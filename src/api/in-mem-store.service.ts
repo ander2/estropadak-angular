@@ -4,12 +4,12 @@ export class InMemStoreService implements InMemoryDbService {
     createDb(){
         let estropadak = [
             {
-                id: 1,
+                id: '1',
                 name: 'Zarautzko estropadak',
                 liga: 'ACT'
             },
             { 
-                id:2,
+                id: '2',
                 name: 'Donostiako estropadak',
                 liga: 'ARC1'
             }
