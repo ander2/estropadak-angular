@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+// ddbb mock
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemStoreService } from '../api/in-mem-store.service';
+
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -8,7 +12,8 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    InMemoryWebApiModule.forRoot(InMemStoreService, {apiBase: 'api/'})
   ],
   providers: [],
   bootstrap: [AppComponent]
