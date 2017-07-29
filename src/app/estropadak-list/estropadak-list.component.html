@@ -1,9 +1,8 @@
-<p>
-  estropadak-list works!
-</p>
-<ul>
-  <li *ngFor="let estropada of estropadak">
-    <a routerLink="/estropada/{{ estropada.id }}">{{ estropada.name }}</a>
-  </li>
-</ul>
-<app-estropada-detail></app-estropada-detail>
+<div *ngIf="estropadak">
+  <ul>
+    <li *ngFor="let estropada of estropadak"
+    (click)="onSelect(estropada)">
+    {{ estropada.name }}
+    </li>
+  </ul>
+</div>

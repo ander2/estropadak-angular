@@ -37,7 +37,7 @@ const routes: Routes = [
     HttpModule,
     RouterModule.forRoot(
       routes,
-      { enableTracing: true}
+      { enableTracing: false}
     ),
     InMemoryWebApiModule.forRoot(InMemStoreService, {apiBase: 'api/'})
   ],
