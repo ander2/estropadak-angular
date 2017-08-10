@@ -39,7 +39,7 @@ const routes: Routes = [
       routes,
       { enableTracing: false}
     ),
-    InMemoryWebApiModule.forRoot(InMemStoreService, {apiBase: 'api/'})
+    // InMemoryWebApiModule.forRoot(InMemStoreService, {apiBase: 'api/'})
   ],
   providers: [EstropadaService],
   bootstrap: [AppComponent]

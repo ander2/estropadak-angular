@@ -3,7 +3,7 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-const estropadakUrl = 'api/estropadak/';
+const estropadakUrl = 'http://estropadak.net:5984/estropadak/';
 
 @Injectable()
 export class EstropadaService {
@@ -11,13 +11,14 @@ export class EstropadaService {
     constructor(private http: Http) { }
 
     getList() {
-        return this.http.get(estropadakUrl)
-            .map(res => res.json()['data'])
+        const endpoint = `{estropadakUrl}/_design/estropadak/_view/all?startkey=["ACT","2007"]&endkey=["ACT","2008"]`;
+        return this.http.get(endpoint)
+            .map(res => res.json()['rows'])
     }
 
-    getOne(id: string) {
+    getOne(id: string) {        
         return this.http.get(`${estropadakUrl}${id}`)
-            .map(res => res.json()['data'])
+            .map(res => res.json())
     }
 
     delete(id: number) {
