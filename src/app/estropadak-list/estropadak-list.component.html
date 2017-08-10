@@ -1,8 +1,8 @@
 <div *ngIf="estropadak">
-  <ul>
-    <li *ngFor="let estropada of estropadak"
+  <md-list>
+    <md-list-item *ngFor="let estropada of estropadak"
     (click)="onSelect(estropada)">
     [{{estropada.key[1]}}] {{ estropada.key[2]}}
-    </li>
-  </ul>
+    </md-list-item>
+  </md-list>
 </div>
