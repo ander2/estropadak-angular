@@ -1,8 +1,9 @@
 <div *ngIf="estropada">
-  <p>
-    {{estropada.name}}
-  </p>
-  <p>
-    {{estropada.id}}
-  </p>
+  <h1>{{estropada.izena}}</h1>
+  <h2>{{estropada.data}} {{estropada.lekua}}</h2>  
+  <ul>
+    <li *ngFor="let sailkapena of estropada.sailkapena">
+    {{sailkapena.posizioa}} - {{sailkapena.talde_izena}}
+  </li>
+</ul>
 </div>
