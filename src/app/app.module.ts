@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { MdListModule } from '@angular/material';
+import { MdListModule, MdTableModule } from '@angular/material';
 
 // ddbb mock
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 import { Routes, RouterModule} from '@angular/router';
 import { EstropadakListComponent } from './estropadak-list/estropadak-list.component';
 import { EstropadaDetailComponent } from './estropada-detail/estropada-detail.component';
+import { EstropadaTandaComponent } from './estropada-tanda/estropada-tanda.component';
 
 
 const routes: Routes = [
@@ -33,12 +34,14 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     EstropadakListComponent,
-    EstropadaDetailComponent
+    EstropadaDetailComponent,
+    EstropadaTandaComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     MdListModule,
+    MdTableModule,
     RouterModule.forRoot(
       routes,
       { enableTracing: false}
