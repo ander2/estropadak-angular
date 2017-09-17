@@ -1,0 +1,23 @@
+<h3>{{tanda[0].tanda}}. tanda</h3>
+<table class="container table table-hover">
+    <thead>
+        <tr>
+            <th class="col-md-1">Postua</th>
+            <th class="col-md-5">Taldea</th>
+            <th class="col-md-1">Kalea</th>
+            <th class="col-md-1">Ziab. 1</th>
+            <th class="col-md-1">Ziab. 2</th>
+            <th class="col-md-1">Ziab. 3</th>
+            <th class="col-md-2">Denbora</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let taldea of tanda">
+        <td>{{taldea.tanda_postua}}</td>
+        <td>{{taldea.talde_izena}}</td>
+        <td>{{taldea.kalea}}</td>
+        <td *ngFor="let ziaboga of taldea.ziabogak">{{ziaboga}}</td>
+        <td>{{taldea.denbora}}</td>
+    </tr>
+    </tbody>
+</table>
