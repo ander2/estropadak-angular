@@ -1,23 +1,40 @@
 <h3>{{tanda[0].tanda}}. tanda</h3>
-<table class="container table table-hover">
-    <thead>
-        <tr>
-            <th class="col-md-1">Postua</th>
-            <th class="col-md-5">Taldea</th>
-            <th class="col-md-1">Kalea</th>
-            <th class="col-md-1">Ziab. 1</th>
-            <th class="col-md-1">Ziab. 2</th>
-            <th class="col-md-1">Ziab. 3</th>
-            <th class="col-md-2">Denbora</th>
-        </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let taldea of tanda">
-        <td>{{taldea.tanda_postua}}</td>
-        <td>{{taldea.talde_izena}}</td>
-        <td>{{taldea.kalea}}</td>
-        <td *ngFor="let ziaboga of taldea.ziabogak">{{ziaboga}}</td>
-        <td>{{taldea.denbora}}</td>
-    </tr>
-    </tbody>
-</table>
+<md-table #table [dataSource]="dataSource">
+    <ng-container mdColumnDef="Taldea">
+      <md-header-cell *mdHeaderCellDef> Taldea </md-header-cell>
+      <md-cell *mdCellDef="let row"> {{row.talde_izena}} </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="Postua">
+      <md-header-cell *mdHeaderCellDef> Postua </md-header-cell>
+      <md-cell *mdCellDef="let row"> {{row.tanda_postua}} </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="Kalea">
+      <md-header-cell *mdHeaderCellDef> Kalea </md-header-cell>
+      <md-cell *mdCellDef="let row"> {{row.kalea}} </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="1.z">
+      <md-header-cell *mdHeaderCellDef> 1.z </md-header-cell>
+      <md-cell *mdCellDef="let row"> {{row.ziabogak[0]}} </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="2.z">
+      <md-header-cell *mdHeaderCellDef> 2.z </md-header-cell>
+      <md-cell *mdCellDef="let row"> {{row.ziabogak[1]}} </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="3.z">
+      <md-header-cell *mdHeaderCellDef> 3.z </md-header-cell>
+      <md-cell *mdCellDef="let row"> {{row.ziabogak[2]}} </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="Denbora">
+      <md-header-cell *mdHeaderCellDef> Denbora </md-header-cell>
+      <md-cell *mdCellDef="let row"> {{row.denbora}} </md-cell>
+    </ng-container>
+
+    <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+    <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+  </md-table>
