@@ -10,8 +10,8 @@ export class EstropadaService {
 
     constructor(private http: Http) { }
 
-    getList() {
-        const endpoint = `${estropadakUrl}/_design/estropadak/_view/all?startkey=["ACT","2007"]&endkey=["ACT","2008"]`;
+    getList(league: string, year: string) {
+        const endpoint = `${estropadakUrl}/_design/estropadak/_view/all?startkey=["${league}","${year}"]&endkey=["${league}","${year}z"]`;
         return this.http.get(endpoint)
             .map(res => res.json()['rows'])
     }
@@ -34,5 +34,22 @@ export class EstropadaService {
     update(joke: any) {
         return this.http.put(`${estropadakUrl}/${joke.id}`, joke)
             .map((res) => res.json());
+    }
+}
+
+@Injectable()
+export class UrteakService {
+
+    constructor(private http: Http) { }
+
+    getList() {
+        const endpoint = `${estropadakUrl}/years`;
+        return this.http.get(endpoint)
+                .map(res => res.json())
+    }
+
+    getOne(id: string) {        
+        return this.http.get(`${estropadakUrl}${id}`)
+            .map(res => res.json())
     }
 }
