@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EstropadaService } from '../shared/estropada.service';
 
 @Component({
@@ -12,15 +12,18 @@ export class EstropadakListComponent implements OnInit {
   estropadak: any = [];
   constructor(
     private estropadaService: EstropadaService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(){
-    this.updateEstropadak();
+    this.route.paramMap.subscribe((params) => {
+      this.updateEstropadak(params.get('league'), params.get('year'));
+    });
   }
-  
-  updateEstropadak(){
-    this.estropadaService.getList().subscribe((estropadak) => this.estropadak = estropadak);
+
+  updateEstropadak(league: string, year: string){
+    this.estropadaService.getList(league.toUpperCase(), year).subscribe((estropadak) => this.estropadak = estropadak);
   }
 
   onSelect(estropada){
