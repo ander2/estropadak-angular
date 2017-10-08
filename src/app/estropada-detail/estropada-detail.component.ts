@@ -10,10 +10,10 @@ import { EstropadaTandaComponent } from '../estropada-tanda/estropada-tanda.comp
   styleUrls: ['./estropada-detail.component.css']
 })
 
-export class EstropadaDetailComponent implements OnInit{
+export class EstropadaDetailComponent implements OnInit {
 
   estropada: any = {};
-  id: string = '1';
+  id = '1';
   datasource;
   constructor(
     private estropadaService: EstropadaService,
@@ -21,7 +21,7 @@ export class EstropadaDetailComponent implements OnInit{
     private router: Router
   ) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.datasource = this.estropadaService.getOne(this.id);
     this.estropadaService.getOne(this.id)

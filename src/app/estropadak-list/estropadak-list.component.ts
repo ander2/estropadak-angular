@@ -16,18 +16,17 @@ export class EstropadakListComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.route.paramMap.subscribe((params) => {
       this.updateEstropadak(params.get('league'), params.get('year'));
     });
   }
 
-  updateEstropadak(league: string, year: string){
+  updateEstropadak(league: string, year: string) {
     this.estropadaService.getList(league.toUpperCase(), year).subscribe((estropadak) => this.estropadak = estropadak);
   }
 
-  onSelect(estropada){
-    console.log(estropada.name + 'Selected');
+  onSelect(estropada) {
     this.router.navigate(['/estropada', estropada.id]);
   }
 }

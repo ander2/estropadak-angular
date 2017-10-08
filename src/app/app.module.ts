@@ -9,11 +9,7 @@ import {
     MatMenuModule,
     MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
 
-// ddbb mock
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemStoreService } from '../api/in-mem-store.service';
-
-//provider
+// provider
 import { HttpModule } from '@angular/http';
 import { EstropadaService, UrteakService } from './shared/estropada.service';
 
@@ -23,7 +19,7 @@ import { Routes, RouterModule} from '@angular/router';
 import { EstropadakListComponent } from './estropadak-list/estropadak-list.component';
 import { EstropadaDetailComponent } from './estropada-detail/estropada-detail.component';
 import { EstropadaTandaComponent } from './estropada-tanda/estropada-tanda.component';
-import { HeaderComponent } from "./header.component";
+import { HeaderComponent } from './header.component';
 
 
 const routes: Routes = [
@@ -60,7 +56,7 @@ const routes: Routes = [
     // InMemoryWebApiModule.forRoot(InMemStoreService, {apiBase: 'api/'})
   ],
   providers: [
-    EstropadaService, 
+    EstropadaService,
     UrteakService,
     { provide: MATERIAL_COMPATIBILITY_MODE, useValue: true }
   ],

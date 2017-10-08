@@ -24,7 +24,7 @@ export class EstropadaTandaComponent implements OnInit {
 
 }
 
-class EstropadaDataSource extends DataSource<any>{
+class EstropadaDataSource extends DataSource<any> {
     tanda;
     constructor(tanda) {
     super();
@@ -35,5 +35,5 @@ class EstropadaDataSource extends DataSource<any>{
         return Observable.of(this.tanda);
     }
 
-    disconnect(){}
+    disconnect() {}
 }

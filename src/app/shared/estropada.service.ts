@@ -16,7 +16,7 @@ export class EstropadaService {
             .map(res => res.json()['rows'])
     }
 
-    getOne(id: string) {        
+    getOne(id: string) {
         return this.http.get(`${estropadakUrl}${id}`)
             .map(res => res.json())
     }
@@ -48,7 +48,7 @@ export class UrteakService {
                 .map(res => res.json())
     }
 
-    getOne(id: string) {        
+    getOne(id: string) {
         return this.http.get(`${estropadakUrl}${id}`)
             .map(res => res.json())
     }
