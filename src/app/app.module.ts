@@ -1,7 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
-import { MdListModule, MdTableModule } from '@angular/material';
+import { 
+    MatButtonModule,
+    MatListModule,
+    MatTableModule,
+    MatMenuModule,
+    MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
 
 // ddbb mock
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -20,7 +26,7 @@ import { EstropadaTandaComponent } from './estropada-tanda/estropada-tanda.compo
 
 
 const routes: Routes = [
-  { 
+  {
     path: 'estropadak',
     component: EstropadakListComponent
   },
@@ -39,16 +45,22 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpModule,
-    MdListModule,
-    MdTableModule,
+    MatButtonModule,
+    MatListModule,
+    MatTableModule,
+    MatMenuModule,
     RouterModule.forRoot(
       routes,
       { enableTracing: false}
     ),
     // InMemoryWebApiModule.forRoot(InMemStoreService, {apiBase: 'api/'})
   ],
-  providers: [EstropadaService],
+  providers: [
+    EstropadaService, 
+    { provide: MATERIAL_COMPATIBILITY_MODE, useValue: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
