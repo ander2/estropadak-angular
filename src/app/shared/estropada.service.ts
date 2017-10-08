@@ -36,3 +36,20 @@ export class EstropadaService {
             .map((res) => res.json());
     }
 }
+
+@Injectable()
+export class UrteakService {
+
+    constructor(private http: Http) { }
+
+    getList() {
+        const endpoint = `${estropadakUrl}/years`;
+        return this.http.get(endpoint)
+                .map(res => res.json())
+    }
+
+    getOne(id: string) {        
+        return this.http.get(`${estropadakUrl}${id}`)
+            .map(res => res.json())
+    }
+}

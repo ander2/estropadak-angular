@@ -1,0 +1,18 @@
+<button mat-raised-button [matMenuTriggerFor]="act">
+ <span>ACT</span>
+</button>
+<mat-menu #act="matMenu">
+    <button mat-menu-item *ngFor="let year of years?.act">{{year}}</button>
+</mat-menu>
+<button mat-raised-button [matMenuTriggerFor]="arc1">
+ <span>ARC-1</span>
+</button>
+<mat-menu #arc1="matMenu">
+    <button mat-menu-item *ngFor="let year of years?.arc1">{{year}}</button>
+</mat-menu>
+<button mat-raised-button [matMenuTriggerFor]="arc2">
+ <span>ARC-2</span>
+</button>
+<mat-menu #arc2="matMenu">
+    <button mat-menu-item *ngFor="let year of years?.arc2">{{year}}</button>
+</mat-menu>
