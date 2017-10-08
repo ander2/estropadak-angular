@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
-import { 
+import {
     MatButtonModule,
     MatListModule,
     MatTableModule,
@@ -15,7 +15,7 @@ import { InMemStoreService } from '../api/in-mem-store.service';
 
 //provider
 import { HttpModule } from '@angular/http';
-import { EstropadaService } from './shared/estropada.service';
+import { EstropadaService, UrteakService } from './shared/estropada.service';
 
 import { AppComponent } from './app.component';
 
@@ -23,6 +23,7 @@ import { Routes, RouterModule} from '@angular/router';
 import { EstropadakListComponent } from './estropadak-list/estropadak-list.component';
 import { EstropadaDetailComponent } from './estropada-detail/estropada-detail.component';
 import { EstropadaTandaComponent } from './estropada-tanda/estropada-tanda.component';
+import { HeaderComponent } from "./header.component";
 
 
 const routes: Routes = [
@@ -39,6 +40,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
     EstropadakListComponent,
     EstropadaDetailComponent,
     EstropadaTandaComponent
@@ -59,6 +61,7 @@ const routes: Routes = [
   ],
   providers: [
     EstropadaService, 
+    UrteakService,
     { provide: MATERIAL_COMPATIBILITY_MODE, useValue: true }
   ],
   bootstrap: [AppComponent]
