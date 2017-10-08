@@ -1,8 +1,8 @@
 <div *ngIf="estropadak">
-  <mat-list>
+  <mat-nav-list>
     <mat-list-item *ngFor="let estropada of estropadak"
     (click)="onSelect(estropada)">
     [{{estropada.key[1]}}] {{ estropada.key[2]}}
     </mat-list-item>
-  </mat-list>
+  </mat-nav-list>
 </div>
