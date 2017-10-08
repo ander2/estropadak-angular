@@ -28,7 +28,7 @@ import { HeaderComponent } from "./header.component";
 
 const routes: Routes = [
   {
-    path: 'estropadak',
+    path: 'estropadak/:league/:year',
     component: EstropadakListComponent
   },
   {

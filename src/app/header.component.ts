@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { OnInit } from "@angular/core/src/metadata/lifecycle_hooks";
 import { UrteakService } from "./shared/estropada.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -9,13 +10,18 @@ import { UrteakService } from "./shared/estropada.service";
 })
 export class HeaderComponent implements OnInit{
 
-    years;
+  years;
 
-    constructor(
-        private urteakService: UrteakService
-    ) {}
+  constructor(
+    private urteakService: UrteakService,
+    private router: Router
+  ) {}
 
-    ngOnInit(){
+  ngOnInit(){
     this.urteakService.getList().subscribe((res) => this.years = res);
-    }
+  }
+
+  goToEstropada(league, year){
+    this.router.navigate([`/estropadak/${league}/${year}`]);
+  }
 }
