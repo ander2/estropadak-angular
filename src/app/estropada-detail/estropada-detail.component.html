@@ -1,6 +1,6 @@
 <div *ngIf="estropada">
-    <h1>{{estropada.izena}}</h1>
-    <h2>{{estropada.data}} {{estropada.lekua}}</h2>
+    <h1 class="mat-title">{{estropada.izena}}</h1>
+    <h2 class="mat-subhead">{{estropada.data}} {{estropada.lekua}}</h2>
     <div *ngFor="let tanda of estropada.tandak">
         <app-estropada-tanda [tanda]="tanda"></app-estropada-tanda>
     </div>
