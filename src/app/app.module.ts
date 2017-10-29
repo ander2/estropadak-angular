@@ -20,6 +20,7 @@ import { EstropadakListComponent } from './estropadak-list/estropadak-list.compo
 import { EstropadaDetailComponent } from './estropada-detail/estropada-detail.component';
 import { EstropadaTandaComponent } from './estropada-tanda/estropada-tanda.component';
 import { HeaderComponent } from './header.component';
+import { EstropadakSailkapenaComponent } from './estropadak-sailkapena/estropadak-sailkapena.component';
 
 
 const routes: Routes = [
@@ -30,7 +31,12 @@ const routes: Routes = [
   {
     path: 'estropada/:id',
     component: EstropadaDetailComponent
+  },
+  {
+    path: 'sailkapena/:league/:year',
+    component: EstropadakSailkapenaComponent
   }
+
 ];
 
 @NgModule({
@@ -39,7 +45,8 @@ const routes: Routes = [
     HeaderComponent,
     EstropadakListComponent,
     EstropadaDetailComponent,
-    EstropadaTandaComponent
+    EstropadaTandaComponent,
+    EstropadakSailkapenaComponent
   ],
   imports: [
     BrowserModule,
