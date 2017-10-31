@@ -20,6 +20,12 @@ export class EstropadakSailkapenaComponent implements OnInit {
   ngOnInit() {
     this.league = this.route.snapshot.paramMap.get('league');
     this.year = this.route.snapshot.paramMap.get('year');
+    if (this.league === null || this.league === undefined){
+      this.league = 'ACT';
+    }
+    if (this.year === null || this.year === undefined){
+      this.year = '2017';
+    }
     const id = `rank_${this.league}_${this.year}`;
     this.estropadaService.getOne(id)
     .subscribe((res) => {

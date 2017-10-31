@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import {
     MatButtonModule,
     MatListModule,
+    MatTabsModule,
     MatTableModule,
     MatMenuModule,
     MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
@@ -21,9 +22,14 @@ import { EstropadaDetailComponent } from './estropada-detail/estropada-detail.co
 import { EstropadaTandaComponent } from './estropada-tanda/estropada-tanda.component';
 import { HeaderComponent } from './header.component';
 import { EstropadakSailkapenaComponent } from './estropadak-sailkapena/estropadak-sailkapena.component';
+import { EstropadakPortadaComponent } from './estropadak-portada/estropadak-portada.component';
 
 
 const routes: Routes = [
+  {
+    path: '',
+    component: EstropadakPortadaComponent
+  },
   {
     path: 'estropadak/:league/:year',
     component: EstropadakListComponent
@@ -46,7 +52,8 @@ const routes: Routes = [
     EstropadakListComponent,
     EstropadaDetailComponent,
     EstropadaTandaComponent,
-    EstropadakSailkapenaComponent
+    EstropadakSailkapenaComponent,
+    EstropadakPortadaComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +62,7 @@ const routes: Routes = [
     MatButtonModule,
     MatListModule,
     MatTableModule,
+    MatTabsModule,
     MatMenuModule,
     RouterModule.forRoot(
       routes,
