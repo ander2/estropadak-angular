@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { EstropadaService } from '../shared/estropada.service';
+import {DataSource} from '@angular/cdk/collections';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 @Component({
   selector: 'app-estropadak-sailkapena',
@@ -11,6 +14,9 @@ export class EstropadakSailkapenaComponent implements OnInit {
   league;
   year;
   sailkapena = [];
+
+  displayedColumns = ['Taldea', 'Puntuak'];
+  dataSource;
 
   constructor(
     private estropadaService: EstropadaService,
@@ -33,6 +39,22 @@ export class EstropadakSailkapenaComponent implements OnInit {
       delete res._rev;
       Object.keys(res).forEach((key) => this.sailkapena.push({izena: key, puntuazioa: res[key]}));
       this.sailkapena.sort((a, b) => b.puntuazioa - a.puntuazioa);
+      this.dataSource = new EstropadaDataSource(this.sailkapena);
     });
   }
+}
+
+
+class EstropadaDataSource extends DataSource<any> {
+  sailkapena;
+  constructor(sailkapena) {
+    super();
+    this.sailkapena = sailkapena;
+  }
+
+  connect(): Observable<any> {
+    return Observable.of(this.sailkapena);
+  }
+
+  disconnect() {}
 }
