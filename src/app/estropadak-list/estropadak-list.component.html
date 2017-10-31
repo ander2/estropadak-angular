@@ -1,8 +1,6 @@
-<div *ngIf="estropadak">
-  <mat-nav-list>
-    <mat-list-item *ngFor="let estropada of estropadak"
+<mat-nav-list *ngIf="estropadak">
+  <mat-list-item *ngFor="let estropada of estropadak"
     (click)="onSelect(estropada)">
     [{{estropada.key[1]}}] {{ estropada.key[2]}}
-    </mat-list-item>
-  </mat-nav-list>
-</div>
+  </mat-list-item>
+</mat-nav-list>
