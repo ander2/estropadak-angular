@@ -23,6 +23,12 @@ export class EstropadakListComponent implements OnInit {
   }
 
   updateEstropadak(league: string, year: string) {
+    if (league === null || league === undefined){
+      league = 'ACT';
+    }
+    if (year === null || year === undefined){
+      year = '2017';
+    }
     this.estropadaService.getList(league.toUpperCase(), year).subscribe((estropadak) => this.estropadak = estropadak);
   }
 
