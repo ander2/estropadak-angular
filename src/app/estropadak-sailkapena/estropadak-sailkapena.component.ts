@@ -33,6 +33,7 @@ export class EstropadakSailkapenaComponent implements OnChanges {
     .subscribe((res) => {
       delete res._id;
       delete res._rev;
+      this.sailkapena = [];
       Object.keys(res).forEach((key) => this.sailkapena.push({izena: key, puntuazioa: res[key]}));
       this.sailkapena.sort((a, b) => b.puntuazioa - a.puntuazioa);
       this.dataSource = new EstropadaDataSource(this.sailkapena);
