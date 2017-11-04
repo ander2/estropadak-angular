@@ -19,7 +19,8 @@ export class EstropadaTandaComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.dataSource = new EstropadaDataSource(this.tanda);
+    const orderedTanda = this.tanda.sort((a, b) => a.tanda_postua > b.tanda_postua);
+    this.dataSource = new EstropadaDataSource(orderedTanda);
   }
 
 }

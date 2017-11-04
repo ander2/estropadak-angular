@@ -24,6 +24,7 @@ import { HeaderComponent } from './header.component';
 import { EstropadakSailkapenaComponent } from './estropadak-sailkapena/estropadak-sailkapena.component';
 import { EstropadakPortadaComponent } from './estropadak-portada/estropadak-portada.component';
 import { EstropadakPageComponent } from './estropadak-page/estropadak-page.component';
+import { EstropadaEstropadaSailkapenaComponent } from './estropada-estropada-sailkapena/estropada-estropada-sailkapena.component';
 
 
 const routes: Routes = [
@@ -55,7 +56,8 @@ const routes: Routes = [
     EstropadaTandaComponent,
     EstropadakSailkapenaComponent,
     EstropadakPortadaComponent,
-    EstropadakPageComponent
+    EstropadakPageComponent,
+    EstropadaEstropadaSailkapenaComponent
   ],
   imports: [
     BrowserModule,
