@@ -30,7 +30,6 @@ export class EstropadaDetailComponent implements OnInit {
       const tanda2 = estropada.sailkapena.filter((el) => el.tanda === 2);
       const tanda3 = estropada.sailkapena.filter((el) => el.tanda === 3);
       const tandak = [tanda1, tanda2, tanda3];
-      console.log(tandak);
       this.estropada = {
         izena: estropada.izena,
         lekua: estropada.lekua,

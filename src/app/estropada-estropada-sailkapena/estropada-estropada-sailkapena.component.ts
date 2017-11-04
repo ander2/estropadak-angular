@@ -19,7 +19,6 @@ export class EstropadaEstropadaSailkapenaComponent implements OnInit {
 
   ngOnInit() {
     const orderedSailkapena = this.sailkapena.sort((a, b) => (parseInt(a.posizioa) - parseInt(b.posizioa)));
-    console.log(orderedSailkapena);
     this.dataSource = new EstropadaDataSource(orderedSailkapena);
   }
 }
