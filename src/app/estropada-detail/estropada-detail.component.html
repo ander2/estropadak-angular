@@ -2,7 +2,10 @@
     <h1 class="mat-title">{{estropada.izena}}</h1>
     <h2 class="mat-subhead">{{estropada.data}} {{estropada.lekua}}</h2>
     <div *ngFor="let tanda of estropada.tandak">
-        <app-estropada-tanda [tanda]="tanda"></app-estropada-tanda>
+      <app-estropada-tanda [tanda]="tanda"></app-estropada-tanda>
+    </div>
+    <div *ngIf="estropada.sailkapena">
+      <app-estropada-estropada-sailkapena [sailkapena]="estropada.sailkapena"></app-estropada-estropada-sailkapena>
     </div>
 </div>
 
