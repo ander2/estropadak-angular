@@ -23,6 +23,7 @@ import { EstropadaTandaComponent } from './estropada-tanda/estropada-tanda.compo
 import { HeaderComponent } from './header.component';
 import { EstropadakSailkapenaComponent } from './estropadak-sailkapena/estropadak-sailkapena.component';
 import { EstropadakPortadaComponent } from './estropadak-portada/estropadak-portada.component';
+import { EstropadakPageComponent } from './estropadak-page/estropadak-page.component';
 
 
 const routes: Routes = [
@@ -32,7 +33,7 @@ const routes: Routes = [
   },
   {
     path: 'estropadak/:league/:year',
-    component: EstropadakListComponent
+    component: EstropadakPageComponent
   },
   {
     path: 'estropada/:id',
@@ -53,7 +54,8 @@ const routes: Routes = [
     EstropadaDetailComponent,
     EstropadaTandaComponent,
     EstropadakSailkapenaComponent,
-    EstropadakPortadaComponent
+    EstropadakPortadaComponent,
+    EstropadakPageComponent
   ],
   imports: [
     BrowserModule,
