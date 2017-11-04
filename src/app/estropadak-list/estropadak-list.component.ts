@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EstropadaService } from '../shared/estropada.service';
 
@@ -7,19 +7,18 @@ import { EstropadaService } from '../shared/estropada.service';
   templateUrl: './estropadak-list.component.html',
   styleUrls: ['./estropadak-list.component.css']
 })
-export class EstropadakListComponent implements OnInit {
+export class EstropadakListComponent implements OnChanges {
 
+  @Input() league;
+  @Input() year;
   estropadak: any = [];
   constructor(
     private estropadaService: EstropadaService,
     private router: Router,
-    private route: ActivatedRoute
   ) { }
 
-  ngOnInit() {
-    this.route.paramMap.subscribe((params) => {
-      this.updateEstropadak(params.get('league'), params.get('year'));
-    });
+  ngOnChanges() {
+    this.updateEstropadak(this.league, this.year);
   }
 
   updateEstropadak(league: string, year: string) {
