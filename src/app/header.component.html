@@ -1,16 +1,16 @@
-<button mat-raised-button [matMenuTriggerFor]="act">
+<button mat-button [matMenuTriggerFor]="act">
   <span>ACT</span>
 </button>
 <mat-menu #act="matMenu">
   <button mat-menu-item *ngFor="let year of years?.act" (click)="goToEstropada('act', year)">{{year}}</button>
 </mat-menu>
-<button mat-raised-button [matMenuTriggerFor]="arc1">
+<button mat-button [matMenuTriggerFor]="arc1">
   <span>ARC-1</span>
 </button>
 <mat-menu #arc1="matMenu">
   <button mat-menu-item *ngFor="let year of years?.arc1" (click)="goToEstropada('arc1', year)">{{year}}</button>
 </mat-menu>
-<button mat-raised-button [matMenuTriggerFor]="arc2">
+<button mat-button [matMenuTriggerFor]="arc2">
   <span>ARC-2</span>
 </button>
 <mat-menu #arc2="matMenu">
