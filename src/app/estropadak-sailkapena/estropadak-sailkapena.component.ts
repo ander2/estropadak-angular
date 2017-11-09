@@ -14,7 +14,7 @@ export class EstropadakSailkapenaComponent implements OnChanges {
   @Input() year;
   sailkapena = [];
 
-  displayedColumns = ['Taldea', 'Puntuak'];
+  displayedColumns = ['Posizioa', 'Taldea', 'Puntuak'];
   dataSource;
 
   constructor(
@@ -36,7 +36,12 @@ export class EstropadakSailkapenaComponent implements OnChanges {
       this.sailkapena = [];
       Object.keys(res).forEach((key) => this.sailkapena.push({izena: key, puntuazioa: res[key]}));
       this.sailkapena.sort((a, b) => b.puntuazioa - a.puntuazioa);
-      this.dataSource = new EstropadaDataSource(this.sailkapena);
+      const ordered = this.sailkapena.map((val, index) => {
+        val.posizioa = index + 1;
+        return val;
+      });
+      console.log(ordered);
+      this.dataSource = new EstropadaDataSource(ordered);
     });
   }
 }
