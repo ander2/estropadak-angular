@@ -1,5 +1,10 @@
-<h1>{{league.toUpperCase()}} {{year}} Sailkapena</h1>
+<h2 class="mat-title">{{league.toUpperCase()}} {{year}} Sailkapena</h2>
 <mat-table #table [dataSource]="dataSource">
+    <ng-container matColumnDef="Posizioa">
+      <mat-header-cell *matHeaderCellDef> Posizioa </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.posizioa}} </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="Taldea">
       <mat-header-cell *matHeaderCellDef> Taldea </mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.izena}} </mat-cell>

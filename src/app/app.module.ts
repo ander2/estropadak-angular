@@ -25,6 +25,7 @@ import { EstropadakSailkapenaComponent } from './estropadak-sailkapena/estropada
 import { EstropadakPortadaComponent } from './estropadak-portada/estropadak-portada.component';
 import { EstropadakPageComponent } from './estropadak-page/estropadak-page.component';
 import { EstropadaEstropadaSailkapenaComponent } from './estropada-estropada-sailkapena/estropada-estropada-sailkapena.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 const routes: Routes = [
@@ -67,6 +68,7 @@ const routes: Routes = [
     MatListModule,
     MatTableModule,
     MatTabsModule,
+    MatToolbarModule,
     MatMenuModule,
     RouterModule.forRoot(
       routes,
