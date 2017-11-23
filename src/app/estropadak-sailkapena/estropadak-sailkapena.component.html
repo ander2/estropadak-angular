@@ -2,7 +2,7 @@
 <mat-table #table [dataSource]="dataSource">
     <ng-container matColumnDef="Posizioa">
       <mat-header-cell *matHeaderCellDef> Posizioa </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.posizioa}} </mat-cell>
+      <mat-cell *matCellDef="let row"> {{row.position}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="Taldea">
@@ -12,7 +12,22 @@
 
     <ng-container matColumnDef="Puntuak">
       <mat-header-cell *matHeaderCellDef> Puntuak </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.puntuazioa}} </mat-cell>
+      <mat-cell *matCellDef="let row"> {{row.points}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Banderak">
+      <mat-header-cell *matHeaderCellDef> Banderak </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.wins}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Onena">
+      <mat-header-cell *matHeaderCellDef> Pos. onena</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.best}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Txarrena">
+      <mat-header-cell *matHeaderCellDef> Pos. txarrena</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.worst}} </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

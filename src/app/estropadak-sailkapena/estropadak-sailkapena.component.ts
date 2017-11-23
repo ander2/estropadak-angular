@@ -14,7 +14,7 @@ export class EstropadakSailkapenaComponent implements OnChanges {
   @Input() year;
   sailkapena = [];
 
-  displayedColumns = ['Posizioa', 'Taldea', 'Puntuak'];
+  displayedColumns = ['Posizioa', 'Taldea', 'Puntuak', 'Banderak', 'Onena', 'Txarrena'];
   dataSource;
 
   constructor(
@@ -22,10 +22,10 @@ export class EstropadakSailkapenaComponent implements OnChanges {
   ) { }
 
   ngOnChanges() {
-    if (this.league === null || this.league === undefined){
+    if (this.league === null || this.league === undefined) {
       this.league = 'ACT';
     }
-    if (this.year === null || this.year === undefined){
+    if (this.year === null || this.year === undefined) {
       this.year = '2017';
     }
     const id = `rank_${this.league.toUpperCase()}_${this.year}`;
@@ -33,14 +33,13 @@ export class EstropadakSailkapenaComponent implements OnChanges {
     .subscribe((res) => {
       delete res._id;
       delete res._rev;
-      this.sailkapena = [];
-      Object.keys(res).forEach((key) => this.sailkapena.push({izena: key, puntuazioa: res[key]}));
-      this.sailkapena.sort((a, b) => b.puntuazioa - a.puntuazioa);
-      const ordered = this.sailkapena.map((val, index) => {
-        val.posizioa = index + 1;
-        return val;
-      });
-      console.log(ordered);
+      this.sailkapena = res.stats;
+      const sailk = Object.keys(res.stats).reduce((memo: any[], taldeIzena: string) => {
+        res.stats[taldeIzena].izena = taldeIzena;
+        memo.push(res.stats[taldeIzena]);
+        return memo;
+      }, []);
+      const ordered = sailk.sort((a, b) => b.points - a.points);
       this.dataSource = new EstropadaDataSource(ordered);
     });
   }
