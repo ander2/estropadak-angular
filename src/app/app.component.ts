@@ -7,5 +7,5 @@ import { HeaderComponent } from './header.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Estropadak.net, estropada emaitzak';
+  title = 'Estropadak.net';
 }
