@@ -22,10 +22,10 @@ export class EstropadakListComponent implements OnChanges {
   }
 
   updateEstropadak(league: string, year: string) {
-    if (league === null || league === undefined){
+    if (league === null || league === undefined) {
       league = 'ACT';
     }
-    if (year === null || year === undefined){
+    if (year === null || year === undefined) {
       year = '2017';
     }
     this.estropadaService.getList(league.toUpperCase(), year).subscribe((estropadak) => this.estropadak = estropadak);

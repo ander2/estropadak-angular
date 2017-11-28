@@ -6,7 +6,7 @@ import { ActivatedRoute, NavigationEnd } from '@angular/router';
   templateUrl: './estropadak-page.component.html',
   styleUrls: ['./estropadak-page.component.css']
 })
-export class EstropadakPageComponent implements OnInit{
+export class EstropadakPageComponent implements OnInit {
 
   league;
   year;
