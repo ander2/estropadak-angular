@@ -26,6 +26,7 @@ import { EstropadakPortadaComponent } from './estropadak-portada/estropadak-port
 import { EstropadakPageComponent } from './estropadak-page/estropadak-page.component';
 import { EstropadaEstropadaSailkapenaComponent } from './estropada-estropada-sailkapena/estropada-estropada-sailkapena.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { EstropadakHoniBuruzComponent } from './estropadak-honi-buruz/estropadak-honi-buruz.component';
 
 
 const routes: Routes = [
@@ -44,6 +45,10 @@ const routes: Routes = [
   {
     path: 'sailkapena/:league/:year',
     component: EstropadakSailkapenaComponent
+  },
+  {
+    path: 'honi-buruz',
+    component: EstropadakHoniBuruzComponent
   }
 
 ];
@@ -58,7 +63,8 @@ const routes: Routes = [
     EstropadakSailkapenaComponent,
     EstropadakPortadaComponent,
     EstropadakPageComponent,
-    EstropadaEstropadaSailkapenaComponent
+    EstropadaEstropadaSailkapenaComponent,
+    EstropadakHoniBuruzComponent
   ],
   imports: [
     BrowserModule,
