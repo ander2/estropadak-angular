@@ -1,14 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import {
-    MatButtonModule,
-    MatListModule,
-    MatTabsModule,
-    MatTableModule,
-    MatMenuModule,
-    MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
+  MatButtonModule,
+  MatListModule,
+  MatTabsModule,
+  MatTableModule,
+  MatMenuModule,
+  MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
 
 // provider
 import { HttpModule } from '@angular/http';
@@ -69,6 +70,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     HttpModule,
     MatButtonModule,
     MatListModule,

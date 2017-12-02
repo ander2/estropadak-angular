@@ -26,10 +26,19 @@ export class EstropadaDetailComponent implements OnInit {
     this.datasource = this.estropadaService.getOne(this.id);
     this.estropadaService.getOne(this.id)
     .subscribe((estropada) => {
+      const tandak = [];
       const tanda1 = estropada.sailkapena.filter((el) => el.tanda === 1);
+      if (tanda1.length > 0) {
+        tandak.push(tanda1);
+      }
       const tanda2 = estropada.sailkapena.filter((el) => el.tanda === 2);
+      if (tanda2.length > 0) {
+        tandak.push(tanda2);
+      }
       const tanda3 = estropada.sailkapena.filter((el) => el.tanda === 3);
-      const tandak = [tanda1, tanda2, tanda3];
+      if (tanda3.length > 0) {
+        tandak.push(tanda3);
+      }
       this.estropada = {
         izena: estropada.izena,
         lekua: estropada.lekua,
