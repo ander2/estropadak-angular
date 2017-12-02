@@ -11,8 +11,8 @@
     </ng-container>
 
     <ng-container matColumnDef="Kalea">
-      <mat-header-cell *matHeaderCellDef> Kalea </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.kalea}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef fxHide.xs> Kalea </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxHide.xs> {{row.kalea}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="1.z">
@@ -36,8 +36,8 @@
     </ng-container>
 
     <ng-container matColumnDef="Puntuak">
-      <mat-header-cell *matHeaderCellDef> Puntuak </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.puntuazioa}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef fxHide.xs> Puntuak </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxHide.xs> {{row.puntuazioa}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
