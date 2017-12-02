@@ -1,5 +1,5 @@
-<div fxLayout="row" fxLayout.xs="column" style="border: 1px solid blue" fxLayoutAlign="space-around center">
-  <div fxLayout="row" fxLayoutAlign="space-around center" fxFlex.xs="50" style="border: 1px solid red">
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around center" fxFlex>
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="50" fxFlexFill>
     <div>
       <button mat-button [matMenuTriggerFor]="act" class="background-primary-color white-text">
         <span>ACT</span>
@@ -25,7 +25,7 @@
       </mat-menu>
     </div>
   </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex.xs="50">
+  <div fxLayout="row" fxLayoutAlign="space-around center" fxFlex="50" fxFlexFill>
     <div>
       <button mat-button [matMenuTriggerFor]="euskotren" class="background-primary-color white-text">
         <span>Euskotren</span>
