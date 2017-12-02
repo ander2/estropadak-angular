@@ -1,6 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <mat-toolbar>
-    <div routerLink="/">{{title}}</div>
-    <app-header></app-header>
+  <div fxLayout="row" fxLayout.xs="column" style="border:1px solid green" fxFlex>
+    <div fxHide.xs fxFlex="15" style="border:1px solid yellow" routerLink="/">{{title}}</div>
+    <app-header fxFlex fxFlex.xs="100"></app-header>
+  </div>
 </mat-toolbar>
 <router-outlet></router-outlet>
