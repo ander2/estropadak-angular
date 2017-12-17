@@ -28,6 +28,9 @@ import { EstropadakPageComponent } from './estropadak-page/estropadak-page.compo
 import { EstropadaEstropadaSailkapenaComponent } from './estropada-estropada-sailkapena/estropada-estropada-sailkapena.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { EstropadakHoniBuruzComponent } from './estropadak-honi-buruz/estropadak-honi-buruz.component';
+import { EstropadakStatsComponent } from './estropadak-stats/estropadak-stats.component';
+import { NvD3Module } from 'ng2-nvd3';
+
 
 
 const routes: Routes = [
@@ -65,7 +68,8 @@ const routes: Routes = [
     EstropadakPortadaComponent,
     EstropadakPageComponent,
     EstropadaEstropadaSailkapenaComponent,
-    EstropadakHoniBuruzComponent
+    EstropadakHoniBuruzComponent,
+    EstropadakStatsComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +82,7 @@ const routes: Routes = [
     MatTabsModule,
     MatToolbarModule,
     MatMenuModule,
+    NvD3Module,
     RouterModule.forRoot(
       routes,
       { enableTracing: false}
