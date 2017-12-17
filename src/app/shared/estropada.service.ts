@@ -11,7 +11,8 @@ export class EstropadaService {
     constructor(private http: Http) { }
 
     getList(league: string, year: string) {
-        const endpoint = `${estropadakUrl}/_design/estropadak/_view/all?startkey=["${league}","${year}"]&endkey=["${league}","${year}z"]`;
+        const upperLeague = league.toUpperCase();
+        const endpoint = `${estropadakUrl}/_design/estropadak/_view/all?startkey=["${upperLeague}","${year}"]&endkey=["${upperLeague}","${year}z"]`;
         return this.http.get(endpoint)
             .map(res => res.json()['rows'])
     }
