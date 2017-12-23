@@ -9,7 +9,8 @@ import {
   MatTabsModule,
   MatTableModule,
   MatMenuModule,
-  MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
+  MATERIAL_COMPATIBILITY_MODE,
+  MatSidenavModule} from '@angular/material';
 
 // provider
 import { HttpModule } from '@angular/http';
@@ -82,6 +83,7 @@ const routes: Routes = [
     MatTabsModule,
     MatToolbarModule,
     MatMenuModule,
+    MatSidenavModule,
     NvD3Module,
     RouterModule.forRoot(
       routes,
