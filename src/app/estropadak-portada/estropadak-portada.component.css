@@ -7,12 +7,6 @@
     color: white;
 }
 
-.box img{
-}
-
-.box-arc{
-    color: black;
-    background-color: #1b6f87;
-}
-.box-arc img{
+.box-white{
+    background-color: #ffffff;
 }
