@@ -31,6 +31,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { EstropadakHoniBuruzComponent } from './estropadak-honi-buruz/estropadak-honi-buruz.component';
 import { EstropadakStatsComponent } from './estropadak-stats/estropadak-stats.component';
 import { NvD3Module } from 'ng2-nvd3';
+import { EstropadakYearsComponent } from './estropadak-years/estropadak-years.component';
 
 
 
@@ -71,6 +72,7 @@ const routes: Routes = [
     EstropadaEstropadaSailkapenaComponent,
     EstropadakHoniBuruzComponent,
     EstropadakStatsComponent,
+    EstropadakYearsComponent,
   ],
   imports: [
     BrowserModule,
