@@ -25,9 +25,4 @@ export class EstropadakPortadaComponent implements OnChanges {
       this.sidenav.toggle();
     }
   }
-
-  goToEstropadak(league, year) {
-    this.router.navigate([`/estropadak/${league}/${year}`]);
-  }
-
 }
