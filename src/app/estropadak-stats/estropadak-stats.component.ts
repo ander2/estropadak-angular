@@ -73,11 +73,17 @@ export class EstropadakStatsComponent implements OnInit, OnChanges {
     if (this.year === null || this.year === undefined) {
       this.year = '2017';
     }
+    let liga = this.league;
+    if (this.league.toLowerCase() !== 'euskotren') {
+     liga = this.league.toUpperCase();
+    } else {
+      liga = this.league.toLowerCase();
+    }
     this.estropadaService.getList(this.league, this.year)
     .subscribe((estropadak) => {
       this.estropadak = estropadak.map((estropada) => estropada.key[2])
       .filter((estropada) => estropada.indexOf('Play') === -1)
-      this.estropadaService.getOne(`rank_${this.league.toUpperCase()}_${this.year}`)
+      this.estropadaService.getOne(`rank_${liga}_${this.year}`)
       .subscribe((res) => {
         const stats = res.stats;
         this.data = Object.keys(stats).map((teamName) => {

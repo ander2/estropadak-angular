@@ -9,7 +9,10 @@ import {
   MatTabsModule,
   MatTableModule,
   MatMenuModule,
-  MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
+  MATERIAL_COMPATIBILITY_MODE,
+  MatSidenavModule,
+  MatIconModule
+} from '@angular/material';
 
 // provider
 import { HttpModule } from '@angular/http';
@@ -30,6 +33,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { EstropadakHoniBuruzComponent } from './estropadak-honi-buruz/estropadak-honi-buruz.component';
 import { EstropadakStatsComponent } from './estropadak-stats/estropadak-stats.component';
 import { NvD3Module } from 'ng2-nvd3';
+import { EstropadakYearsComponent } from './estropadak-years/estropadak-years.component';
 
 
 
@@ -70,6 +74,7 @@ const routes: Routes = [
     EstropadaEstropadaSailkapenaComponent,
     EstropadakHoniBuruzComponent,
     EstropadakStatsComponent,
+    EstropadakYearsComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,11 +82,13 @@ const routes: Routes = [
     FlexLayoutModule,
     HttpModule,
     MatButtonModule,
+    MatIconModule,
     MatListModule,
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
     MatMenuModule,
+    MatSidenavModule,
     NvD3Module,
     RouterModule.forRoot(
       routes,

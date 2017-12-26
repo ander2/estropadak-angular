@@ -1,4 +1,6 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-estropadak-portada',
@@ -9,8 +11,18 @@ export class EstropadakPortadaComponent implements OnChanges {
 
   @Input() league;
   @Input() year;
-  constructor() { }
+  @ViewChild(MatSidenav) sidenav;
+  liga = 'ACT';
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnChanges() { }
 
+  sailkapenaToogle(liga: string) {
+    this.liga = liga;
+    if (!this.sidenav.opened) {
+      this.sidenav.toggle();
+    }
+  }
 }

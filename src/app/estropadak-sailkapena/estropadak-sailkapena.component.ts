@@ -14,7 +14,7 @@ export class EstropadakSailkapenaComponent implements OnChanges {
   @Input() year;
   sailkapena = [];
 
-  displayedColumns = ['Posizioa', 'Taldea', 'Puntuak', 'Banderak', 'Onena', 'Txarrena'];
+  displayedColumns = ['Posizioa', 'Taldea', 'Puntuak', 'Banderak'];
   dataSource;
 
   constructor(
@@ -28,7 +28,13 @@ export class EstropadakSailkapenaComponent implements OnChanges {
     if (this.year === null || this.year === undefined) {
       this.year = '2017';
     }
-    const id = `rank_${this.league.toUpperCase()}_${this.year}`;
+    let liga = this.league;
+    if (this.league.toLowerCase() !== 'euskotren') {
+     liga = this.league.toUpperCase();
+    } else {
+      liga = this.league.toLowerCase();
+    }
+    const id = `rank_${liga}_${this.year}`;
     this.estropadaService.getOne(id)
     .subscribe((res) => {
       delete res._id;
@@ -44,7 +50,6 @@ export class EstropadakSailkapenaComponent implements OnChanges {
     });
   }
 }
-
 
 class EstropadaDataSource extends DataSource<any> {
   sailkapena;
