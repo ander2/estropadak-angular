@@ -10,7 +10,9 @@ import {
   MatTableModule,
   MatMenuModule,
   MATERIAL_COMPATIBILITY_MODE,
-  MatSidenavModule} from '@angular/material';
+  MatSidenavModule,
+  MatIconModule
+} from '@angular/material';
 
 // provider
 import { HttpModule } from '@angular/http';
@@ -80,6 +82,7 @@ const routes: Routes = [
     FlexLayoutModule,
     HttpModule,
     MatButtonModule,
+    MatIconModule,
     MatListModule,
     MatTableModule,
     MatTabsModule,
