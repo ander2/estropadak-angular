@@ -14,7 +14,7 @@ export class EstropadakSailkapenaComponent implements OnChanges {
   @Input() year;
   sailkapena = [];
 
-  displayedColumns = ['Posizioa', 'Taldea', 'Puntuak', 'Banderak', 'Onena', 'Txarrena'];
+  displayedColumns = ['Posizioa', 'Taldea', 'Puntuak', 'Banderak'];
   dataSource;
 
   constructor(
