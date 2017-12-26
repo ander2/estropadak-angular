@@ -1,11 +1,49 @@
-<mat-tab-group>
-  <mat-tab label="Sailkapen orokorra">
-      <app-estropadak-sailkapena [year]="year" [league]="league"></app-estropadak-sailkapena>
-  </mat-tab>
-  <mat-tab label="Estropada emaitzak">
-    <app-estropadak-list [year]="year" [league]="league"></app-estropadak-list>
-  </mat-tab>
-  <mat-tab label="Estatistikak">
-    <app-estropadak-stats [year]="year" [league]="league"></app-estropadak-stats>
-  </mat-tab>
-</mat-tab-group>
+<div fxFlex>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" opened="false" disableClose="false">
+    <app-estropadak-sailkapena year="2017" [league]="liga"></app-estropadak-sailkapena>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div fxLayout="row" class="box-white">
+      <div fxLayout="row" fxFlex="50">
+        <div fxFlex fxLayoutAlign="center end">
+          <div>
+            <a href="/estropadak/ACT/2017">
+              <img src="assets/logo_euskolabel.png" alt="Eusko label liga">
+            </a>
+            <h1 (click)="sailkapenaToogle('ACT')">TKE Liga</h1>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="row" fxFlex="50">
+        <div fxFlex fxLayoutAlign="center end">
+          <div>
+            <a href="/estropadak/ARC1/2017">
+              <img src="assets/logo_arc.png" alt="arc">
+            </a>
+            <h1 (click)="sailkapenaToogle('ARC1')">KAE-1 Liga</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="row" class="box-white">
+        <div fxFlex fxLayoutAlign="center end">
+          <div>
+            <a href="/estropadak/ARC2/2017">
+              <img src="assets/logo_arc.png" alt="arc">
+            </a>
+            <h1 (click)="sailkapenaToogle('ARC2')">KAE-2 Liga</h1>
+          </div>
+        </div>
+        <div fxFlex fxLayoutAlign="center end">
+          <div>
+            <a href="/estropadak/euskotren/2017">
+              <img src="assets/logo_euskotren.gif" alt="Euskotren liga">
+            </a>
+            <h1 (click)="sailkapenaToogle('EUSKOTREN')">Euskotren Liga</h1>
+          </div>
+        </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+</div>

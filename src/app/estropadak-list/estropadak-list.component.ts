@@ -28,7 +28,7 @@ export class EstropadakListComponent implements OnChanges {
     if (year === null || year === undefined) {
       year = '2017';
     }
-    this.estropadaService.getList(league.toUpperCase(), year).subscribe((estropadak) => this.estropadak = estropadak);
+    this.estropadaService.getList(league, year).subscribe((estropadak) => this.estropadak = estropadak);
   }
 
   onSelect(estropada) {
