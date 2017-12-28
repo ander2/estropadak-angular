@@ -3,6 +3,7 @@ import {DataSource} from '@angular/cdk/collections';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { SailkapenaService } from 'app/shared/estropada.service';
+import { Stats } from 'app/shared/estropadak.model';
 
 @Component({
   selector: 'app-estropadak-sailkapena',
@@ -12,7 +13,7 @@ import { SailkapenaService } from 'app/shared/estropada.service';
 export class EstropadakSailkapenaComponent implements OnChanges {
   @Input() league;
   @Input() year;
-  sailkapena = [];
+  sailkapena: Stats;
 
   displayedColumns = ['Posizioa', 'Taldea', 'Puntuak', 'Banderak'];
   dataSource;
@@ -22,18 +23,6 @@ export class EstropadakSailkapenaComponent implements OnChanges {
   ) { }
 
   ngOnChanges() {
-    if (this.league === null || this.league === undefined) {
-      this.league = 'ACT';
-    }
-    if (this.year === null || this.year === undefined) {
-      this.year = '2017';
-    }
-    let liga = this.league;
-    if (this.league.toLowerCase() !== 'euskotren') {
-     liga = this.league.toUpperCase();
-    } else {
-      liga = this.league.toLowerCase();
-    }
     this.sailkapenaService.getOne(this.league, this.year)
     .subscribe((res) => {
       this.sailkapena = res;

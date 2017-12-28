@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { Estropadak, Stats } from 'app/shared/estropadak.model';
 
 const estropadakUrl = 'http://localhost:5000/';
 
@@ -10,14 +11,14 @@ export class EstropadaService {
 
     constructor(private http: Http) { }
 
-    getList(league: string, year: string) {
+    getList(league: string, year: string): Observable<Estropadak[]> {
         const endpoint = `${estropadakUrl}estropadak/${league}/${year}`;
         return this.http.get(endpoint)
             .map(res => res.json())
     }
 
-    getOne(id: string) {
-        return this.http.get(`${estropadakUrl}estropadak/${id}`)
+    getOne(id: string): Observable<Estropadak> {
+        return this.http.get(`${estropadakUrl}estropada/${id}`)
             .map(res => res.json())
     }
 }
@@ -50,7 +51,7 @@ export class SailkapenaService {
             .map(res => res.json())
     }
 
-    getOne(league: string, year: string) {
+    getOne(league: string, year: string): Observable<Stats> {
         return this.http.get(`${estropadakUrl}sailkapena/${league}/${year}`)
             .map(res => res.json())
     }
