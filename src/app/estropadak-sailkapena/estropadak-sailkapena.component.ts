@@ -1,8 +1,8 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { EstropadaService } from '../shared/estropada.service';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import { SailkapenaService } from 'app/shared/estropada.service';
 
 @Component({
   selector: 'app-estropadak-sailkapena',
@@ -18,7 +18,7 @@ export class EstropadakSailkapenaComponent implements OnChanges {
   dataSource;
 
   constructor(
-    private estropadaService: EstropadaService,
+    private sailkapenaService: SailkapenaService,
   ) { }
 
   ngOnChanges() {
@@ -34,15 +34,12 @@ export class EstropadakSailkapenaComponent implements OnChanges {
     } else {
       liga = this.league.toLowerCase();
     }
-    const id = `rank_${liga}_${this.year}`;
-    this.estropadaService.getOne(id)
+    this.sailkapenaService.getOne(this.league, this.year)
     .subscribe((res) => {
-      delete res._id;
-      delete res._rev;
-      this.sailkapena = res.stats;
-      const sailk = Object.keys(res.stats).reduce((memo: any[], taldeIzena: string) => {
-        res.stats[taldeIzena].izena = taldeIzena;
-        memo.push(res.stats[taldeIzena]);
+      this.sailkapena = res;
+      const sailk = Object.keys(this.sailkapena).reduce((memo: any[], taldeIzena: string) => {
+        this.sailkapena[taldeIzena].izena = taldeIzena;
+        memo.push(this.sailkapena[taldeIzena]);
         return memo;
       }, []);
       const ordered = sailk.sort((a, b) => b.points - a.points);
