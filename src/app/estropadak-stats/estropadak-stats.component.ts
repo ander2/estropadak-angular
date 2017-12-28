@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges, Input, ViewEncapsulation } from '@angular/core';
 import { EstropadaService, SailkapenaService } from 'app/shared/estropada.service';
 import 'nvd3';
+import { Estropadak } from 'app/shared/estropadak.model';
 declare let d3: any;
 
 @Component({
@@ -15,7 +16,7 @@ export class EstropadakStatsComponent implements OnInit, OnChanges {
   options;
   piechartOptions;
   data;
-  estropadak = [];
+  estropadak: string[] = [];
   cumulative = [];
   rank = [];
   wins = [];
@@ -70,21 +71,9 @@ export class EstropadakStatsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    if (this.league === null || this.league === undefined) {
-      this.league = 'ACT';
-    }
-    if (this.year === null || this.year === undefined) {
-      this.year = '2017';
-    }
-    let liga = this.league;
-    if (this.league.toLowerCase() !== 'euskotren') {
-     liga = this.league.toUpperCase();
-    } else {
-      liga = this.league.toLowerCase();
-    }
     this.estropadaService.getList(this.league, this.year)
     .subscribe((estropadak) => {
-      this.estropadak = estropadak.map((estropada) => estropada.key[2])
+      this.estropadak = estropadak.map((estropada) => estropada.izena)
       .filter((estropada) => estropada.indexOf('Play') === -1)
       this.sailkapenaService.getOne(this.league, this.year)
       .subscribe((res) => {
