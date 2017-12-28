@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, Input, ViewEncapsulation } from '@angular/core';
-import { EstropadaService } from 'app/shared/estropada.service';
+import { EstropadaService, SailkapenaService } from 'app/shared/estropada.service';
 import 'nvd3';
 declare let d3: any;
 
@@ -23,7 +23,10 @@ export class EstropadakStatsComponent implements OnInit, OnChanges {
   @Input() year;
   @Input() league;
 
-  constructor(private estropadaService: EstropadaService) { }
+  constructor(
+    private estropadaService: EstropadaService,
+    private sailkapenaService: SailkapenaService
+  ) { }
 
   ngOnInit() {
     this.options = {
@@ -83,11 +86,11 @@ export class EstropadakStatsComponent implements OnInit, OnChanges {
     .subscribe((estropadak) => {
       this.estropadak = estropadak.map((estropada) => estropada.key[2])
       .filter((estropada) => estropada.indexOf('Play') === -1)
-      this.estropadaService.getOne(`rank_${liga}_${this.year}`)
+      this.sailkapenaService.getOne(this.league, this.year)
       .subscribe((res) => {
-        const stats = res.stats;
+        const stats = res;
         this.data = Object.keys(stats).map((teamName) => {
-          const values = res.stats[teamName].positions.map((pos, i) => {
+          const values = stats[teamName].positions.map((pos, i) => {
             return {label: i, value: 13 - pos};
           });
           return {
@@ -96,7 +99,7 @@ export class EstropadakStatsComponent implements OnInit, OnChanges {
           }
         });
         this.cumulative = Object.keys(stats).map((teamName) => {
-          const values = res.stats[teamName].positions.reduce((memo, val, pos) => {
+          const values = stats[teamName].positions.reduce((memo, val, pos) => {
             if (memo.length === 0) {
               memo.push({label: pos, value: (13 - val) });
             } else {
