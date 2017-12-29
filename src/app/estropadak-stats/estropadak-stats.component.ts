@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges, Input, ViewEncapsulation } from '@angular/core';
-import { EstropadaService } from 'app/shared/estropada.service';
+import { EstropadaService, SailkapenaService } from 'app/shared/estropada.service';
 import 'nvd3';
+import { Estropadak } from 'app/shared/estropadak.model';
 declare let d3: any;
 
 @Component({
@@ -15,7 +16,7 @@ export class EstropadakStatsComponent implements OnInit, OnChanges {
   options;
   piechartOptions;
   data;
-  estropadak = [];
+  estropadak: string[] = [];
   cumulative = [];
   rank = [];
   wins = [];
@@ -23,7 +24,10 @@ export class EstropadakStatsComponent implements OnInit, OnChanges {
   @Input() year;
   @Input() league;
 
-  constructor(private estropadaService: EstropadaService) { }
+  constructor(
+    private estropadaService: EstropadaService,
+    private sailkapenaService: SailkapenaService
+  ) { }
 
   ngOnInit() {
     this.options = {
@@ -67,27 +71,15 @@ export class EstropadakStatsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    if (this.league === null || this.league === undefined) {
-      this.league = 'ACT';
-    }
-    if (this.year === null || this.year === undefined) {
-      this.year = '2017';
-    }
-    let liga = this.league;
-    if (this.league.toLowerCase() !== 'euskotren') {
-     liga = this.league.toUpperCase();
-    } else {
-      liga = this.league.toLowerCase();
-    }
     this.estropadaService.getList(this.league, this.year)
     .subscribe((estropadak) => {
-      this.estropadak = estropadak.map((estropada) => estropada.key[2])
+      this.estropadak = estropadak.map((estropada) => estropada.izena)
       .filter((estropada) => estropada.indexOf('Play') === -1)
-      this.estropadaService.getOne(`rank_${liga}_${this.year}`)
+      this.sailkapenaService.getOne(this.league, this.year)
       .subscribe((res) => {
-        const stats = res.stats;
+        const stats = res;
         this.data = Object.keys(stats).map((teamName) => {
-          const values = res.stats[teamName].positions.map((pos, i) => {
+          const values = stats[teamName].positions.map((pos, i) => {
             return {label: i, value: 13 - pos};
           });
           return {
@@ -96,7 +88,7 @@ export class EstropadakStatsComponent implements OnInit, OnChanges {
           }
         });
         this.cumulative = Object.keys(stats).map((teamName) => {
-          const values = res.stats[teamName].positions.reduce((memo, val, pos) => {
+          const values = stats[teamName].positions.reduce((memo, val, pos) => {
             if (memo.length === 0) {
               memo.push({label: pos, value: (13 - val) });
             } else {

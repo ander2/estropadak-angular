@@ -16,7 +16,7 @@ import {
 
 // provider
 import { HttpModule } from '@angular/http';
-import { EstropadaService, UrteakService } from './shared/estropada.service';
+import { EstropadaService, UrteakService, SailkapenaService } from './shared/estropada.service';
 
 import { AppComponent } from './app.component';
 
@@ -98,6 +98,7 @@ const routes: Routes = [
   ],
   providers: [
     EstropadaService,
+    SailkapenaService,
     UrteakService,
     { provide: MATERIAL_COMPATIBILITY_MODE, useValue: true }
   ],
