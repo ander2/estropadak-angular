@@ -73,8 +73,16 @@ export class EstropadakStatsComponent implements OnInit, OnChanges {
   ngOnChanges() {
     this.estropadaService.getList(this.league, this.year)
     .subscribe((estropadak) => {
-      this.estropadak = estropadak.map((estropada) => estropada.izena)
+      this.estropadak = estropadak.filter((estropada) => {
+        if ('puntuagarria' in estropada) {
+          return estropada.puntuagarria;
+        } else {
+          return true;
+        }
+      })
+      .map((estropada) => estropada.izena)
       .filter((estropada) => estropada.indexOf('Play') === -1)
+      console.log(this.estropadak);
       this.sailkapenaService.getOne(this.league, this.year)
       .subscribe((res) => {
         const stats = res;

@@ -18,6 +18,8 @@ export class Estropadak {
   liga: 'ACT' | 'ARC1' | 'ARC2' | 'euskotren';
   urla: string;
   sailkapena: TaldeSailkapena[];
+  puntuagarria?: boolean;
+  oharra?: string;
 }
 
 class Stat {
