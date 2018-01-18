@@ -1,7 +1,8 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { EstropadaService } from '../shared/estropada.service';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { EstropadaTandaComponent } from '../estropada-tanda/estropada-tanda.component';
 
 @Component({
@@ -18,7 +19,7 @@ export class EstropadaDetailComponent implements OnInit {
   constructor(
     private estropadaService: EstropadaService,
     private route: ActivatedRoute,
-    private router: Router
+    private location: Location
   ) { }
 
   ngOnInit() {

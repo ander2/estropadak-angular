@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./estropadak-honi-buruz.component.css']
 })
 export class EstropadakHoniBuruzComponent implements OnInit {
+  year: number;
 
   constructor() { }
 
   ngOnInit() {
+    this.year = 2017;
   }
 
 }

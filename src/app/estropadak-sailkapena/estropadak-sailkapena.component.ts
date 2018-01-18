@@ -1,8 +1,9 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { EstropadaService } from '../shared/estropada.service';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import { SailkapenaService } from 'app/shared/estropada.service';
+import { Stats } from 'app/shared/estropadak.model';
 
 @Component({
   selector: 'app-estropadak-sailkapena',
@@ -12,31 +13,22 @@ import 'rxjs/add/observable/of';
 export class EstropadakSailkapenaComponent implements OnChanges {
   @Input() league;
   @Input() year;
-  sailkapena = [];
+  sailkapena: Stats;
 
-  displayedColumns = ['Posizioa', 'Taldea', 'Puntuak', 'Banderak', 'Onena', 'Txarrena'];
+  displayedColumns = ['Posizioa', 'Taldea', 'Puntuak', 'Banderak'];
   dataSource;
 
   constructor(
-    private estropadaService: EstropadaService,
+    private sailkapenaService: SailkapenaService,
   ) { }
 
   ngOnChanges() {
-    if (this.league === null || this.league === undefined) {
-      this.league = 'ACT';
-    }
-    if (this.year === null || this.year === undefined) {
-      this.year = '2017';
-    }
-    const id = `rank_${this.league.toUpperCase()}_${this.year}`;
-    this.estropadaService.getOne(id)
+    this.sailkapenaService.getOne(this.league, this.year)
     .subscribe((res) => {
-      delete res._id;
-      delete res._rev;
-      this.sailkapena = res.stats;
-      const sailk = Object.keys(res.stats).reduce((memo: any[], taldeIzena: string) => {
-        res.stats[taldeIzena].izena = taldeIzena;
-        memo.push(res.stats[taldeIzena]);
+      this.sailkapena = res;
+      const sailk = Object.keys(this.sailkapena).reduce((memo: any[], taldeIzena: string) => {
+        this.sailkapena[taldeIzena].izena = taldeIzena;
+        memo.push(this.sailkapena[taldeIzena]);
         return memo;
       }, []);
       const ordered = sailk.sort((a, b) => b.points - a.points);
@@ -44,7 +36,6 @@ export class EstropadakSailkapenaComponent implements OnChanges {
     });
   }
 }
-
 
 class EstropadaDataSource extends DataSource<any> {
   sailkapena;
