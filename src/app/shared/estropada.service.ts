@@ -3,8 +3,9 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Estropadak, Stats } from 'app/shared/estropadak.model';
+import { environment } from '../../environments/environment';
 
-const estropadakUrl = 'http://localhost:5000/';
+const estropadakUrl = environment.apiUrl;
 
 @Injectable()
 export class EstropadaService {
