@@ -87,26 +87,15 @@ export class EstropadakStatsComponent implements OnInit, OnChanges {
       .subscribe((res) => {
         const stats = res;
         this.data = Object.keys(stats).map((teamName) => {
-          const values = stats[teamName].positions.map((pos, i) => {
-            return {label: i, value: 13 - pos};
-          });
           return {
             key: teamName,
-            values: values
+            values: stats[teamName].positions.map((pos, i) => ({label: i, value: 13 - pos}))
           }
         });
         this.cumulative = Object.keys(stats).map((teamName) => {
-          const values = stats[teamName].positions.reduce((memo, val, pos) => {
-            if (memo.length === 0) {
-              memo.push({label: pos, value: (13 - val) });
-            } else {
-              memo.push({label: pos, value: (13 - val) + memo[pos - 1].value});
-            }
-            return memo;
-          }, []);
           return {
             key: teamName,
-            values: values
+            values: stats[teamName].cumulative.map((points, i) => ({label: i, value: points}))
           }
         });
         this.rank = Object.keys(stats).map((teamName) => {
