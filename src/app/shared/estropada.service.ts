@@ -57,3 +57,20 @@ export class SailkapenaService {
             .map(res => res.json())
     }
 }
+
+@Injectable()
+export class EmaitzakService {
+
+    constructor(private http: Http) { }
+
+    getList(league: string, year: string) {
+        const endpoint = `${estropadakUrl}emaitzak/${league}/${year}`;
+        return this.http.get(endpoint)
+            .map(res => res.json())
+    }
+
+    getOne(id: string): Observable<Estropadak> {
+        return this.http.get(`${estropadakUrl}estropada/${id}`)
+            .map(res => res.json())
+    }
+}
