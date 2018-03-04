@@ -82,7 +82,6 @@ export class EstropadakStatsComponent implements OnInit, OnChanges {
       })
       .map((estropada) => estropada.izena)
       .filter((estropada) => estropada.indexOf('Play') === -1)
-      console.log(this.estropadak);
       this.sailkapenaService.getOne(this.league, this.year)
       .subscribe((res) => {
         const stats = res;
