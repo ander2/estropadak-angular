@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EstropadaEstropadaSailkapenaComponent } from './estropada-estropada-sailkapena.component';
 import { MatTableModule } from '@angular/material';
+import { estropada } from '../shared/estropada.fixture';
 
 describe('EstropadaEstropadaSailkapenaComponent', () => {
   let component: EstropadaEstropadaSailkapenaComponent;
@@ -20,6 +21,7 @@ describe('EstropadaEstropadaSailkapenaComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadaEstropadaSailkapenaComponent);
     component = fixture.componentInstance;
+    component.sailkapena = estropada.sailkapena;
     fixture.detectChanges();
   });
 
