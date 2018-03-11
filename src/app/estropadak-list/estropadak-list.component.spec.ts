@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EstropadakListComponent } from './estropadak-list.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { EstropadaService } from '../shared/estropada.service';
+import { EstropadaServiceStub } from '../shared/estropada.service.stub';
+import { MatListModule } from '@angular/material';
 
 describe('EstropadakListComponent', () => {
   let component: EstropadakListComponent;
@@ -8,6 +12,13 @@ describe('EstropadakListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule,
+        MatListModule
+      ],
+      providers: [
+        {provide: EstropadaService, useClass: EstropadaServiceStub }
+      ],
       declarations: [ EstropadakListComponent ]
     })
     .compileComponents();
