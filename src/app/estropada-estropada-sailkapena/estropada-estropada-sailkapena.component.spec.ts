@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EstropadaEstropadaSailkapenaComponent } from './estropada-estropada-sailkapena.component';
+import { MatTableModule } from '@angular/material';
 
 describe('EstropadaEstropadaSailkapenaComponent', () => {
   let component: EstropadaEstropadaSailkapenaComponent;
@@ -8,6 +9,9 @@ describe('EstropadaEstropadaSailkapenaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        MatTableModule
+      ],
       declarations: [ EstropadaEstropadaSailkapenaComponent ]
     })
     .compileComponents();
