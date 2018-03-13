@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpModule } from '@angular/http';
+
+import { NvD3Module } from 'ng2-nvd3';
 
 import { EstropadakStatsComponent } from './estropadak-stats.component';
+import { EstropadaService, SailkapenaService } from '../shared/estropada.service';
 
 describe('EstropadakStatsComponent', () => {
   let component: EstropadakStatsComponent;
@@ -8,7 +12,15 @@ describe('EstropadakStatsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EstropadakStatsComponent ]
+      imports: [
+        HttpModule,
+        NvD3Module,
+      ],
+      declarations: [ EstropadakStatsComponent ],
+      providers: [
+        EstropadaService,
+        SailkapenaService
+      ]
     })
     .compileComponents();
   }));
