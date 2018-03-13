@@ -770,5 +770,18 @@ export class SailkapenaServiceStub {
       }
     });
   }
+}
 
+export class UrteakServiceStub {
+  getOne() {
+    return Observable.of(2017)
+  }
+
+  getList() {
+    return Observable.of({
+      'act': [2017, 2016, 2015],
+      'arc1': [2017, 2016, 2015],
+      'arc2': [2017, 2016, 2015],
+    })
+  }
 }
