@@ -34,6 +34,7 @@ import { EstropadakStatsComponent } from './estropadak-stats/estropadak-stats.co
 import { NvD3Module } from 'ng2-nvd3';
 import { EstropadakYearsComponent } from './estropadak-years/estropadak-years.component';
 import { EstropadaNavegationComponent } from './estropada-navegation/estropada-navegation.component';
+import { EstropadakNavegationService } from './shared/estropadak-navegation.service';
 
 
 
@@ -99,6 +100,7 @@ const routes: Routes = [
   ],
   providers: [
     EstropadaService,
+    EstropadakNavegationService,
     SailkapenaService,
     UrteakService,
   ],
