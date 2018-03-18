@@ -5,6 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { EstropadaService } from '../shared/estropada.service';
 import { EstropadaServiceStub } from '../shared/estropada.service.stub';
 import { MatListModule } from '@angular/material';
+import { EstropadakNavegationService } from '../shared/estropadak-navegation.service';
 
 describe('EstropadakListComponent', () => {
   let component: EstropadakListComponent;
@@ -17,7 +18,8 @@ describe('EstropadakListComponent', () => {
         MatListModule
       ],
       providers: [
-        {provide: EstropadaService, useClass: EstropadaServiceStub }
+        {provide: EstropadaService, useClass: EstropadaServiceStub },
+        EstropadakNavegationService
       ],
       declarations: [ EstropadakListComponent ]
     })
