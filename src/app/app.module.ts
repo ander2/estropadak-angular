@@ -9,7 +9,6 @@ import {
   MatTabsModule,
   MatTableModule,
   MatMenuModule,
-  MATERIAL_COMPATIBILITY_MODE,
   MatSidenavModule,
   MatIconModule
 } from '@angular/material';
@@ -34,6 +33,8 @@ import { EstropadakHoniBuruzComponent } from './estropadak-honi-buruz/estropadak
 import { EstropadakStatsComponent } from './estropadak-stats/estropadak-stats.component';
 import { NvD3Module } from 'ng2-nvd3';
 import { EstropadakYearsComponent } from './estropadak-years/estropadak-years.component';
+import { EstropadaNavegationComponent } from './estropada-navegation/estropada-navegation.component';
+import { EstropadakNavegationService } from './shared/estropadak-navegation.service';
 
 
 
@@ -75,6 +76,7 @@ const routes: Routes = [
     EstropadakHoniBuruzComponent,
     EstropadakStatsComponent,
     EstropadakYearsComponent,
+    EstropadaNavegationComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,9 +100,9 @@ const routes: Routes = [
   ],
   providers: [
     EstropadaService,
+    EstropadakNavegationService,
     SailkapenaService,
     UrteakService,
-    { provide: MATERIAL_COMPATIBILITY_MODE, useValue: true }
   ],
   bootstrap: [AppComponent]
 })

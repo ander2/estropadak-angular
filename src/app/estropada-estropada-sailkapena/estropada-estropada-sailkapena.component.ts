@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
 import {DataSource} from '@angular/cdk/collections';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
@@ -9,7 +9,7 @@ import 'rxjs/add/observable/of';
   templateUrl: './estropada-estropada-sailkapena.component.html',
   styleUrls: ['./estropada-estropada-sailkapena.component.css']
 })
-export class EstropadaEstropadaSailkapenaComponent implements OnInit {
+export class EstropadaEstropadaSailkapenaComponent implements OnChanges {
 
   @Input() sailkapena;
   displayedColumns = ['Postua', 'Taldea', 'Kalea', '1.z',
@@ -17,9 +17,12 @@ export class EstropadaEstropadaSailkapenaComponent implements OnInit {
   dataSource;
   constructor() { }
 
-  ngOnInit() {
-    const orderedSailkapena = this.sailkapena.sort((a, b) => (parseInt(a.posizioa, 10) - parseInt(b.posizioa, 10)));
-    this.dataSource = new EstropadaDataSource(orderedSailkapena);
+  ngOnChanges(simpleChanges: SimpleChanges) {
+    if ('sailkapena' in simpleChanges) {
+      this.sailkapena = simpleChanges.sailkapena.currentValue;
+      const orderedSailkapena = this.sailkapena.sort((a, b) => (parseInt(a.posizioa, 10) - parseInt(b.posizioa, 10)));
+      this.dataSource = new EstropadaDataSource(orderedSailkapena);
+    }
   }
 }
 
