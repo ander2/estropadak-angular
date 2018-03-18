@@ -1,5 +1,7 @@
+import { Router } from '@angular/router';
+
 export class EstropadakNavegationService {
-  private _estropadak: string[]
+  private _estropadak: string[] = [];
   set estropadak(value: string[]) {
     this._estropadak = value;
   }
@@ -24,5 +26,4 @@ export class EstropadakNavegationService {
       return this.estropadak[ind];
     }
   }
-
 }
