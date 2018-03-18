@@ -1,3 +1,17 @@
-<p>
-  estropada-navegation works!
-</p>
+<div fxLayout>
+  <div fxFlex="10">
+  <a mat-button [routerLink]="['/estropada', prev]">
+    <mat-icon>
+      arrow_left
+    </mat-icon>
+  </a>
+  </div>
+  <div fxFlex="80"></div>
+  <div fxFlex="10">
+    <a mat-button [routerLink]="['/estropada', next]">
+      <mat-icon>
+        arrow_right
+      </mat-icon>
+    </a>
+  </div>
+</div>
