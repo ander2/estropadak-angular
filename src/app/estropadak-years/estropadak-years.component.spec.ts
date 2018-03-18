@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+
+import { MatMenuModule } from '@angular/material';
 
 import { EstropadakYearsComponent } from './estropadak-years.component';
+import { UrteakServiceStub } from '../shared/estropada.service.stub';
+import { UrteakService } from '../shared/estropada.service';
 
 describe('EstropadakYearsComponent', () => {
   let component: EstropadakYearsComponent;
@@ -8,7 +13,14 @@ describe('EstropadakYearsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EstropadakYearsComponent ]
+      imports: [
+        MatMenuModule,
+        RouterTestingModule
+      ],
+      declarations: [ EstropadakYearsComponent ],
+      providers: [
+        {provide: UrteakService, useClass: UrteakServiceStub}
+      ]
     })
     .compileComponents();
   }));
@@ -16,6 +28,7 @@ describe('EstropadakYearsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadakYearsComponent);
     component = fixture.componentInstance;
+    component.league = 'ACT';
     fixture.detectChanges();
   });
 
