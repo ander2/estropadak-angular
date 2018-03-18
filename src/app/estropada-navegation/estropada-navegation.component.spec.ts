@@ -2,6 +2,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EstropadaNavegationComponent } from './estropada-navegation.component';
 import { EstropadakNavegationService } from '../shared/estropadak-navegation.service';
+import { MatIconModule, MatButtonModule } from '@angular/material';
+import { RouterTestingModule } from '@angular/router/testing';
+import { EstropadaService } from '../shared/estropada.service';
+import { EstropadaServiceStub } from '../shared/estropada.service.stub';
 
 describe('EstropadaNavegationComponent', () => {
   let component: EstropadaNavegationComponent;
@@ -9,9 +13,15 @@ describe('EstropadaNavegationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        MatIconModule,
+        MatButtonModule,
+        RouterTestingModule
+      ],
       declarations: [ EstropadaNavegationComponent ],
       providers: [
-        EstropadakNavegationService
+        EstropadakNavegationService,
+        {provide: EstropadaService, useClass: EstropadaServiceStub}
       ]
     })
     .compileComponents();
