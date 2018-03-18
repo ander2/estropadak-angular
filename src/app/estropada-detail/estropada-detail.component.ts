@@ -24,6 +24,14 @@ export class EstropadaDetailComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+      this.refresh();
+    });
+  }
+
+  refresh( ) {
+    console.log(this.id);
     this.datasource = this.estropadaService.getOne(this.id);
     this.estropadaService.getOne(this.id)
     .subscribe((estropada) => {
@@ -47,7 +55,6 @@ export class EstropadaDetailComponent implements OnInit {
         tandak: tandak,
         sailkapena: estropada.sailkapena
       };
-      // return this.estropada = estropada;
     });
   }
 }

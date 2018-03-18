@@ -5,6 +5,7 @@
 <div *ngIf="estropada">
     <h1 class="mat-headline">{{estropada.izena}}</h1>
     <h2 class="mat-h2">{{estropada.lekua}} {{estropada.data}}</h2>
+    <app-estropada-navegation [estropadaId]="id"></app-estropada-navegation>
     <div *ngIf="estropada.sailkapena">
       <app-estropada-estropada-sailkapena [sailkapena]="estropada.sailkapena"></app-estropada-estropada-sailkapena>
     </div>

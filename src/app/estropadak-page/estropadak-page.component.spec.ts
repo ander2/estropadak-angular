@@ -15,6 +15,7 @@ import { EstropadakStatsComponent } from '../estropadak-stats/estropadak-stats.c
 import { EstropadaService, UrteakService, SailkapenaService } from '../shared/estropada.service';
 import { HttpModule } from '@angular/http';
 import { EstropadaServiceStub, SailkapenaServiceStub, UrteakServiceStub } from '../shared/estropada.service.stub';
+import { EstropadakNavegationService } from '../shared/estropadak-navegation.service';
 
 describe('EstropadakPageComponent', () => {
   let component: EstropadakPageComponent;
@@ -51,6 +52,7 @@ describe('EstropadakPageComponent', () => {
           } else {
             return 'ACT';
           }}})}},
+        EstropadakNavegationService
       ]
     })
     .compileComponents();
