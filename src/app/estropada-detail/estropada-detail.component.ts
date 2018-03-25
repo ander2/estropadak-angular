@@ -31,20 +31,19 @@ export class EstropadaDetailComponent implements OnInit {
   }
 
   refresh( ) {
-    console.log(this.id);
-    this.datasource = this.estropadaService.getOne(this.id);
     this.estropadaService.getOne(this.id)
     .subscribe((estropada) => {
       const tandak = [];
-      const tanda1 = estropada.sailkapena.filter((el) => el.tanda === 1);
+      const sailkapena = estropada.sailkapena || [];
+      const tanda1 = sailkapena.filter((el) => el.tanda === 1);
       if (tanda1.length > 0) {
         tandak.push(tanda1);
       }
-      const tanda2 = estropada.sailkapena.filter((el) => el.tanda === 2);
+      const tanda2 = sailkapena.filter((el) => el.tanda === 2);
       if (tanda2.length > 0) {
         tandak.push(tanda2);
       }
-      const tanda3 = estropada.sailkapena.filter((el) => el.tanda === 3);
+      const tanda3 = sailkapena.filter((el) => el.tanda === 3);
       if (tanda3.length > 0) {
         tandak.push(tanda3);
       }
@@ -53,7 +52,7 @@ export class EstropadaDetailComponent implements OnInit {
         lekua: estropada.lekua,
         data: estropada.data,
         tandak: tandak,
-        sailkapena: estropada.sailkapena
+        sailkapena: sailkapena
       };
     });
   }

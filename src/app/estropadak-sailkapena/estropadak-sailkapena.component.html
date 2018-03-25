@@ -1,25 +1,30 @@
 <h2 class="mat-title">{{year}} {{league.toUpperCase()}} liga. Sailkapen orokorra</h2>
-<mat-table #table [dataSource]="dataSource">
-    <ng-container matColumnDef="Posizioa">
-      <mat-header-cell *matHeaderCellDef fxFlex="15"> Posizioa </mat-header-cell>
-      <mat-cell *matCellDef="let row" fxFlex="15"> {{row.position}} </mat-cell>
-    </ng-container>
+<ng-container *ngIf="sailkapena; else no_sailkapena">
+  <mat-table #table [dataSource]="dataSource">
+      <ng-container matColumnDef="Posizioa">
+        <mat-header-cell *matHeaderCellDef fxFlex="15"> Posizioa </mat-header-cell>
+        <mat-cell *matCellDef="let row" fxFlex="15"> {{row.position}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="Taldea">
-      <mat-header-cell *matHeaderCellDef fxFlex="55"> Taldea </mat-header-cell>
-      <mat-cell *matCellDef="let row" fxFlex="55"> {{row.izena}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="Taldea">
+        <mat-header-cell *matHeaderCellDef fxFlex="55"> Taldea </mat-header-cell>
+        <mat-cell *matCellDef="let row" fxFlex="55"> {{row.izena}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="Puntuak">
-      <mat-header-cell *matHeaderCellDef fxFlex="15"> Puntuak </mat-header-cell>
-      <mat-cell *matCellDef="let row" fxFlex="15"> {{row.points}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="Puntuak">
+        <mat-header-cell *matHeaderCellDef fxFlex="15"> Puntuak </mat-header-cell>
+        <mat-cell *matCellDef="let row" fxFlex="15"> {{row.points}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="Banderak">
-      <mat-header-cell *matHeaderCellDef fxFlex="15"> Banderak </mat-header-cell>
-      <mat-cell *matCellDef="let row" fxFlex="15"> {{row.wins}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="Banderak">
+        <mat-header-cell *matHeaderCellDef fxFlex="15"> Banderak </mat-header-cell>
+        <mat-cell *matCellDef="let row" fxFlex="15"> {{row.wins}} </mat-cell>
+      </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</ng-container>
+<ng-template #no_sailkapena>
+  <h3 style='text-align:center'>Sailkapena ez dago eskuragarri</h3>
+</ng-template>

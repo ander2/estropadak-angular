@@ -112,6 +112,11 @@ export class EstropadakStatsComponent implements OnInit, OnChanges {
           }
           return memo;
         }, []);
+      }, (err) => {
+        this.data = [];
+        this.cumulative = [];
+        this.rank = [];
+        this.wins = [];
       });
     });
   }

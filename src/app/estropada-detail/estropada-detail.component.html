@@ -6,10 +6,13 @@
     <h1 class="mat-headline">{{estropada.izena}}</h1>
     <h2 class="mat-h2">{{estropada.lekua}} {{estropada.data}}</h2>
     <app-estropada-navegation [estropadaId]="id"></app-estropada-navegation>
-    <div *ngIf="estropada.sailkapena">
+    <div *ngIf="estropada?.sailkapena?.length > 0; else no_sailkapena">
       <app-estropada-estropada-sailkapena [sailkapena]="estropada.sailkapena"></app-estropada-estropada-sailkapena>
     </div>
-    <div *ngFor="let tanda of estropada.tandak">
+    <ng-template #no_sailkapena>
+      <h3 style='text-align: center'>Sailkapena ez dago eskuragarri</h3>
+    </ng-template>
+    <div *ngFor="let tanda of estropada?.tandak">
       <app-estropada-tanda [tanda]="tanda"></app-estropada-tanda>
       <mat-divider></mat-divider>
     </div>
