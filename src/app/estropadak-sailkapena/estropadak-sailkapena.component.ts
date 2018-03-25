@@ -33,6 +33,8 @@ export class EstropadakSailkapenaComponent implements OnChanges {
       }, []);
       const ordered = sailk.sort((a, b) => b.points - a.points);
       this.dataSource = new EstropadaDataSource(ordered);
+    }, (err) => {
+      console.log('Error');
     });
   }
 }
