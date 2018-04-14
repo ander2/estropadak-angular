@@ -14,7 +14,7 @@ export class EstropadakListComponent implements OnChanges {
   @Input() year;
   estropadak: any = [];
   constructor(
-    private estropadaService: EstropadaService,
+    protected estropadaService: EstropadaService,
     private navigationService: EstropadakNavegationService,
     private router: Router,
   ) { }

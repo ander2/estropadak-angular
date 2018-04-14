@@ -10,7 +10,8 @@ import {
   MatTableModule,
   MatMenuModule,
   MatSidenavModule,
-  MatIconModule
+  MatIconModule,
+  MatCardModule
 } from '@angular/material';
 
 // provider
@@ -35,6 +36,7 @@ import { NvD3Module } from 'ng2-nvd3';
 import { EstropadakYearsComponent } from './estropadak-years/estropadak-years.component';
 import { EstropadaNavegationComponent } from './estropada-navegation/estropada-navegation.component';
 import { EstropadakNavegationService } from './shared/estropadak-navegation.service';
+import { EstropadakHurrengoakCardComponent } from './estropadak-hurrengoak-card/estropadak-hurrengoak-card.component';
 
 
 
@@ -77,6 +79,7 @@ const routes: Routes = [
     EstropadakStatsComponent,
     EstropadakYearsComponent,
     EstropadaNavegationComponent,
+    EstropadakHurrengoakCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,6 +87,7 @@ const routes: Routes = [
     FlexLayoutModule,
     HttpModule,
     MatButtonModule,
+    MatCardModule,
     MatIconModule,
     MatListModule,
     MatTableModule,
