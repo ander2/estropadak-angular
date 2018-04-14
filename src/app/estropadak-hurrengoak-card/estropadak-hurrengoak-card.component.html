@@ -8,5 +8,10 @@
         {{estropada.data}} - {{estropada.izena}}
       </mat-list-item>
     </mat-list>
+    <mat-list *ngIf="estropadak.length === 0">
+      <mat-list-item>
+        Ez dago estropadarik
+      </mat-list-item>
+    </mat-list>
   </mat-card-content>
 </mat-card>
