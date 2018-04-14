@@ -10,7 +10,7 @@ export class TaldeSailkapena {
   ziabogak: string[];
 }
 
-export class Estropadak {
+export class Estropada {
   izena: string;
   data: string;
   id: string;

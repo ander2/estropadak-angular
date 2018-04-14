@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { Estropadak, Stats } from 'app/shared/estropadak.model';
+import { Estropada, Stats } from 'app/shared/estropadak.model';
 import { environment } from '../../environments/environment';
 
 const estropadakUrl = environment.apiUrl;
@@ -12,13 +12,13 @@ export class EstropadaService {
 
     constructor(private http: Http) { }
 
-    getList(league: string, year: string): Observable<Estropadak[]> {
+    getList(league: string, year: string): Observable<Estropada[]> {
         const endpoint = `${estropadakUrl}estropadak/${league}/${year}`;
         return this.http.get(endpoint)
             .map(res => res.json())
     }
 
-    getOne(id: string): Observable<Estropadak> {
+    getOne(id: string): Observable<Estropada> {
         return this.http.get(`${estropadakUrl}estropada/${id}`)
             .map(res => res.json())
     }
@@ -69,7 +69,7 @@ export class EmaitzakService {
             .map(res => res.json())
     }
 
-    getOne(id: string): Observable<Estropadak> {
+    getOne(id: string): Observable<Estropada> {
         return this.http.get(`${estropadakUrl}estropada/${id}`)
             .map(res => res.json())
     }
