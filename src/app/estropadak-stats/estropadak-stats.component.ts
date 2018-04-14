@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges, Input, ViewEncapsulation } from '@angular/core';
 import { EstropadaService, SailkapenaService } from 'app/shared/estropada.service';
 import 'nvd3';
-import { Estropadak } from 'app/shared/estropadak.model';
+import { Estropada } from 'app/shared/estropadak.model';
 declare let d3: any;
 
 @Component({
