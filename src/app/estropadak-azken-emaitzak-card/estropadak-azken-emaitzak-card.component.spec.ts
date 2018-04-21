@@ -6,7 +6,7 @@ import { EmaitzakServiceStub } from '../shared/estropada.service.stub';
 import { EmaitzakService } from '../shared/estropada.service';
 import { Estropada } from '../shared/estropadak.model';
 
-fdescribe('EstropadakAzkenEmaitzakCardComponent', () => {
+describe('EstropadakAzkenEmaitzakCardComponent', () => {
   let component: EstropadakAzkenEmaitzakCardComponent;
   let fixture: ComponentFixture<EstropadakAzkenEmaitzakCardComponent>;
 
