@@ -2,6 +2,7 @@ export class TaldeSailkapena {
   denbora: string;
   kalea: number;
   postua: number;
+  posizioa: number;
   puntuazioa: number;
   talde_id: string;
   talde_izena: string;
