@@ -1,0 +1,20 @@
+<mat-card>
+  <mat-card-title>
+    {{this.league}} Azken emaitzak:
+  </mat-card-title>
+  <mat-card-content>
+    <div *ngFor="let estropada of this.estropadak">
+      {{estropada.data}} - {{estropada.izena}}
+      <mat-list *ngFor="let taldea of estropada.sailkapena">
+        <mat-list-item >
+          {{taldea.posizioa}} - {{taldea.talde_izena}} {{taldea.denbora}}
+        </mat-list-item>
+      </mat-list>
+      <mat-list *ngIf="estropadak.length === 0">
+        <mat-list-item>
+          Ez dago estropadarik
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </mat-card-content>
+</mat-card>
