@@ -16,7 +16,7 @@ import {
 
 // provider
 import { HttpModule } from '@angular/http';
-import { EstropadaService, UrteakService, SailkapenaService } from './shared/estropada.service';
+import { EstropadaService, UrteakService, SailkapenaService, EmaitzakService } from './shared/estropada.service';
 
 import { AppComponent } from './app.component';
 
@@ -37,6 +37,7 @@ import { EstropadakYearsComponent } from './estropadak-years/estropadak-years.co
 import { EstropadaNavegationComponent } from './estropada-navegation/estropada-navegation.component';
 import { EstropadakNavegationService } from './shared/estropadak-navegation.service';
 import { EstropadakHurrengoakCardComponent } from './estropadak-hurrengoak-card/estropadak-hurrengoak-card.component';
+import { EstropadakAzkenEmaitzakCardComponent } from './estropadak-azken-emaitzak-card/estropadak-azken-emaitzak-card.component';
 
 
 
@@ -80,6 +81,7 @@ const routes: Routes = [
     EstropadakYearsComponent,
     EstropadaNavegationComponent,
     EstropadakHurrengoakCardComponent,
+    EstropadakAzkenEmaitzakCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -104,6 +106,7 @@ const routes: Routes = [
   ],
   providers: [
     EstropadaService,
+    EmaitzakService,
     EstropadakNavegationService,
     SailkapenaService,
     UrteakService,
