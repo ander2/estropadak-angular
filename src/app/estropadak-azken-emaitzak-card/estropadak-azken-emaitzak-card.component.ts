@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { EmaitzakService } from '../shared/estropada.service';
 import { Estropada, TaldeSailkapena } from '../shared/estropadak.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-estropadak-azken-emaitzak-card',
@@ -24,11 +25,11 @@ export class EstropadakAzkenEmaitzakCardComponent implements OnInit, OnChanges {
     this.showEmaitzak(this.league, this.year);
   }
   showEmaitzak(league, year) {
-    const date = new Date().toISOString();
+    const date = moment(); // new Date().toISOString();
     this.emaitzakService.getList(league, year)
       .subscribe((estropadak: Estropada[]) => {
         this.estropadak = estropadak
-        .filter((estropada: Estropada) => estropada.data <= date)
+        .filter((estropada: Estropada) => moment(estropada.data) <= date)
         .reverse()
         .filter((estropada: Estropada, index) => index <= 2)
         .map((estropada: Estropada) => {
