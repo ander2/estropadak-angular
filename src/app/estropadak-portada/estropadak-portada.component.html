@@ -4,45 +4,47 @@
     <app-estropadak-sailkapena [year]="year" [league]="league"></app-estropadak-sailkapena>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div fxLayout="row" class="box-white">
-      <div fxLayout="row" fxFlex="50">
-        <div fxFlex fxLayoutAlign="center end">
-          <div>
-            <a routerLink="/estropadak/ACT/{{year}}">
-              <img src="assets/logo_euskolabel.png" alt="Eusko label liga">
-            </a>
-            <h1 (click)="sailkapenaToogle('ACT')">TKE Liga</h1>
-          </div>
-        </div>
-      </div>
-      <div fxLayout="row" fxFlex="50">
-        <div fxFlex fxLayoutAlign="center end">
-          <div>
-            <a routerLink="/estropadak/ARC1/{{year}}">
-              <img src="assets/logo_arc.png" alt="arc">
-            </a>
-            <h1 (click)="sailkapenaToogle('ARC1')">KAE-1 Liga</h1>
-          </div>
-        </div>
-      </div>
+    <div fxLayout="row" class="box-white" fxLayoutAlign="space-around start">
+        <mat-tab-group>
+          <mat-tab label="ACT hurrengo estropadak">
+            <app-estropadak-hurrengoak-card [year]=2018 [league]="'ACT'"></app-estropadak-hurrengoak-card>
+          </mat-tab>
+          <mat-tab label="ACT azken emaitzak">
+            <app-estropadak-azken-emaitzak-card [year]=2018 [league]="'ACT'"></app-estropadak-azken-emaitzak-card>
+          </mat-tab>
+        </mat-tab-group>
+        <mat-tab-group>
+          <mat-tab label="ARC1 hurrengo estropadak">
+            <app-estropadak-hurrengoak-card [year]=2018 [league]="'ARC1'"></app-estropadak-hurrengoak-card>
+          </mat-tab>
+          <mat-tab label="ARC1 azken emaitzak">
+            <app-estropadak-azken-emaitzak-card [year]=2018 [league]="'ARC1'"></app-estropadak-azken-emaitzak-card>
+          </mat-tab>
+        </mat-tab-group>
+    </div>
+    <div fxLayout="row" class="box-white" fxLayoutAlign="space-around start">
+        <mat-tab-group>
+          <mat-tab label="ARC2 hurrengo estropadak">
+            <app-estropadak-hurrengoak-card [year]=2018 [league]="'ARC2'"></app-estropadak-hurrengoak-card>
+          </mat-tab>
+          <mat-tab label="ARC2 azken emaitzak">
+            <app-estropadak-azken-emaitzak-card [year]=2018 [league]="'ARC2'"></app-estropadak-azken-emaitzak-card>
+          </mat-tab>
+        </mat-tab-group>
+        <mat-tab-group>
+          <mat-tab label="Euskotren hurrengo estropadak">
+            <app-estropadak-hurrengoak-card [year]=2018 [league]="'euskotren'"></app-estropadak-hurrengoak-card>
+          </mat-tab>
+          <mat-tab label="Euskotren azken emaitzak">
+            <app-estropadak-azken-emaitzak-card [year]=2018 [league]="'euskotren'"></app-estropadak-azken-emaitzak-card>
+          </mat-tab>
+        </mat-tab-group>
     </div>
     <div fxLayout="row" class="box-white">
-        <div fxFlex fxLayoutAlign="center end">
-          <div>
-            <a routerLink="/estropadak/ARC2/{{year}}">
-              <img src="assets/logo_arc.png" alt="arc">
-            </a>
-            <h1 (click)="sailkapenaToogle('ARC2')">KAE-2 Liga</h1>
-          </div>
-        </div>
-        <div fxFlex fxLayoutAlign="center end">
-          <div>
-            <a routerLink="/estropadak/euskotren/{{year}}">
-              <img src="assets/logo_euskotren.gif" alt="Euskotren liga">
-            </a>
-            <h1 (click)="sailkapenaToogle('EUSKOTREN')">Euskotren Liga</h1>
-          </div>
-        </div>
+      <div fxLayout="row" fxFlex="50">
+      </div>
+      <div fxLayout="row" fxFlex="50">
+      </div>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -5,7 +5,7 @@
   <mat-card-content>
     <mat-list>
       <mat-list-item *ngFor="let estropada of this.estropadak">
-        {{estropada.data}} - {{estropada.izena}}
+        {{estropada.data}} <br/> {{estropada.izena}}
       </mat-list-item>
     </mat-list>
     <mat-list *ngIf="estropadak.length === 0">
