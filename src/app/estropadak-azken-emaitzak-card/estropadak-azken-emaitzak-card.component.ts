@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { EmaitzakService } from '../shared/estropada.service';
 import { Estropada, TaldeSailkapena } from '../shared/estropadak.model';
 import * as moment from 'moment';
+import { MatButtonToggleChange } from '@angular/material';
 
 @Component({
   selector: 'app-estropadak-azken-emaitzak-card',
@@ -24,6 +25,13 @@ export class EstropadakAzkenEmaitzakCardComponent implements OnInit, OnChanges {
   ngOnChanges() {
     this.showEmaitzak(this.league, this.year);
   }
+
+  onChangeLeague(event: MatButtonToggleChange) {
+    this.league = event.value;
+    this.showEmaitzak(this.league, this.year);
+
+  }
+
   showEmaitzak(league, year) {
     const date = moment(); // new Date().toISOString();
     this.emaitzakService.getList(league, year)
@@ -34,8 +42,8 @@ export class EstropadakAzkenEmaitzakCardComponent implements OnInit, OnChanges {
         .filter((estropada: Estropada, index) => index <= 2)
         .map((estropada: Estropada) => {
           estropada.sailkapena = estropada.sailkapena
-            .sort((a, b) => a.posizioa - b.posizioa)
-            .filter((taldea: TaldeSailkapena) => taldea.posizioa < 5);
+            .sort((a, b) => a.posizioa - b.posizioa);
+            //.filter((taldea: TaldeSailkapena) => taldea.posizioa < 5);
           return estropada;
         });
       })
