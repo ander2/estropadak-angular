@@ -4,47 +4,16 @@
     <app-estropadak-sailkapena [year]="year" [league]="league"></app-estropadak-sailkapena>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div fxLayout="row" class="box-white" fxLayoutAlign="space-around start">
-        <mat-tab-group>
-          <mat-tab label="ACT hurrengo estropadak">
-            <app-estropadak-hurrengoak-card [year]=2018 [league]="'ACT'"></app-estropadak-hurrengoak-card>
-          </mat-tab>
-          <mat-tab label="ACT azken emaitzak">
-            <app-estropadak-azken-emaitzak-card [year]=2018 [league]="'ACT'"></app-estropadak-azken-emaitzak-card>
-          </mat-tab>
-        </mat-tab-group>
-        <mat-tab-group>
-          <mat-tab label="ARC1 hurrengo estropadak">
-            <app-estropadak-hurrengoak-card [year]=2018 [league]="'ARC1'"></app-estropadak-hurrengoak-card>
-          </mat-tab>
-          <mat-tab label="ARC1 azken emaitzak">
-            <app-estropadak-azken-emaitzak-card [year]=2018 [league]="'ARC1'"></app-estropadak-azken-emaitzak-card>
-          </mat-tab>
-        </mat-tab-group>
+    <div>
+      <app-estropadak-azken-emaitzak-card [year]=2018 [league]="'ACT'"></app-estropadak-azken-emaitzak-card>
     </div>
-    <div fxLayout="row" class="box-white" fxLayoutAlign="space-around start">
-        <mat-tab-group>
-          <mat-tab label="ARC2 hurrengo estropadak">
-            <app-estropadak-hurrengoak-card [year]=2018 [league]="'ARC2'"></app-estropadak-hurrengoak-card>
-          </mat-tab>
-          <mat-tab label="ARC2 azken emaitzak">
-            <app-estropadak-azken-emaitzak-card [year]=2018 [league]="'ARC2'"></app-estropadak-azken-emaitzak-card>
-          </mat-tab>
-        </mat-tab-group>
-        <mat-tab-group>
-          <mat-tab label="Euskotren hurrengo estropadak">
-            <app-estropadak-hurrengoak-card [year]=2018 [league]="'euskotren'"></app-estropadak-hurrengoak-card>
-          </mat-tab>
-          <mat-tab label="Euskotren azken emaitzak">
-            <app-estropadak-azken-emaitzak-card [year]=2018 [league]="'euskotren'"></app-estropadak-azken-emaitzak-card>
-          </mat-tab>
-        </mat-tab-group>
+    <div>
+      <h2>Sailkapen nagusia</h2>
+      <app-estropadak-sailkapena [year]=2018 [league]="'ARC1'"></app-estropadak-sailkapena>
     </div>
-    <div fxLayout="row" class="box-white">
-      <div fxLayout="row" fxFlex="50">
-      </div>
-      <div fxLayout="row" fxFlex="50">
-      </div>
+    <div>
+      <h2>Hurrengo estropadak</h2>
+      <app-estropadak-hurrengoak-card [year]=2018 [league]="'ARC1'"></app-estropadak-hurrengoak-card>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

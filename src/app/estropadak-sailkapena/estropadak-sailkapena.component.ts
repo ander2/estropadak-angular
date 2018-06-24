@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { SailkapenaService } from 'app/shared/estropada.service';
 import { Stats } from 'app/shared/estropadak.model';
+import { MatButtonToggleChange } from '@angular/material';
 
 @Component({
   selector: 'app-estropadak-sailkapena',
@@ -22,8 +23,17 @@ export class EstropadakSailkapenaComponent implements OnChanges {
     private sailkapenaService: SailkapenaService,
   ) { }
 
+  onChangeLeague(event: MatButtonToggleChange) {
+    this.league = event.value;
+    this.getSailkapena(this.league, this.year);
+  }
+
   ngOnChanges() {
-    this.sailkapenaService.getOne(this.league, this.year)
+    this.getSailkapena(this.league, this.year);
+  }
+
+  getSailkapena(league, year) {
+    this.sailkapenaService.getOne(league, year)
     .subscribe((res) => {
       this.sailkapena = res;
       const sailk = Object.keys(this.sailkapena).reduce((memo: any[], taldeIzena: string) => {
@@ -31,7 +41,7 @@ export class EstropadakSailkapenaComponent implements OnChanges {
         memo.push(this.sailkapena[taldeIzena]);
         return memo;
       }, []);
-      const ordered = sailk.sort((a, b) => b.points - a.points);
+      const ordered = sailk.sort((a, b) => parseInt(a.position, 10) - parseInt(b.position, 10));
       this.dataSource = new EstropadaDataSource(ordered);
     }, (err) => {
       console.log('Error');

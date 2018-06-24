@@ -20,7 +20,6 @@ export class EstropadakHurrengoakCardComponent extends EstropadakListComponent i
     navigationService: EstropadakNavegationService,
     router: Router,
   ) {
-    console.log('fuck');
     super(estropadaService, navigationService, router);
   }
 
