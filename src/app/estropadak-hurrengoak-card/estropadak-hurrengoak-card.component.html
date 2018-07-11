@@ -1,17 +1,15 @@
-<mat-card>
-  <!-- <mat-card-title>
-    {{this.league}} Hurrengo estropadak:
-  </mat-card-title> -->
-  <mat-card-content>
-    <mat-list>
-      <mat-list-item *ngFor="let estropada of this.estropadak">
-        {{estropada.data}} - {{estropada.izena}}
-      </mat-list-item>
-    </mat-list>
-    <mat-list *ngIf="estropadak.length === 0">
-      <mat-list-item>
-        Ez dago estropadarik
-      </mat-list-item>
-    </mat-list>
-  </mat-card-content>
-</mat-card>
+<mat-button-toggle-group name="fontStyle" aria-label="Font Style" (change)="onChangeLeague($event)">
+  <mat-button-toggle value="ACT" [checked]="league.toUpperCase() === 'ACT'">ACT</mat-button-toggle>
+  <mat-button-toggle value="ARC1" [checked]="league.toUpperCase() === 'ARC1'">ARC1</mat-button-toggle>
+  <mat-button-toggle value="ARC2" [checked]="league.toUpperCase() === 'ARC2'">ARC2</mat-button-toggle>
+</mat-button-toggle-group>
+<mat-list>
+  <mat-list-item *ngFor="let estropada of this.estropadak">
+    {{estropada.data}} - {{estropada.izena}}
+  </mat-list-item>
+</mat-list>
+<mat-list *ngIf="estropadak.length === 0">
+  <mat-list-item>
+    Ez dago estropadarik
+  </mat-list-item>
+</mat-list>
