@@ -14,6 +14,15 @@ import { MatButtonToggleChange } from '@angular/material';
 export class EstropadakSailkapenaComponent implements OnChanges {
   @Input() league;
   @Input() year;
+  _showTitle: boolean;
+  @Input()
+  set showTitle(val) {
+    console.log(val);
+    this._showTitle = val;
+  }
+  get showTitle() {
+    return this._showTitle;
+  }
   sailkapena: Stats;
 
   displayedColumns = ['Posizioa', 'Taldea', 'Puntuak', 'Banderak'];
