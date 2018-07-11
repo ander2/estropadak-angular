@@ -7,6 +7,7 @@ import { Estropada } from '../shared/estropadak.model';
 import { EstropadaService } from '../shared/estropada.service';
 import { EstropadakNavegationService } from '../shared/estropadak-navegation.service';
 import { EstropadakListComponent } from '../estropadak-list/estropadak-list.component';
+import { MatButtonToggleChange } from '@angular/material';
 
 @Component({
   selector: 'app-estropadak-hurrengoak-card',
@@ -34,6 +35,11 @@ export class EstropadakHurrengoakCardComponent extends EstropadakListComponent i
           .filter((estropada, index) => index < 4);
       });
     }
+  }
+
+   onChangeLeague(event: MatButtonToggleChange) {
+    this.league = event.value;
+    this.updateEstropadak(this.league, this.year);
   }
 
 }
