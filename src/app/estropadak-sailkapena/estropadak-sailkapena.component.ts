@@ -14,10 +14,9 @@ import { MatButtonToggleChange } from '@angular/material';
 export class EstropadakSailkapenaComponent implements OnChanges {
   @Input() league;
   @Input() year;
-  _showTitle: boolean;
+  _showTitle = true;
   @Input()
   set showTitle(val) {
-    console.log(val);
     this._showTitle = val;
   }
   get showTitle() {

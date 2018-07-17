@@ -1,5 +1,5 @@
-<h2 class="mat-title" *ngIf="showTitle===true">Liga sailkapena {{showTitle}}</h2>
-<mat-button-toggle-group name="fontStyle" aria-label="Font Style" (change)="onChangeLeague($event)">
+<h2 class="mat-title" *ngIf="showTitle === true">Liga sailkapena</h2>
+<mat-button-toggle-group name="fontStyle" aria-label="Font Style" (change)="onChangeLeague($event)" *ngIf="showTitle !== true">
   <mat-button-toggle value="ACT" [checked]="league.toUpperCase() === 'ACT'">ACT</mat-button-toggle>
   <mat-button-toggle value="ARC1" [checked]="league.toUpperCase() === 'ARC1'">ARC1</mat-button-toggle>
   <mat-button-toggle value="ARC2" [checked]="league.toUpperCase() === 'ARC2'">ARC2</mat-button-toggle>
