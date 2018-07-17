@@ -1,38 +1,20 @@
-<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around center" fxFlex>
-  <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="50" fxFlexFill>
-    <div>
-      <button mat-button [matMenuTriggerFor]="act" class="background-primary-color white-text">
-        <span>ACT</span>
-      </button>
-      <mat-menu #act="matMenu">
-        <button mat-menu-item *ngFor="let year of years?.act" (click)="goToEstropada('act', year)">{{year}}</button>
-      </mat-menu>
-    </div>
-    <div>
-      <button mat-button [matMenuTriggerFor]="arc1" class="background-primary-color white-text">
-        <span>ARC-1</span>
-        </button>
-      <mat-menu #arc1="matMenu">
-        <button mat-menu-item *ngFor="let year of years?.arc1" (click)="goToEstropada('arc1', year)">{{year}}</button>
-      </mat-menu>
-    </div>
-    <div>
-      <button mat-button [matMenuTriggerFor]="arc2" class="background-primary-color white-text">
-        <span>ARC-2</span>
-      </button>
-      <mat-menu #arc2="matMenu">
-        <button mat-menu-item *ngFor="let year of years?.arc2" (click)="goToEstropada('arc2', year)">{{year}}</button>
-      </mat-menu>
-    </div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-around center" fxFlex="50" fxFlexFill>
-    <div>
-      <button mat-button [matMenuTriggerFor]="euskotren" class="background-primary-color white-text">
-        <span>Euskotren</span>
-      </button>
-      <mat-menu #euskotren="matMenu">
-        <button mat-menu-item *ngFor="let year of years?.euskotren" (click)="goToEstropada('euskotren', year)">{{year}}</button>
-      </mat-menu>
-    </div>
-  </div>
-</div>
+<button mat-icon-button [matMenuTriggerFor]="menu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="goToEstropada()">
+    Portada
+  </button>
+  <button mat-menu-item (click)="goToEstropada('act', years?.act[years?.act.length - 1])">
+    ACT
+  </button>
+  <button mat-menu-item (click)="goToEstropada('arc1', years?.arc1[years?.arc1.length - 1])">
+    ARC-1
+  </button>
+  <button mat-menu-item (click)="goToEstropada('arc2', years?.arc2[years?.arc2.length - 1])">
+    ARC-2
+  </button>
+  <button mat-menu-item (click)="goToEstropada('euskotren', years?.euskotren[years?.euskotren.length - 1])">
+    Euskotren
+  </button>
+</mat-menu>
