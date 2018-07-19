@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EstropadaService } from '../shared/estropada.service';
 import { EstropadakNavegationService } from '../shared/estropadak-navegation.service';
@@ -19,7 +19,15 @@ export class EstropadakListComponent implements OnChanges {
     private router: Router,
   ) { }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('Changes');
+    console.log(changes);
+    if (changes.league) {
+      this.league = changes.league.currentValue;
+    }
+    if (changes.year) {
+      this.year = changes.year.currentValue;
+    }
     this.updateEstropadak(this.league, this.year);
   }
 
