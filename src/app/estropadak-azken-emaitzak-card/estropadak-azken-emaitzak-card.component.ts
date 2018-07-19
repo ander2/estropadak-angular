@@ -63,7 +63,6 @@ export class EstropadakAzkenEmaitzakCardComponent implements OnInit, OnChanges {
         .map((estropada: Estropada) => {
           estropada.sailkapena = estropada.sailkapena
             .sort((a, b) => a.posizioa - b.posizioa);
-            //.filter((taldea: TaldeSailkapena) => taldea.posizioa < 5);
           return estropada;
         });
       console.log(this.estropadak[0].sailkapena);
