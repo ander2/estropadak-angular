@@ -33,6 +33,7 @@ export class EstropadakAzkenEmaitzakCardComponent implements OnInit, OnChanges {
   estropadak = [];
   displayedColumns = ['Postua', 'Taldea', 'Denbora'];
   dataSource: any;
+  dataSource2: any;
   constructor(
     private emaitzakService: EmaitzakService
   ) { }
@@ -67,6 +68,7 @@ export class EstropadakAzkenEmaitzakCardComponent implements OnInit, OnChanges {
         });
       console.log(this.estropadak[0].sailkapena);
       this.dataSource = new EstropadaDataSource(this.estropadak[0].sailkapena);
+      this.dataSource2 = new EstropadaDataSource(this.estropadak[1].sailkapena);
       })
   }
 }
