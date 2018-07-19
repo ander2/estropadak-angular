@@ -11,7 +11,8 @@ import {
   MatMenuModule,
   MatSidenavModule,
   MatIconModule,
-  MatCardModule
+  MatCardModule,
+  MatButtonToggleModule
 } from '@angular/material';
 
 // provider
@@ -89,6 +90,7 @@ const routes: Routes = [
     FlexLayoutModule,
     HttpModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatCardModule,
     MatIconModule,
     MatListModule,

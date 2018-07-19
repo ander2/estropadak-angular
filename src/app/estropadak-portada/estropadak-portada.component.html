@@ -1,49 +1,15 @@
-<div fxFlex>
-<mat-sidenav-container>
-  <mat-sidenav #sidenav mode="side" opened="false" disableClose="false">
-    <app-estropadak-sailkapena [year]="year" [league]="league"></app-estropadak-sailkapena>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <div fxLayout="row" class="box-white">
-      <div fxLayout="row" fxFlex="50">
-        <div fxFlex fxLayoutAlign="center end">
-          <div>
-            <a routerLink="/estropadak/ACT/{{year}}">
-              <img src="assets/logo_euskolabel.png" alt="Eusko label liga">
-            </a>
-            <h1 (click)="sailkapenaToogle('ACT')">TKE Liga</h1>
-          </div>
-        </div>
-      </div>
-      <div fxLayout="row" fxFlex="50">
-        <div fxFlex fxLayoutAlign="center end">
-          <div>
-            <a routerLink="/estropadak/ARC1/{{year}}">
-              <img src="assets/logo_arc.png" alt="arc">
-            </a>
-            <h1 (click)="sailkapenaToogle('ARC1')">KAE-1 Liga</h1>
-          </div>
-        </div>
-      </div>
+<div>
+  <div>
+    <app-estropadak-azken-emaitzak-card [year]=2018 [league]="'ACT'"></app-estropadak-azken-emaitzak-card>
+  </div>
+  <div fxLayout fxLayout.xs="column" fxLayoutAlign="space-around start" fxLayoutAlign.xs="center center">
+    <div fxFlex="45" fxFill.xs>
+      <h2>Sailkapen nagusia</h2>
+      <app-estropadak-sailkapena [year]=2018 [league]="'ARC1'" [showTitle]="'false'"></app-estropadak-sailkapena>
     </div>
-    <div fxLayout="row" class="box-white">
-        <div fxFlex fxLayoutAlign="center end">
-          <div>
-            <a routerLink="/estropadak/ARC2/{{year}}">
-              <img src="assets/logo_arc.png" alt="arc">
-            </a>
-            <h1 (click)="sailkapenaToogle('ARC2')">KAE-2 Liga</h1>
-          </div>
-        </div>
-        <div fxFlex fxLayoutAlign="center end">
-          <div>
-            <a routerLink="/estropadak/euskotren/{{year}}">
-              <img src="assets/logo_euskotren.gif" alt="Euskotren liga">
-            </a>
-            <h1 (click)="sailkapenaToogle('EUSKOTREN')">Euskotren Liga</h1>
-          </div>
-        </div>
+    <div fxFlex="45" fxFill.xs>
+      <h2>Hurrengo estropadak</h2>
+      <app-estropadak-hurrengoak-card [year]=2018 [league]="'ARC1'"></app-estropadak-hurrengoak-card>
     </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </div>
 </div>
