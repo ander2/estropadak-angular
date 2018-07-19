@@ -4,8 +4,10 @@
   <mat-button-toggle value="ARC2" [checked]="league.toUpperCase() === 'ARC2'">ARC2</mat-button-toggle>
 </mat-button-toggle-group>
 <mat-list>
-  <mat-list-item *ngFor="let estropada of this.estropadak">
-    {{estropada.data}} - {{estropada.izena}}
+  <mat-list-item *ngFor="let estropada of this.estropadak" >
+    <a [routerLink]="['/estropada', estropada.id]">
+      {{estropada.data}} - {{estropada.izena}}
+    </a>
   </mat-list-item>
 </mat-list>
 <mat-list *ngIf="estropadak.length === 0">
