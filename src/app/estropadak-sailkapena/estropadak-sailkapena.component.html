@@ -4,6 +4,7 @@
   <mat-button-toggle value="ARC1" [checked]="league.toUpperCase() === 'ARC1'">ARC1</mat-button-toggle>
   <mat-button-toggle value="ARC2" [checked]="league.toUpperCase() === 'ARC2'">ARC2</mat-button-toggle>
   <mat-button-toggle value="EUSKOTREN" [checked]="league.toUpperCase() === 'EUSKOTREN'">EUSKOTREN</mat-button-toggle>
+  <mat-button-toggle value="ETE" [checked]="league.toUpperCase() === 'ETE'">ETE</mat-button-toggle>
 </mat-button-toggle-group>
 <ng-container *ngIf="sailkapena; else no_sailkapena">
   <mat-table #table [dataSource]="dataSource">
