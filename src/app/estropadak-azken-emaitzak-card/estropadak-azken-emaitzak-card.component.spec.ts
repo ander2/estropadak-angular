@@ -1,10 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatCardModule, MatListModule } from '@angular/material';
+import { MatCardModule, MatListModule, MatButtonToggleModule, MatTableModule } from '@angular/material';
 
 import { EstropadakAzkenEmaitzakCardComponent } from './estropadak-azken-emaitzak-card.component';
 import { EmaitzakServiceStub } from '../shared/estropada.service.stub';
 import { EmaitzakService } from '../shared/estropada.service';
 import { Estropada } from '../shared/estropadak.model';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('EstropadakAzkenEmaitzakCardComponent', () => {
   let component: EstropadakAzkenEmaitzakCardComponent;
@@ -14,7 +15,10 @@ describe('EstropadakAzkenEmaitzakCardComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         MatCardModule,
-        MatListModule
+        MatButtonToggleModule,
+        MatListModule,
+        MatTableModule,
+        RouterTestingModule
       ],
       declarations: [ EstropadakAzkenEmaitzakCardComponent ],
       providers: [
@@ -36,13 +40,13 @@ describe('EstropadakAzkenEmaitzakCardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should return a list of three estropadak', () => {
-    expect(component.estropadak.length).toEqual(3);
+  it('should return a list of two estropadak', () => {
+    expect(component.estropadak.length).toEqual(2);
   });
 
-  it('should return fout teams for every estropadak', () => {
+  it('should return all teams (12) for every estropadak', () => {
     component.estropadak.forEach((e: Estropada) => {
-      expect(e.sailkapena.length).toEqual(4);
+      expect(e.sailkapena.length).toEqual(12);
     });
   });
 });

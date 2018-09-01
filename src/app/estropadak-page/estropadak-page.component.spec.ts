@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatIconModule, MatTabsModule, MatButtonModule, MatMenuModule, MatListModule, MatTableModule } from '@angular/material';
+import { MatIconModule, MatTabsModule, MatButtonModule, MatMenuModule, MatListModule, MatTableModule, MatButtonToggleModule } from '@angular/material';
 import { NvD3Module } from 'ng2-nvd3';
 import { Observable } from 'rxjs/Observable';
 
@@ -27,6 +27,7 @@ describe('EstropadakPageComponent', () => {
         BrowserAnimationsModule,
         HttpModule,
         MatButtonModule,
+        MatButtonToggleModule,
         MatIconModule,
         MatListModule,
         MatMenuModule,

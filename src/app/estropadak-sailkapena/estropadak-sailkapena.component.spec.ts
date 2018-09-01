@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MatTableModule } from '@angular/material';
+import { MatTableModule, MatButtonToggleModule } from '@angular/material';
 
 import { EstropadakSailkapenaComponent } from './estropadak-sailkapena.component';
 import { SailkapenaService } from '../shared/estropada.service';
@@ -13,7 +13,8 @@ describe('EstropadakSailkapenaComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        MatTableModule
+        MatTableModule,
+        MatButtonToggleModule,
       ],
       declarations: [ EstropadakSailkapenaComponent ],
       providers: [
