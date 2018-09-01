@@ -1,5 +1,5 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 
 import * as moment from 'moment';
 
@@ -14,22 +14,33 @@ import { MatButtonToggleChange } from '@angular/material';
   templateUrl: './estropadak-hurrengoak-card.component.html',
   styleUrls: ['./estropadak-hurrengoak-card.component.css']
 })
-export class EstropadakHurrengoakCardComponent extends EstropadakListComponent implements OnChanges {
+export class EstropadakHurrengoakCardComponent implements OnChanges {
+
+  @Input() league;
+  @Input() year;
+  estropadak: any = [];
 
   constructor(
-    estropadaService: EstropadaService,
+    private estropadaService: EstropadaService,
     navigationService: EstropadakNavegationService,
-    router: Router,
+    router: Router
   ) {
-    super(estropadaService, navigationService, router);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.league) {
+      this.league = changes.league.currentValue;
+    }
+    if (changes.year) {
+      this.year = changes.year.currentValue;
+    }
+    this.updateEstropadak(this.league, this.year);
   }
 
   updateEstropadak(league: string, year: string) {
-    console.log(`update estropadak ${this.league}-${this.year}`)
     if (this.league && this.year) {
       this.estropadaService.getList(this.league, this.year).subscribe((estropadak: Estropada[]) => {
-        const date = moment(); // new Date().toISOString();
-        console.log(date);
+        const date = moment();
         this.estropadak = estropadak
           .filter((estropada: Estropada) => moment(estropada.data) >= date)
           .filter((estropada, index) => index < 4);
