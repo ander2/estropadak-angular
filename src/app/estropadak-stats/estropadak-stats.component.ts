@@ -15,6 +15,7 @@ declare let d3: any;
 export class EstropadakStatsComponent implements OnInit, OnChanges {
   options;
   piechartOptions;
+  discreteBarChartOptions;
   data;
   estropadak: string[] = [];
   cumulative = [];
@@ -65,7 +66,28 @@ export class EstropadakStatsComponent implements OnInit, OnChanges {
         },
         x: (d) => d.label,
         y: (d) => d.value,
-        showValues: true
+        showValues: true,
+      }
+    };
+    this.discreteBarChartOptions = {
+      chart: {
+        type: 'discreteBarChart',
+        height: 450,
+        margin : {
+          top: 20,
+          right: 20,
+          bottom: 50,
+          left: 55
+        },
+        x: (d) => d.label,
+        y: (d) => d.value,
+        showValues: true,
+        xAxis: {
+          axisLabel: 'Taldeak',
+        },
+        yAxis: {
+          axisLabel: 'Puntuak',
+        },
       }
     };
   }
@@ -97,12 +119,12 @@ export class EstropadakStatsComponent implements OnInit, OnChanges {
             values: stats[teamName].cumulative.map((points, i) => ({label: i, value: points}))
           }
         });
-        this.rank = Object.keys(stats).map((teamName) => {
-          return {
-            label: teamName,
-            value: stats[teamName].points
-          };
-        });
+        this.rank =  [{
+          key: 'sailkapena',
+          values: Object.keys(stats)
+                        .map((teamName) => ({label: teamName, value: stats[teamName].points}))
+                        .sort((a, b) => b.value - a.value)
+        }];
         this.wins = Object.keys(stats).reduce((memo, teamName) => {
           if (stats[teamName].wins > 0) {
             memo.push({
