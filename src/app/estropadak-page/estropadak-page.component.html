@@ -1,4 +1,4 @@
-<mat-tab-group>
+<mat-tab-group (selectedTabChange)="resizeIfStats($event)">
     <mat-tab label="Estropadak">
         <app-estropadak-years [league]="league"></app-estropadak-years>
         <app-estropadak-list [year]="year" [league]="league"></app-estropadak-list>
