@@ -1,34 +1,37 @@
-<h2 class="mat-title">{{year}} {{league.toUpperCase()}} liga. Sailkapen orokorra</h2>
-<mat-table #table [dataSource]="dataSource">
-    <ng-container matColumnDef="Posizioa">
-      <mat-header-cell *matHeaderCellDef fxFlex="15"> Posizioa </mat-header-cell>
-      <mat-cell *matCellDef="let row" fxFlex="15"> {{row.position}} </mat-cell>
-    </ng-container>
+<h2 class="mat-title" *ngIf="showTitle === true">Liga sailkapena</h2>
+<mat-button-toggle-group name="fontStyle" aria-label="Font Style" (change)="onChangeLeague($event)" *ngIf="showTitle !== true">
+  <mat-button-toggle value="ACT" [checked]="league.toUpperCase() === 'ACT'">ACT</mat-button-toggle>
+  <mat-button-toggle value="ARC1" [checked]="league.toUpperCase() === 'ARC1'">ARC1</mat-button-toggle>
+  <mat-button-toggle value="ARC2" [checked]="league.toUpperCase() === 'ARC2'">ARC2</mat-button-toggle>
+  <mat-button-toggle value="EUSKOTREN" [checked]="league.toUpperCase() === 'EUSKOTREN'">EUSKOTREN</mat-button-toggle>
+  <mat-button-toggle value="ETE" [checked]="league.toUpperCase() === 'ETE'">ETE</mat-button-toggle>
+</mat-button-toggle-group>
+<ng-container *ngIf="sailkapena; else no_sailkapena">
+  <mat-table #table [dataSource]="dataSource">
+      <ng-container matColumnDef="Posizioa">
+        <mat-header-cell *matHeaderCellDef fxFlex="15"> Posizioa </mat-header-cell>
+        <mat-cell *matCellDef="let row" fxFlex="15"> {{row.position}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="Taldea">
-      <mat-header-cell *matHeaderCellDef fxFlex="40"> Taldea </mat-header-cell>
-      <mat-cell *matCellDef="let row" fxFlex="40"> {{row.izena}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="Taldea">
+        <mat-header-cell *matHeaderCellDef fxFlex="55"> Taldea </mat-header-cell>
+        <mat-cell *matCellDef="let row" fxFlex="55"> {{row.izena}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="Puntuak">
-      <mat-header-cell *matHeaderCellDef fxFlex="15"> Puntuak </mat-header-cell>
-      <mat-cell *matCellDef="let row" fxFlex="15"> {{row.points}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="Puntuak">
+        <mat-header-cell *matHeaderCellDef fxFlex="15"> Puntuak </mat-header-cell>
+        <mat-cell *matCellDef="let row" fxFlex="15"> {{row.points}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="Banderak">
-      <mat-header-cell *matHeaderCellDef fxFlex="15"> Banderak </mat-header-cell>
-      <mat-cell *matCellDef="let row" fxFlex="15"> {{row.wins}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="Banderak">
+        <mat-header-cell *matHeaderCellDef fxFlex="15"> Banderak </mat-header-cell>
+        <mat-cell *matCellDef="let row" fxFlex="15"> {{row.wins}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="Onena">
-      <mat-header-cell *matHeaderCellDef fxFlex="15"> Pos. onena</mat-header-cell>
-      <mat-cell *matCellDef="let row" fxFlex="15"> {{row.best}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="Txarrena">
-      <mat-header-cell *matHeaderCellDef fxFlex="15"> Pos. txarrena</mat-header-cell>
-      <mat-cell *matCellDef="let row" fxFlex="15"> {{row.worst}} </mat-cell>
-    </ng-container>
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</ng-container>
+<ng-template #no_sailkapena>
+  <h3 style='text-align:center'>Sailkapena ez dago eskuragarri</h3>
+</ng-template>

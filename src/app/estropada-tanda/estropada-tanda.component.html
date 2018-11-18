@@ -1,38 +1,38 @@
 <h2 class="mat-title">{{tanda[0].tanda}}. tanda</h2>
 <mat-table #table [dataSource]="dataSource">
     <ng-container matColumnDef="Taldea">
-      <mat-header-cell *matHeaderCellDef> Taldea </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.talde_izena}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef fxFlex="27" fxLayoutAlign.xs="center" fxLayoutAlign="space-around center"> Taldea </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxFlex="27" fxLayoutAlign.xs="left"> {{row.talde_izena}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="Postua">
-      <mat-header-cell *matHeaderCellDef> Postua </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.tanda_postua}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef fxFlex="8" fxLayoutAlign="space-around center"> Postua </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxFlex="8" fxLayoutAlign="space-around center" fxLayoutAlign.xs="left"> {{row.tanda_postua}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="Kalea">
-      <mat-header-cell *matHeaderCellDef> Kalea </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.kalea}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef fxFlex="5" fxHide.xs fxLayoutAlign="space-around center"> Kalea </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxFlex="5" fxHide.xs fxLayoutAlign="space-around center"> {{row.kalea}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="1.z">
-      <mat-header-cell *matHeaderCellDef> 1.z </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.ziabogak[0]}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef fxFlex="15" fxLayoutAlign="space-around center"> 1.z </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxFlex="15" fxLayoutAlign="space-around center"> {{row.ziabogak[0]}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="2.z">
-      <mat-header-cell *matHeaderCellDef> 2.z </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.ziabogak[1]}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef fxFlex="15" fxLayoutAlign="space-around center"> 2.z </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxFlex="15" fxLayoutAlign="space-around center"> {{row.ziabogak[1]}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="3.z">
-      <mat-header-cell *matHeaderCellDef> 3.z </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.ziabogak[2]}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef fxFlex="15" fxLayoutAlign="space-around center"> 3.z </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxFlex="15" fxLayoutAlign="space-around center"> {{row.ziabogak[2]}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="Denbora">
-      <mat-header-cell *matHeaderCellDef> Denbora </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.denbora}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef fxFlex="15" fxLayoutAlign="space-around center"> Denbora </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxFlex="15" fxLayoutAlign="space-around center"> {{row.denbora}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -1,0 +1,18 @@
+<ng-container *ngIf="data?.length > 0; else no_stats">
+    <h2 class="mat-title">Estropada puntuak</h2>
+    <nvd3 [options]="options" [data]="data"></nvd3>
+    <hr>
+    <h2 class="mat-title">Sailkapen bilakaera</h2>
+    <nvd3 [options]="options" [data]="cumulative"></nvd3>
+    <hr>
+    <h2 class="mat-title">Sailkapen orokorreko puntuak</h2>
+    <nvd3 [options]="discreteBarChartOptions" [data]="rank"></nvd3>
+    <hr>
+    <h2 class="mat-title">Irabazitako banderak</h2>
+    <nvd3 [options]="piechartOptions" [data]="wins"></nvd3>
+</ng-container>
+<ng-template #no_stats>
+    <h3 style='text-align: center'>
+        Ez dago estatistika daturik
+    </h3>
+</ng-template>
