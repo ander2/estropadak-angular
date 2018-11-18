@@ -9,11 +9,15 @@ import {
   MatTabsModule,
   MatTableModule,
   MatMenuModule,
-  MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
+  MatSidenavModule,
+  MatIconModule,
+  MatCardModule,
+  MatButtonToggleModule
+} from '@angular/material';
 
 // provider
 import { HttpModule } from '@angular/http';
-import { EstropadaService, UrteakService } from './shared/estropada.service';
+import { EstropadaService, UrteakService, SailkapenaService, EmaitzakService } from './shared/estropada.service';
 
 import { AppComponent } from './app.component';
 
@@ -28,6 +32,14 @@ import { EstropadakPageComponent } from './estropadak-page/estropadak-page.compo
 import { EstropadaEstropadaSailkapenaComponent } from './estropada-estropada-sailkapena/estropada-estropada-sailkapena.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { EstropadakHoniBuruzComponent } from './estropadak-honi-buruz/estropadak-honi-buruz.component';
+import { EstropadakStatsComponent } from './estropadak-stats/estropadak-stats.component';
+import { NvD3Module } from 'ng2-nvd3';
+import { EstropadakYearsComponent } from './estropadak-years/estropadak-years.component';
+import { EstropadaNavegationComponent } from './estropada-navegation/estropada-navegation.component';
+import { EstropadakNavegationService } from './shared/estropadak-navegation.service';
+import { EstropadakHurrengoakCardComponent } from './estropadak-hurrengoak-card/estropadak-hurrengoak-card.component';
+import { EstropadakAzkenEmaitzakCardComponent } from './estropadak-azken-emaitzak-card/estropadak-azken-emaitzak-card.component';
+
 
 
 const routes: Routes = [
@@ -65,7 +77,12 @@ const routes: Routes = [
     EstropadakPortadaComponent,
     EstropadakPageComponent,
     EstropadaEstropadaSailkapenaComponent,
-    EstropadakHoniBuruzComponent
+    EstropadakHoniBuruzComponent,
+    EstropadakStatsComponent,
+    EstropadakYearsComponent,
+    EstropadaNavegationComponent,
+    EstropadakHurrengoakCardComponent,
+    EstropadakAzkenEmaitzakCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,11 +90,16 @@ const routes: Routes = [
     FlexLayoutModule,
     HttpModule,
     MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatIconModule,
     MatListModule,
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
     MatMenuModule,
+    MatSidenavModule,
+    NvD3Module,
     RouterModule.forRoot(
       routes,
       { enableTracing: false}
@@ -86,8 +108,10 @@ const routes: Routes = [
   ],
   providers: [
     EstropadaService,
+    EmaitzakService,
+    EstropadakNavegationService,
+    SailkapenaService,
     UrteakService,
-    { provide: MATERIAL_COMPATIBILITY_MODE, useValue: true }
   ],
   bootstrap: [AppComponent]
 })

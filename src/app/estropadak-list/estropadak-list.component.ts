@@ -1,6 +1,7 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EstropadaService } from '../shared/estropada.service';
+import { EstropadakNavegationService } from '../shared/estropadak-navegation.service';
 
 @Component({
   selector: 'app-estropadak-list',
@@ -13,11 +14,20 @@ export class EstropadakListComponent implements OnChanges {
   @Input() year;
   estropadak: any = [];
   constructor(
-    private estropadaService: EstropadaService,
+    protected estropadaService: EstropadaService,
+    private navigationService: EstropadakNavegationService,
     private router: Router,
   ) { }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('Changes');
+    console.log(changes);
+    if (changes.league) {
+      this.league = changes.league.currentValue;
+    }
+    if (changes.year) {
+      this.year = changes.year.currentValue;
+    }
     this.updateEstropadak(this.league, this.year);
   }
 
@@ -28,7 +38,10 @@ export class EstropadakListComponent implements OnChanges {
     if (year === null || year === undefined) {
       year = '2017';
     }
-    this.estropadaService.getList(league.toUpperCase(), year).subscribe((estropadak) => this.estropadak = estropadak);
+    this.estropadaService.getList(league, year).subscribe((estropadak) => {
+      this.estropadak = estropadak
+      this.navigationService.estropadak = estropadak.map(estropada => estropada.id);
+    });
   }
 
   onSelect(estropada) {
