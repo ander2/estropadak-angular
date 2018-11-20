@@ -1,5 +1,5 @@
 ANALITICS_PATH=/home/ander/lana/estropadak/google-analytics-estropadak.txt
-REMOTE_PATH=/home/ander2/Work/estropadak-angular/
+REMOTE_PATH=/home/ander2/Work/estropadak-nginx/dist
 
 deploy: src/app/*
 	ng build --prod --environment=prod --aot=false 
