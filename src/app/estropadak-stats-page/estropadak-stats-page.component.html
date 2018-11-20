@@ -1,0 +1,27 @@
+<p>
+  estropadak-stats-page works!
+</p>
+<div>
+  <form [formGroup]="form" novalidate>
+    <mat-form-field>
+      <mat-select formControlName="league" placeholder="Liga">
+        <mat-option *ngFor="let league of leagues" [value]="league">
+          {{league}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select formControlName="year" placeholder="Urtea">
+        <mat-option *ngFor="let year of years" [value]="year">
+          {{year}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-button (click)="updateChart()">
+      Ikusi
+    </button>
+  </form>
+</div>
+<div *ngIf="data.length > 0">
+  <nvd3 [options]="options" [data]="data"></nvd3>
+</div>
