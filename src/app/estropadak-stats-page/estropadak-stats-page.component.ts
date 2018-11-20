@@ -19,7 +19,10 @@ export class EstropadakStatsPageComponent implements OnInit {
   year = '2013';
   options: any = {};
   data: any = [];
+  cumulative: any = [];
   estropadak: string[] = [];
+  chartData: any;
+  charts: {[key: string]: string}[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -31,9 +34,17 @@ export class EstropadakStatsPageComponent implements OnInit {
     this.leagues = ['ACT', 'ARC1', 'ARC2', 'EUSKOTREN', 'ETE'];
     this.years = ['2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012',
                   '2013', '2014', '2015', '2016', '2017', '2018'];
+    this.charts = [ {
+      name: 'Puntuak estropadako',
+      value: 'points_per_race'
+    }, {
+      name: 'Puntu bilakaera',
+      value: 'points_total'
+    }];
     this.form = this.fb.group({
       'league': [this.league],
-      'year': [this.year]
+      'year': [this.year],
+      'chart': ['points_per_race']
     });
     this.options = {
       chart: {
@@ -90,8 +101,24 @@ export class EstropadakStatsPageComponent implements OnInit {
             }),
           }
         });
+        this.cumulative = Object.keys(stats).map((teamName) => {
+          return {
+            key: teamName,
+            values: stats[teamName].cumulative.map((points, i) => ({label: i, value: points}))
+          }
+        });
+        this.chartData = this.data;
       });
     });
+  }
+
+  changeChart() {
+    const chartType = this.form.get('chart').value;
+    if (chartType === 'points_per_race') {
+      this.chartData = this.data;
+    } else {
+      this.chartData = this.cumulative;
+    }
   }
 
 }

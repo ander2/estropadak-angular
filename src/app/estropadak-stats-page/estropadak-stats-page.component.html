@@ -17,8 +17,15 @@
     <button mat-button (click)="updateChart()">
       Ikusi
     </button>
+    <div *ngIf="data.length > 0">
+      <mat-form-field>
+        <mat-select formControlName="chart" placeholder="Grafika mota" (selectionChange)="changeChart()">
+          <mat-option [value]="chart.value" *ngFor="let chart of charts">
+             {{chart.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <nvd3 [options]="options" [data]="chartData"></nvd3>
+    </div>
   </form>
-</div>
-<div *ngIf="data.length > 0">
-  <nvd3 [options]="options" [data]="data"></nvd3>
 </div>
