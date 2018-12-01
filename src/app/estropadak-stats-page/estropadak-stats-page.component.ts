@@ -18,7 +18,8 @@ export class EstropadakStatsPageComponent implements OnInit {
   league = 'ACT';
   year = '2013';
   options: any = {};
-  data: any = [];
+  points_per_race: any = [];
+  positions_per_race: any = [];
   cumulative: any = [];
   estropadak: string[] = [];
   chartData: any;
@@ -34,7 +35,10 @@ export class EstropadakStatsPageComponent implements OnInit {
     this.leagues = ['ACT', 'ARC1', 'ARC2', 'EUSKOTREN', 'ETE'];
     this.years = ['2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012',
                   '2013', '2014', '2015', '2016', '2017', '2018'];
-    this.charts = [ {
+    this.charts = [{
+      name: 'Posizioak estropadako',
+      value: 'positions_per_race'
+    }, {
       name: 'Puntuak estropadako',
       value: 'points_per_race'
     }, {
@@ -53,8 +57,8 @@ export class EstropadakStatsPageComponent implements OnInit {
         margin : {
           top: 20,
           right: 20,
-          bottom: 50,
-          left: 55
+          bottom: 70,
+          left: 25
         },
         x: (d) => d.label,
         y: (d) => d.value,
@@ -65,7 +69,7 @@ export class EstropadakStatsPageComponent implements OnInit {
           showMaxMin: false
         },
         yAxis: {
-          axisLabel: 'Puntuak',
+          axisLabel: 'Puntuak'
         },
       }
     };
@@ -90,14 +94,23 @@ export class EstropadakStatsPageComponent implements OnInit {
       })
       .map((estropada) => estropada.izena)
       .filter((estropada) => estropada.indexOf('Play') === -1)
+
       this.sailkapenaService.getOne(league, year)
       .subscribe((res) => {
         const stats = res;
-        this.data = Object.keys(stats).map((teamName) => {
+        this.points_per_race = Object.keys(stats).map((teamName) => {
           return {
             key: teamName,
             values: stats[teamName].positions.map((pos, i) => {
               return {label: i, value: 13 - pos};
+            }),
+          }
+        });
+        this.positions_per_race = Object.keys(stats).map((teamName) => {
+          return {
+            key: teamName,
+            values: stats[teamName].positions.map((pos, i) => {
+              return {label: i, value: pos};
             }),
           }
         });
@@ -107,7 +120,7 @@ export class EstropadakStatsPageComponent implements OnInit {
             values: stats[teamName].cumulative.map((points, i) => ({label: i, value: points}))
           }
         });
-        this.chartData = this.data;
+        this.chartData = this.points_per_race;
       });
     });
   }
@@ -115,7 +128,9 @@ export class EstropadakStatsPageComponent implements OnInit {
   changeChart() {
     const chartType = this.form.get('chart').value;
     if (chartType === 'points_per_race') {
-      this.chartData = this.data;
+      this.chartData = this.points_per_race;
+    } else if (chartType === 'positions_per_race') {
+      this.chartData = this.positions_per_race;
     } else {
       this.chartData = this.cumulative;
     }
