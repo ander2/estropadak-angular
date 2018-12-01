@@ -17,7 +17,7 @@
     <button mat-button (click)="updateChart()">
       Ikusi
     </button>
-    <div *ngIf="points_per_race.length > 0">
+    <ng-container *ngIf="points_per_race.length > 0">
       <mat-form-field>
         <mat-select formControlName="chart" placeholder="Grafika mota" (selectionChange)="changeChart()">
           <mat-option [value]="chart.value" *ngFor="let chart of charts">
@@ -25,7 +25,9 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <nvd3 [options]="options" [data]="chartData"></nvd3>
-    </div>
+    </ng-container>
   </form>
+  <div *ngIf="options">
+    <nvd3 [options]="options" [data]="chartData"></nvd3>
+  </div>
 </div>
