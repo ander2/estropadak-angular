@@ -8,15 +8,12 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <mat-select formControlName="year" placeholder="Urtea">
+      <mat-select formControlName="year" placeholder="Urtea" (selectionChange)="updateChart()">
         <mat-option *ngFor="let year of years" [value]="year">
           {{year}}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button mat-button (click)="updateChart()">
-      Ikusi
-    </button>
     <ng-container *ngIf="points_per_race.length > 0">
       <mat-form-field>
         <mat-select formControlName="chart" placeholder="Grafika mota" (selectionChange)="changeChart()">
@@ -27,7 +24,7 @@
       </mat-form-field>
     </ng-container>
   </form>
-  <div *ngIf="options">
-    <nvd3 [options]="options" [data]="chartData"></nvd3>
-  </div>
+</div>
+<div *ngIf="options">
+  <nvd3 [options]="options" [data]="chartData"></nvd3>
 </div>

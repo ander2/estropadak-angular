@@ -67,7 +67,7 @@ export class EstropadakStatsPageComponent implements OnInit {
           top: 20,
           right: 20,
           bottom: 70,
-          left: 25
+          left: 65
         },
         x: (d) => d.label,
         y: (d) => d.value,
@@ -91,7 +91,7 @@ export class EstropadakStatsPageComponent implements OnInit {
           top: 20,
           right: 20,
           bottom: 50,
-          left: 55
+          left: 65
         },
         x: (d) => d.label,
         y: (d) => d.value,
@@ -181,6 +181,8 @@ export class EstropadakStatsPageComponent implements OnInit {
   updateYears() {
     const league = this.form.get('league').value;
     this.years = this.allYears[league];
+    this.form.get('year').setValue(this.years[0]);
+    this.updateChart();
   }
 
 }
