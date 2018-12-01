@@ -18,8 +18,11 @@ export class EstropadakStatsPageComponent implements OnInit {
   league = 'ACT';
   year = '2013';
   options: any = {};
+  lineChartOptions: any = {};
+  discreteBarChartOptions: any = {};
   points_per_race: any = [];
   positions_per_race: any = [];
+  rank: any = [];
   cumulative: any = [];
   estropadak: string[] = [];
   chartData: any;
@@ -39,18 +42,18 @@ export class EstropadakStatsPageComponent implements OnInit {
       name: 'Posizioak estropadako',
       value: 'positions_per_race'
     }, {
-      name: 'Puntuak estropadako',
-      value: 'points_per_race'
-    }, {
       name: 'Puntu bilakaera',
       value: 'points_total'
+    }, {
+      name: 'Sailkapena',
+      value: 'rank'
     }];
     this.form = this.fb.group({
       'league': [this.league],
       'year': [this.year],
       'chart': ['points_per_race']
     });
-    this.options = {
+    this.lineChartOptions = {
       chart: {
         type: 'lineChart',
         height: 450,
@@ -70,6 +73,28 @@ export class EstropadakStatsPageComponent implements OnInit {
         },
         yAxis: {
           axisLabel: 'Puntuak'
+        },
+      }
+    };
+
+    this.discreteBarChartOptions = {
+      chart: {
+        type: 'discreteBarChart',
+        height: 450,
+        margin : {
+          top: 20,
+          right: 20,
+          bottom: 50,
+          left: 55
+        },
+        x: (d) => d.label,
+        y: (d) => d.value,
+        showValues: true,
+        xAxis: {
+          axisLabel: 'Taldeak',
+        },
+        yAxis: {
+          axisLabel: 'Puntuak',
         },
       }
     };
@@ -120,17 +145,28 @@ export class EstropadakStatsPageComponent implements OnInit {
             values: stats[teamName].cumulative.map((points, i) => ({label: i, value: points}))
           }
         });
-        this.chartData = this.points_per_race;
+        this.rank = [{
+          key: 'sailkapena',
+          values: Object.keys(stats)
+                        .map((teamName) => ({label: teamName, value: stats[teamName].points}))
+                        .sort((a, b) => b.value - a.value)
+        }];
+        // this.chartData = this.points_per_race;
+        this.changeChart();
       });
     });
   }
 
   changeChart() {
     const chartType = this.form.get('chart').value;
+    this.options = this.lineChartOptions;
     if (chartType === 'points_per_race') {
       this.chartData = this.points_per_race;
     } else if (chartType === 'positions_per_race') {
       this.chartData = this.positions_per_race;
+    } else if (chartType === 'rank') {
+      this.chartData = this.rank;
+      this.options = this.discreteBarChartOptions;
     } else {
       this.chartData = this.cumulative;
     }
