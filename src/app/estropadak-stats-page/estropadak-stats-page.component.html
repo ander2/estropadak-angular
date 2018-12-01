@@ -1,9 +1,9 @@
 <div>
   <form [formGroup]="form" novalidate>
     <mat-form-field>
-      <mat-select formControlName="league" placeholder="Liga">
+      <mat-select formControlName="league" placeholder="Liga" (selectionChange)="updateYears()">
         <mat-option *ngFor="let league of leagues" [value]="league">
-          {{league}}
+          {{league | uppercase}}
         </mat-option>
       </mat-select>
     </mat-form-field>

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { EstropadaService, SailkapenaService } from 'app/shared/estropada.service';
+import { EstropadaService, SailkapenaService, UrteakService } from 'app/shared/estropada.service';
+import { MatSelectionListChange } from '@angular/material';
 
 @Component({
   selector: 'app-estropadak-stats-page',
@@ -14,7 +15,8 @@ export class EstropadakStatsPageComponent implements OnInit {
 
   form: FormGroup;
   leagues: string[];
-  years: string[];
+  years: number[];
+  allYears: {[key: string]: number[]};
   league = 'ACT';
   year = '2013';
   options: any = {};
@@ -30,17 +32,21 @@ export class EstropadakStatsPageComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private yearService: UrteakService,
     private estropadaService: EstropadaService,
     private sailkapenaService: SailkapenaService
   ) { }
 
   ngOnInit() {
-    this.leagues = ['ACT', 'ARC1', 'ARC2', 'EUSKOTREN', 'ETE'];
-    this.years = ['2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012',
-                  '2013', '2014', '2015', '2016', '2017', '2018'];
+    this.yearService.getList().subscribe( years => {
+      this.allYears = years;
+      this.leagues = Object.keys(years);
+    } );
+    // this.years = ['2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012',
+    //               '2013', '2014', '2015', '2016', '2017', '2018'];
     this.charts = [{
-      name: 'Posizioak estropadako',
-      value: 'positions_per_race'
+      name: 'Puntuak estropadako',
+      value: 'points_per_race'
     }, {
       name: 'Puntu bilakaera',
       value: 'points_total'
@@ -170,6 +176,11 @@ export class EstropadakStatsPageComponent implements OnInit {
     } else {
       this.chartData = this.cumulative;
     }
+  }
+
+  updateYears() {
+    const league = this.form.get('league').value;
+    this.years = this.allYears[league];
   }
 
 }
