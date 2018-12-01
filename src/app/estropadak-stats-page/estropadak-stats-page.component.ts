@@ -19,7 +19,7 @@ export class EstropadakStatsPageComponent implements OnInit {
   allYears: {[key: string]: number[]};
   league = 'ACT';
   year = '2013';
-  options: any = {};
+  options: any;
   lineChartOptions: any = {};
   discreteBarChartOptions: any = {};
   points_per_race: any = [];
