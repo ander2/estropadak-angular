@@ -12,7 +12,9 @@ import {
   MatSidenavModule,
   MatIconModule,
   MatCardModule,
-  MatButtonToggleModule
+  MatButtonToggleModule,
+  MatFormFieldModule,
+  MatSelectModule
 } from '@angular/material';
 
 // provider
@@ -39,6 +41,8 @@ import { EstropadaNavegationComponent } from './estropada-navegation/estropada-n
 import { EstropadakNavegationService } from './shared/estropadak-navegation.service';
 import { EstropadakHurrengoakCardComponent } from './estropadak-hurrengoak-card/estropadak-hurrengoak-card.component';
 import { EstropadakAzkenEmaitzakCardComponent } from './estropadak-azken-emaitzak-card/estropadak-azken-emaitzak-card.component';
+import { EstropadakStatsPageComponent } from './estropadak-stats-page/estropadak-stats-page.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -62,6 +66,10 @@ const routes: Routes = [
   {
     path: 'honi-buruz',
     component: EstropadakHoniBuruzComponent
+  },
+  {
+    path: 'estatistikak',
+    component: EstropadakStatsPageComponent
   }
 
 ];
@@ -83,23 +91,28 @@ const routes: Routes = [
     EstropadaNavegationComponent,
     EstropadakHurrengoakCardComponent,
     EstropadakAzkenEmaitzakCardComponent,
+    EstropadakStatsPageComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    FormsModule,
     HttpModule,
     MatButtonModule,
     MatButtonToggleModule,
     MatCardModule,
+    MatFormFieldModule,
     MatIconModule,
     MatListModule,
+    MatSelectModule,
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
     MatMenuModule,
     MatSidenavModule,
     NvD3Module,
+    ReactiveFormsModule,
     RouterModule.forRoot(
       routes,
       { enableTracing: false}
