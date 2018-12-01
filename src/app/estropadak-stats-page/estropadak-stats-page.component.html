@@ -1,0 +1,30 @@
+<div>
+  <form [formGroup]="form" novalidate>
+    <mat-form-field>
+      <mat-select formControlName="league" placeholder="Liga" (selectionChange)="updateYears()">
+        <mat-option *ngFor="let league of leagues" [value]="league">
+          {{league | uppercase}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select formControlName="year" placeholder="Urtea" (selectionChange)="updateChart()">
+        <mat-option *ngFor="let year of years" [value]="year">
+          {{year}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <ng-container *ngIf="points_per_race.length > 0">
+      <mat-form-field>
+        <mat-select formControlName="chart" placeholder="Grafika mota" (selectionChange)="changeChart()">
+          <mat-option [value]="chart.value" *ngFor="let chart of charts">
+             {{chart.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
+  </form>
+</div>
+<div *ngIf="options">
+  <nvd3 [options]="options" [data]="chartData"></nvd3>
+</div>
