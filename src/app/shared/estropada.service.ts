@@ -13,8 +13,9 @@ export class EstropadaService {
     constructor(private http: Http) { }
 
     getList(league: string, year: string): Observable<Estropada[]> {
-        const endpoint = `${estropadakUrl}estropadak/${league}/${year}`;
-        return this.http.get(endpoint)
+        const endpoint = `${estropadakUrl}estropadak`;
+        const params = {league, year};
+        return this.http.get(endpoint, {params})
             .map(res => res.json())
     }
 
@@ -47,13 +48,15 @@ export class SailkapenaService {
     constructor(private http: Http) { }
 
     getList(league: string, year: string) {
-        const endpoint = `${estropadakUrl}estropadak/${league}/${year}`;
-        return this.http.get(endpoint)
+        const params = {league, year};
+        const endpoint = `${estropadakUrl}estropadak`;
+        return this.http.get(endpoint, {params})
             .map(res => res.json())
     }
 
     getOne(league: string, year: string): Observable<Stats> {
-        return this.http.get(`${estropadakUrl}sailkapena/${league}/${year}`)
+        const params = {league, year};
+        return this.http.get(`${estropadakUrl}sailkapena`, {params})
             .map(res => res.json())
     }
 }
@@ -64,8 +67,9 @@ export class EmaitzakService {
     constructor(private http: Http) { }
 
     getList(league: string, year: string) {
-        const endpoint = `${estropadakUrl}emaitzak/${league}/${year}`;
-        return this.http.get(endpoint)
+        const endpoint = `${estropadakUrl}emaitzak`;
+        const params = {league, year};
+        return this.http.get(endpoint, {params})
             .map(res => res.json())
     }
 
