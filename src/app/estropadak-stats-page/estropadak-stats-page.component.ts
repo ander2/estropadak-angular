@@ -31,6 +31,7 @@ export class EstropadakStatsPageComponent implements OnInit {
   rank: any = [];
   cumulative: any = [];
   estropadak: string[] = [];
+  allEstropadak: {[key: string]: any[]}
   chartData: any;
   charts: {[key: string]: string}[] = [];
   @ViewChild('chart') chart: MatSelect;
@@ -51,7 +52,6 @@ export class EstropadakStatsPageComponent implements OnInit {
     this.taldeakService.getList().subscribe(teams => {
       this.teams = teams;
     });
-
     this.charts = [{
       name: 'Puntuak estropadako',
       value: 'points_per_race'
@@ -194,9 +194,79 @@ export class EstropadakStatsPageComponent implements OnInit {
 
   updateYears() {
     const league = this.form.get('league').value;
-    this.years = this.allYears[league];
+    this.years = this.allYears[league].sort((a, b) => b - a);
     this.form.get('year').setValue(this.years[0]);
     this.updateChart();
+  }
+  teamColors(team: string) {
+    switch (team) {
+      case 'Arkote':
+        return 'yellow'
+        break;
+      case 'Astillero':
+        return 'navy'
+        break;
+      case 'Cabo':
+        return 'red'
+        break;
+      case 'Castro':
+        return 'red'
+        break;
+      case 'Deustu':
+        return 'red'
+        break;
+      case 'Donostiarra':
+        return 'LightBlue'
+        break;
+      case 'Getaria':
+        return 'wheat'
+        break;
+      case 'Hondarribia':
+        return 'LimeGreen'
+        break;
+      case 'Hibaika':
+        return 'black'
+        break;
+      case 'Isuntza':
+        return 'LightBlue'
+        break;
+      case 'Orio':
+        return 'yellow'
+        break;
+      case 'Itsasoko ama':
+        return 'purple'
+        break;
+      case 'Kaiku':
+        return 'green'
+        break;
+      case 'Ondarroa':
+        return 'red'
+        break;
+      case 'Portugalete':
+        return 'yellow'
+        break;
+      case 'San Juan':
+        return 'pink'
+        break;
+      case 'San Pedro':
+        return 'purple'
+        break;
+      case 'Tiran':
+        return 'blue'
+        break;
+      case 'Urdaibai':
+        return 'blue'
+        break;
+      case 'Zarautz':
+        return 'blue'
+        break;
+      case 'Zumaia':
+        return 'red'
+        break;
+      case 'Zierbena':
+        return 'chocolate'
+        break;
+    }
   }
 
   loadYearData(league: string, year: string) {
@@ -206,6 +276,7 @@ export class EstropadakStatsPageComponent implements OnInit {
       this.points_per_race = Object.keys(stats).map((teamName) => {
         return {
           key: teamName,
+          color: this.teamColors(teamName),
           values: stats[teamName].positions.map((pos, i) => {
             return {label: i, value: 13 - pos};
           }),
@@ -214,6 +285,7 @@ export class EstropadakStatsPageComponent implements OnInit {
       this.positions_per_race = Object.keys(stats).map((teamName) => {
         return {
           key: teamName,
+          color: this.teamColors(teamName),
           values: stats[teamName].positions.map((pos, i) => {
             return {label: i, value: pos};
           }),
@@ -222,13 +294,18 @@ export class EstropadakStatsPageComponent implements OnInit {
       this.cumulative = Object.keys(stats).map((teamName) => {
         return {
           key: teamName,
+          color: this.teamColors(teamName),
           values: stats[teamName].cumulative.map((points, i) => ({label: i, value: points}))
         }
       });
       this.rank = [{
         key: 'sailkapena',
         values: Object.keys(stats)
-                      .map((teamName) => ({label: teamName, value: stats[teamName].points}))
+                      .map((teamName) => ({
+                        label: teamName,
+                        color: this.teamColors(teamName),
+                        value: stats[teamName].points
+                      }))
                       .sort((a, b) => b.value - a.value)
       }];
       this.changeChart();
@@ -268,6 +345,7 @@ export class EstropadakStatsPageComponent implements OnInit {
     const team = this.form.get('team').value;
     if (team) {
       this.form.get('year').disable();
+      this.lineChartOptions.chart.xAxis.tickFormat = (i) => i;
       this.chart.options.forEach( (item, index) => {
         if (index === 2) {
           item.disabled = true;
@@ -275,6 +353,7 @@ export class EstropadakStatsPageComponent implements OnInit {
       });
     } else {
       this.form.get('year').enable();
+      this.lineChartOptions.chart.xAxis.tickFormat = (i) => this.estropadak[i];
       this.chart.options.forEach( (item, index) => {
         item.disabled = false;
       });
