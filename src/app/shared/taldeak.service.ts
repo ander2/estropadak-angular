@@ -15,5 +15,6 @@ export class TaldeakService {
       const endpoint = `${estropadakUrl}taldeak`;
       return this.http.get(endpoint)
           .map(res => res.json())
+          .map(res => res.filter(it => /^[A-Z]/.test(it)))
   }
 }
