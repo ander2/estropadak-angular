@@ -43,6 +43,7 @@ import { EstropadakHurrengoakCardComponent } from './estropadak-hurrengoak-card/
 import { EstropadakAzkenEmaitzakCardComponent } from './estropadak-azken-emaitzak-card/estropadak-azken-emaitzak-card.component';
 import { EstropadakStatsPageComponent } from './estropadak-stats-page/estropadak-stats-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TaldeakService } from './shared/taldeak.service';
 
 
 
@@ -124,6 +125,7 @@ const routes: Routes = [
     EmaitzakService,
     EstropadakNavegationService,
     SailkapenaService,
+    TaldeakService,
     UrteakService,
   ],
   bootstrap: [AppComponent]

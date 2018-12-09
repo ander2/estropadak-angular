@@ -47,15 +47,15 @@ export class SailkapenaService {
 
     constructor(private http: Http) { }
 
-    getList(league: string, year: string) {
-        const params = {league, year};
+    getList(league: string, year: string, team?: string) {
+        const params = {league, year, team};
         const endpoint = `${estropadakUrl}estropadak`;
         return this.http.get(endpoint, {params})
             .map(res => res.json())
     }
 
-    getOne(league: string, year: string): Observable<Stats> {
-        const params = {league, year};
+    getOne(league: string, year: string, team?: string): any {
+        const params = {league, year, team};
         return this.http.get(`${estropadakUrl}sailkapena`, {params})
             .map(res => res.json())
     }

@@ -9,14 +9,23 @@
     </mat-form-field>
     <mat-form-field>
       <mat-select formControlName="year" placeholder="Urtea" (selectionChange)="updateChart()">
+        <mat-option [value]="">Guztiak</mat-option>
         <mat-option *ngFor="let year of years" [value]="year">
           {{year}}
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-form-field>
+      <mat-select formControlName="team" placeholder="Taldea" (selectionChange)="teamChange()">
+        <mat-option [value]="">Guztiak</mat-option>
+        <mat-option *ngFor="let team of teams" [value]="team">
+          {{team}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
     <ng-container *ngIf="points_per_race.length > 0">
       <mat-form-field>
-        <mat-select formControlName="chart" placeholder="Grafika mota" (selectionChange)="changeChart()">
+        <mat-select #chart formControlName="chart" placeholder="Grafika mota" (selectionChange)="changeChart()">
           <mat-option [value]="chart.value" *ngFor="let chart of charts">
              {{chart.name}}
           </mat-option>
