@@ -46,7 +46,7 @@ export class EstropadakStatsPageComponent implements OnInit {
   ngOnInit() {
     this.yearService.getList().subscribe( years => {
       this.allYears = years;
-      this.leagues = Object.keys(years);
+      this.leagues = Object.keys(years).sort();
     });
     this.taldeakService.getList().subscribe(teams => {
       this.teams = teams;
