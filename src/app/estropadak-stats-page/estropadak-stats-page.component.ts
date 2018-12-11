@@ -202,70 +202,48 @@ export class EstropadakStatsPageComponent implements OnInit {
     switch (team) {
       case 'Arkote':
         return 'yellow'
-        break;
       case 'Astillero':
         return 'navy'
-        break;
       case 'Cabo':
         return 'red'
-        break;
       case 'Castro':
         return 'red'
-        break;
       case 'Deustu':
         return 'red'
-        break;
       case 'Donostiarra':
         return 'LightBlue'
-        break;
       case 'Getaria':
         return 'wheat'
-        break;
       case 'Hondarribia':
         return 'LimeGreen'
-        break;
       case 'Hibaika':
         return 'black'
-        break;
       case 'Isuntza':
         return 'LightBlue'
-        break;
       case 'Orio':
         return 'yellow'
-        break;
       case 'Itsasoko ama':
         return 'purple'
-        break;
       case 'Kaiku':
         return 'green'
-        break;
       case 'Ondarroa':
         return 'red'
-        break;
       case 'Portugalete':
         return 'yellow'
-        break;
       case 'San Juan':
         return 'pink'
-        break;
       case 'San Pedro':
         return 'purple'
-        break;
       case 'Tiran':
         return 'blue'
-        break;
       case 'Urdaibai':
         return 'blue'
-        break;
       case 'Zarautz':
         return 'blue'
-        break;
       case 'Zumaia':
         return 'red'
-        break;
       case 'Zierbena':
         return 'chocolate'
-        break;
     }
   }
 
