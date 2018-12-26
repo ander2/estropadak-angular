@@ -67,21 +67,12 @@ export class StatsService {
     return this.http.get(`${estropadakUrl}sailkapena`, {params})
     .map(res => res.json())
     .map(res => {
-      if (team) {
-        return res.map(stat => {
+      const results = res.map( stat => {
+        return Object.keys(stat.stats).map(taldea => {
           return {
-            key: stat.urtea,
-            values: stat.stats.positions.map((pos, i) => {
-              return {label: i, value: 13 - pos};
-            }),
-          }
-        });
-      } else {
-        return Object.keys(res[0].stats).map(taldea => {
-          return {
-            key: taldea,
+            key: team ? stat.urtea : taldea,
             color: this.teamColors(taldea),
-            values: res[0].stats[taldea].positions.map((pos, i) => {
+            values: stat.stats[taldea].positions.map((pos, i) => {
               return {
                 label: i,
                 value: pos
@@ -89,7 +80,8 @@ export class StatsService {
             }),
           }
         });
-      }
+      });
+      return results.reduce((memo, val) => memo.concat(val), []);
     });
   }
 
@@ -99,19 +91,12 @@ export class StatsService {
     return this.http.get(`${estropadakUrl}sailkapena`, {params})
     .map(res => res.json())
     .map(res => {
-      if (team) {
-        return res.map(stat => {
-          return {
-            key: stat.urtea,
-            values: stat.stats.cumulative.map((points, i) => ({label: i, value: points}))
-          }
-        });
-      } else {
+      const results = res.map( stat => {
         return Object.keys(res[0].stats).map(taldea => {
           return {
-            key: taldea,
+            key: team ? stat.urtea : taldea,
             color: this.teamColors(taldea),
-            values: res[0].stats[taldea].cumulative.map((points, i) => {
+            values: stat.stats[taldea].cumulative.map((points, i) => {
               return {
                 label: i,
                 value: points
@@ -119,7 +104,8 @@ export class StatsService {
             }),
           }
         });
-      }
+      });
+      return results.reduce((memo, val) => memo.concat(val), []);
     });
   }
 
@@ -131,7 +117,7 @@ export class StatsService {
       return [{
         key: team,
         color: this.teamColors(team),
-        values: stats.map((stat, i) => ({label: stat.urtea, value: stat.stats.position}))
+        values: stats.map((stat, i) => ({label: stat.urtea, value: stat.stats[team].position}))
       }]
     });
   }
