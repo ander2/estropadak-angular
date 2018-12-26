@@ -213,7 +213,6 @@ export class EstropadakStatsPageComponent implements OnInit {
       this.options.chart.yDomain = [1, maxVals]
     } else if (chartType === 'general_rank') {
       this.chartData = this.rank;
-      console.log(this.chartData);
       this.options = this.discreteBarChartOptions;
     } else if (chartType === 'rank') {
       this.chartData = this.rank;
