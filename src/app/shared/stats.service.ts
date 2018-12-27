@@ -71,11 +71,12 @@ export class StatsService {
         return Object.keys(stat.stats).map(taldea => {
           return {
             key: team ? stat.urtea : taldea,
-            color: this.teamColors(taldea),
-            values: stat.stats[taldea].positions.map((pos, i) => {
+            color: year ? this.teamColors(taldea) : undefined,
+            values: stat.stats[taldea].cumulative.map((pos, i, arr) => {
+              const points = i === 0 ? arr[i] : arr[i] - arr[i - 1];
               return {
                 label: i,
-                value: pos
+                value: points
               };
             }),
           }
@@ -95,7 +96,7 @@ export class StatsService {
         return Object.keys(res[0].stats).map(taldea => {
           return {
             key: team ? stat.urtea : taldea,
-            color: this.teamColors(taldea),
+            color: year ? this.teamColors(taldea) : undefined,
             values: stat.stats[taldea].cumulative.map((points, i) => {
               return {
                 label: i,
