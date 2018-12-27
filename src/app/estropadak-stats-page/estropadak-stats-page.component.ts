@@ -200,6 +200,7 @@ export class EstropadakStatsPageComponent implements OnInit {
     let chartType = this.form.get('chart').value;
     this.setEnabledFields(chartType);
     if (chartType.indexOf('t') === 0) {
+      this.lineChartOptions.chart.xAxis.axisLabel = 'Jardunaldia';
       chartType = chartType.slice(1);
     }
     this.options = this.lineChartOptions;
@@ -230,9 +231,11 @@ export class EstropadakStatsPageComponent implements OnInit {
     if (chartType[0] === 't') {
       this.showYears = false;
       this.showTeams = true;
+      this.form.get('year').reset();
     } else {
       this.showYears = true;
       this.showTeams = false;
+      this.form.get('team').reset();
     }
   }
 
@@ -283,17 +286,9 @@ export class EstropadakStatsPageComponent implements OnInit {
     const team = this.form.get('team').value;
     if (team) {
       this.lineChartOptions.chart.xAxis.tickFormat = (i) => i;
-      this.chart.options.forEach( (item, index) => {
-        if (index === 2) {
-          item.disabled = true;
-        }
-      });
     } else {
       this.form.get('year').enable();
       this.lineChartOptions.chart.xAxis.tickFormat = (i) => this.estropadak[i];
-      this.chart.options.forEach( (item, index) => {
-        item.disabled = false;
-      });
     }
     this.updateChart();
   }
