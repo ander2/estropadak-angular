@@ -202,6 +202,10 @@ export class EstropadakStatsPageComponent implements OnInit {
     if (chartType.indexOf('t') === 0) {
       this.lineChartOptions.chart.xAxis.axisLabel = 'Jardunaldia';
       chartType = chartType.slice(1);
+    } else if (chartType === 'trank') {
+      this.lineChartOptions.chart.yAxis.axisLabel = 'Sailkapena';
+    } else {
+      this.lineChartOptions.chart.yAxis.axisLabel = 'Puntuak';
     }
     this.options = this.lineChartOptions;
     if (chartType === 'points_per_race') {
