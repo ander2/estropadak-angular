@@ -3,7 +3,7 @@ import {DataSource} from '@angular/cdk/collections';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { SailkapenaService } from 'app/shared/estropada.service';
-import { Stats } from 'app/shared/estropadak.model';
+import { Stats } from 'app/shared/stats.model';
 import { MatButtonToggleChange } from '@angular/material';
 
 @Component({
