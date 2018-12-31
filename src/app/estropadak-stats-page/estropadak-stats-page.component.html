@@ -1,13 +1,14 @@
 <div>
   <form [formGroup]="form" novalidate>
+    <p>Aukeratu ikusi nahi duzun grafika mota eta liga. Ondoren aukeratu urtea edo taldea (grafikaren arabera).</p>
     <mat-form-field>
       <mat-select #chart formControlName="chart" placeholder="Grafika mota" (selectionChange)="changeChart($event)">
-        <mat-optgroup label="Liga">
+        <mat-optgroup label="Ligen gaineko grafikak">
           <mat-option [value]="chart.value" *ngFor="let chart of charts['liga']">
               {{chart.name}}
           </mat-option>
         </mat-optgroup>
-        <mat-optgroup label="Taldeak">
+        <mat-optgroup label="Taldeen gaineko grafikak">
           <mat-option [value]="chart.value" *ngFor="let chart of charts['taldea']">
               {{chart.name}}
           </mat-option>
