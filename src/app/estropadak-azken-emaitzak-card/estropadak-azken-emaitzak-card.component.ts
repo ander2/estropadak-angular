@@ -4,7 +4,7 @@ import { Estropada, TaldeSailkapena } from '../shared/estropadak.model';
 import * as moment from 'moment';
 import { MatButtonToggleChange } from '@angular/material';
 import {DataSource} from '@angular/cdk/collections';
-import {Observable} from 'rxjs/Observable';
+import {Observable, of} from 'rxjs';
 
 class EstropadaDataSource extends DataSource<any> {
     sailkapena;
@@ -14,7 +14,7 @@ class EstropadaDataSource extends DataSource<any> {
     }
 
     connect(): Observable<any> {
-      return Observable.of(this.sailkapena);
+      return of(this.sailkapena);
     }
 
     disconnect() {}
