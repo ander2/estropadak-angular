@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 
 import { Estropada } from './estropadak.model';
 import { environment } from '../../environments/environment';
@@ -17,12 +18,12 @@ export class EstropadaService {
         const endpoint = `${estropadakUrl}estropadak`;
         const params = {league, year};
         return this.http.get(endpoint, {params})
-            .map(res => res.json())
+            .pipe(map(res => res.json()))
     }
 
     getOne(id: string): Observable<Estropada> {
         return this.http.get(`${estropadakUrl}estropada/${id}`)
-            .map(res => res.json())
+            .pipe(map(res => res.json()))
     }
 }
 
@@ -34,12 +35,12 @@ export class UrteakService {
     getList() {
         const endpoint = `${estropadakUrl}years`;
         return this.http.get(endpoint)
-                .map(res => res.json())
+                .pipe(map(res => res.json()))
     }
 
     getOne(id: string) {
         return this.http.get(`${estropadakUrl}${id}`)
-            .map(res => res.json())
+            .pipe(map(res => res.json()))
     }
 }
 
@@ -52,13 +53,13 @@ export class SailkapenaService {
         const params = {league, year, team};
         const endpoint = `${estropadakUrl}estropadak`;
         return this.http.get(endpoint, {params})
-            .map(res => res.json())
+            .pipe(map(res => res.json()));
     }
 
     getOne(league: string, year: string, team?: string): any {
         const params = {league, year, team};
         return this.http.get(`${estropadakUrl}sailkapena`, {params})
-            .map(res => res.json())
+            .pipe(map(res => res.json()));
     }
 }
 
@@ -71,11 +72,11 @@ export class EmaitzakService {
         const endpoint = `${estropadakUrl}emaitzak`;
         const params = {league, year};
         return this.http.get(endpoint, {params})
-            .map(res => res.json())
+            .pipe(map(res => res.json()));
     }
 
     getOne(id: string): Observable<Estropada> {
         return this.http.get(`${estropadakUrl}estropada/${id}`)
-            .map(res => res.json())
+            .pipe(map(res => res.json()));
     }
 }

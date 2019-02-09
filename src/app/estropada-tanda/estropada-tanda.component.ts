@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {DataSource} from '@angular/cdk/collections';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import {Observable, of} from 'rxjs';
+
 
 @Component({
   selector: 'app-estropada-tanda',
@@ -33,7 +32,7 @@ class EstropadaDataSource extends DataSource<any> {
     }
 
     connect(): Observable<any> {
-        return Observable.of(this.tanda);
+        return of(this.tanda);
     }
 
     disconnect() {}

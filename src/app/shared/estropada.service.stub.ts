@@ -1,14 +1,14 @@
-import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
 import { estropada } from './estropada.fixture';
 
 export class EstropadaServiceStub {
 
   getOne(id: number) {
-    return Observable.of(estropada)
+    return of(estropada)
   }
 
   getList() {
-    return Observable.of([{
+    return of([{
       'data': '2017-07-01 19:00',
       'id': '415a90c7b50aea0ef54ee194e60016ac',
       'izena': 'VIII Bandera de Bilbao',
@@ -219,7 +219,7 @@ export class EstropadaServiceStub {
 export class SailkapenaServiceStub {
 
   getOne(liga, year) {
-    return Observable.of({
+    return of({
       "Tiran": {
         "position": 7,
         "points": 93,
@@ -774,11 +774,11 @@ export class SailkapenaServiceStub {
 
 export class UrteakServiceStub {
   getOne() {
-    return Observable.of(2017)
+    return of(2017)
   }
 
   getList() {
-    return Observable.of({
+    return of({
       'act': [2017, 2016, 2015],
       'arc1': [2017, 2016, 2015],
       'arc2': [2017, 2016, 2015],
@@ -789,7 +789,7 @@ export class UrteakServiceStub {
 export class EmaitzakServiceStub {
 
   getList(league, year) {
-    return Observable.of([
+    return of([
       {
         "data": "2017-07-01 19:00",
         "id": "415a90c7b50aea0ef54ee194e60016ac",

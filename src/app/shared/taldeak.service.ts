@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { environment } from '../../environments/environment';
 
 const estropadakUrl = environment.apiUrl;
@@ -15,7 +16,7 @@ export class TaldeakService {
       const endpoint = `${estropadakUrl}taldeak`;
       const params = {league};
       return this.http.get(endpoint, {params})
-          .map(res => res.json())
-          .map(res => res.filter(it => /^[A-Z]/.test(it)))
+          .pipe(map(res => res.json()))
+          .pipe(map(res => res.filter(it => /^[A-Z]/.test(it))))
   }
 }

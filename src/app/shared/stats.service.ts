@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
-import {tap} from 'rxjs/operators';
+
+import {map, tap} from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 
@@ -65,8 +65,8 @@ export class StatsService {
     const params = {league, year, team};
 
     return this.http.get(`${estropadakUrl}sailkapena`, {params})
-    .map(res => res.json())
-    .map(res => {
+    .pipe(map(res => res.json()))
+    .pipe(map(res => {
       const results = res.map( stat => {
         return Object.keys(stat.stats).map(taldea => {
           return {
@@ -83,15 +83,15 @@ export class StatsService {
         });
       });
       return results.reduce((memo, val) => memo.concat(val), []);
-    });
+    }));
   }
 
   getGraphCumulativePoints(league: string, year?: number, team?: string) {
     const params = {league, year, team};
 
     return this.http.get(`${estropadakUrl}sailkapena`, {params})
-    .map(res => res.json())
-    .map(res => {
+    .pipe(map(res => res.json()))
+    .pipe(map(res => {
       const results = res.map( stat => {
         return Object.keys(res[0].stats).map(taldea => {
           return {
@@ -107,28 +107,28 @@ export class StatsService {
         });
       });
       return results.reduce((memo, val) => memo.concat(val), []);
-    });
+    }));
   }
 
   getTeamRank(league: string, team: string) {
     const params = {league, team};
     return this.http.get(`${estropadakUrl}sailkapena`, {params})
-    .map(res => res.json())
-    .map(stats => {
+    .pipe(map(res => res.json()))
+    .pipe(map(stats => {
       return [{
         key: team,
         color: this.teamColors(team),
         values: stats.map((stat, i) => ({label: stat.urtea, value: stat.stats[team].position}))
       }]
-    });
+    }));
   }
 
   getRank(league: string, year?: number, team?: string) {
     const params = {league, year, team};
 
     return this.http.get(`${estropadakUrl}sailkapena`, {params})
-    .map(res => res.json())
-    .map(res => {
+    .pipe(map(res => res.json()))
+    .pipe(map(res => {
       const stats = res[0].stats;
       return [{
         key: 'Taldea',
@@ -140,7 +140,7 @@ export class StatsService {
                       }))
                       .sort((a, b) => b.value - a.value)
       }]
-    });
+    }));
   }
 
 }

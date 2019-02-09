@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import {DataSource} from '@angular/cdk/collections';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import {Observable, of} from 'rxjs';
+
 import { SailkapenaService } from 'app/shared/estropada.service';
 import { Stats } from 'app/shared/stats.model';
 import { MatButtonToggleChange } from '@angular/material';
@@ -65,7 +65,7 @@ class EstropadaDataSource extends DataSource<any> {
   }
 
   connect(): Observable<any> {
-    return Observable.of(this.sailkapena);
+    return of(this.sailkapena);
   }
 
   disconnect() {}
