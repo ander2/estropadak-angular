@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable, of} from 'rxjs';
 
@@ -36,22 +36,26 @@ export class EstropadakSailkapenaComponent implements OnChanges {
     this.getSailkapena(this.league, this.year);
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.year) {
+      this.year = changes.year.currentValue;
+    }
     this.getSailkapena(this.league, this.year);
   }
 
   getSailkapena(league, year) {
     this.sailkapenaService.getOne(league, year)
     .subscribe((res) => {
-      this.sailkapena = res;
-      const sailk = Object.keys(this.sailkapena).reduce((memo: any[], taldeIzena: string) => {
-        this.sailkapena[taldeIzena].izena = taldeIzena;
-        memo.push(this.sailkapena[taldeIzena]);
+      this.sailkapena = res[0];
+      const sailk = Object.keys(this.sailkapena.stats).reduce((memo: any[], taldeIzena: string) => {
+        this.sailkapena.stats[taldeIzena].izena = taldeIzena;
+        memo.push(this.sailkapena.stats[taldeIzena]);
         return memo;
       }, []);
       const ordered = sailk.sort((a, b) => parseInt(a.position, 10) - parseInt(b.position, 10));
       this.dataSource = new EstropadaDataSource(ordered);
     }, (err) => {
+      this.dataSource = new EstropadaDataSource([]);
       console.log('Error');
     });
   }

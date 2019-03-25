@@ -20,8 +20,6 @@ export class EstropadakListComponent implements OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('Changes');
-    console.log(changes);
     if (changes.league) {
       this.league = changes.league.currentValue;
     }
