@@ -14,19 +14,19 @@
     </h3>
     <p>{{estropada.data}}</p>
     <mat-table #table [dataSource]="i==0?dataSource:dataSource2">
-      <ng-container matColumnDef="Postua">
-        <mat-header-cell *matHeaderCellDef fxFlex="15"> Postua </mat-header-cell>
-        <mat-cell *matCellDef="let row" fxFlex="15"> {{row.posizioa}} </mat-cell>
-      </ng-container>
+      <!-- <ng-container matColumnDef="Postua">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row">  </mat-cell>
+      </ng-container> -->
 
       <ng-container matColumnDef="Taldea">
-        <mat-header-cell *matHeaderCellDef fxLayoutAlign.xs="space-around center"> Taldea </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.talde_izena}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef> Taldea </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.posizioa}} - {{row.talde_izena}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="Denbora">
-        <mat-header-cell *matHeaderCellDef fxFlex="15"> Denbora </mat-header-cell>
-        <mat-cell *matCellDef="let row" fxFlex="15"> {{row.denbora}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef> Denbora </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.denbora}} </mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -37,5 +37,8 @@
         Ez dago estropadarik
       </mat-list-item>
     </mat-list>
+    <p *ngIf="estropadak.length !== 0">
+      <a [routerLink]="['/estropada', estropada.id]">Ikusi gehiago</a>
+    </p>
   </div>
 </div>

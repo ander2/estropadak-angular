@@ -31,7 +31,7 @@ export class EstropadakAzkenEmaitzakCardComponent implements OnInit, OnChanges {
   @Input() league;
   @Input() year;
   estropadak = [];
-  displayedColumns = ['Postua', 'Taldea', 'Denbora'];
+  displayedColumns = ['Taldea', 'Denbora'];
   dataSource: any;
   dataSource2: any;
   constructor(
@@ -62,10 +62,10 @@ export class EstropadakAzkenEmaitzakCardComponent implements OnInit, OnChanges {
         .filter((estropada: Estropada, index) => index <= 1)
         .map((estropada: Estropada) => {
           estropada.sailkapena = estropada.sailkapena
-            .sort((a, b) => a.posizioa - b.posizioa);
+            .sort((a, b) => a.posizioa - b.posizioa)
+            .filter((_, index) => index < 4);
           return estropada;
         });
-      console.log(this.estropadak[0].sailkapena);
       this.dataSource = new EstropadaDataSource(this.estropadak[0].sailkapena);
       this.dataSource2 = new EstropadaDataSource(this.estropadak[1].sailkapena);
       })
