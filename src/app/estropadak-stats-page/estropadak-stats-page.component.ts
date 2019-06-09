@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatSelect } from '@angular/material';
 
 import * as d3 from 'd3';
-import * as nvd3 from 'nvd3';
+import 'nvd3';
 
 import { EstropadaService, SailkapenaService, UrteakService } from 'app/shared/estropada.service';
 import { TaldeakService } from 'app/shared/taldeak.service';
