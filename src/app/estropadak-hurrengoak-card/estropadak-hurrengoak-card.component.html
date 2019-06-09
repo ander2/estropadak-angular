@@ -7,9 +7,12 @@
 </mat-button-toggle-group>
 <mat-list>
   <mat-list-item *ngFor="let estropada of this.estropadak" >
-    <a [routerLink]="['/estropada', estropada.id]">
-      {{estropada.data}} - {{estropada.izena}}
-    </a>
+    <h3 matLine>
+      <a [routerLink]="['/estropada', estropada.id]">
+         {{estropada.izena}}
+      </a>
+    </h3>
+    <p matLine> {{estropada.data}} </p>
   </mat-list-item>
 </mat-list>
 <mat-list *ngIf="estropadak.length === 0">

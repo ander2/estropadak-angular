@@ -2,6 +2,11 @@
 <mat-nav-list *ngIf="estropadak">
   <mat-list-item *ngFor="let estropada of estropadak"
     (click)="onSelect(estropada)">
-    [{{estropada.data}}] {{ estropada.izena}}
+    <h3 matLine>
+      {{ estropada.izena}}
+    </h3>
+    <p matLine>
+      {{estropada.data}}
+    </p>
   </mat-list-item>
 </mat-nav-list>
