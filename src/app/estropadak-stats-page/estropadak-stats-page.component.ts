@@ -2,6 +2,9 @@ import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatSelect } from '@angular/material';
 
+import * as d3 from 'd3';
+import * as nvd3 from 'nvd3';
+
 import { EstropadaService, SailkapenaService, UrteakService } from 'app/shared/estropada.service';
 import { TaldeakService } from 'app/shared/taldeak.service';
 import { StatsService } from 'app/shared/stats.service';
