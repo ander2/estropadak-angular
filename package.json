@@ -27,6 +27,8 @@
     "angular-in-memory-web-api": "^0.3.2",
     "core-js": "^2.5.3",
     "moment": "^2.22.2",
+    "d3": "^3.5.15",
+    "nvd3": "^1.8.5",
     "ng2-nvd3": "^2.0.0",
     "rxjs": "^6.4.0",
     "rxjs-compat": "^6.4.0",
