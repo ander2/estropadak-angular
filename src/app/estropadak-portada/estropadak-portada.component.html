@@ -1,15 +1,15 @@
 <div>
   <div>
-    <app-estropadak-azken-emaitzak-card [year]=2018 [league]="'ACT'"></app-estropadak-azken-emaitzak-card>
+    <app-estropadak-azken-emaitzak-card [year]="year" [league]="'ACT'"></app-estropadak-azken-emaitzak-card>
   </div>
   <div fxLayout fxLayout.xs="column" fxLayoutAlign="space-around start" fxLayoutAlign.xs="center center">
     <div fxFlex="45" fxFill.xs>
       <h2>Sailkapen nagusia</h2>
-      <app-estropadak-sailkapena [year]=2018 [league]="'ACT'" [showTitle]="'false'"></app-estropadak-sailkapena>
+      <app-estropadak-sailkapena [year]="year" [league]="'ACT'" [showTitle]="'false'"></app-estropadak-sailkapena>
     </div>
     <div fxFlex="45" fxFill.xs>
       <h2>Hurrengo estropadak</h2>
-      <app-estropadak-hurrengoak-card [year]=2019 [league]="'ACT'"></app-estropadak-hurrengoak-card>
+      <app-estropadak-hurrengoak-card [year]="year" [league]="'ACT'"></app-estropadak-hurrengoak-card>
     </div>
   </div>
 </div>
