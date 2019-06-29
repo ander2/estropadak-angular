@@ -4,7 +4,7 @@ build: src/app/*
 	ng build --prod
 
 clean: dist/*
-	rm dist/*
+	rm -rf dist/*
 
 deploy: dist/*
 	scp -r ./dist/* ander2@estropadak.eus:$(REMOTE_PATH)
