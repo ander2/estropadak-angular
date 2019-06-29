@@ -119,7 +119,8 @@ export class EstropadakStatsPageComponent implements OnInit {
         yAxis: {
           axisLabel: 'Puntuak'
         },
-        yDomain: [12, 1]
+        yDomain: [12, 0],
+        yRange: [360, 10]
       }
     }
 
@@ -134,7 +135,7 @@ export class EstropadakStatsPageComponent implements OnInit {
           left: 65
         },
         x: (d) => d.label,
-        y: (d) => d.value,
+        y: (d) => parseInt(d.value, 10),
         xAxis: {
           axisLabel: 'Estropadak',
           tickFormat: (d) => this.estropadak[d],
@@ -158,13 +159,15 @@ export class EstropadakStatsPageComponent implements OnInit {
           left: 65
         },
         x: (d) => d.label,
-        y: (d) => d.value,
+        y: (d) => parseInt(d.value, 10),
+        valueFormat: d3.format('d'),
         showValues: true,
         xAxis: {
           axisLabel: 'Taldeak',
         },
         yAxis: {
           axisLabel: 'Puntuak',
+          tickFormat: d3.format('d'),
         },
       }
     };
@@ -214,11 +217,11 @@ export class EstropadakStatsPageComponent implements OnInit {
     if (chartType === 'points_per_race') {
       this.chartData = this.points_per_race;
       const maxVals = Math.max(...this.chartData.map(g => Math.max(...g.values.map(k => k.value))));
-      this.options.chart.yDomain = [1, maxVals]
+      this.options.chart.yDomain = [0, maxVals]
     } else if (chartType === 'positions_per_race') {
       this.chartData = this.positions_per_race;
       const maxVals = Math.max(...this.chartData.map(g => Math.max(...g.values.map(k => k.value))));
-      this.options.chart.yDomain = [1, maxVals]
+      this.options.chart.yDomain = [0, maxVals]
     } else if (chartType === 'general_rank') {
       this.chartData = this.rank;
       this.options = this.discreteBarChartOptions;
@@ -229,7 +232,7 @@ export class EstropadakStatsPageComponent implements OnInit {
       this.chartData = this.cumulative;
       this.options = this.lineChartOptions;
       const maxVals = Math.max(...this.chartData.map(g => Math.max(...g.values.map(k => k.value))));
-      this.options.chart.yDomain = [1, maxVals]
+      this.options.chart.yDomain = [0, maxVals]
     }
   }
 
