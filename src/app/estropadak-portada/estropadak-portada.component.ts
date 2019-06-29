@@ -11,7 +11,7 @@ import { UrteakService } from 'app/shared/estropada.service';
 export class EstropadakPortadaComponent implements OnInit {
 
   league = 'ACT';
-  year = 2017;
+  year = 2019;
   @ViewChild(MatSidenav) sidenav;
   constructor(
     private router: Router,
