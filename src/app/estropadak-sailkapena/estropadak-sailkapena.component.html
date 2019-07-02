@@ -9,23 +9,23 @@
 <ng-container *ngIf="sailkapena; else no_sailkapena">
   <mat-table #table [dataSource]="dataSource">
       <ng-container matColumnDef="Posizioa">
-        <mat-header-cell *matHeaderCellDef fxFlex="15"> Posizioa </mat-header-cell>
-        <mat-cell *matCellDef="let row" fxFlex="15"> {{row.position}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef> Posizioa </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.position}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="Taldea">
-        <mat-header-cell *matHeaderCellDef fxFlex="55"> Taldea </mat-header-cell>
-        <mat-cell *matCellDef="let row" fxFlex="55"> {{row.izena}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef> Taldea </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.izena}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="Puntuak">
-        <mat-header-cell *matHeaderCellDef fxFlex="15"> Puntuak </mat-header-cell>
-        <mat-cell *matCellDef="let row" fxFlex="15"> {{row.points}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef> Puntuak </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.points}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="Banderak">
-        <mat-header-cell *matHeaderCellDef fxFlex="15"> Banderak </mat-header-cell>
-        <mat-cell *matCellDef="let row" fxFlex="15"> {{row.wins}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef> Banderak </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.wins}} </mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
