@@ -1,1 +1,10 @@
 h2 {text-align: left}
+
+.mat-column-Taldea {
+  flex: 1 1 auto;
+}
+
+.mat-column-Denbora {
+  flex: 1 0 auto;
+  justify-content: flex-end;
+}
