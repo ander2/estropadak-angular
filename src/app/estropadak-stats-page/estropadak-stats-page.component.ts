@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatSelect } from '@angular/material';
 
@@ -8,6 +8,7 @@ import 'nvd3';
 import { EstropadaService, SailkapenaService, UrteakService } from 'app/shared/estropada.service';
 import { TaldeakService } from 'app/shared/taldeak.service';
 import { StatsService } from 'app/shared/stats.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -18,15 +19,17 @@ import { StatsService } from 'app/shared/stats.service';
   ],
   encapsulation: ViewEncapsulation.None
 })
-export class EstropadakStatsPageComponent implements OnInit {
+export class EstropadakStatsPageComponent implements OnInit, OnChanges {
 
+  @Input()
+  league;
+  @Input()
+  year;
   form: FormGroup;
   leagues: string[];
   years: number[];
   teams: string[] = [];
   allYears: {[key: string]: number[]};
-  league = 'ACT';
-  year = '2013';
   team = undefined;
   options: any;
   lineChartOptions: any = {};
@@ -50,17 +53,34 @@ export class EstropadakStatsPageComponent implements OnInit {
     private estropadaService: EstropadaService,
     private sailkapenaService: SailkapenaService,
     private taldeakService: TaldeakService,
-    private statsService: StatsService
+    private statsService: StatsService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
     this.yearService.getList().subscribe( years => {
       this.allYears = years;
       this.leagues = Object.keys(years).sort();
+      this.updateYears();
     });
     this.taldeakService.getList().subscribe(teams => {
       this.teams = teams;
     });
+    this.route.queryParams.subscribe((params) => {
+      this.league = params.league.toLowerCase(); // params.get('league');
+      this.year = params.year; // params.get('year');
+      this.initGraphSettings();
+      this.form = this.fb.group({
+        'league': [this.league],
+        'year': [this.year],
+        'chart': ['points_per_race'],
+        'team': [this.team]
+      });
+      this.updateChart();
+    });
+  }
+
+  initGraphSettings() {
     this.charts = {
       liga: [
         {
@@ -91,12 +111,6 @@ export class EstropadakStatsPageComponent implements OnInit {
         }
       ]
     };
-    this.form = this.fb.group({
-      'league': [this.league],
-      'year': [this.year],
-      'chart': ['points_per_race'],
-      'team': [this.team]
-    });
 
     this.lineChartReversedOptions = {
       chart: {
@@ -171,14 +185,23 @@ export class EstropadakStatsPageComponent implements OnInit {
         },
       }
     };
+  }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.year) {
+      this.year = changes.year.currentValue;
+    }
+    if (changes.league) {
+      this.league = changes.league.currentValue;
+    }
+    this.updateChart();
   }
 
   updateChart() {
-    this.year = this.form.get('year').value;
-    this.league = this.form.get('league').value;
+    const year = this.form.get('year').value;
+    const league = this.form.get('league').value;
     this.team = this.form.get('team').value;
-    this.updateData(this.year, this.league, this.team);
+    this.updateData(year, league, this.team);
   }
 
   updateData(year: string, league: string, team?: string) {
@@ -249,13 +272,17 @@ export class EstropadakStatsPageComponent implements OnInit {
     }
   }
 
+  updateYearsAndRefresh() {
+    this.updateYears();
+    this.form.get('year').setValue(this.years[0]);
+    this.updateChart();
+  }
+
   updateYears() {
     const league = this.form.get('league').value;
     this.taldeakService.getList(league)
     .subscribe( res => this.teams = res);
     this.years = this.allYears[league].sort((a, b) => b - a);
-    this.form.get('year').setValue(this.years[0]);
-    this.updateChart();
   }
 
   loadYearData(league: string, year: string) {
@@ -306,4 +333,3 @@ export class EstropadakStatsPageComponent implements OnInit {
   }
 
 }
-
