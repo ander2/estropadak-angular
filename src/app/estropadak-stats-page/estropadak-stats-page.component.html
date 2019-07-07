@@ -16,7 +16,7 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <mat-select formControlName="league" placeholder="Liga" (selectionChange)="updateYears()">
+      <mat-select formControlName="league" placeholder="Liga" (selectionChange)="updateYearsAndRefresh()">
         <mat-option *ngFor="let league of leagues" [value]="league">
           {{league | uppercase}}
         </mat-option>
