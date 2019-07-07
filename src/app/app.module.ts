@@ -45,6 +45,7 @@ import { EstropadakStatsPageComponent } from './estropadak-stats-page/estropadak
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TaldeakService } from './shared/taldeak.service';
 import { StatsService } from './shared/stats.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 
@@ -72,7 +73,8 @@ const routes: Routes = [
   {
     path: 'estatistikak',
     component: EstropadakStatsPageComponent
-  }
+  },
+  { path: '**', component: PageNotFoundComponent }
 
 ];
 
@@ -94,6 +96,7 @@ const routes: Routes = [
     EstropadakHurrengoakCardComponent,
     EstropadakAzkenEmaitzakCardComponent,
     EstropadakStatsPageComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
