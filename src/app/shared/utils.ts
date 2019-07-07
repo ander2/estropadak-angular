@@ -16,3 +16,13 @@ export function sanitizeLeague(league: string) {
         return undefined;
     }
 };
+
+export function sanitizeChart(chart: string) {
+    const _charts = ['general_rank', 'points_per_race', 'points_total',
+        'tpoints_per_race', 'tpoints_total', 'trank'];
+    if (_charts.indexOf(chart) > -1) {
+        return chart;
+    } else {
+        return undefined;
+    }
+}
