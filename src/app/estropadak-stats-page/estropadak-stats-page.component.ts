@@ -9,6 +9,7 @@ import { EstropadaService, SailkapenaService, UrteakService } from 'app/shared/e
 import { TaldeakService } from 'app/shared/taldeak.service';
 import { StatsService } from 'app/shared/stats.service';
 import { ActivatedRoute } from '@angular/router';
+import { sanitizeYear, sanitizeLeague } from 'app/shared/utils';
 
 
 @Component({
@@ -67,8 +68,8 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
       this.teams = teams;
     });
     this.route.queryParams.subscribe((params) => {
-      this.league = params.league.toLowerCase(); // params.get('league');
-      this.year = params.year; // params.get('year');
+      this.year = sanitizeYear(params.year) || '2019';
+      this.league = sanitizeLeague(params.league) || 'act';
       this.initGraphSettings();
       this.form = this.fb.group({
         'league': [this.league],
