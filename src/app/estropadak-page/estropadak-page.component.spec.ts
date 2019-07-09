@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatIconModule, MatTabsModule, MatButtonModule, MatMenuModule, MatListModule, MatTableModule, MatButtonToggleModule } from '@angular/material';
 import { NvD3Module } from 'ng2-nvd3';
-import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
 
 import { EstropadakPageComponent } from './estropadak-page.component';
 import { EstropadakYearsComponent } from '../estropadak-years/estropadak-years.component';
@@ -47,7 +47,7 @@ describe('EstropadakPageComponent', () => {
         {provide: EstropadaService, useClass: EstropadaServiceStub},
         {provide: SailkapenaService, useClass: SailkapenaServiceStub},
         {provide: UrteakService, useClass: UrteakServiceStub},
-        {provide: ActivatedRoute, useValue: {paramMap: Observable.of({get: (key) => {
+        {provide: ActivatedRoute, useValue: {paramMap: of({get: (key) => {
           if (key === 'year') {
             return 2017;
           } else {

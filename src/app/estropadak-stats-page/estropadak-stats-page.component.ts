@@ -59,6 +59,12 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      'league': [this.league],
+      'year': [this.year],
+      'chart': [this.chart],
+      'team': [this.team]
+    });
     this.yearService.getList().subscribe( years => {
       this.allYears = years;
       this.leagues = Object.keys(years).sort();
@@ -67,16 +73,15 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
     this.taldeakService.getList().subscribe(teams => {
       this.teams = teams;
     });
+    this.initGraphSettings();
     this.route.queryParams.subscribe((params) => {
       this.year = sanitizeYear(params.year) || '2019';
       this.league = sanitizeLeague(params.league) || 'act';
       this.chart = sanitizeChart(params.chart) || 'general_rank';
-      this.initGraphSettings();
-      this.form = this.fb.group({
-        'league': [this.league],
-        'year': [this.year],
-        'chart': [this.chart],
-        'team': [this.team]
+      this.form.patchValue({
+        league: this.league,
+        year: this.year,
+        chart: this.chart,
       });
       this.updateChart();
     });

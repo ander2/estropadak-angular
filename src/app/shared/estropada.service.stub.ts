@@ -219,7 +219,10 @@ export class EstropadaServiceStub {
 export class SailkapenaServiceStub {
 
   getOne(liga, year) {
-    return of({
+    return of([{
+      "id": "rank_ACT_2017",
+      "urtea": 2017,
+      "stats": {
       "Tiran": {
         "position": 7,
         "points": 93,
@@ -768,7 +771,8 @@ export class SailkapenaServiceStub {
           7
         ]
       }
-    });
+    }
+    }]);
   }
 }
 
