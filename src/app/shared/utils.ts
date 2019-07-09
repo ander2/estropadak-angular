@@ -1,4 +1,7 @@
 export function sanitizeYear(year: string) {
+    if (!year) {
+        return undefined;
+    }
     const _year = parseInt(year, 10);
     if (_year > 2008 && _year < 2020) {
         return String(year);
@@ -8,6 +11,9 @@ export function sanitizeYear(year: string) {
 }
 
 export function sanitizeLeague(league: string) {
+    if (!league) {
+        return undefined;
+    }
     league = league.toLowerCase();
     const _leagues = ['act', 'arc1', 'arc2', 'euskotren', 'ete'];
     if (_leagues.indexOf(league) > -1) {
@@ -18,6 +24,9 @@ export function sanitizeLeague(league: string) {
 };
 
 export function sanitizeChart(chart: string) {
+    if (!chart) {
+        return undefined;
+    }
     const _charts = ['general_rank', 'points_per_race', 'points_total',
         'tpoints_per_race', 'tpoints_total', 'trank'];
     if (_charts.indexOf(chart) > -1) {

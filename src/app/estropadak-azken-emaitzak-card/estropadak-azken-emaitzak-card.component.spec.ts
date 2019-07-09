@@ -44,9 +44,9 @@ describe('EstropadakAzkenEmaitzakCardComponent', () => {
     expect(component.estropadak.length).toEqual(2);
   });
 
-  it('should return all teams (12) for every estropadak', () => {
+  it('should return four teams for every estropadak', () => {
     component.estropadak.forEach((e: Estropada) => {
-      expect(e.sailkapena.length).toEqual(12);
+      expect(e.sailkapena.length).toEqual(4);
     });
   });
 });
