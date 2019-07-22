@@ -1,14 +1,18 @@
-<div>
-  <div>
+<div fxLayout="column">
+  <div fxFlex>
     <app-estropadak-azken-emaitzak-card [year]="year" [league]="'ACT'"></app-estropadak-azken-emaitzak-card>
   </div>
-  <div fxLayout fxLayout.xs="column" fxLayoutAlign="space-around start" fxLayoutAlign.xs="start strectch">
-    <div >
-      <h2>Sailkapen nagusia</h2>
+  <div fxLayout fxLayout.xs="column">
+    <div fxFlex="50%" fxFlex.xs class="box">
+      <mat-toolbar>
+        Sailkapen nagusia
+      </mat-toolbar>
       <app-estropadak-sailkapena [year]="year" [league]="'ACT'" [showTitle]="'false'"></app-estropadak-sailkapena>
     </div>
-    <div >
-      <h2>Hurrengo estropadak</h2>
+    <div fxFlex="50%" fxFlex.xs class="box">
+      <mat-toolbar>
+        <h2>Hurrengo estropadak</h2>
+      </mat-toolbar>
       <app-estropadak-hurrengoak-card [year]="year" [league]="'ACT'"></app-estropadak-hurrengoak-card>
     </div>
   </div>
