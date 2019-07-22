@@ -8,3 +8,7 @@ h2 {text-align: left}
   flex: 1 0 auto;
   justify-content: flex-end;
 }
+
+.box {
+  padding: 0 10px;
+}

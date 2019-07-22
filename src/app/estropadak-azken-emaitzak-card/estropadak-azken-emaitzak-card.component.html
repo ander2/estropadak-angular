@@ -1,4 +1,4 @@
-<h2>Azken estropada emaitzak</h2>
+<h2> Azken estropada emaitzak </h2>
 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" (change)="onChangeLeague($event)">
   <mat-button-toggle value="ACT" [checked]="league.toUpperCase() === 'ACT'">ACT</mat-button-toggle>
   <mat-button-toggle value="ARC1" [checked]="league.toUpperCase() === 'ARC1'">ARC1</mat-button-toggle>
@@ -7,12 +7,12 @@
   <mat-button-toggle value="ETE" [checked]="league.toUpperCase() === 'ETE'">ETE</mat-button-toggle>
 </mat-button-toggle-group>
 
-<div fxLayoutAlign="space-around center" fxLayout.xs="column">
-  <div fxFlex="45" *ngFor="let estropada of this.estropadak; let i=index">
-    <h3>
-      <a [routerLink]="['/estropada', estropada.id]">{{estropada.izena}}</a>
-    </h3>
-    <p>{{estropada.data}}</p>
+<div fxLayout fxLayout.xs="column">
+  <div fxFlex fxFlex.xs="50%" *ngFor="let estropada of this.estropadak; let i=index" class="box">
+    <mat-toolbar>
+      {{estropada.izena}}
+    </mat-toolbar>
+    <p>{{estropada.data}} {{estropada.lekua}}</p>
     <mat-table #table [dataSource]="i==0?dataSource:dataSource2">
       <!-- <ng-container matColumnDef="Postua">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
