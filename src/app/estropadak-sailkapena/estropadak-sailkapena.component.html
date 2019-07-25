@@ -1,4 +1,6 @@
-<h2 class="mat-title" *ngIf="showTitle === true">Liga sailkapena</h2>
+<mat-toolbar *ngIf="showTitle === true">
+    Liga sailkapena
+</mat-toolbar>
 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" (change)="onChangeLeague($event)" *ngIf="showTitle !== true">
   <mat-button-toggle value="ACT" [checked]="league.toUpperCase() === 'ACT'">ACT</mat-button-toggle>
   <mat-button-toggle value="ARC1" [checked]="league.toUpperCase() === 'ARC1'">ARC1</mat-button-toggle>
@@ -9,23 +11,23 @@
 <ng-container *ngIf="sailkapena; else no_sailkapena">
   <mat-table #table [dataSource]="dataSource">
       <ng-container matColumnDef="Posizioa">
-        <mat-header-cell *matHeaderCellDef> Posizioa </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.position}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.position}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="Taldea">
-        <mat-header-cell *matHeaderCellDef> Taldea </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.izena}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef>Taldea</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.izena}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="Puntuak">
-        <mat-header-cell *matHeaderCellDef> Puntuak </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.points}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef>Puntuak</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.points}}</mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="Banderak">
-        <mat-header-cell *matHeaderCellDef> Banderak </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.wins}} </mat-cell>
+      <ng-container matColumnDef="Garaipenak">
+        <mat-header-cell *matHeaderCellDef>Garaipenak</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.wins}}</mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
