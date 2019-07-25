@@ -1,7 +1,11 @@
+.mat-column-Posizioa {
+  flex: 0 1 20px;
+}
+
 .mat-column-Puntuak {
   justify-content: flex-end;
 }
 
-.mat-column-Banderak {
+.mat-column-Garaipenak {
   justify-content: flex-end;
 }
