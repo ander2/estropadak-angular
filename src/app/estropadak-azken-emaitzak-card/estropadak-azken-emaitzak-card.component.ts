@@ -58,6 +58,7 @@ export class EstropadakAzkenEmaitzakCardComponent implements OnInit, OnChanges {
       .subscribe((estropadak: Estropada[]) => {
         this.estropadak = estropadak
         .filter((estropada: Estropada) => moment(estropada.data) <= date)
+        .filter((estropada: Estropada) => estropada.sailkapena && estropada.sailkapena.length)
         .reverse()
         .filter((estropada: Estropada, index) => index <= 1)
         .map((estropada: Estropada) => {

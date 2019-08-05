@@ -4,9 +4,10 @@
 }
 
 .box {
-    color: white;
+  padding: 10px;
 }
 
 .box-white{
     background-color: #ffffff;
 }
+
