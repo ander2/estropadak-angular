@@ -1,4 +1,4 @@
-<mat-button-toggle-group name="fontStyle" aria-label="Font Style" (change)="onChangeLeague($event)">
+<mat-button-toggle-group name="fontStyle" aria-label="Font Style" (change)="onChangeLeague($event)" class="box">
   <mat-button-toggle value="ACT" [checked]="league.toUpperCase() === 'ACT'">ACT</mat-button-toggle>
   <mat-button-toggle value="ARC1" [checked]="league.toUpperCase() === 'ARC1'">ARC1</mat-button-toggle>
   <mat-button-toggle value="ARC2" [checked]="league.toUpperCase() === 'ARC2'">ARC2</mat-button-toggle>
@@ -12,7 +12,7 @@
          {{estropada.izena}}
       </a>
     </h3>
-    <p matLine> {{estropada.data}} </p>
+    <p matLine>{{estropada.data}} {{estropada.lekua}}</p>
   </mat-list-item>
 </mat-list>
 <mat-list *ngIf="estropadak.length === 0">

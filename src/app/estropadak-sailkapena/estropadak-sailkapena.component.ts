@@ -24,7 +24,7 @@ export class EstropadakSailkapenaComponent implements OnChanges {
   }
   sailkapena: Stats;
 
-  displayedColumns = ['Posizioa', 'Taldea', 'Puntuak', 'Banderak'];
+  displayedColumns = ['Posizioa', 'Taldea', 'Puntuak', 'Garaipenak'];
   dataSource;
 
   constructor(
