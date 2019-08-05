@@ -9,3 +9,7 @@
 .mat-column-Garaipenak {
   justify-content: flex-end;
 }
+
+.box {
+  margin: 10px 0
+}

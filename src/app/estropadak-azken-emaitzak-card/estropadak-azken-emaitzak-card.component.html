@@ -1,4 +1,6 @@
-<h2> Azken estropada emaitzak </h2>
+<mat-card>
+<mat-card-title> Azken estropada emaitzak </mat-card-title>
+<mat-card-content>
 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" (change)="onChangeLeague($event)">
   <mat-button-toggle value="ACT" [checked]="league.toUpperCase() === 'ACT'">ACT</mat-button-toggle>
   <mat-button-toggle value="ARC1" [checked]="league.toUpperCase() === 'ARC1'">ARC1</mat-button-toggle>
@@ -42,3 +44,4 @@
     </p>
   </div>
 </div>
+</mat-card-content></mat-card>
