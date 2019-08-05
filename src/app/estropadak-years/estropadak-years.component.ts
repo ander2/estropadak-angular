@@ -21,7 +21,7 @@ export class EstropadakYearsComponent implements OnInit {
     this.urteakService.getList().subscribe((res) => {
       const liga = this.league.toLowerCase();
       if (res[liga]) {
-        this.years = res[liga];
+        this.years = res[liga].sort((a,b) => b - a);
       }
     });
   }
