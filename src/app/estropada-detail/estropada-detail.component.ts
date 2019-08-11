@@ -52,7 +52,8 @@ export class EstropadaDetailComponent implements OnInit {
         lekua: estropada.lekua,
         data: estropada.data,
         tandak: tandak,
-        sailkapena: sailkapena
+        sailkapena: sailkapena,
+        oharrak: estropada.oharrak
       };
     });
   }
