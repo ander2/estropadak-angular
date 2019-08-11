@@ -20,5 +20,5 @@ export class Estropada {
   urla: string;
   sailkapena: TaldeSailkapena[];
   puntuagarria?: boolean;
-  oharra?: string;
+  oharrak?: string;
 }
