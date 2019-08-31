@@ -41,6 +41,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
   rank: any = [];
   cumulative: any = [];
   estropadak: string[] = [];
+  ages: any = [];
   allEstropadak: {[key: string]: any[]}
   chartData: any;
   charts: {[key: string]: any[]};
@@ -101,6 +102,10 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
         {
           name: 'Sailkapen orokorra',
           value: 'general_rank'
+        },
+        {
+          name: 'Arraunlarien adina',
+          value: 'ages'
         }
       ],
       taldea: [
@@ -115,6 +120,10 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
         {
           name: 'Sailkapen orokorra',
           value: 'trank'
+        },
+        {
+          name: 'Arraunlarien adina',
+          value: 'tages'
         }
       ]
     };
@@ -186,7 +195,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
         xAxis: {
           axisLabel: 'Taldeak',
         },
-        staggerLabels: true,
+        staggerLabels: false,
         yAxis: {
           axisLabel: 'Puntuak',
           tickFormat: d3.format('d'),
@@ -259,6 +268,13 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
     } else if (chartType === 'rank') {
       this.chartData = this.rank;
       this.options = this.lineChartReversedOptions;
+    } else if (chartType === 'ages') {
+      this.chartData = this.ages;
+      this.options = this.discreteBarChartOptions;
+      this.options.chart.type = 'multiBarChart';
+      this.options.chart.yAxis.axisLabel = 'Urteak';
+      this.options.chart.reduceXTicks = false;
+      this.options.chart.xAxis.staggerLabels = true;
     } else {
       this.chartData = this.cumulative;
       this.options = this.lineChartOptions;
@@ -309,6 +325,11 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
       this.rank = res;
       this.changeChart();
     });
+    this.statsService.getAges(league, parseInt(year, 10))
+    .subscribe( res => {
+      this.ages = res;
+      this.changeChart();
+    });
   }
 
   loadTeamData(league: string, team: string) {
@@ -325,6 +346,11 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
     this.statsService.getTeamRank(league, team)
     .subscribe( res => {
       this.rank = res;
+      this.changeChart();
+    });
+    this.statsService.getAges(league, undefined, team)
+    .subscribe( res => {
+      this.ages = res;
       this.changeChart();
     });
   }

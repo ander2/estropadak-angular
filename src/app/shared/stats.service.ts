@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
-import {map, tap} from 'rxjs/operators';
+import {map, tap } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 
@@ -140,6 +140,65 @@ export class StatsService {
                       }))
                       .sort((a, b) => b.value - a.value)
       }]
+    }));
+  }
+
+  getAges(league: string, year?: number, team?: string) {
+    const params = {league, year, team};
+
+    return this.http.get(`${estropadakUrl}sailkapena`, {params})
+    .pipe(map(res => res.json()))
+    .pipe(map(res => {
+      if (team) {
+        res = res.filter(u => u.stats[team].age);
+        return [{
+          key: 'Min',
+          // color: this.teamColors(team),
+          values: res.map((stat, i) => ({
+            label: stat.urtea,
+            value: stat.stats[team].age ? stat.stats[team].age.min_age : 0
+          }))
+        }, {
+          key: 'Media',
+          // color: this.teamColors(team),
+          values: res.map((stat, i) => ({
+            label: stat.urtea,
+            value: stat.stats[team].age ? stat.stats[team].age.avg_age : 0
+          }))
+        }, {
+          key: 'Max',
+          // color: this.teamColors(team),
+          values: res.map((stat, i) => ({
+            label: stat.urtea,
+            value: stat.stats[team].age ? stat.stats[team].age.max_age : 0
+          }))
+        }]
+      } else {
+        const stats = res[0].stats;
+        return [{
+          key: 'Min',
+          values: 
+            Object.keys(stats)
+                  .map((teamName) => ({
+                    label: teamName,
+                    value: stats[teamName].age ? parseInt(stats[teamName].age.min_age, 10) : 0
+                  }))
+        }, {
+          key: 'Media',
+          values: Object.keys(stats)
+                  .map((teamName) => ({
+                    label: teamName,
+                    value: stats[teamName].age ? stats[teamName].age.avg_age : 0
+                  }))
+        }, {
+          key: 'Max',
+          values: Object.keys(stats)
+                  .map((teamName) => ({
+                    label: teamName,
+                    value: stats[teamName].age ? parseInt(stats[teamName].age.max_age, 10) : 0
+                  }))
+        }];
+      }
     }));
   }
 
