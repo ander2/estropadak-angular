@@ -202,4 +202,30 @@ export class StatsService {
     }));
   }
 
+
+  getIncorporations(league: string, year?: number, team?: string) {
+    const params = {league, year, team};
+
+    return this.http.get(`${estropadakUrl}sailkapena`, {params})
+    .pipe(map(res => res.json()))
+    .pipe(map(res => res[0].stats))
+    .pipe(map(stats => {
+        return [{
+          key: 'Bajak',
+          values: Object.keys(stats)
+                  .map((teamName) => ({
+                    label: teamName,
+                    value: stats[teamName].rowers ? stats[teamName].rowers.bajak : 0
+                  }))
+        }, {
+          key: 'Altak',
+          values: Object.keys(stats)
+                  .map((teamName) => ({
+                    label: teamName,
+                    value: stats[teamName].rowers ? stats[teamName].rowers.altak : 0
+                  }))
+        }];
+    }));
+  }
+
 }

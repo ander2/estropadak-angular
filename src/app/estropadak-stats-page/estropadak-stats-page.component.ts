@@ -42,6 +42,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
   cumulative: any = [];
   estropadak: string[] = [];
   ages: any = [];
+  incorporations: any = [];
   allEstropadak: {[key: string]: any[]}
   chartData: any;
   charts: {[key: string]: any[]};
@@ -106,6 +107,9 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
         {
           name: 'Arraunlarien adina',
           value: 'ages'
+        },{
+          name: 'Arraunlarien alta eta bajak',
+          value: 'incorporations'
         }
       ],
       taldea: [
@@ -275,6 +279,13 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
       this.options.chart.yAxis.axisLabel = 'Urteak';
       this.options.chart.reduceXTicks = false;
       this.options.chart.xAxis.staggerLabels = true;
+    } else if (chartType === 'incorporations') {
+      this.chartData = this.incorporations;
+      this.options = this.discreteBarChartOptions;
+      this.options.chart.type = 'multiBarChart';
+      this.options.chart.yAxis.axisLabel = 'Urteak';
+      this.options.chart.reduceXTicks = false;
+      this.options.chart.xAxis.staggerLabels = true;
     } else {
       this.chartData = this.cumulative;
       this.options = this.lineChartOptions;
@@ -328,6 +339,11 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
     this.statsService.getAges(league, parseInt(year, 10))
     .subscribe( res => {
       this.ages = res;
+      this.changeChart();
+    });
+    this.statsService.getIncorporations(league, parseInt(year, 10))
+    .subscribe( res => {
+      this.incorporations = res;
       this.changeChart();
     });
   }
