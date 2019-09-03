@@ -28,7 +28,8 @@ export function sanitizeChart(chart: string) {
         return undefined;
     }
     const _charts = ['general_rank', 'points_per_race', 'points_total',
-        'tpoints_per_race', 'tpoints_total', 'trank'];
+                     'tpoints_per_race', 'tpoints_total', 'trank',
+                     'ages', 'tages', 'incorporations'];
     if (_charts.indexOf(chart) > -1) {
         return chart;
     } else {
