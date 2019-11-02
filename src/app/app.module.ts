@@ -19,11 +19,15 @@ import {
 
 // provider
 import { HttpModule } from '@angular/http';
-import { EstropadaService, UrteakService, SailkapenaService, EmaitzakService } from './shared/estropada.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Routes, RouterModule} from '@angular/router';
+
+import { NvD3Module } from 'ng2-nvd3';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppComponent } from './app.component';
 
-import { Routes, RouterModule} from '@angular/router';
+import { EstropadaService, UrteakService, SailkapenaService, EmaitzakService } from './shared/estropada.service';
 import { EstropadakListComponent } from './estropadak-list/estropadak-list.component';
 import { EstropadaDetailComponent } from './estropada-detail/estropada-detail.component';
 import { EstropadaTandaComponent } from './estropada-tanda/estropada-tanda.component';
@@ -32,20 +36,18 @@ import { EstropadakSailkapenaComponent } from './estropadak-sailkapena/estropada
 import { EstropadakPortadaComponent } from './estropadak-portada/estropadak-portada.component';
 import { EstropadakPageComponent } from './estropadak-page/estropadak-page.component';
 import { EstropadaEstropadaSailkapenaComponent } from './estropada-estropada-sailkapena/estropada-estropada-sailkapena.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { EstropadakHoniBuruzComponent } from './estropadak-honi-buruz/estropadak-honi-buruz.component';
 import { EstropadakStatsComponent } from './estropadak-stats/estropadak-stats.component';
-import { NvD3Module } from 'ng2-nvd3';
 import { EstropadakYearsComponent } from './estropadak-years/estropadak-years.component';
 import { EstropadaNavegationComponent } from './estropada-navegation/estropada-navegation.component';
 import { EstropadakNavegationService } from './shared/estropadak-navegation.service';
 import { EstropadakHurrengoakCardComponent } from './estropadak-hurrengoak-card/estropadak-hurrengoak-card.component';
 import { EstropadakAzkenEmaitzakCardComponent } from './estropadak-azken-emaitzak-card/estropadak-azken-emaitzak-card.component';
 import { EstropadakStatsPageComponent } from './estropadak-stats-page/estropadak-stats-page.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TaldeakService } from './shared/taldeak.service';
 import { StatsService } from './shared/stats.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { EstropadakResultsComponent } from './estropadak-results/estropadak-results.component';
 
 
 
@@ -74,6 +76,10 @@ const routes: Routes = [
     path: 'estatistikak',
     component: EstropadakStatsPageComponent
   },
+  {
+    path: 'estropadak/:league/:year/:team',
+    component: EstropadakResultsComponent
+  },
   { path: '**', component: PageNotFoundComponent }
 
 ];
@@ -96,6 +102,7 @@ const routes: Routes = [
     EstropadakHurrengoakCardComponent,
     EstropadakAzkenEmaitzakCardComponent,
     EstropadakStatsPageComponent,
+    EstropadakResultsComponent,
     PageNotFoundComponent,
   ],
   imports: [
