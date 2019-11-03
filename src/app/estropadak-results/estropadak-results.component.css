@@ -1,0 +1,32 @@
+.mat-column-Data {
+  justify-content: center;
+  flex: 0 0 90px;
+}
+
+.mat-column-Posizioa {
+  justify-content: center;
+  flex: 0 0 60px;
+}
+
+.mat-column-Puntuak {
+  justify-content: center;
+  flex: 0 0 60px;
+}
+
+
+/* offsets the header by the same amount of size/padding the sort button occupies */
+.mat-sort-header-container {
+  margin-left: 18px;
+}
+
+.mat-row, .mat-header-row {
+  border-bottom-width: 1px;
+}
+
+table {
+  width: 100%;
+}
+
+mat-table {
+  overflow-x: scroll;
+}

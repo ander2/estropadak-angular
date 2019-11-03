@@ -68,9 +68,12 @@ export class EmaitzakService {
 
     constructor(private http: Http) { }
 
-    getList(league: string, year: string) {
+    getList(league: string, year: string, team?: string) {
         const endpoint = `${estropadakUrl}emaitzak`;
         const params = {league, year};
+        if (team) {
+            params['team'] = team;
+        }
         return this.http.get(endpoint, {params})
             .pipe(map(res => res.json()));
     }
