@@ -1,3 +1,48 @@
-<p>
-  {{team}} emaitzak {{league}} {{year}}
-</p>
+<div>
+  <mat-toolbar>{{team}} estropada emaitzak: {{league | uppercase}} {{year}} urtea</mat-toolbar>
+</div>
+
+<mat-table #table [dataSource]="dataSource">
+  <ng-container matColumnDef="Data">
+    <mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.data | date: 'yyyy/MM/dd'}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Estropada">
+    <mat-header-cell *matHeaderCellDef>Estropada</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <a [routerLink]="['/estropada', row.id]">
+        {{row.izena}}
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Posizioa">
+    <mat-header-cell *matHeaderCellDef>Posizioa</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.position}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Puntuak">
+    <mat-header-cell *matHeaderCellDef>Puntuak</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.points}}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<div>
+  <ul>
+    <li *ngFor="let res of results">
+      [{{res['data']}}] {{res['izena']}} 
+      <span *ngIf="res['sailkapena'].length > 0">
+        {{res['sailkapena'][0]['tanda']}}
+      </span>
+      <span *ngIf="res['sailkapena'].length > 0">
+        {{res['sailkapena'][0]['posizioa']}}
+      </span>
+      <span *ngIf="res['sailkapena'].length > 0">
+        {{res['sailkapena'][0]['puntuazioa']}}
+      </span>
+    </li>
+  </ul>
+</div>
