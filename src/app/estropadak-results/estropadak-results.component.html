@@ -9,7 +9,6 @@
   >
 </app-estropadak-selection-form>
 <div fxLayout fxLayout.xs="column" fxLayoutAlign="center start">
-  <div fxFlex="75%" fxFlex.xs>
 <mat-table #table [dataSource]="dataSource" matSort>
   <ng-container matColumnDef="data">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
@@ -43,5 +42,4 @@
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
-</div>
 </div>

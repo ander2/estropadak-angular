@@ -1,19 +1,19 @@
-.mat-column-Data {
+.mat-column-data {
   justify-content: center;
   flex: 0 0 90px;
 }
 
-.mat-column-Posizioa {
+.mat-column-position {
   justify-content: center;
-  flex: 0 0 60px;
+  flex: 0 0 70px;
 }
 
-.mat-column-Puntuak {
+.mat-column-points {
   justify-content: center;
-  flex: 0 0 60px;
+  flex: 0 0 70px;
 }
 
-.mat-column-Denbora {
+.mat-column-denbora {
   justify-content: center;
 }
 
@@ -26,7 +26,7 @@
   border-bottom-width: 1px;
 }
 
-table {
+.mat-table {
   width: 100%;
 }
 
