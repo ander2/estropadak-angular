@@ -72,9 +72,6 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
       this.leagues = Object.keys(years).sort();
       this.updateYears();
     });
-    this.taldeakService.getList().subscribe(teams => {
-      this.teams = teams;
-    });
     this.initGraphSettings();
     this.route.queryParams.subscribe((params) => {
       this.year = sanitizeYear(params.year) || '2019';
@@ -85,6 +82,10 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
         year: this.year,
         chart: this.chart,
       });
+      this.taldeakService.getList(this.league, this.year)
+        .subscribe(teams => {
+          this.teams = teams.map(t => t.name);
+        });
       this.updateChart();
     });
   }
@@ -315,7 +316,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
 
   updateYears() {
     const league = this.form.get('league').value;
-    this.taldeakService.getList(league)
+    this.taldeakService.getList(league, this.year)
     .subscribe( res => this.teams = res);
     this.years = this.allYears[league].sort((a, b) => b - a);
   }
