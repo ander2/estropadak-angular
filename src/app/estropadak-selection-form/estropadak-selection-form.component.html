@@ -20,8 +20,8 @@
     <mat-form-field>
       <mat-select formControlName="team" placeholder="Taldea" (selectionChange)="teamChange()">
         <mat-option [value]="">Guztiak</mat-option>
-        <mat-option *ngFor="let team of teams" [value]="team.name">
-          {{team.name}}
+        <mat-option *ngFor="let team of teams" [value]="team">
+          {{team}}
         </mat-option>
       </mat-select>
     </mat-form-field>
