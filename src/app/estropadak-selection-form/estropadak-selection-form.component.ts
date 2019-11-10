@@ -76,8 +76,7 @@ export class EstropadakSelectionFormComponent implements OnInit {
     const league = this.form.get('league').value;
 
     this.taldeakService.getList(league, year).subscribe(res => {
-      console.log(res);
-      this.teams = res;
+      this.teams = res.map(t => t.name).sort();
     });
   }
 
