@@ -49,7 +49,8 @@ export class EstropadakResultsComponent implements OnInit {
             emaitza.denbora = undefined;
           }
           return emaitza;
-        });
+        })
+        .filter(emaitza => emaitza.position !== undefined);
         this.dataSource = new EstropadaDataSource(emaitzak)
         this.dataSource.sort = this.sort;
     });

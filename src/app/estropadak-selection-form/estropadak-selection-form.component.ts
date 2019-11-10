@@ -42,9 +42,10 @@ export class EstropadakSelectionFormComponent implements OnInit {
       this.leagues = Object.keys(years).sort();
       this.updateYears();
     });
-    this.taldeakService.getList(this.league, this.year).subscribe(teams => {
-      this.teams = teams;
-    });
+    this.taldeakService.getList(this.league, this.year)
+      .subscribe(teams => {
+        this.teams = teams.map(t => t.name).sort();
+      });
   }
 
   updateYears() {
