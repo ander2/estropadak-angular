@@ -1,0 +1,30 @@
+<form [formGroup]="form" novalidate>
+  <mat-form-field>
+    <mat-select formControlName="league" placeholder="Liga" (selectionChange)="updateYearsAndRefresh()">
+      <mat-option *ngFor="let league of leagues" [value]="league">
+        {{league | uppercase}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <ng-container *ngIf="showYears">
+    <mat-form-field>
+      <mat-select formControlName="year" placeholder="Urtea" (selectionChange)="yearChange()">
+        <mat-option [value]="">Guztiak</mat-option>
+        <mat-option *ngFor="let year of years" [value]="year">
+          {{year}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </ng-container> 
+  <ng-container *ngIf="showTeams">
+    <mat-form-field>
+      <mat-select formControlName="team" placeholder="Taldea" (selectionChange)="teamChange()">
+        <mat-option [value]="">Guztiak</mat-option>
+        <mat-option *ngFor="let team of teams" [value]="team.name">
+          {{team.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </ng-container> 
+  <button mat-button (click)="teamSelected()">Aukeratu</button>
+</form>
