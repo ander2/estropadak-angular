@@ -17,7 +17,12 @@
 
       <ng-container matColumnDef="Taldea">
         <mat-header-cell *matHeaderCellDef>Taldea</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.izena}}</mat-cell>
+        <mat-cell *matCellDef="let row">
+          {{row.izena}}
+          <a [routerLink]="['/estropadak', league, year, row.izena]">
+            <mat-icon>arrow_right</mat-icon>
+          </a>
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="Puntuak">

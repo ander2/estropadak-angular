@@ -1,0 +1,45 @@
+<div>
+  <mat-toolbar>{{team}} estropada emaitzak: {{league | uppercase}} {{year}} urtea</mat-toolbar>
+</div>
+<app-estropadak-selection-form 
+  [year]="year" 
+  [league]="league" 
+  [team]="team"
+  (teamChanged)="paramsChanged($event)"
+  >
+</app-estropadak-selection-form>
+<div fxLayout fxLayout.xs="column" fxLayoutAlign="center start">
+<mat-table #table [dataSource]="dataSource" matSort>
+  <ng-container matColumnDef="data">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.data | date: 'yyyy/MM/dd'}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Estropada">
+    <mat-header-cell *matHeaderCellDef>Estropada</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <a [routerLink]="['/estropada', row.id]">
+        {{row.izena}}
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="position">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Posizioa</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.position}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="points">
+    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs>Puntuak</mat-header-cell>
+    <mat-cell *matCellDef="let row" fxHide.xs>{{row.points}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="denbora">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Denbora</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.denbora}}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+</div>
