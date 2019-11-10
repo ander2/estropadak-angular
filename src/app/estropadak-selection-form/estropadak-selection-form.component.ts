@@ -33,7 +33,7 @@ export class EstropadakSelectionFormComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      league: [this.league, Validators.required],
+      league: [this.league.toLowerCase(), Validators.required],
       year: [this.year, Validators.required],
       team: [this.team, Validators.required]
     });
@@ -49,7 +49,10 @@ export class EstropadakSelectionFormComponent implements OnInit {
   }
 
   updateYears() {
-    const league = this.form.get('league').value;
+    let league = this.form.get('league').value;
+    if (league) {
+      league = league.toLowerCase();
+    }
     const year = this.form.get('year').value;
     this.years = this.allYears[league].sort((a, b) => b - a);
   }
