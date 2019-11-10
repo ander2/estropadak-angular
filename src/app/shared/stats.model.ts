@@ -11,3 +11,9 @@ export class Stat {
 export class Stats {
   [key: string]: Stat;
 }
+
+export class SeasonTeamSelection {
+  league: string;
+  year: number;
+  team: string;
+}
