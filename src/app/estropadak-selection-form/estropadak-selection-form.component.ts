@@ -55,6 +55,7 @@ export class EstropadakSelectionFormComponent implements OnInit {
     }
     const year = this.form.get('year').value;
     this.years = this.allYears[league].sort((a, b) => b - a);
+    this.yearChange();
   }
 
   updateYearsAndRefresh() {
