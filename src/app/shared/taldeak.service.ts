@@ -14,9 +14,12 @@ export class TaldeakService {
 
   getList(league?: string, year?: string): Observable<any> {
       const endpoint = `${estropadakUrl}taldeak`;
-      const params = {league};
+      const params = {
+        league,
+        year
+      };
       return this.http.get(endpoint, {params})
-          .pipe(map(res => res.json()))
-          .pipe(map(res => res.filter(it => /^[A-Z]/.test(it))))
+          .pipe(map(res => res.json()));
+          // .pipe(map(res => res.filter(it => /^[A-Z]/.test(it))))
   }
 }

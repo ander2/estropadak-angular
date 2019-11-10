@@ -1,10 +1,18 @@
 <div>
   <mat-toolbar>{{team}} estropada emaitzak: {{league | uppercase}} {{year}} urtea</mat-toolbar>
 </div>
-
-<mat-table #table [dataSource]="dataSource">
-  <ng-container matColumnDef="Data">
-    <mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
+<app-estropadak-selection-form 
+  [year]="year" 
+  [league]="league" 
+  [team]="team"
+  (teamChanged)="paramsChanged($event)"
+  >
+</app-estropadak-selection-form>
+<div fxLayout fxLayout.xs="column" fxLayoutAlign="center start">
+  <div fxFlex="75%" fxFlex.xs>
+<mat-table #table [dataSource]="dataSource" matSort>
+  <ng-container matColumnDef="data">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
     <mat-cell *matCellDef="let row">{{row.data | date: 'yyyy/MM/dd'}}</mat-cell>
   </ng-container>
 
@@ -17,32 +25,23 @@
     </mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="Posizioa">
-    <mat-header-cell *matHeaderCellDef>Posizioa</mat-header-cell>
+  <ng-container matColumnDef="position">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Posizioa</mat-header-cell>
     <mat-cell *matCellDef="let row">{{row.position}}</mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="Puntuak">
-    <mat-header-cell *matHeaderCellDef>Puntuak</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.points}}</mat-cell>
+  <ng-container matColumnDef="points">
+    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs>Puntuak</mat-header-cell>
+    <mat-cell *matCellDef="let row" fxHide.xs>{{row.points}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="denbora">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Denbora</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.denbora}}</mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
-<div>
-  <ul>
-    <li *ngFor="let res of results">
-      [{{res['data']}}] {{res['izena']}} 
-      <span *ngIf="res['sailkapena'].length > 0">
-        {{res['sailkapena'][0]['tanda']}}
-      </span>
-      <span *ngIf="res['sailkapena'].length > 0">
-        {{res['sailkapena'][0]['posizioa']}}
-      </span>
-      <span *ngIf="res['sailkapena'].length > 0">
-        {{res['sailkapena'][0]['puntuazioa']}}
-      </span>
-    </li>
-  </ul>
+</div>
 </div>
