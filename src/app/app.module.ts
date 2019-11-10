@@ -14,7 +14,8 @@ import {
   MatCardModule,
   MatButtonToggleModule,
   MatFormFieldModule,
-  MatSelectModule
+  MatSelectModule,
+  MatSortModule
 } from '@angular/material';
 
 // provider
@@ -48,6 +49,7 @@ import { TaldeakService } from './shared/taldeak.service';
 import { StatsService } from './shared/stats.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { EstropadakResultsComponent } from './estropadak-results/estropadak-results.component';
+import { EstropadakSelectionFormComponent } from './estropadak-selection-form/estropadak-selection-form.component';
 
 
 
@@ -104,6 +106,7 @@ const routes: Routes = [
     EstropadakStatsPageComponent,
     EstropadakResultsComponent,
     PageNotFoundComponent,
+    EstropadakSelectionFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -123,6 +126,7 @@ const routes: Routes = [
     MatToolbarModule,
     MatMenuModule,
     MatSidenavModule,
+    MatSortModule,
     NvD3Module,
     ReactiveFormsModule,
     RouterModule.forRoot(

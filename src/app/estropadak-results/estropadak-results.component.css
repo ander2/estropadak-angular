@@ -13,6 +13,9 @@
   flex: 0 0 60px;
 }
 
+.mat-column-Denbora {
+  justify-content: center;
+}
 
 /* offsets the header by the same amount of size/padding the sort button occupies */
 .mat-sort-header-container {
