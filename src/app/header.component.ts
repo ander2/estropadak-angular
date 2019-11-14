@@ -32,4 +32,8 @@ export class HeaderComponent implements OnInit {
   goToEstatistikak() {
     this.router.navigate(['estatistikak']);
   }
+
+  goToPlayground() {
+    this.router.navigate(['playground']);
+  }
 }
