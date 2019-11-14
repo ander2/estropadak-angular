@@ -50,6 +50,7 @@ import { StatsService } from './shared/stats.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { EstropadakResultsComponent } from './estropadak-results/estropadak-results.component';
 import { EstropadakSelectionFormComponent } from './estropadak-selection-form/estropadak-selection-form.component';
+import { EstropadakPlaygroundComponent } from './estropadak-playground/estropadak-playground.component';
 
 
 
@@ -82,6 +83,10 @@ const routes: Routes = [
     path: 'estropadak/:league/:year/:team',
     component: EstropadakResultsComponent
   },
+  {
+    path: 'playground',
+    component: EstropadakPlaygroundComponent
+  },
   { path: '**', component: PageNotFoundComponent }
 
 ];
@@ -107,6 +112,7 @@ const routes: Routes = [
     EstropadakResultsComponent,
     PageNotFoundComponent,
     EstropadakSelectionFormComponent,
+    EstropadakPlaygroundComponent,
   ],
   imports: [
     BrowserModule,
