@@ -6,6 +6,20 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <mat-form-field>
+    <mat-select formControlName="minVal" placeholder="Min" (selectionChange)="changeFilter()">
+      <mat-option *ngFor="let prop of values" [value]="prop">
+        {{prop}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select formControlName="maxVal" placeholder="Max" (selectionChange)="changeFilter()">
+      <mat-option *ngFor="let prop of values" [value]="prop">
+        {{prop}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </form>
 <div fxLayout fxLayout.xs="column" fxLayoutAlign="center start">
   <mat-table #table [dataSource]="dataSource" matSort>
@@ -13,7 +27,8 @@
       <mat-header-cell *matHeaderCellDef="let row">{{header}}</mat-header-cell>
       <mat-cell *matCellDef="let row">
         <span *ngIf="header === 'izena'">{{row.izena}}</span>
-        <span *ngIf="header !== 'izena'">{{row[header][displayProp]}}</span>
+        <span *ngIf="header !== 'izena' && row[header]">{{row[header][displayProp]}}</span>
+        <span *ngIf="header !== 'izena' && !row[header]"> - </span>
       </mat-cell>
     </ng-container>
 

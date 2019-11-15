@@ -18,6 +18,7 @@ export class EstropadakPlaygroundComponent implements OnInit {
   displayColumnHeaders = ['izena'];
   displayProp = 'posizioa';
   properties = ['posizioa', 'puntuazioa', 'tanda', 'tanda_postua', 'kalea', 'denbora'];
+  values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   taldeak = [];
   form;
 
@@ -29,7 +30,9 @@ export class EstropadakPlaygroundComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      property: [this.displayProp]
+      property: [this.displayProp],
+      minVal: [1],
+      maxVal: [12],
     });
     this.taldeakService.getList('ACT', '2019')
     .subscribe(res => {
@@ -59,7 +62,8 @@ export class EstropadakPlaygroundComponent implements OnInit {
             sailkapena[izena] = taldea;
           });
           return sailkapena;
-        }).filter(emaitza => emaitza !== null);
+        })
+        .filter(emaitza => emaitza !== null);
         this.dataSource = new PlaygroundDataSource(emaitzak)
     });
   }
@@ -67,6 +71,13 @@ export class EstropadakPlaygroundComponent implements OnInit {
   changeDisplayProp() {
     this.displayProp = this.form.get('property').value;
   }
+
+  changeFilter() {
+    this.dataSource.filterByValue(this.displayProp,
+       this.form.get('minVal').value,
+       this.form.get('maxVal').value);
+  }
+
 }
 
 class PlaygroundDataSource extends DataSource<any> {
@@ -102,5 +113,26 @@ class PlaygroundDataSource extends DataSource<any> {
     // return this.data;
   }
 
+  filterByValue(displayProp, minVal, maxVal) {
+    const emaitzaBerria = this.sailkapena.map(estropada => {
+      const d = {};
+      for (const teamName of Object.keys(estropada)) {
+        if (teamName !== 'izena') {
+          const result = Object.assign({}, estropada[teamName]);
+          if (result[displayProp]) {
+            if (result[displayProp] < minVal ||
+                result[displayProp] > maxVal) {
+                result[displayProp] = '-';
+            }
+          }
+          d[teamName] = result;
+        } else {
+          d[teamName] = estropada[teamName];
+        }
+      };
+      return d;
+    });
+    this.data.next(emaitzaBerria);
+  }
   disconnect() {}
 }
