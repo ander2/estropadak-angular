@@ -85,7 +85,7 @@ const routes: Routes = [
     component: EstropadakResultsComponent
   },
   {
-    path: 'playground',
+    path: 'jolastokia',
     component: EstropadakPlaygroundComponent
   },
   { path: '**', component: PageNotFoundComponent }
