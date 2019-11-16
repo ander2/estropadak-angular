@@ -51,6 +51,10 @@ export class EstropadakPlaygroundComponent implements OnInit {
     this.league = newParams.league;
     this.year = newParams.year;
     this.resetTable();
+    if (this.league === 'ete' || this.league === 'euskotren') {
+      this.form.get('minTime').setValue('11:00');
+      this.form.get('maxTime').setValue('13:00');
+    }
     this.taldeakService.getList(this.league, this.year)
     .subscribe(res => {
       this.taldeak = res;
