@@ -5,6 +5,7 @@ import { EmaitzakService } from 'app/shared/estropada.service';
 import { TaldeakService } from 'app/shared/taldeak.service';
 import { filter } from 'rxjs/operators';
 import { FormBuilder } from '@angular/forms';
+import { SeasonTeamSelection } from 'app/shared/stats.model';
 
 @Component({
   selector: 'app-estropadak-playground',
@@ -14,6 +15,8 @@ import { FormBuilder } from '@angular/forms';
 export class EstropadakPlaygroundComponent implements OnInit {
 
   public dataSource: any;
+  year = 2019;
+  league = 'ACT'
   displayedColumns = ['estropada'];
   displayColumnHeaders = ['izena'];
   displayProp = 'posizioa';
@@ -33,13 +36,31 @@ export class EstropadakPlaygroundComponent implements OnInit {
       property: [this.displayProp],
       minVal: [1],
       maxVal: [12],
+      minTime: ['19:00'],
+      maxTime: ['23:00'],
     });
-    this.taldeakService.getList('ACT', '2019')
+    this.taldeakService.getList(this.league, this.year)
     .subscribe(res => {
       this.taldeak = res;
       this.getEmaitzak('ACT', 2019);
       this.dataSource = new PlaygroundDataSource([]);
     });
+  }
+
+  paramsChanged(newParams: SeasonTeamSelection) {
+    this.league = newParams.league;
+    this.year = newParams.year;
+    this.resetTable();
+    this.taldeakService.getList(this.league, this.year)
+    .subscribe(res => {
+      this.taldeak = res;
+      this.getEmaitzak(newParams.league, newParams.year);
+    });
+  }
+
+  resetTable() {
+    this.displayColumnHeaders = ['izena'];
+    this.displayedColumns = ['estropada'];
   }
 
   getEmaitzak(league, year) {
@@ -73,9 +94,21 @@ export class EstropadakPlaygroundComponent implements OnInit {
   }
 
   changeFilter() {
-    this.dataSource.filterByValue(this.displayProp,
-       this.form.get('minVal').value,
-       this.form.get('maxVal').value);
+    let min;
+    let max;
+    if (this.displayProp === 'denbora') {
+      min = this.form.get('minTime').value
+      max = this.form.get('maxTime').value
+    } else {
+      min = this.form.get('minVal').value
+      max = this.form.get('maxVal').value
+    }
+    this.dataSource.filterByValue(this.displayProp, min, max);
+  }
+
+  removeCol(colName: string) {
+    console.log(`removing ${colName} col`);
+    this.displayColumnHeaders = this.displayColumnHeaders.filter(h => h !== colName);
   }
 
 }
