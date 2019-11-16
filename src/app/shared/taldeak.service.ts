@@ -12,7 +12,7 @@ export class TaldeakService {
 
   constructor(private http: Http) { }
 
-  getList(league?: string, year?: string): Observable<any> {
+  getList(league?: string, year?: number): Observable<any> {
       const endpoint = `${estropadakUrl}taldeak`;
       const params = {
         league,
