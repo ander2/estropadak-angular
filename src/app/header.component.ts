@@ -34,6 +34,6 @@ export class HeaderComponent implements OnInit {
   }
 
   goToPlayground() {
-    this.router.navigate(['playground']);
+    this.router.navigate(['jolastokia']);
   }
 }
