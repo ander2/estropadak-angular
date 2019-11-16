@@ -13,17 +13,19 @@ export class EstropadakSelectionFormComponent implements OnInit {
   @Input()
   league: string;
   @Input()
-  year: string;
+  year: number;
   @Input()
   team: string;
+  @Input()
+  showYears = true;
+  @Input()
+  showTeams = true;
   @Output()
-  teamChanged: EventEmitter<any> = new EventEmitter();
+  selectionChanged: EventEmitter<any> = new EventEmitter();
   form: FormGroup;
   leagues: string[];
   years: number[];
   teams: string[] = [];
-  showYears = true;
-  showTeams = true;
   allYears: {[key: string]: number[]};
   constructor(
     private fb: FormBuilder,
@@ -35,8 +37,12 @@ export class EstropadakSelectionFormComponent implements OnInit {
     this.form = this.fb.group({
       league: [this.league.toLowerCase(), Validators.required],
       year: [this.year, Validators.required],
-      team: [this.team, Validators.required]
+      team: [this.team]
     });
+    if (this.showTeams) {
+      this.form.get('team').setValidators(Validators.required);
+      this.form.get('team').updateValueAndValidity();
+    }
     this.yearService.getList().subscribe( years => {
       this.allYears = years;
       this.leagues = Object.keys(years).sort();
@@ -63,9 +69,9 @@ export class EstropadakSelectionFormComponent implements OnInit {
     this.form.get('year').setValue(this.years[0]);
   }
 
-  teamSelected() {
+  selectedData() {
     const values = this.form.getRawValue();
-    this.teamChanged.emit(values);
+    this.selectionChanged.emit(values);
   }
 
   teamChange() {
