@@ -8,7 +8,7 @@
   >
 </app-estropadak-selection-form>
 <form [formGroup]="form" novalidate>
-  <p>Aukeratu bistartu nahi duzun balio eta filtroak:</p>
+  <p>Aukeratu bistaratu nahi dituzun balio eta filtroak:</p>
   <mat-form-field>
     <mat-select formControlName="property" placeholder="Aukeratu bistaratzeko balioa" (selectionChange)="changeDisplayProp()">
       <mat-option *ngFor="let prop of properties" [value]="prop">
