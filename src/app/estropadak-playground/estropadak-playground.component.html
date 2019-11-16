@@ -1,0 +1,61 @@
+<mat-toolbar>Playground (beta)</mat-toolbar>
+<p>Aukeratu liga eta urtea:</p>
+<app-estropadak-selection-form 
+  [year]="year" 
+  [league]="league" 
+  [showTeams]="false"
+  (selectionChanged)="paramsChanged($event)"
+  >
+</app-estropadak-selection-form>
+<form [formGroup]="form" novalidate>
+  <p>Aukeratu bistaratu nahi dituzun balio eta filtroak:</p>
+  <mat-form-field>
+    <mat-select formControlName="property" placeholder="Aukeratu bistaratzeko balioa" (selectionChange)="changeDisplayProp()">
+      <mat-option *ngFor="let prop of properties" [value]="prop">
+        {{prop}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <ng-container *ngIf="displayProp !=='denbora'">
+  <mat-form-field>
+    <mat-select formControlName="minVal" placeholder="Min" (selectionChange)="changeFilter()">
+      <mat-option *ngFor="let prop of values" [value]="prop">
+        {{prop}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select formControlName="maxVal" placeholder="Max" (selectionChange)="changeFilter()">
+      <mat-option *ngFor="let prop of values" [value]="prop">
+        {{prop}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  </ng-container>
+  <ng-container *ngIf="displayProp ==='denbora'">
+  <mat-form-field>
+    <input matInput formControlName="minTime" placeholder="Denbora min">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="maxTime" placeholder="Denbora max">
+  </mat-form-field>
+  <button mat-button (click)="changeFilter()">Bilatu</button>
+  </ng-container>
+</form>
+  <mat-table #table [dataSource]="dataSource" matSort>
+    <ng-container *ngFor="let header of displayColumnHeaders;let i=index; " [matColumnDef]="header">
+      <mat-header-cell *matHeaderCellDef="let row">{{header}} 
+        <button mat-icon-button (click)="removeCol(header)" *ngIf="header !== 'izena'">
+          <mat-icon inline=true>cancel</mat-icon>
+        </button>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <span *ngIf="header === 'izena'">{{row.izena}}</span>
+        <span *ngIf="header !== 'izena' && row[header]">{{row[header][displayProp]}}</span>
+        <span *ngIf="header !== 'izena' && !row[header]"> - </span>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayColumnHeaders"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayColumnHeaders;"></mat-row>
+  </mat-table>
