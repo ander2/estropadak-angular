@@ -1,3 +1,5 @@
+<mat-toolbar>Playground (beta)</mat-toolbar>
+<p>Aukeratu liga eta urtea:</p>
 <app-estropadak-selection-form 
   [year]="year" 
   [league]="league" 
@@ -6,8 +8,9 @@
   >
 </app-estropadak-selection-form>
 <form [formGroup]="form" novalidate>
+  <p>Aukeratu bistartu nahi duzun balio eta filtroak:</p>
   <mat-form-field>
-    <mat-select formControlName="property" placeholder="Aukeratu balioa" (selectionChange)="changeDisplayProp()">
+    <mat-select formControlName="property" placeholder="Aukeratu bistaratzeko balioa" (selectionChange)="changeDisplayProp()">
       <mat-option *ngFor="let prop of properties" [value]="prop">
         {{prop}}
       </mat-option>
