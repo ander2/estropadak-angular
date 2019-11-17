@@ -1,24 +1,27 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EmaitzakService } from 'app/shared/estropada.service';
+
 import { DataSource } from '@angular/cdk/table';
-import { Observable, of, BehaviorSubject } from 'rxjs';
-import { SeasonTeamSelection } from 'app/shared/stats.model';
 import { MatSort } from '@angular/material';
+import { Observable, of, BehaviorSubject } from 'rxjs';
+
+import { EmaitzakService } from 'app/shared/estropada.service';
+import { SeasonTeamSelection } from 'app/shared/stats.model';
 
 @Component({
   selector: 'app-estropadak-results',
   templateUrl: './estropadak-results.component.html',
   styleUrls: ['./estropadak-results.component.css']
 })
-export class EstropadakResultsComponent implements OnInit {
+export class EstropadakResultsComponent implements OnInit, AfterViewInit {
 
   public league: string;
   public team: string;
   public year: number;
   public results: any[] = [];
-  public dataSource: any;
+  public emaitzak = [];
   displayedColumns = ['data', 'Estropada', 'denbora', 'position', 'points'];
+  public dataSource = new EstropadaDataSource([]);
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
@@ -31,12 +34,11 @@ export class EstropadakResultsComponent implements OnInit {
       this.league = params.get('league');
       this.year = parseInt(params.get('year'), 10);
       this.team = params.get('team');
-      this.getEmaitzak(this.league, '' + this.year, this.team);
     });
   }
 
-  getEmaitzak(league, year, team) {
-    this.emaitzakService.getList(league, year, team)
+  ngAfterViewInit() {
+    this.getEmaitzak(this.league, '' + this.year, this.team)
       .subscribe(res => {
         const emaitzak = res.map(emaitza => {
           if (emaitza.sailkapena.length > 0) {
@@ -51,9 +53,30 @@ export class EstropadakResultsComponent implements OnInit {
           return emaitza;
         })
         .filter(emaitza => emaitza.position !== undefined);
-        this.dataSource = new EstropadaDataSource(emaitzak)
-        this.dataSource.sort = this.sort;
+        this.emaitzak = emaitzak;
+        this.dataSource.data.next(emaitzak);
+        this.sort.sortChange
+          .subscribe(ev => {
+            const sailk = this.emaitzak.sort((a, b) => {
+              if (['denbora', 'data'].indexOf(ev.active) > -1) {
+                if (a[ev.active] < b[ev.active]) {
+                  return ev.direction === 'asc' ? -1 : 1;
+                } else if (a[ev.active] > b[ev.active]) {
+                  return ev.direction === 'asc' ? 1 : -1;
+                } else {
+                  return 0;
+                }
+              } else {
+                return ev.direction === 'asc' ? a[ev.active] - b[ev.active] : b[ev.active] - a[ev.active];
+              }
+            });
+            this.dataSource.data.next(sailk);
+          });
     });
+  }
+
+  getEmaitzak(league, year, team) {
+    return this.emaitzakService.getList(league, year, team);
   }
 
   paramsChanged(newParams: SeasonTeamSelection) {
@@ -76,23 +99,6 @@ class EstropadaDataSource extends DataSource<any> {
   }
 
   connect(): Observable<any> {
-    this.sort.sortChange
-      .subscribe(ev => {
-        const sailk = this.sailkapena.sort((a, b) => {
-          if (['denbora', 'data'].indexOf(ev.active) > -1) {
-            if (a[ev.active] < b[ev.active]) {
-              return ev.direction === 'asc' ? -1 : 1;
-            } else if (a[ev.active] > b[ev.active]) {
-              return ev.direction === 'asc' ? 1 : -1;
-            } else {
-              return 0;
-            }
-          } else {
-            return ev.direction === 'asc' ? a[ev.active] - b[ev.active] : b[ev.active] - a[ev.active];
-          }
-        });
-        this.data.next(this.sailkapena);
-      });
     return this.data;
   }
 

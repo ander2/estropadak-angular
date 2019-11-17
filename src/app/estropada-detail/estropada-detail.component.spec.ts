@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatIconModule, MatTableModule, MatButtonModule } from '@angular/material';
+import { MatIconModule, MatTableModule, MatButtonModule, MatToolbarModule, MatCardModule } from '@angular/material';
 import {MatDividerModule } from '@angular/material/divider';
 
 import { EstropadaDetailComponent } from './estropada-detail.component';
@@ -21,9 +21,11 @@ describe('EstropadaDetailComponent', () => {
       imports: [
         FlexLayoutModule,
         MatButtonModule,
+        MatCardModule,
         MatIconModule,
         MatDividerModule,
         MatTableModule,
+        MatToolbarModule,
         RouterTestingModule
       ],
       declarations: [

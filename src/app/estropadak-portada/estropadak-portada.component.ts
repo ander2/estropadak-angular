@@ -10,7 +10,7 @@ import { UrteakService } from 'app/shared/estropada.service';
 })
 export class EstropadakPortadaComponent implements OnInit {
 
-  league = 'ACT';
+  league = 'act';
   year = 2019;
   @ViewChild(MatSidenav) sidenav;
   constructor(

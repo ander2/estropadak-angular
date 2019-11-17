@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { MatSidenavModule, MatTableModule, MatButtonToggleModule, MatListModule } from '@angular/material';
+import { MatSidenavModule, MatTableModule, MatButtonToggleModule, MatListModule, MatToolbarModule, MatCardModule, MatIconModule } from '@angular/material';
 
 import { EstropadakPortadaComponent } from './estropadak-portada.component';
 import { EstropadakSailkapenaComponent } from '../estropadak-sailkapena/estropadak-sailkapena.component';
@@ -20,9 +20,12 @@ describe('EstropadakPortadaComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        MatCardModule,
+        MatIconModule,
         MatSidenavModule,
         MatTableModule,
         MatButtonToggleModule,
+        MatToolbarModule,
         MatListModule,
         RouterTestingModule
       ],
@@ -46,6 +49,8 @@ describe('EstropadakPortadaComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadakPortadaComponent);
     component = fixture.componentInstance;
+    component.year = 2017;
+    component.league = 'act';
     fixture.detectChanges();
   });
 

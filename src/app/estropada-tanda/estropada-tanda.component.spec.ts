@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { MatTableModule } from '@angular/material';
+import { MatCardModule, MatTableModule } from '@angular/material';
 
 import { EstropadaTandaComponent } from './estropada-tanda.component';
 import { By } from '@angular/platform-browser';
@@ -14,6 +14,7 @@ describe('EstropadaTandaComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        MatCardModule,
         MatTableModule,
         FlexLayoutModule
       ],
@@ -34,7 +35,7 @@ describe('EstropadaTandaComponent', () => {
   });
 
   it('should show tanda number in title', () => {
-    expect(fixture.debugElement.query(By.css('h2')).nativeElement.innerHTML).toBe('1. tanda');
+    expect(fixture.debugElement.query(By.css('mat-card-title')).nativeElement.innerHTML).toBe('1. tanda');
   });
 
   it('should show one row per team', () => {

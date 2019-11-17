@@ -2,11 +2,10 @@
   <mat-toolbar>{{team}} estropada emaitzak: {{league | uppercase}} {{year}} urtea</mat-toolbar>
 </div>
 <app-estropadak-selection-form 
-  [year]="year" 
-  [league]="league" 
+  [year]="year"
+  [league]="league"
   [team]="team"
-  (selectionChanged)="paramsChanged($event)"
-  >
+  (selectionChanged)="paramsChanged($event)">
 </app-estropadak-selection-form>
 <div fxLayout fxLayout.xs="column" fxLayoutAlign="center start">
 <mat-table #table [dataSource]="dataSource" matSort>
