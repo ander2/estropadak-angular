@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatIconModule, MatTabsModule, MatButtonModule, MatMenuModule, MatListModule, MatTableModule, MatButtonToggleModule } from '@angular/material';
+import { MatIconModule, MatTabsModule, MatButtonModule, MatMenuModule, MatListModule, MatTableModule, MatButtonToggleModule, MatToolbarModule } from '@angular/material';
 import { NvD3Module } from 'ng2-nvd3';
 import { of } from 'rxjs';
 
@@ -33,6 +33,7 @@ describe('EstropadakPageComponent', () => {
         MatMenuModule,
         MatTabsModule,
         MatTableModule,
+        MatToolbarModule,
         NvD3Module,
         RouterTestingModule
       ],

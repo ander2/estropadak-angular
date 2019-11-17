@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MatListModule, MatToolbarModule } from '@angular/material';
 
 import { EstropadakListComponent } from './estropadak-list.component';
-import { RouterTestingModule } from '@angular/router/testing';
 import { EstropadaService } from '../shared/estropada.service';
 import { EstropadaServiceStub } from '../shared/estropada.service.stub';
-import { MatListModule } from '@angular/material';
 import { EstropadakNavegationService } from '../shared/estropadak-navegation.service';
 
 describe('EstropadakListComponent', () => {
@@ -15,7 +15,8 @@ describe('EstropadakListComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        MatListModule
+        MatListModule,
+        MatToolbarModule
       ],
       providers: [
         {provide: EstropadaService, useClass: EstropadaServiceStub },

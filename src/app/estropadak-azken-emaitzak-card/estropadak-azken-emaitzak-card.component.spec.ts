@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatCardModule, MatListModule, MatButtonToggleModule, MatTableModule } from '@angular/material';
-
+import { MatCardModule, MatListModule, MatButtonToggleModule, MatTableModule, MatToolbarModule } from '@angular/material';
 import { EstropadakAzkenEmaitzakCardComponent } from './estropadak-azken-emaitzak-card.component';
 import { EmaitzakServiceStub } from '../shared/estropada.service.stub';
 import { EmaitzakService } from '../shared/estropada.service';
@@ -18,6 +17,7 @@ describe('EstropadakAzkenEmaitzakCardComponent', () => {
         MatButtonToggleModule,
         MatListModule,
         MatTableModule,
+        MatToolbarModule,
         RouterTestingModule
       ],
       declarations: [ EstropadakAzkenEmaitzakCardComponent ],

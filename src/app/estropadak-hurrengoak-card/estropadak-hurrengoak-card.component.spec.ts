@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MatListModule, MatButtonToggleModule } from '@angular/material';
+import { MatListModule, MatButtonToggleModule, MatToolbarModule } from '@angular/material';
 
 import { EstropadakHurrengoakCardComponent } from './estropadak-hurrengoak-card.component';
 import { EstropadaServiceStub } from '../shared/estropada.service.stub';
@@ -18,6 +18,7 @@ describe('EstropadakHurrengoakCardComponent', () => {
       imports: [
         MatListModule,
         MatButtonToggleModule,
+        MatToolbarModule,
         RouterTestingModule
       ],
       declarations: [

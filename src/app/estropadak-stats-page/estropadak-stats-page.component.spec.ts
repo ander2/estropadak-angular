@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatSelectModule } from '@angular/material';
+import { MatSelectModule, MatToolbarModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { EstropadakStatsPageComponent } from './estropadak-stats-page.component';
@@ -20,6 +20,7 @@ describe('EstropadakStatsPageComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         MatSelectModule,
+        MatToolbarModule,
         FormsModule,
         NoopAnimationsModule,
         NvD3Module,

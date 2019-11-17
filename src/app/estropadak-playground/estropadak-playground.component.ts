@@ -16,7 +16,7 @@ export class EstropadakPlaygroundComponent implements OnInit {
 
   public dataSource: any;
   year = 2019;
-  league = 'ACT'
+  league = 'act'
   displayedColumns = ['estropada'];
   displayColumnHeaders = ['izena'];
   displayProp = 'posizioa';
