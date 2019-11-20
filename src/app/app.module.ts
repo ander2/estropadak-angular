@@ -52,7 +52,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { EstropadakResultsComponent } from './estropadak-results/estropadak-results.component';
 import { EstropadakSelectionFormComponent } from './estropadak-selection-form/estropadak-selection-form.component';
 import { EstropadakPlaygroundComponent } from './estropadak-playground/estropadak-playground.component';
-
+import { NgCytoComponent } from './ng-cyto/ng-cyto.component';
+import { EstropadakRowerGraphComponent } from './estropadak-rower-graph/estropadak-rower-graph.component';
 
 
 const routes: Routes = [
@@ -88,6 +89,10 @@ const routes: Routes = [
     path: 'jolastokia',
     component: EstropadakPlaygroundComponent
   },
+  {
+    path: 'grafo',
+    component: EstropadakRowerGraphComponent
+  },
   { path: '**', component: PageNotFoundComponent }
 
 ];
@@ -96,6 +101,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HeaderComponent,
+    NgCytoComponent,
     EstropadakListComponent,
     EstropadaDetailComponent,
     EstropadaTandaComponent,
@@ -114,6 +120,7 @@ const routes: Routes = [
     PageNotFoundComponent,
     EstropadakSelectionFormComponent,
     EstropadakPlaygroundComponent,
+    EstropadakRowerGraphComponent
   ],
   imports: [
     BrowserModule,
