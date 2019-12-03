@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, EventEmitter, AfterViewChecked} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, AfterViewInit} from '@angular/core';
 import { TaldeakService } from 'app/shared/taldeak.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { TaldeakService } from 'app/shared/taldeak.service';
     }`],
 })
 
-export class EstropadakRowerGraphComponent implements AfterViewChecked{
+export class EstropadakRowerGraphComponent implements AfterViewInit{
 
     node_name: string;
 
@@ -72,26 +72,44 @@ export class EstropadakRowerGraphComponent implements AfterViewChecked{
     private taldeakService: TaldeakService
   ) { }
 
-  ngAfterViewChecked() {
+  ngAfterViewInit() {
     this.taldeakService.getList('ACT', 2019)
       .subscribe(res => {
-        this.graphData.nodes = res.map(element => {
+        this.graphData = {
+          nodes: res.map(element => {
+            return {
+              data: {
+                id: element.name,
+                name: element.name,
+                weight: 100,
+                colorCode: 'green',
+                shapeType: 'ellipse'
+              }
+            }
+          }),
+          edges: []
+        };
+      });
+  }
+
+  nodeChange(event) {
+    const team = event;
+    console.log('Team clicked', team);
+    this.taldeakService.getOne(team, 'ACT', 2019)
+      .subscribe(res => {
+        this.graphData = res.rowers.map(rower => {
           return {
+            group: 'nodes',
             data: {
-              id: element.name,
-              name: element.name,
-              weigth: 100,
+              id: rower.name,
+              name: rower.name,
+              weight: 100,
               colorCode: 'green',
               shapeType: 'ellipse'
             }
           }
-        });
-      })
-    this.zoom = 2;
-  }
-
-  nodeChange(event) {
-    this.node_name = event;
+        })
+      });
   }
 
 }

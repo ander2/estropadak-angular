@@ -20,6 +20,15 @@ export class TaldeakService {
       };
       return this.http.get(endpoint, {params})
           .pipe(map(res => res.json()));
-          // .pipe(map(res => res.filter(it => /^[A-Z]/.test(it))))
+  }
+
+  getOne(team: string, league: string, year: number): Observable<any> {
+      const endpoint = `${estropadakUrl}taldeak/${team}/plantilla`;
+      const params = {
+        league,
+        year
+      };
+      return this.http.get(endpoint, {params})
+          .pipe(map(res => res.json()));
   }
 }
