@@ -23,6 +23,8 @@ export class NgCytoComponent implements OnInit, OnChanges {
   @Input() public zoom: any;
 
   @Output() select: EventEmitter<any> = new EventEmitter<any>();
+ 
+  private graph;
 
   public constructor(private renderer: Renderer, private el: ElementRef) {
 
@@ -83,16 +85,18 @@ export class NgCytoComponent implements OnInit, OnChanges {
     this.render();
   }
 
-  public ngOnChanges(): any {
-    console.log('On Changes', this.zoom);
-    this.render();
-    console.log(this.elements);
+  public ngOnChanges(changes): any {
+    if (changes.elements) {
+      console.log('On Changes', changes);
+      this.graph.add(changes.elements.currentValue);
+      this.graph.layout(this.layout).run();
+    }
   }
 
   public render() {
     let cy_contianer = this.renderer.selectRootElement("#cy");
     let localselect = this.select;
-    let cy = cytoscape({
+    this.graph = cytoscape({
       container: cy_contianer,
       layout: this.layout,
       minZoom: this.zoom.min,
@@ -102,18 +106,18 @@ export class NgCytoComponent implements OnInit, OnChanges {
     });
 
 
-    cy.on('tap', 'node', function (e) {
+    this.graph.on('tap', 'node', (e) => {
       var node = e.target;
       var neighborhood = node.neighborhood().add(node);
 
-      cy.elements().addClass('faded');
+      this.graph.elements().addClass('faded');
       neighborhood.removeClass('faded');
       localselect.emit(node.data('name'));
     });
 
-    cy.on('tap', function (e) {
-      if (e.target === cy) {
-        cy.elements().removeClass('faded');
+    this.graph.on('tap', (e) => {
+      if (e.target === this.graph) {
+        this.graph.elements().removeClass('faded');
       }
     });
   }
