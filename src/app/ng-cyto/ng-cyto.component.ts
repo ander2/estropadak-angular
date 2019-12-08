@@ -25,14 +25,20 @@ export class NgCytoComponent implements OnInit, OnChanges {
   @Output() select: EventEmitter<any> = new EventEmitter<any>();
  
   private graph;
+  private selectedNode;
+  private initLayout;
 
   public constructor(private renderer: Renderer, private el: ElementRef) {
 
-    this.layout = this.layout || {
-      name: 'grid',
-      directed: true,
-      padding: 0
+    this.initLayout = {
+      name: 'concentric',
+      concentric: function( ele ){
+        return 1;
+      },
+      levelWidth: function () { return 1; },
     };
+
+    this.layout = this.initLayout;
 
     this.zoom = this.zoom || {
       min: 0.1,
@@ -77,7 +83,13 @@ export class NgCytoComponent implements OnInit, OnChanges {
       .css({
         'opacity': 0.25,
         'text-opacity': 0
+      })
+      .selector('.hidden')
+      .css({
+        'display': 'none',
+        'visibility': 'hidden'
       });
+      ;
   }
 
   public ngOnInit() {
@@ -86,10 +98,31 @@ export class NgCytoComponent implements OnInit, OnChanges {
   }
 
   public ngOnChanges(changes): any {
-    if (changes.elements) {
-      console.log('On Changes', changes);
-      this.graph.add(changes.elements.currentValue);
-      this.graph.layout(this.layout).run();
+    if (this.graph) {
+      if (changes.elements) {
+        console.log('On elemnts Changes', changes);
+        this.graph.add(changes.elements.currentValue);
+        this.graph.elements(':visible').layout(this.layout).run();
+      }
+      if (changes.elements && changes.elements.firstChange) {
+        console.log('On elemnts first Change');
+        this.graph.layout = this.layout;
+        this.graph.layout(this.layout).run();
+        // this.selectedNode.neighborhood().filter(':visible').layout(this.layout).run();
+      }
+
+      if (changes.layout) {
+        console.log('On layou Change');
+        this.graph.layout = changes.layout.currentValue;
+        this.layout = changes.layout.currentValue;
+        // this.selectedNode.closedNeighborhood().filter(':visible').layout(this.initLayout).run();
+        this.graph.layout(this.initLayout).run();
+      }
+    }
+
+    if (changes.layout) {
+      console.log('On layou Change');
+      this.layout = changes.layout.currentValue;
     }
   }
 
@@ -110,14 +143,24 @@ export class NgCytoComponent implements OnInit, OnChanges {
       var node = e.target;
       var neighborhood = node.neighborhood().add(node);
 
-      this.graph.elements().addClass('faded');
-      neighborhood.removeClass('faded');
-      localselect.emit(node.data('name'));
+      // this.graph.elements().addClass('hidden');
+      // node.removeClass('hidden');
+      this.graph.elements("node[rower]").addClass('hidden');
+      node.data('orgPos', {
+        x: node.position().x,
+        y: node.position().y
+      });
+      // localselect.emit(node.data('name'));
+      this.selectedNode = node;
+      localselect.emit(node);
     });
 
     this.graph.on('tap', (e) => {
       if (e.target === this.graph) {
-        this.graph.elements().removeClass('faded');
+        this.selectedNode = null;
+        // this.graph.elements().removeClass('hidden');
+        this.graph.elements("node[rower]").addClass('hidden');
+        this.graph.elements("node[team]").layout(this.initLayout).run();
       }
     });
   }
