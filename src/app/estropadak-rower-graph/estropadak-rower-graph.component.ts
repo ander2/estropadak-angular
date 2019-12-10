@@ -16,6 +16,8 @@ import { TaldeakService } from 'app/shared/taldeak.service';
 export class EstropadakRowerGraphComponent implements AfterViewInit{
 
     node_name: string;
+    teams = [];
+    rowers = [];
 
     runLayout = function(node){
       const p = node.data('orgPos');
@@ -58,6 +60,7 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
     fit: true,
     animate: true,
     animationDuration: 10,
+    animationEasing: 'linear',
     concentric: function( ele ){
       if( ele.data('team') ){
         return 2;
@@ -84,6 +87,7 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
   ngAfterViewInit() {
     this.taldeakService.getList('ACT', 2019)
       .subscribe(res => {
+        this.teams = res.map(r => r.name);
         this.graphData = {
           nodes: res.map(element => {
             return {
@@ -103,10 +107,60 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
   }
 
   nodeChange(event) {
-    const team = event.data('name');
-    console.log('Team clicked', team);
+    let team;
+    let rower;
+    if (event.data('rower')){
+      rower = event.data('name');
+      console.log('Rower clicked', rower);
+      this.loadRowerData(rower);
+    }
+    if (event.data('team')){
+      team = event.data('name');
+      console.log('Team clicked', team);
+      this.loadTeamData(team);
+    }
+  }
+
+  loadRowerData(rower: string) {
+    console.log('Load data', rower);
+    const theRower = this.rowers.find(r => r.name === rower);
+    const nodes = [];
+    const edges = [];
+    for (const h of theRower.historial) {
+      nodes.push({
+        group: 'nodes',
+        data: {
+          id: h.name,
+          name: h.name,
+          weight: 100,
+          colorCode: 'green',
+          shapeType: 'ellipse',
+          team: true
+        }
+      });
+      edges.push({
+        group: 'edges',
+        data: {
+          id: `${theRower.name}_${h.name}`,
+          source: theRower.name,
+          target: h.name,
+          label: h.year,
+          strength: 1,
+          colorCode: 'red'
+        }
+      });
+    }
+
+    this.graphData = {
+      nodes: nodes,
+      edges: edges
+    };
+  }
+
+  loadTeamData(team: string) {
     this.taldeakService.getOne(team, 'ACT', 2019)
       .subscribe(res => {
+        this.rowers = this.rowers.concat(res.rowers);
         const nodes = res.rowers.map(rower => {
           return {
             group: 'nodes',
@@ -133,6 +187,27 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
             }
           }
         });
+        for (const rower of res.rowers) {
+          for (const h of rower.historial) {
+            if (h.year === '2018' && h.name.toLowerCase() !== team.toLowerCase()){
+              console.log('Other found:', rower.name, h.name);
+              if (this.teams.indexOf(h.name) > -1) {
+                edges.push({
+                  group: 'edges',
+                  data: {
+                    id: `${rower.name}_${h.name}`,
+                    target: rower.name,
+                    source: h.name,
+                    label: h.year,
+                    strength: 1,
+                    colorCode: 'red'
+                  }
+                });
+              }
+            }
+          }
+        };
+
         this.graphData = {
           nodes: nodes,
           edges: edges

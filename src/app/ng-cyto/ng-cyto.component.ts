@@ -74,6 +74,10 @@ export class NgCytoComponent implements OnInit, OnChanges {
         'source-arrow-color': 'data(colorCode)',
         'target-arrow-color': 'data(colorCode)'
       })
+      .selector('edge[label]')
+      .css({
+        'label': 'data(label)',
+      })
       .selector('edge.questionable')
       .css({
         'line-style': 'dotted',
@@ -99,14 +103,49 @@ export class NgCytoComponent implements OnInit, OnChanges {
 
   public ngOnChanges(changes): any {
     if (this.graph) {
-      if (changes.elements) {
+      if (changes.elements && this.selectedNode) {
         console.log('On elemnts Changes', changes);
-        this.graph.add(changes.elements.currentValue);
-        this.graph.elements(':visible').layout(this.layout).run();
+        const curatedNewNodes = [];
+        changes.elements.currentValue.nodes.forEach(n => {
+          if ( this.graph.$(`node[name = '${n.data.name}']`).length > 0) {
+            this.graph.$(`node[name = '${n.data.name}']`).removeClass('hidden');
+          } else {
+            curatedNewNodes.push(n);
+          }
+        })
+        const newVal = changes.elements.currentValue;
+        newVal.nodes = curatedNewNodes;
+        this.graph.add(newVal);
+        // this.graph.elements(':visible').layout(this.layout).run();
+        const p = this.selectedNode.data('orgPos');
+        const _this = this;
+        this.selectedNode.closedNeighborhood().filter(':visible').makeLayout({
+          name: 'concentric',
+          animate: true,
+          animationDuration: 500,
+          animationEasing: 'linear',
+          boundingBox: {
+            x1: p.x - 1,
+            x2: p.x + 1,
+            y1: p.y - 1,
+            y2: p.y + 1
+          },
+          avoidOverlap: true,
+          concentric: function( ele ){
+            // this.selectedNode 
+            if( ele.same( _this.graph.$('node:selected') ) ){
+              return 2;
+            } else {
+              return 1;
+            }
+          },
+          levelWidth: function () { return 1; },
+        }).run();
       }
-      if (changes.elements && changes.elements.firstChange) {
+      if (changes.elements && !this.selectedNode) {
         console.log('On elemnts first Change');
-        this.graph.layout = this.layout;
+        // this.graph.layout = this.layout;
+        this.graph.add(changes.elements.currentValue);
         this.graph.layout(this.layout).run();
         // this.selectedNode.neighborhood().filter(':visible').layout(this.layout).run();
       }
@@ -143,9 +182,9 @@ export class NgCytoComponent implements OnInit, OnChanges {
       var node = e.target;
       var neighborhood = node.neighborhood().add(node);
 
-      // this.graph.elements().addClass('hidden');
-      // node.removeClass('hidden');
-      this.graph.elements("node[rower]").addClass('hidden');
+      this.graph.elements().addClass('hidden');
+      node.removeClass('hidden');
+      // this.graph.elements("node[rower]").addClass('hidden');
       node.data('orgPos', {
         x: node.position().x,
         y: node.position().y
@@ -158,7 +197,7 @@ export class NgCytoComponent implements OnInit, OnChanges {
     this.graph.on('tap', (e) => {
       if (e.target === this.graph) {
         this.selectedNode = null;
-        // this.graph.elements().removeClass('hidden');
+        this.graph.elements().removeClass('hidden');
         this.graph.elements("node[rower]").addClass('hidden');
         this.graph.elements("node[team]").layout(this.initLayout).run();
       }
