@@ -109,15 +109,16 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
   nodeChange(event) {
     let team;
     let rower;
-    if (event.data('rower')){
-      rower = event.data('name');
+    const year = event.year;
+    if (event.node.data('rower')){
+      rower = event.node.data('name');
       console.log('Rower clicked', rower);
       this.loadRowerData(rower);
     }
-    if (event.data('team')){
-      team = event.data('name');
+    if (event.node.data('team')){
+      team = event.node.data('name');
       console.log('Team clicked', team);
-      this.loadTeamData(team);
+      this.loadTeamData(team, year);
     }
   }
 
@@ -157,8 +158,8 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
     };
   }
 
-  loadTeamData(team: string) {
-    this.taldeakService.getOne(team, 'ACT', 2019)
+  loadTeamData(team: string, year: number) {
+    this.taldeakService.getOne(team, 'ACT', year)
       .subscribe(res => {
         this.rowers = this.rowers.concat(res.rowers);
         const nodes = res.rowers.map(rower => {
