@@ -23,7 +23,7 @@ export class NgCytoComponent implements OnInit, OnChanges {
   @Input() public zoom: any;
 
   @Output() select: EventEmitter<any> = new EventEmitter<any>();
- 
+
   private graph;
   private selectedNode;
   private initLayout;
@@ -121,6 +121,10 @@ export class NgCytoComponent implements OnInit, OnChanges {
         // this.graph.elements(':visible').layout(this.layout).run();
         const p = this.selectedNode.data('orgPos');
         const _this = this;
+        let spacingFactor = 1;
+        if (this.selectedNode.data('rower')){
+          spacingFactor = 2;
+        }
         this.selectedNode.closedNeighborhood().filter(':visible').makeLayout({
           name: 'concentric',
           animate: true,
@@ -133,6 +137,7 @@ export class NgCytoComponent implements OnInit, OnChanges {
             y2: p.y + 1
           },
           avoidOverlap: true,
+          spacingFactor: spacingFactor,
           concentric: function( ele ){
             // this.selectedNode 
             if( ele.same( _this.graph.$('node:selected') ) ){
@@ -183,17 +188,23 @@ export class NgCytoComponent implements OnInit, OnChanges {
     this.graph.on('tap', 'node', (e) => {
       var node = e.target;
       var neighborhood = node.neighborhood().add(node);
-
-      this.graph.elements().addClass('hidden');
-      node.removeClass('hidden');
-      // this.graph.elements("node[rower]").addClass('hidden');
       node.data('orgPos', {
         x: node.position().x,
         y: node.position().y
       });
-      // localselect.emit(node.data('name'));
       this.selectedNode = node;
-      localselect.emit(node);
+      let year;
+      if (this.graph.$('edge[target="'+node.id()+'"]').filter(':visible').length) {
+        year = this.graph.$('edge[target="'+node.id()+'"]')[0].data('label');
+      } else {
+        year = 2019;
+      }
+      this.graph.elements().addClass('hidden');
+      node.removeClass('hidden');
+      localselect.emit({
+        year,
+        node
+      });
     });
 
     this.graph.on('tap', (e) => {
