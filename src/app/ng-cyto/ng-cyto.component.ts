@@ -109,6 +109,8 @@ export class NgCytoComponent implements OnInit, OnChanges {
         changes.elements.currentValue.nodes.forEach(n => {
           if ( this.graph.$(`node[name = '${n.data.name}']`).length > 0) {
             this.graph.$(`node[name = '${n.data.name}']`).removeClass('hidden');
+            this.graph.$(`edge[source = '${n.data.id}']`).removeClass('hidden');
+            this.graph.$(`edge[target = '${n.data.id}']`).removeClass('hidden');
           } else {
             curatedNewNodes.push(n);
           }
