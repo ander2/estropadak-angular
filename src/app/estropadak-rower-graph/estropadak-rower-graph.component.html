@@ -2,7 +2,8 @@
     <ng2-cytoscape [elements]="graphData" [layout]="layout" [zoom]="zoom" (select)="nodeChange($event)"></ng2-cytoscape>
 </div>
 
+<app-estropadak-selection-form [year]="this.year" [league]="this.league" [showTeams]="false" (selectionChanged)="yearLeagueChange($event)"></app-estropadak-selection-form>
 <div style="height: 90%; width: 20%; float: left; overflow: auto; overflow-x: hidden">
-    <h1>Selected Node Name</h1>
     <h2>{{node_name}}</h2>
+    <h2>{{year}}</h2>
 </div>

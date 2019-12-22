@@ -27,6 +27,7 @@ export class NgCytoComponent implements OnInit, OnChanges {
   private graph;
   private selectedNode;
   private initLayout;
+  private initValues;
 
   public constructor(private renderer: Renderer, private el: ElementRef) {
 
@@ -50,22 +51,23 @@ export class NgCytoComponent implements OnInit, OnChanges {
       .selector('node')
       .css({
         'shape': 'data(shapeType)',
-        'width': 'mapData(weight, 40, 80, 20, 60)',
+        'width': 'mapData(weight)',
         'content': 'data(name)',
-        'text-valign': 'center',
-        'text-outline-width': 1,
-        'text-outline-color': 'data(colorCode)',
+        // 'text-valign': 'center',
         'background-color': 'data(colorCode)',
-        'color': '#fff',
-        'font-size': 10
+        'color': '#000',
+        'font-size': 8,
+        'font-weight': 'bold'
       })
       .selector(':selected')
       .css({
         'border-width': 1,
-        'border-color': 'black'
+        'border-color': 'black',
+        'text-valign': 'bottom',
       })
       .selector('edge')
       .css({
+        'font-size': 7,
         'curve-style': 'bezier',
         'opacity': 0.666,
         'width': 'mapData(strength, 70, 100, 2, 6)',
@@ -109,6 +111,8 @@ export class NgCytoComponent implements OnInit, OnChanges {
         changes.elements.currentValue.nodes.forEach(n => {
           if ( this.graph.$(`node[name = '${n.data.name}']`).length > 0) {
             this.graph.$(`node[name = '${n.data.name}']`).removeClass('hidden');
+            // this.graph.$(`edge[source = '${n.data.id}']`).remove();
+            // this.graph.$(`edge[target = '${n.data.id}']`).remove();
             this.graph.$(`edge[source = '${n.data.id}']`).removeClass('hidden');
             this.graph.$(`edge[target = '${n.data.id}']`).removeClass('hidden');
           } else {
@@ -117,6 +121,7 @@ export class NgCytoComponent implements OnInit, OnChanges {
         })
         const newVal = changes.elements.currentValue;
         newVal.nodes = curatedNewNodes;
+        console.table(newVal);
         this.graph.add(newVal);
         // this.graph.elements(':visible').layout(this.layout).run();
         const p = this.selectedNode.data('orgPos');
@@ -137,24 +142,30 @@ export class NgCytoComponent implements OnInit, OnChanges {
             y2: p.y + 1
           },
           avoidOverlap: true,
-          spacingFactor: spacingFactor,
+          minNodeSpacing: 50,
+          // spacingFactor: spacingFactor,
           concentric: function( ele ){
             // this.selectedNode 
             if( ele.same( _this.graph.$('node:selected') ) ){
+              return 3;
+            } 
+            if (ele.data('index') && ele.data('index') % 2 === 0) {
               return 2;
             } else {
               return 1;
             }
           },
+          padding: 80,
           levelWidth: function () { return 1; },
         }).run();
       }
       if (changes.elements && !this.selectedNode) {
         console.log('On elemnts first Change');
-        // this.graph.layout = this.layout;
-        this.graph.add(changes.elements.currentValue);
+        this.graph.nodes().remove();
+        this.graph.edges().remove();
+        this.initValues = changes.elements.currentValue;
+        this.graph.add(this.initValues);
         this.graph.layout(this.layout).run();
-        // this.selectedNode.neighborhood().filter(':visible').layout(this.layout).run();
       }
 
       if (changes.layout) {
@@ -168,6 +179,9 @@ export class NgCytoComponent implements OnInit, OnChanges {
 
     if (changes.layout) {
       console.log('On layou Change');
+      if (changes.layout.firstChange) {
+        this.initLayout = changes.layout.currentValue;
+      }
       this.layout = changes.layout.currentValue;
     }
   }
@@ -195,10 +209,8 @@ export class NgCytoComponent implements OnInit, OnChanges {
       this.selectedNode = node;
       let year;
       if (this.graph.$('edge[target="'+node.id()+'"]').filter(':visible').length) {
-        year = this.graph.$('edge[target="'+node.id()+'"]')[0].data('label');
-      } else {
-        year = 2019;
-      }
+        year = this.graph.$('edge[target="'+node.id()+'"]').filter(':visible')[0].data('label');
+      } 
       this.graph.elements().addClass('hidden');
       node.removeClass('hidden');
       localselect.emit({
@@ -210,9 +222,12 @@ export class NgCytoComponent implements OnInit, OnChanges {
     this.graph.on('tap', (e) => {
       if (e.target === this.graph) {
         this.selectedNode = null;
-        this.graph.elements().removeClass('hidden');
-        this.graph.elements("node[rower]").addClass('hidden');
-        this.graph.elements("node[team]").layout(this.initLayout).run();
+        this.graph.elements().remove();
+        this.graph.add(this.initValues);
+        this.graph.layout(this.initLayout).run();
+        // this.graph.elements().removeClass('hidden');
+        // this.graph.elements("node[rower]").addClass('hidden');
+        // this.graph.elements("node[team]").layout(this.initLayout).run();
       }
     });
   }
