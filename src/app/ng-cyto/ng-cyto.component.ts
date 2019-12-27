@@ -21,6 +21,7 @@ export class NgCytoComponent implements OnInit, OnChanges {
   @Input() public style: any;
   @Input() public layout: any;
   @Input() public zoom: any;
+  @Input() public selected: any;
 
   @Output() select: EventEmitter<any> = new EventEmitter<any>();
 
@@ -105,6 +106,10 @@ export class NgCytoComponent implements OnInit, OnChanges {
 
   public ngOnChanges(changes): any {
     if (this.graph) {
+      if (changes.selected) {
+        const node = this.graph.$(`node[name= '${changes.selected.currentValue.club}']`);
+        this.selectNode(node, changes.selected.currentValue.year);
+      }
       if (changes.elements && this.selectedNode) {
         console.log('On elemnts Changes', changes);
         const curatedNewNodes = [];
@@ -121,7 +126,6 @@ export class NgCytoComponent implements OnInit, OnChanges {
         })
         const newVal = changes.elements.currentValue;
         newVal.nodes = curatedNewNodes;
-        console.table(newVal);
         this.graph.add(newVal);
         // this.graph.elements(':visible').layout(this.layout).run();
         const p = this.selectedNode.data('orgPos');
@@ -135,18 +139,19 @@ export class NgCytoComponent implements OnInit, OnChanges {
           animate: true,
           animationDuration: 500,
           animationEasing: 'linear',
+          avoidOverlap: true,
           boundingBox: {
             x1: p.x - 1,
             x2: p.x + 1,
             y1: p.y - 1,
             y2: p.y + 1
           },
-          avoidOverlap: true,
           minNodeSpacing: 50,
-          // spacingFactor: spacingFactor,
+          spacingFactor: spacingFactor,
           concentric: function( ele ){
-            // this.selectedNode 
-            if( ele.same( _this.graph.$('node:selected') ) ){
+            //  
+            //_this.graph.$('node:selected')
+            if( ele.same( _this.selectedNode ) ){
               return 3;
             } 
             if (ele.data('index') && ele.data('index') % 2 === 0) {
@@ -155,7 +160,7 @@ export class NgCytoComponent implements OnInit, OnChanges {
               return 1;
             }
           },
-          padding: 80,
+          padding: 20,
           levelWidth: function () { return 1; },
         }).run();
       }
@@ -201,22 +206,7 @@ export class NgCytoComponent implements OnInit, OnChanges {
 
     this.graph.on('tap', 'node', (e) => {
       var node = e.target;
-      var neighborhood = node.neighborhood().add(node);
-      node.data('orgPos', {
-        x: node.position().x,
-        y: node.position().y
-      });
-      this.selectedNode = node;
-      let year;
-      if (this.graph.$('edge[target="'+node.id()+'"]').filter(':visible').length) {
-        year = this.graph.$('edge[target="'+node.id()+'"]').filter(':visible')[0].data('label');
-      } 
-      this.graph.elements().addClass('hidden');
-      node.removeClass('hidden');
-      localselect.emit({
-        year,
-        node
-      });
+      this.selectNode(node);
     });
 
     this.graph.on('tap', (e) => {
@@ -229,6 +219,25 @@ export class NgCytoComponent implements OnInit, OnChanges {
         // this.graph.elements("node[rower]").addClass('hidden');
         // this.graph.elements("node[team]").layout(this.initLayout).run();
       }
+    });
+  }
+
+  selectNode(node: any, year?: number) {
+    var neighborhood = node.neighborhood().add(node);
+    node.data('orgPos', {
+      x: node.position().x,
+      y: node.position().y
+    });
+    this.selectedNode = node;
+    if (!year) {
+      if (this.graph.$('edge[target="'+node.id()+'"]').filter(':visible').length) {
+        year = this.graph.$('edge[target="'+node.id()+'"]').filter(':visible')[0].data('label');
+      } 
+    }
+    this.graph.$('[id!="'+node.id()+'"]').remove();
+    this.select.emit({
+      year,
+      node
     });
   }
 

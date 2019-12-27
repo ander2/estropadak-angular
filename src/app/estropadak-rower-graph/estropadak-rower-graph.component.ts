@@ -21,6 +21,9 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
   year: number = 2019;
   league = 'ACT';
   team: string;
+  selectedRower;
+  selectedNode;
+  error: string;
   
   layout = {
     name: 'concentric',
@@ -114,7 +117,9 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
 
   loadRowerData(rower: string) {
     console.log('Load data', rower);
+    this.error = '';
     const theRower = this.rowers.find(r => r.name === rower);
+    this.selectedRower = theRower;
     const nodes = [];
     const edges = [];
     const sortedH = theRower.historial.sort((a, b) => a.year - b.year);
@@ -198,6 +203,7 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
   }
 
   loadTeamData(team: string, year: number) {
+    this.error = '';
     this.taldeakService.getOne(team, this.league, year)
       .subscribe(res => {
         this.rowers = this.rowers.concat(res.rowers);
@@ -228,32 +234,21 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
             }
           }
         });
-        // for (const rower of res.rowers) {
-        //   for (const h of rower.historial) {
-        //     if (h.year === '2018' && h.name.toLowerCase() !== team.toLowerCase()){
-        //       console.log('Other found:', rower.name, h.name);
-        //       if (this.teams.indexOf(h.name) > -1) {
-        //         edges.push({
-        //           group: 'edges',
-        //           data: {
-        //             id: `${rower.name}_${h.name}`,
-        //             target: rower.name,
-        //             source: h.name,
-        //             label: h.year,
-        //             strength: 1,
-        //             colorCode: 'red'
-        //           }
-        //         });
-        //       }
-        //     }
-        //   }
-        // };
 
         this.graphData = {
           nodes: nodes,
           edges: edges
         };
+      },
+      (err) => {
+        this.error = 'Ez dago daturik aukeratutako taldearentzat, urte eta liga horretan';
+        console.log('No data', err);
       });
+  }
+
+  goToClubYear(club: string, year: number) {
+    console.log(year, club);
+    this.selectedNode = {club, year}; // loadTeamData(club, year);
   }
 
 }

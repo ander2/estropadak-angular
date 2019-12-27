@@ -1,9 +1,23 @@
+<h3>{{error}}</h3>
 <div style="height: 90%; width: 80%; float: left; overflow: auto; overflow-y: hidden">
-    <ng2-cytoscape [elements]="graphData" [layout]="layout" [zoom]="zoom" (select)="nodeChange($event)"></ng2-cytoscape>
+    <ng2-cytoscape [elements]="graphData" [layout]="layout" [zoom]="zoom" [selected]="selectedNode" (select)="nodeChange($event)"></ng2-cytoscape>
 </div>
 
 <app-estropadak-selection-form [year]="this.year" [league]="this.league" [showTeams]="false" (selectionChanged)="yearLeagueChange($event)"></app-estropadak-selection-form>
+
 <div style="height: 90%; width: 20%; float: left; overflow: auto; overflow-x: hidden">
-    <h2>{{node_name}}</h2>
-    <h2>{{year}}</h2>
+  <h2>{{node_name}} - {{year}}</h2>
+  <ng-container *ngIf="selectedRower">
+    <h3>{{selectedRower.birthplace}} - {{selectedRower.birthday}}</h3>
+  </ng-container>
+  <div *ngIf="selectedRower">
+    <ul>
+      <li *ngFor="let h of selectedRower.historial">
+        {{h.year}} {{h.name}} 
+        <button mat-icon-button (click)="goToClubYear(h.name, h.year)">
+          <mat-icon>arrow_right</mat-icon>
+        </button>
+      </li>
+    </ul>
+  </div>
 </div>
