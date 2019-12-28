@@ -1,5 +1,7 @@
 import {Component, OnInit, Output, EventEmitter, AfterViewInit} from '@angular/core';
 import { TaldeakService } from 'app/shared/taldeak.service';
+import { StatsService } from 'app/shared/stats.service';
+
 
 @Component({
   selector: 'app-estropadak-rower-graph',
@@ -53,7 +55,8 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
   zoom = 1;
 
   constructor(
-    private taldeakService: TaldeakService
+    private taldeakService: TaldeakService,
+    private statsService: StatsService 
   ) { }
 
   ngAfterViewInit() {
@@ -80,7 +83,7 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
                 id: element.name,
                 name: element.name,
                 weight: 60,
-                colorCode: 'grey',
+                colorCode: this.statsService.teamColors(element.name),
                 shapeType: 'ellipse',
                 team: true
               }
@@ -99,6 +102,9 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
       year = event.year;
     } else {
       year = this.year;
+    }
+    if (year <2010) {
+      return ;
     }
     this.node_name = event.node.data('name');
     if (event.node.data('rower')){
@@ -155,7 +161,7 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
         id: this.team,
         name: this.team,
         weight: 80,
-        colorCode: 'green',
+        colorCode: this.statsService.teamColors(this.team),
         shapeType: 'ellipse',
         team: true
       }
@@ -178,7 +184,7 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
           id: h.name,
           name: h.name,
           weight: 80,
-          colorCode: 'green',
+          colorCode: this.statsService.teamColors(h.name),
           shapeType: 'ellipse',
           team: true
         }
