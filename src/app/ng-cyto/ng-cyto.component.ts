@@ -48,13 +48,11 @@ export class NgCytoComponent implements OnInit, OnChanges {
     };
 
     this.style = this.style || cytoscape.stylesheet()
-
       .selector('node')
       .css({
         'shape': 'data(shapeType)',
         'width': 'mapData(weight)',
         'content': 'data(name)',
-        // 'text-valign': 'center',
         'background-color': 'data(colorCode)',
         'color': '#000',
         'font-size': 8,
@@ -95,8 +93,18 @@ export class NgCytoComponent implements OnInit, OnChanges {
       .css({
         'display': 'none',
         'visibility': 'hidden'
+      })
+      .selector('.rower')
+      .css({
+        'shape': 'data(shapeType)',
+        'width': 'mapData(weight)',
+        'content': 'data(name)',
+        'background-color': '#FFF',
+        'background-image': 'assets/rowing-24px.svg',
+        'color': '#000',
+        'font-size': 8,
+        'font-weight': 'bold'
       });
-      ;
   }
 
   public ngOnInit() {
@@ -111,23 +119,10 @@ export class NgCytoComponent implements OnInit, OnChanges {
         this.selectNode(node, changes.selected.currentValue.year);
       }
       if (changes.elements && this.selectedNode) {
-        console.log('On elemnts Changes', changes);
         const curatedNewNodes = [];
-        changes.elements.currentValue.nodes.forEach(n => {
-          if ( this.graph.$(`node[name = '${n.data.name}']`).length > 0) {
-            this.graph.$(`node[name = '${n.data.name}']`).removeClass('hidden');
-            // this.graph.$(`edge[source = '${n.data.id}']`).remove();
-            // this.graph.$(`edge[target = '${n.data.id}']`).remove();
-            this.graph.$(`edge[source = '${n.data.id}']`).removeClass('hidden');
-            this.graph.$(`edge[target = '${n.data.id}']`).removeClass('hidden');
-          } else {
-            curatedNewNodes.push(n);
-          }
-        })
+        this.deleteOtherNodes(this.selectedNode);
         const newVal = changes.elements.currentValue;
-        newVal.nodes = curatedNewNodes;
         this.graph.add(newVal);
-        // this.graph.elements(':visible').layout(this.layout).run();
         const p = this.selectedNode.data('orgPos');
         const _this = this;
         let spacingFactor = 1;
@@ -149,8 +144,6 @@ export class NgCytoComponent implements OnInit, OnChanges {
           minNodeSpacing: 50,
           spacingFactor: spacingFactor,
           concentric: function( ele ){
-            //  
-            //_this.graph.$('node:selected')
             if( ele.same( _this.selectedNode ) ){
               return 3;
             } 
@@ -163,6 +156,7 @@ export class NgCytoComponent implements OnInit, OnChanges {
           padding: 20,
           levelWidth: function () { return 1; },
         }).run();
+        this.graph.$('[rower]').addClass('rower');
       }
       if (changes.elements && !this.selectedNode) {
         console.log('On elemnts first Change');
@@ -215,11 +209,12 @@ export class NgCytoComponent implements OnInit, OnChanges {
         this.graph.elements().remove();
         this.graph.add(this.initValues);
         this.graph.layout(this.initLayout).run();
-        // this.graph.elements().removeClass('hidden');
-        // this.graph.elements("node[rower]").addClass('hidden');
-        // this.graph.elements("node[team]").layout(this.initLayout).run();
       }
     });
+  }
+
+  deleteOtherNodes(node: any){
+    this.graph.$('[id!="'+node.id()+'"]').remove();
   }
 
   selectNode(node: any, year?: number) {
@@ -231,10 +226,9 @@ export class NgCytoComponent implements OnInit, OnChanges {
     this.selectedNode = node;
     if (!year) {
       if (this.graph.$('edge[target="'+node.id()+'"]').filter(':visible').length) {
-        year = this.graph.$('edge[target="'+node.id()+'"]').filter(':visible')[0].data('label');
+        year = parseInt(this.graph.$('edge[target="'+node.id()+'"]').filter(':visible')[0].data('label'), 10);
       } 
     }
-    this.graph.$('[id!="'+node.id()+'"]').remove();
     this.select.emit({
       year,
       node

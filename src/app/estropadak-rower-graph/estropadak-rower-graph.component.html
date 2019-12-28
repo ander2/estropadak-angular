@@ -14,7 +14,7 @@
     <ul>
       <li *ngFor="let h of selectedRower.historial">
         {{h.year}} {{h.name}} 
-        <button mat-icon-button (click)="goToClubYear(h.name, h.year)">
+        <button mat-icon-button (click)="goToClubYear(h.name, h.year)" *ngIf="h.year > 2009">
           <mat-icon>arrow_right</mat-icon>
         </button>
       </li>
