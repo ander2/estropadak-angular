@@ -2,6 +2,8 @@ import {Component, OnInit, Output, EventEmitter, AfterViewInit} from '@angular/c
 import { TaldeakService } from 'app/shared/taldeak.service';
 import { StatsService } from 'app/shared/stats.service';
 
+import {catchError} from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-estropadak-rower-graph',
@@ -95,7 +97,6 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
   }
 
   nodeChange(event) {
-    let team;
     let rower;
     let year;
     if (event.year) {
@@ -114,10 +115,9 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
     }
     if (event.node.data('team')){
       this.year = year;
-      team = event.node.data('name');
-      this.team = team;
-      console.log('Team clicked', team);
-      this.loadTeamData(team, year);
+      this.team = event.node.data('name');
+      this.selectedRower = null;
+      this.loadTeamData(this.team, year);
     }
   }
 
@@ -209,9 +209,31 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
   }
 
   loadTeamData(team: string, year: number) {
+    let league;
     this.error = '';
     this.taldeakService.getOne(team, this.league, year)
+      .pipe(catchError(err => {
+        if (this.league === 'ACT') {
+          league = 'ARC1';
+        } else if (this.league === 'ARC1'){
+          league = 'ARC2';
+        } else if (this.league === 'ARC2'){
+          league = 'ARC1';
+        } 
+        return this.taldeakService.getOne(team, league, year)
+      }))  
+      .pipe(catchError(err => {
+        if (this.league === 'ACT') {
+          league = 'ARC2';
+        } else if (this.league === 'ARC1'){
+          league = 'ACT';
+        }
+        return this.taldeakService.getOne(team, league, year)
+      }))  
       .subscribe(res => {
+        if (league) {
+          this.league = league;
+        }
         this.rowers = this.rowers.concat(res.rowers);
         const nodes = res.rowers.map(rower => {
           return {
