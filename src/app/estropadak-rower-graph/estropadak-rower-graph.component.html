@@ -1,23 +1,21 @@
+<mat-toolbar> Taldeak eta Arraunlariak</mat-toolbar>
+<p>
+  Aukeratu liga eta urte bat eta hasi talde eta arraunlarien artean nabigatzen. 
+</p>
 <h3>{{error}}</h3>
-<div style="height: 90%; width: 80%; float: left; overflow: auto; overflow-y: hidden">
+<div style="height: 90%; width: 70%; float: left; overflow: auto; overflow-y: hidden">
     <ng2-cytoscape [elements]="graphData" [layout]="layout" [zoom]="zoom" [selected]="selectedNode" (select)="nodeChange($event)"></ng2-cytoscape>
 </div>
 
 <app-estropadak-selection-form [year]="this.year" [league]="this.league" [showTeams]="false" (selectionChanged)="yearLeagueChange($event)"></app-estropadak-selection-form>
 
-<div style="height: 90%; width: 20%; float: left; overflow: auto; overflow-x: hidden">
-  <h2>{{node_name}} - {{year}} - {{league}}</h2>
+<div style="height: 90%; width: 30%; float: left; overflow: auto; overflow-x: hidden">
+  <h2 class="mat-h2">{{node_name}} - {{year}} - {{league}}</h2>
   <ng-container *ngIf="selectedRower">
-    <h3>{{selectedRower.birthplace}} - {{selectedRower.birthday}}</h3>
+    <h3 class="mat-h3">{{selectedRower.birthplace}} ({{selectedRower.birthday}})</h3>
   </ng-container>
   <div *ngIf="selectedRower">
-    <ul>
-      <li *ngFor="let h of selectedRower.historial">
-        {{h.year}} {{h.name}} 
-        <button mat-icon-button (click)="goToClubYear(h.name, h.year)" *ngIf="h.year > 2009">
-          <mat-icon>arrow_right</mat-icon>
-        </button>
-      </li>
-    </ul>
+    <app-estropadak-rower-historial-table [rower]="selectedRower" (teamClicked)="teamClicked($event)">
+    </app-estropadak-rower-historial-table>
   </div>
 </div>

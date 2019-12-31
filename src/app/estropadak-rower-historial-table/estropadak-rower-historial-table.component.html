@@ -1,0 +1,19 @@
+<mat-table #table [dataSource]="dataSource">
+  <ng-container matColumnDef="Urtea">
+    <mat-header-cell *matHeaderCellDef> Urtea </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.year}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="Taldea">
+    <mat-header-cell *matHeaderCellDef> Taldea </mat-header-cell>
+    <mat-cell *matCellDef="let row"> 
+      {{row.name}} 
+      <button mat-icon-button (click)="clubYearClicked(row)" *ngIf="row.year > 2009">
+        <mat-icon>arrow_right</mat-icon>
+      </button>
+
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>
