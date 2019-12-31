@@ -54,6 +54,7 @@ import { EstropadakSelectionFormComponent } from './estropadak-selection-form/es
 import { EstropadakPlaygroundComponent } from './estropadak-playground/estropadak-playground.component';
 import { NgCytoComponent } from './ng-cyto/ng-cyto.component';
 import { EstropadakRowerGraphComponent } from './estropadak-rower-graph/estropadak-rower-graph.component';
+import { EstropadakRowerHistorialTableComponent } from './estropadak-rower-historial-table/estropadak-rower-historial-table.component';
 
 
 const routes: Routes = [
@@ -120,7 +121,8 @@ const routes: Routes = [
     PageNotFoundComponent,
     EstropadakSelectionFormComponent,
     EstropadakPlaygroundComponent,
-    EstropadakRowerGraphComponent
+    EstropadakRowerGraphComponent,
+    EstropadakRowerHistorialTableComponent
   ],
   imports: [
     BrowserModule,

@@ -275,8 +275,11 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
   }
 
   goToClubYear(club: string, year: number) {
-    console.log(year, club);
     this.selectedNode = {club, year}; // loadTeamData(club, year);
+  }
+
+  teamClicked(historial) {
+    this.goToClubYear(historial.name, historial.year);
   }
 
 }
