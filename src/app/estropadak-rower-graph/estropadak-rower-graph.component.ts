@@ -68,8 +68,8 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
   yearLeagueChange(event) {
     this.year = event.year;
     this.league = event.league;
+    this.selectedNode = this.selectedNode === null ? 0 : null;
     this.loadTeams(this.league, this.year);
-    this.selectedNode = null;
   }
 
   loadTeams(league: string, year: number) {
@@ -214,19 +214,19 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
     this.error = '';
     this.taldeakService.getOne(team, this.league, year)
       .pipe(catchError(err => {
-        if (this.league === 'ACT') {
+        if (this.league.toLowerCase() === 'act') {
           league = 'ARC1';
-        } else if (this.league === 'ARC1'){
+        } else if (this.league.toLowerCase() === 'arc1'){
           league = 'ARC2';
-        } else if (this.league === 'ARC2'){
+        } else if (this.league.toLowerCase() === 'arc2'){
           league = 'ARC1';
         } 
         return this.taldeakService.getOne(team, league, year)
       }))  
       .pipe(catchError(err => {
-        if (this.league === 'ACT') {
+        if (this.league.toLowerCase() === 'act') {
           league = 'ARC2';
-        } else if (this.league === 'ARC1'){
+        } else if (this.league.toLowerCase() === 'arc1'){
           league = 'ACT';
         }
         return this.taldeakService.getOne(team, league, year)
