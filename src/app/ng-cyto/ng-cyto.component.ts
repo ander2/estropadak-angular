@@ -115,8 +115,12 @@ export class NgCytoComponent implements OnInit, OnChanges {
   public ngOnChanges(changes): any {
     if (this.graph) {
       if (changes.selected) {
-        const node = this.graph.$(`node[name= '${changes.selected.currentValue.club}']`);
-        this.selectNode(node, changes.selected.currentValue.year);
+        if (changes.selected.currentValue) {
+          const node = this.graph.$(`node[name= '${changes.selected.currentValue.club}']`);
+          this.selectNode(node, changes.selected.currentValue.year);
+        } else {
+          this.selectedNode = null;
+        }
       }
       if (changes.elements && this.selectedNode) {
         const curatedNewNodes = [];

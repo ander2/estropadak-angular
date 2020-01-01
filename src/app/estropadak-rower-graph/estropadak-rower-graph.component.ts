@@ -69,6 +69,7 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
     this.year = event.year;
     this.league = event.league;
     this.loadTeams(this.league, this.year);
+    this.selectedNode = null;
   }
 
   loadTeams(league: string, year: number) {
