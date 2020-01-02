@@ -1,7 +1,15 @@
-<mat-toolbar> Taldeak eta Arraunlariak</mat-toolbar>
-<p>
-  Aukeratu liga eta urte bat eta hasi talde eta arraunlarien artean nabigatzen. 
-</p>
+<mat-toolbar>Taldeak eta Arraunlariak<sup>beta</sup></mat-toolbar>
+<div>
+  <p>
+    Aukeratu liga eta urte bat eta hasi talde eta arraunlarien artean nabigatzen: 
+  </p>
+  <ul>
+    <li>Click egin talde batean, plantilla ikusteko.</li>
+    <li>Click egin arraunlari batean, bere historiala ikusteko</li>
+    <li>Click egin arraunlari baten historial taulan, talde eta urte jakin bat ikusteko</li>
+    <li>Click egin talde edo arraunlari bat ez den puntu batean, hasierako egoerara bueltatzeko</li>
+  </ul>
+</div>
 <h3>{{error}}</h3>
 <div style="height: 90%; width: 70%; float: left; overflow: auto; overflow-y: hidden">
     <ng2-cytoscape [elements]="graphData" [layout]="layout" [zoom]="zoom" [selected]="selectedNode" (select)="nodeChange($event)"></ng2-cytoscape>

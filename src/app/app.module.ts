@@ -91,7 +91,7 @@ const routes: Routes = [
     component: EstropadakPlaygroundComponent
   },
   {
-    path: 'grafo',
+    path: 'arraunlariak',
     component: EstropadakRowerGraphComponent
   },
   { path: '**', component: PageNotFoundComponent }
