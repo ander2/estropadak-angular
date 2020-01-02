@@ -36,4 +36,8 @@ export class HeaderComponent implements OnInit {
   goToPlayground() {
     this.router.navigate(['jolastokia']);
   }
+
+  goToArraunlariak() {
+    this.router.navigate(['arraunlariak']);
+  }
 }
