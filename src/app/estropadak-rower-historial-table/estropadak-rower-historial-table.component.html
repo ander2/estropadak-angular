@@ -1,6 +1,6 @@
-<mat-table #table [dataSource]="dataSource">
+<mat-table #table [dataSource]="dataSource" matSort>
   <ng-container matColumnDef="Urtea">
-    <mat-header-cell *matHeaderCellDef> Urtea </mat-header-cell>
+    <mat-header-cell mat-sort-header start="desc" disableClear="true" *matHeaderCellDef> Urtea </mat-header-cell>
     <mat-cell *matCellDef="let row"> {{row.year}} </mat-cell>
   </ng-container>
   <ng-container matColumnDef="Taldea">
