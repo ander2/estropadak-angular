@@ -6,11 +6,8 @@ declare var cytoscape: any;
   selector: 'ng2-cytoscape',
   template: '<div id="cy"></div>',
   styles: [`#cy {
-        height: 100%;
+        height: 500px;
         width: 100%;
-        position: relative;
-        left: 0;
-        top: 0;
     }`]
 })
 
@@ -108,7 +105,6 @@ export class NgCytoComponent implements OnInit, OnChanges {
   }
 
   public ngOnInit() {
-    console.log('Init');
     this.render();
   }
 
@@ -163,7 +159,6 @@ export class NgCytoComponent implements OnInit, OnChanges {
         this.graph.$('[rower]').addClass('rower');
       }
       if (changes.elements && !this.selectedNode) {
-        console.log('On elemnts first Change');
         this.graph.nodes().remove();
         this.graph.edges().remove();
         this.initValues = changes.elements.currentValue;
@@ -172,7 +167,6 @@ export class NgCytoComponent implements OnInit, OnChanges {
       }
 
       if (changes.layout) {
-        console.log('On layou Change');
         this.graph.layout = changes.layout.currentValue;
         this.layout = changes.layout.currentValue;
         // this.selectedNode.closedNeighborhood().filter(':visible').layout(this.initLayout).run();
@@ -181,7 +175,6 @@ export class NgCytoComponent implements OnInit, OnChanges {
     }
 
     if (changes.layout) {
-      console.log('On layou Change');
       if (changes.layout.firstChange) {
         this.initLayout = changes.layout.currentValue;
       }

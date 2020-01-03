@@ -111,7 +111,6 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
     this.node_name = event.node.data('name');
     if (event.node.data('rower')){
       rower = event.node.data('name');
-      console.log('Rower clicked', rower);
       this.loadRowerData(rower);
     }
     if (event.node.data('team')){
@@ -123,7 +122,6 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
   }
 
   loadRowerData(rower: string) {
-    console.log('Load data', rower);
     this.error = '';
     const theRower = this.rowers.find(r => r.name === rower);
     this.selectedRower = theRower;
@@ -271,7 +269,6 @@ export class EstropadakRowerGraphComponent implements AfterViewInit{
       },
       (err) => {
         this.error = 'Ez dago daturik aukeratutako taldearentzat, urte eta liga horretan';
-        console.log('No data', err);
       });
   }
 
