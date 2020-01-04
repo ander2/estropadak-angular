@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpParams } from '@angular/common/http';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -32,9 +33,10 @@ export class UrteakService {
 
     constructor(private http: Http) { }
 
-    getList() {
+    getList(historial: boolean=false) {
         const endpoint = `${estropadakUrl}years`;
-        return this.http.get(endpoint)
+        const params = {historial};
+        return this.http.get(endpoint, {params})
                 .pipe(map(res => res.json()))
     }
 
