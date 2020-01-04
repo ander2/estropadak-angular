@@ -20,6 +20,8 @@ export class EstropadakSelectionFormComponent implements OnInit {
   showYears = true;
   @Input()
   showTeams = true;
+  @Input()
+  historial = false;
   @Output()
   selectionChanged: EventEmitter<any> = new EventEmitter();
   form: FormGroup;
@@ -43,7 +45,7 @@ export class EstropadakSelectionFormComponent implements OnInit {
       this.form.get('team').setValidators(Validators.required);
       this.form.get('team').updateValueAndValidity();
     }
-    this.yearService.getList().subscribe( years => {
+    this.yearService.getList(this.historial).subscribe( years => {
       this.allYears = years;
       this.leagues = Object.keys(years).sort();
       this.updateYears();

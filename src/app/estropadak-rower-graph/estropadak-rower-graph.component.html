@@ -16,7 +16,7 @@
       <ng2-cytoscape [elements]="graphData" [layout]="layout" [zoom]="zoom" [selected]="selectedNode" (select)="nodeChange($event)"></ng2-cytoscape>
   </div>
   <div fxFlex="30" fxFlex.xs="0 1 auto">
-    <app-estropadak-selection-form [year]="this.year" [league]="this.league" [showTeams]="false" (selectionChanged)="yearLeagueChange($event)"></app-estropadak-selection-form>
+    <app-estropadak-selection-form [year]="this.year" [league]="this.league" [showTeams]="false" [historial]="true" (selectionChanged)="yearLeagueChange($event)"></app-estropadak-selection-form>
     <h2 class="mat-h2">{{node_name}} - {{year}} - {{league}}</h2>
     <ng-container *ngIf="selectedRower">
       <h3 class="mat-h3">{{selectedRower.birthplace}} ({{selectedRower.birthday}})</h3>
