@@ -32,6 +32,7 @@ import { AppComponent } from './app.component';
 import { EstropadaService, UrteakService, SailkapenaService, EmaitzakService } from './shared/estropada.service';
 import { EstropadakListComponent } from './estropadak-list/estropadak-list.component';
 import { EstropadaDetailComponent } from './estropada-detail/estropada-detail.component';
+import { EstropadaDetailComponent as EstropadaDetailComponent2 } from './estropada-detail2/estropada-detail.component';
 import { EstropadaTandaComponent } from './estropada-tanda/estropada-tanda.component';
 import { HeaderComponent } from './header.component';
 import { EstropadakSailkapenaComponent } from './estropadak-sailkapena/estropadak-sailkapena.component';
@@ -63,6 +64,10 @@ const routes: Routes = [
   {
     path: 'estropadak/:league/:year',
     component: EstropadakPageComponent
+  },
+  {
+    path: 'estropada/batel-liga/:id',
+    component: EstropadaDetailComponent2
   },
   {
     path: 'estropada/:id',
@@ -98,6 +103,7 @@ const routes: Routes = [
     HeaderComponent,
     EstropadakListComponent,
     EstropadaDetailComponent,
+    EstropadaDetailComponent2,
     EstropadaTandaComponent,
     EstropadakSailkapenaComponent,
     EstropadakPortadaComponent,

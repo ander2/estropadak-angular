@@ -43,6 +43,10 @@ export class EstropadakListComponent implements OnChanges {
   }
 
   onSelect(estropada) {
-    this.router.navigate(['/estropada', estropada.id]);
+    if (estropada.id.indexOf('GBL') > -1) {
+      this.router.navigate(['/estropada', 'batel-liga', estropada.id]);
+    } else {
+      this.router.navigate(['/estropada', estropada.id]);
+    }
   }
 }

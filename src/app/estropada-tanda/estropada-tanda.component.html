@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-card-title>{{tanda[0].tanda}}. tanda</mat-card-title>
+  <mat-card-title>{{tanda[0].tanda}}. tanda <span *ngIf="tanda[0].kategoria">- {{tanda[0].kategoria}}</span></mat-card-title>
   <mat-card-content>
     <mat-table #table [dataSource]="dataSource">
         <ng-container matColumnDef="Taldea">
