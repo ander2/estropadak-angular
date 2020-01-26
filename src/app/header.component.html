@@ -7,6 +7,20 @@
       <button mat-menu-item (click)="goToEstropada()">
         Portada
       </button>
+      <button mat-menu-item [matMenuTriggerFor]="traineruak">
+        Traineruak
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="batelak">
+        Batelak
+      </button>
+      <button mat-menu-item (click)="goToEstatistikak()">
+        Grafikak
+      </button>
+      <button mat-menu-item (click)="goToPlayground()">
+        Jolastokia
+      </button>
+    </mat-menu>
+    <mat-menu #traineruak="matMenu">
       <button mat-menu-item (click)="goToEstropada('act', years?.act[years?.act.length - 1])">
         ACT
       </button>
@@ -22,11 +36,10 @@
       <button mat-menu-item (click)="goToEstropada('ete', years?.ete[years?.ete.length - 1])">
         ETE
       </button>
-      <button mat-menu-item (click)="goToEstatistikak()">
-        Grafikak
-      </button>
-      <button mat-menu-item (click)="goToPlayground()">
-        Jolastokia
+    </mat-menu>
+    <mat-menu #batelak="matMenu">
+      <button mat-menu-item (click)="goToEstropada('gbl', years?.gbl[years?.gbl.length - 1])">
+        Gipuzkoako Liga
       </button>
     </mat-menu>
     <h1>Traineru Estropadak</h1>

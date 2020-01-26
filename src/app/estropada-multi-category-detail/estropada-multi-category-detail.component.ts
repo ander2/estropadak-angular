@@ -6,12 +6,12 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { EstropadaTandaComponent } from '../estropada-tanda/estropada-tanda.component';
 
 @Component({
-  selector: 'app-estropada-detail',
-  templateUrl: './estropada-detail.component.html',
-  styleUrls: ['./estropada-detail.component.css']
+  selector: 'app-estropada-multi-category-detail',
+  templateUrl: './estropada-multi-category-detail.component.html',
+  styleUrls: ['./estropada-multi-category-detail.component.css']
 })
 
-export class EstropadaDetailComponent implements OnInit {
+export class EstropadaMultiCategoryDetailComponent implements OnInit {
 
   estropada: any = {};
   id = '1';
