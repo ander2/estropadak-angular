@@ -11,6 +11,7 @@ import { TaldeakServiceStub } from 'app/shared/taldeak.service.stub';
 import { StatsService } from 'app/shared/stats.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { of } from 'rxjs';
 
 describe('EstropadakStatsPageComponent', () => {
   let component: EstropadakStatsPageComponent;
@@ -33,7 +34,13 @@ describe('EstropadakStatsPageComponent', () => {
         {provide: EstropadaService, useClass: EstropadaServiceStub},
         {provide: SailkapenaService, useClass: SailkapenaServiceStub},
         {provide: TaldeakService, useClass: TaldeakServiceStub},
-        {provide: StatsService, useValue: {}}
+        {provide: StatsService, useValue: {
+          getGraphPointsPerRace: () => of([]),
+          getGraphCumulativePoints: () => of([]),
+          getRank: () => of([]),
+          getAges: () => of([]),
+          getIncorporations: () => of([]),
+        }}
       ]
     })
     .compileComponents();
@@ -42,6 +49,8 @@ describe('EstropadakStatsPageComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadakStatsPageComponent);
     component = fixture.componentInstance;
+    component.league = 'act';
+    component.year = 2017;
     fixture.detectChanges();
   });
 
