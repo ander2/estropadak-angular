@@ -35,7 +35,7 @@ describe('EstropadaTandaComponent', () => {
   });
 
   it('should show tanda number in title', () => {
-    expect(fixture.debugElement.query(By.css('mat-card-title')).nativeElement.innerHTML).toBe('1. tanda');
+    expect(fixture.debugElement.query(By.css('mat-card-title')).nativeElement.innerHTML.startsWith('1. tanda')).toBeTruthy();
   });
 
   it('should show one row per team', () => {
