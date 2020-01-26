@@ -4,7 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule, MatTableModule, MatButtonModule, MatToolbarModule, MatCardModule } from '@angular/material';
 import {MatDividerModule } from '@angular/material/divider';
 
-import { EstropadaDetailComponent } from './estropada-detail.component';
+import { EstropadaMultiCategoryDetailComponent } from './estropada-multi-category-detail.component';
 import { EstropadaEstropadaSailkapenaComponent } from '../estropada-estropada-sailkapena/estropada-estropada-sailkapena.component';
 import { EstropadaTandaComponent } from '../estropada-tanda/estropada-tanda.component';
 import { EstropadaService } from '../shared/estropada.service';
@@ -13,8 +13,8 @@ import { EstropadaNavegationComponent } from '../estropada-navegation/estropada-
 import { EstropadakNavegationService } from '../shared/estropadak-navegation.service';
 
 describe('EstropadaDetailComponent', () => {
-  let component: EstropadaDetailComponent;
-  let fixture: ComponentFixture<EstropadaDetailComponent>;
+  let component: EstropadaMultiCategoryDetailComponent;
+  let fixture: ComponentFixture<EstropadaMultiCategoryDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -29,7 +29,7 @@ describe('EstropadaDetailComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        EstropadaDetailComponent,
+        EstropadaMultiCategoryDetailComponent,
         EstropadaEstropadaSailkapenaComponent,
         EstropadaTandaComponent,
         EstropadaNavegationComponent
@@ -43,7 +43,7 @@ describe('EstropadaDetailComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EstropadaDetailComponent);
+    fixture = TestBed.createComponent(EstropadaMultiCategoryDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
