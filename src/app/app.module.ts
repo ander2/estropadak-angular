@@ -102,7 +102,7 @@ const routes: Routes = [
     HeaderComponent,
     EstropadakListComponent,
     EstropadaDetailComponent,
-    EstropadaDetailComponent2,
+    EstropadaMultiCategoryDetailComponent,
     EstropadaTandaComponent,
     EstropadakSailkapenaComponent,
     EstropadakPortadaComponent,
