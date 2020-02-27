@@ -56,8 +56,14 @@ export class SailkapenaService {
             .pipe(map(res => res.json()));
     }
 
-    getOne(league: string, year: string, team?: string): any {
-        const params = {league, year, team};
+    getOne(league: string, year: string, team?: string, category?: string): any {
+        const params = {league, year};
+        if (team) {
+            params['team'] = team;
+        }
+        if (category) {
+            params['category'] = category;
+        }
         return this.http.get(`${estropadakUrl}sailkapena`, {params})
             .pipe(map(res => res.json()));
     }

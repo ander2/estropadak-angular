@@ -8,6 +8,12 @@
   <mat-button-toggle value="EUSKOTREN" [checked]="league.toUpperCase() === 'EUSKOTREN'">EUSKOTREN</mat-button-toggle>
   <mat-button-toggle value="ETE" [checked]="league.toUpperCase() === 'ETE'">ETE</mat-button-toggle>
 </mat-button-toggle-group>
+<mat-form-field *ngIf="league === 'gbl'">
+  <mat-label>Kategoria </mat-label>
+  <mat-select [(ngModel)]="category" (selectionChange)="onChangeCategory($event)">
+    <mat-option *ngFor="let kat of kategoriak" [value]="kat">{{kat}}</mat-option>
+  </mat-select>
+</mat-form-field>
 <ng-container *ngIf="sailkapena; else no_sailkapena">
   <mat-table #table [dataSource]="dataSource">
       <ng-container matColumnDef="Posizioa">

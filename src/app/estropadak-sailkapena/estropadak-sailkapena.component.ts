@@ -4,7 +4,7 @@ import {Observable, of} from 'rxjs';
 
 import { SailkapenaService } from 'app/shared/estropada.service';
 import { Stats } from 'app/shared/stats.model';
-import { MatButtonToggleChange } from '@angular/material';
+import { MatButtonToggleChange, MatSelectChange } from '@angular/material';
 
 @Component({
   selector: 'app-estropadak-sailkapena',
@@ -25,6 +25,16 @@ export class EstropadakSailkapenaComponent implements OnChanges {
   sailkapena: Stats;
 
   displayedColumns = ['Posizioa', 'Taldea', 'Puntuak', 'Garaipenak'];
+  kategoriak = [
+    'Promesa NESKAK',
+    'Infantila MUTILAK',
+    'Absolut NESKAK',
+    'Kadete MUTILAK',
+    'Jubenil MUTILAK',
+    'Senior MUTILAK',
+    'Jubenil NESKAK',
+    'Haurra NESKAK'
+  ];
   dataSource;
 
   constructor(
@@ -36,15 +46,26 @@ export class EstropadakSailkapenaComponent implements OnChanges {
     this.getSailkapena(this.league, this.year);
   }
 
+  onChangeCategory(event: MatSelectChange) {
+    const category = event.value;
+    console.log(category);
+    this.getSailkapena(this.league, this.year, category);
+  }
+
   ngOnChanges(changes: SimpleChanges) {
+    let category;
     if (changes.year) {
       this.year = changes.year.currentValue;
     }
-    this.getSailkapena(this.league, this.year);
+    if (this.league === 'gbl') {
+      category = 'Haurra NESKAK';
+    }
+
+    this.getSailkapena(this.league, this.year, category);
   }
 
-  getSailkapena(league, year) {
-    this.sailkapenaService.getOne(league, year)
+  getSailkapena(league, year, category?) {
+    this.sailkapenaService.getOne(league, year, null, category)
     .subscribe((res) => {
       this.sailkapena = res[0];
       const sailk = Object.keys(this.sailkapena.stats).reduce((memo: any[], taldeIzena: string) => {
