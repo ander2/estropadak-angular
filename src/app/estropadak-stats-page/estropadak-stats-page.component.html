@@ -23,6 +23,13 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-form-field *ngIf="form.get('league').value === 'gbl'">
+      <mat-select formControlName="category" placeholder="Kategoria" (selectionChange)="updateChart()">
+        <mat-option *ngFor="let kat of kategoriak" [value]="kat">
+          {{kat | uppercase}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
     <ng-container *ngIf="showYears">
       <mat-form-field>
         <mat-select formControlName="year" placeholder="Urtea" (selectionChange)="updateChart()">
@@ -32,7 +39,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </ng-container> 
+    </ng-container>
     <ng-container *ngIf="showTeams">
     <mat-form-field>
       <mat-select formControlName="team" placeholder="Taldea" (selectionChange)="teamChange()">
@@ -42,7 +49,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    </ng-container> 
+    </ng-container>
   </form>
 </div>
 <div *ngIf="options">

@@ -49,6 +49,17 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
   showYears = false;
   showTeams = false;
   chart: string;
+  kategoriak = [
+    'Promesa NESKAK',
+    'Infantila MUTILAK',
+    'Absolut NESKAK',
+    'Kadete MUTILAK',
+    'Jubenil MUTILAK',
+    'Senior MUTILAK',
+    'Jubenil NESKAK',
+    'Haurra NESKAK'
+  ];
+  category = this.kategoriak[0];
 
   constructor(
     private fb: FormBuilder,
@@ -62,10 +73,11 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.form = this.fb.group({
-      'league': [this.league],
-      'year': [this.year],
-      'chart': [this.chart],
-      'team': [this.team]
+      league: [this.league],
+      year: [this.year],
+      chart: [this.chart],
+      team: [this.team],
+      category: [this.category]
     });
     this.yearService.getList().subscribe( years => {
       this.allYears = years;
@@ -223,10 +235,11 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
     const year = this.form.get('year').value;
     const league = this.form.get('league').value;
     this.team = this.form.get('team').value;
-    this.updateData(year, league, this.team);
+    this.category = this.form.get('category').value;
+    this.updateData(year, league, this.team, this.category);
   }
 
-  updateData(year: string, league: string, team?: string) {
+  updateData(year: string, league: string, team?: string, category?: string) {
     this.estropadaService.getList(league, year)
     .subscribe((estropadak) => {
       this.estropadak = estropadak.filter((estropada) => {
@@ -242,7 +255,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
       if (team) {
         this.loadTeamData(league, team);
       } else {
-        this.loadYearData(league, year);
+        this.loadYearData(league, year, category);
       }
     });
   }
@@ -321,18 +334,18 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
     this.years = this.allYears[league].sort((a, b) => b - a);
   }
 
-  loadYearData(league: string, year: string) {
-    this.statsService.getGraphPointsPerRace(league, parseInt(year, 10))
+  loadYearData(league: string, year: string, category: string) {
+    this.statsService.getGraphPointsPerRace(league, parseInt(year, 10), null, category)
     .subscribe(res => {
       this.points_per_race = res;
       this.changeChart();
     });
-    this.statsService.getGraphCumulativePoints(league, parseInt(year, 10))
+    this.statsService.getGraphCumulativePoints(league, parseInt(year, 10), null, category)
     .subscribe(res => {
       this.cumulative = res;
       this.changeChart();
     });
-    this.statsService.getRank(league, parseInt(year, 10))
+    this.statsService.getRank(league, parseInt(year, 10), null, category)
     .subscribe( res => {
       this.rank = res;
       this.changeChart();
