@@ -27,6 +27,17 @@ export class EstropadakSelectionFormComponent implements OnInit {
   years: number[];
   teams: string[] = [];
   allYears: {[key: string]: number[]};
+  kategoriak = [
+    'Promesa NESKAK',
+    'Infantila MUTILAK',
+    'Absolut NESKAK',
+    'Kadete MUTILAK',
+    'Jubenil MUTILAK',
+    'Senior MUTILAK',
+    'Jubenil NESKAK',
+    'Haurra NESKAK'
+  ];
+  category = this.kategoriak[0];
   constructor(
     private fb: FormBuilder,
     private yearService: UrteakService,
@@ -37,7 +48,8 @@ export class EstropadakSelectionFormComponent implements OnInit {
     this.form = this.fb.group({
       league: [this.league.toLowerCase(), Validators.required],
       year: [this.year, Validators.required],
-      team: [this.team]
+      team: [this.team],
+      category: [this.category]
     });
     if (this.showTeams) {
       this.form.get('team').setValidators(Validators.required);
@@ -65,6 +77,7 @@ export class EstropadakSelectionFormComponent implements OnInit {
   }
 
   updateYearsAndRefresh() {
+    this.league = this.form.get('league').value;
     this.updateYears();
     this.form.get('year').setValue(this.years[0]);
   }
