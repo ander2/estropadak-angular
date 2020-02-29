@@ -3,6 +3,13 @@
   <h2 class="mat-title">{{estropada.data}} {{estropada.lekua}}</h2>
   <app-estropada-navegation [estropadaId]="id"></app-estropada-navegation>
   <h4 *ngIf="estropada.oharrak">Oharrak: {{estropada.oharrak}}</h4>
+  <mat-form-field>
+    <mat-label>Kategoria </mat-label>
+    <mat-select [(ngModel)]="category" (selectionChange)="onChangeCategory($event)">
+      <mat-option value="guztiak">Guztiak</mat-option>
+      <mat-option *ngFor="let kat of kategoriak" [value]="kat">{{kat}}</mat-option>
+    </mat-select>
+  </mat-form-field>
   <div *ngFor="let tanda of estropada?.tandak">
     <app-estropada-tanda [tanda]="tanda"></app-estropada-tanda>
     <mat-divider></mat-divider>
