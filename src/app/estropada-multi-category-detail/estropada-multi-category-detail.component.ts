@@ -16,6 +16,18 @@ export class EstropadaMultiCategoryDetailComponent implements OnInit {
   estropada: any = {};
   id = '1';
   datasource;
+  kategoriak = [
+    'Promesa NESKAK',
+    'Infantila MUTILAK',
+    'Absolut NESKAK',
+    'Kadete MUTILAK',
+    'Jubenil MUTILAK',
+    'Senior MUTILAK',
+    'Jubenil NESKAK',
+    'Haurra NESKAK'
+  ];
+  category = 'guztiak';
+
   constructor(
     private estropadaService: EstropadaService,
     private route: ActivatedRoute,
@@ -44,17 +56,7 @@ export class EstropadaMultiCategoryDetailComponent implements OnInit {
           tandak[index] = [sailk];
         }
       });
-      // if (tanda1.length > 0) {
-      //   tandak.push(tanda1);
-      // }
-      // const tanda2 = sailkapena.filter((el) => el.tanda === 2);
-      // if (tanda2.length > 0) {
-      //   tandak.push(tanda2);
-      // }
-      // const tanda3 = sailkapena.filter((el) => el.tanda === 3);
-      // if (tanda3.length > 0) {
-      //   tandak.push(tanda3);
-      // }
+
       this.estropada = {
         izena: estropada.izena,
         lekua: estropada.lekua,
@@ -64,5 +66,24 @@ export class EstropadaMultiCategoryDetailComponent implements OnInit {
         oharrak: estropada.oharrak
       };
     });
+  }
+
+  onChangeCategory(event) {
+    const tandak = [];
+    const sailkapena = this.estropada.sailkapena || [];
+    if (event.value === 'guztiak') {
+      sailkapena.forEach(sailk => {
+        const index = sailk.tanda - 1;
+        if (tandak[index]) {
+          tandak[index].push(sailk);
+        } else {
+          tandak[index] = [sailk];
+        }
+      });
+    } else {
+      tandak.push(sailkapena.filter(t => t.kategoria === event.value));
+    }
+
+    this.estropada.tandak = tandak;
   }
 }
