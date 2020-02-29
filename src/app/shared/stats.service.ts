@@ -4,6 +4,7 @@ import { Http } from '@angular/http';
 import {map, tap } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
+import { of } from 'rxjs';
 
 const estropadakUrl = environment.apiUrl;
 
@@ -61,8 +62,17 @@ export class StatsService {
     }
   }
 
-  getGraphPointsPerRace(league: string, year?: number, team?: string) {
-    const params = {league, year, team};
+  getGraphPointsPerRace(league: string, year?: number, team?: string, category?: string) {
+    const params = {league};
+    if (year) {
+      params['year'] = year;
+    }
+    if (team) {
+      params['team'] = team;
+    }
+    if (category) {
+      params['category'] = category;
+    }
 
     return this.http.get(`${estropadakUrl}sailkapena`, {params})
     .pipe(map(res => res.json()))
@@ -86,8 +96,17 @@ export class StatsService {
     }));
   }
 
-  getGraphCumulativePoints(league: string, year?: number, team?: string) {
-    const params = {league, year, team};
+  getGraphCumulativePoints(league: string, year?: number, team?: string, category?: string) {
+    const params = {league};
+    if (year) {
+      params['year'] = year;
+    }
+    if (team) {
+      params['team'] = team;
+    }
+    if (category) {
+      params['category'] = category;
+    }
 
     return this.http.get(`${estropadakUrl}sailkapena`, {params})
     .pipe(map(res => res.json()))
@@ -123,8 +142,17 @@ export class StatsService {
     }));
   }
 
-  getRank(league: string, year?: number, team?: string) {
-    const params = {league, year, team};
+  getRank(league: string, year?: number, team?: string, category?: string) {
+    const params = {league};
+    if (year) {
+      params['year'] = year;
+    }
+    if (team) {
+      params['team'] = team;
+    }
+    if (category) {
+      params['category'] = category;
+    }
 
     return this.http.get(`${estropadakUrl}sailkapena`, {params})
     .pipe(map(res => res.json()))
@@ -145,6 +173,10 @@ export class StatsService {
 
   getAges(league: string, year?: number, team?: string) {
     const params = {league, year, team};
+
+    if (league.toLowerCase() === 'gbl') {
+      return of([]);
+    }
 
     return this.http.get(`${estropadakUrl}sailkapena`, {params})
     .pipe(map(res => res.json()))
@@ -177,7 +209,7 @@ export class StatsService {
         const stats = res[0].stats;
         return [{
           key: 'Min',
-          values: 
+          values:
             Object.keys(stats)
                   .map((teamName) => ({
                     label: teamName,
@@ -205,6 +237,10 @@ export class StatsService {
 
   getIncorporations(league: string, year?: number, team?: string) {
     const params = {league, year, team};
+
+    if (league.toLowerCase() === 'gbl') {
+      return of([]);
+    }
 
     return this.http.get(`${estropadakUrl}sailkapena`, {params})
     .pipe(map(res => res.json()))

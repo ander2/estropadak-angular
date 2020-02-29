@@ -16,4 +16,5 @@ export class SeasonTeamSelection {
   league: string;
   year: number;
   team: string;
+  category?: string;
 }
