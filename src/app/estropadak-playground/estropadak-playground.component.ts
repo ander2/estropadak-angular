@@ -16,7 +16,8 @@ export class EstropadakPlaygroundComponent implements OnInit {
 
   public dataSource: any;
   year = 2019;
-  league = 'act'
+  league = 'act';
+  category = '';
   displayedColumns = ['estropada'];
   displayColumnHeaders = ['izena'];
   displayProp = 'posizioa';
@@ -50,11 +51,18 @@ export class EstropadakPlaygroundComponent implements OnInit {
   paramsChanged(newParams: SeasonTeamSelection) {
     this.league = newParams.league;
     this.year = newParams.year;
+    this.category = newParams.category;
     this.resetTable();
     if (this.league === 'ete' || this.league === 'euskotren') {
       this.form.get('minTime').setValue('11:00');
       this.form.get('maxTime').setValue('13:00');
     }
+    if (this.category.toLowerCase() === 'gbl') {
+      this.properties = ['posizioa', 'puntuazioa', 'denbora'];
+    } else {
+      this.properties = ['posizioa', 'puntuazioa', 'tanda', 'tanda_postua', 'kalea', 'denbora'];
+    }
+
     this.taldeakService.getList(this.league, this.year)
     .subscribe(res => {
       this.taldeak = res;
@@ -70,20 +78,24 @@ export class EstropadakPlaygroundComponent implements OnInit {
   getEmaitzak(league, year) {
     this.emaitzakService.getList(league, year)
       .subscribe(res => {
+        res = res.filter(s => s.sailkapena);
         const emaitzak = res.map((emaitza, i) => {
           if (emaitza.izena.indexOf('Play') > -1) {
             return null;
           }
           if (i === 0) {
             console.log(this.displayColumnHeaders);
+            if (this.league.toLowerCase() === 'gbl') {
+              emaitza.sailkapena = emaitza.sailkapena.filter(s => s.kategoria === this.category);
+            }
             emaitza.sailkapena.forEach(taldea => {
-              const izena = this.taldeak.find(t => t.alt_names.indexOf(taldea.talde_izena) > -1).name;
+              const izena = this.getTeamName(taldea.talde_izena);
               this.displayColumnHeaders.push(izena)
             });
           }
           const sailkapena = {izena: emaitza.izena};
           emaitza.sailkapena.forEach((taldea) => {
-            const izena = this.taldeak.find(t => t.alt_names.indexOf(taldea.talde_izena) > -1).name;
+            const izena = this.getTeamName(taldea.talde_izena);
             sailkapena[izena] = taldea;
           });
           return sailkapena;
@@ -91,6 +103,14 @@ export class EstropadakPlaygroundComponent implements OnInit {
         .filter(emaitza => emaitza !== null);
         this.dataSource = new PlaygroundDataSource(emaitzak)
     });
+  }
+
+  getTeamName(team: string) {
+    if (this.taldeak.find(t => t.alt_names.indexOf(team) > -1)) {
+      return this.taldeak.find(t => t.alt_names.indexOf(team) > -1).name;
+    } else {
+      return team;
+    }
   }
 
   changeDisplayProp() {
@@ -128,26 +148,7 @@ class PlaygroundDataSource extends DataSource<any> {
   }
 
   connect(): Observable<any> {
-    // this.data.next([{izena: 'Kontxa', Donostiarra: {name: 'Donos', position: 1}}]);
     return this.data;
-    // this.sort.sortChange
-    //   .subscribe(ev => {
-    //     const sailk = this.sailkapena.sort((a, b) => {
-    //       if (['denbora', 'data'].indexOf(ev.active) > -1) {
-    //         if (a[ev.active] < b[ev.active]) {
-    //           return ev.direction === 'asc' ? -1 : 1;
-    //         } else if (a[ev.active] > b[ev.active]) {
-    //           return ev.direction === 'asc' ? 1 : -1;
-    //         } else {
-    //           return 0;
-    //         }
-    //       } else {
-    //         return ev.direction === 'asc' ? a[ev.active] - b[ev.active] : b[ev.active] - a[ev.active];
-    //       }
-    //     });
-    //     this.data.next(this.sailkapena);
-    //   });
-    // return this.data;
   }
 
   filterByValue(displayProp, minVal, maxVal) {
