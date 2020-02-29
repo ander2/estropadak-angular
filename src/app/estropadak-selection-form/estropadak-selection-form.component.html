@@ -6,6 +6,13 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <mat-form-field *ngIf="league.toLowerCase() === 'gbl'">
+    <mat-select formControlName="category" placeholder="Kategoria" (selectionChange)="updateYearsAndRefresh()">
+      <mat-option *ngFor="let kat of kategoriak" [value]="kat">
+        {{kat | uppercase}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
   <ng-container *ngIf="showYears">
     <mat-form-field>
       <mat-select formControlName="year" placeholder="Urtea" (selectionChange)="yearChange()">
@@ -15,7 +22,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-  </ng-container> 
+  </ng-container>
   <ng-container *ngIf="showTeams">
     <mat-form-field>
       <mat-select formControlName="team" placeholder="Taldea" (selectionChange)="teamChange()">
@@ -25,6 +32,6 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-  </ng-container> 
+  </ng-container>
   <button mat-button (click)="selectedData()">Aukeratu</button>
 </form>
