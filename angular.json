@@ -23,7 +23,11 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/cytoscape/dist/cytoscape.min.js",
+              "node_modules/dagre/dist/dagre.min.js",
+              "node_modules/cytoscape-dagre/cytoscape-dagre.js"
+            ]
           },
           "configurations": {
             "production": {
