@@ -3,7 +3,7 @@ export function sanitizeYear(year: string) {
         return undefined;
     }
     const _year = parseInt(year, 10);
-    if (_year > 2008 && _year < 2020) {
+    if (_year > 2008 && _year < 2021) {
         return String(year);
     } else {
         return undefined;
