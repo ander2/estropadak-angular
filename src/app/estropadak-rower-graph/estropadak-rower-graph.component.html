@@ -1,0 +1,28 @@
+<mat-toolbar>Taldeak eta Arraunlariak<sup>beta</sup></mat-toolbar>
+<div>
+  <p>
+    Aukeratu liga eta urte bat eta hasi talde eta arraunlarien artean nabigatzen: 
+  </p>
+  <ul>
+    <li>Click egin talde batean, plantilla ikusteko.</li>
+    <li>Click egin arraunlari batean, bere historiala ikusteko</li>
+    <li>Click egin arraunlari baten historial taulan, talde eta urte jakin bat ikusteko</li>
+    <li>Click egin talde edo arraunlari bat ez den puntu batean, hasierako egoerara bueltatzeko</li>
+  </ul>
+</div>
+<div fxLayout fxLayout.xs="column">
+  <div fxFlex="70" fxFlex.xs="1 1 500px">
+    <h3>{{error}}</h3>
+      <ng2-cytoscape [elements]="graphData" [layout]="layout" [zoom]="zoom" [selected]="selectedNode" (select)="nodeChange($event)"></ng2-cytoscape>
+  </div>
+  <div fxFlex="30" fxFlex.xs="0 1 auto">
+    <app-estropadak-selection-form [year]="this.year" [league]="this.league" [showTeams]="false" [historial]="true" (selectionChanged)="yearLeagueChange($event)"></app-estropadak-selection-form>
+    <h2 class="mat-h2">{{node_name}} - {{year}} - {{league}}</h2>
+    <ng-container *ngIf="selectedRower">
+      <h3 class="mat-h3">{{selectedRower.birthplace}} ({{selectedRower.birthday}})</h3>
+    </ng-container>
+    <div *ngIf="selectedRower">
+      <app-estropadak-rower-historial-table [rower]="selectedRower" (teamClicked)="teamClicked($event)">
+      </app-estropadak-rower-historial-table>
+    </div>
+  </div>
