@@ -12,6 +12,7 @@ export class EstropadakPortadaComponent implements OnInit {
 
   league = 'act';
   year = 2019;
+  this_or_before_year = 2019;
   @ViewChild(MatSidenav) sidenav;
   constructor(
     private router: Router,
@@ -20,7 +21,16 @@ export class EstropadakPortadaComponent implements OnInit {
 
   ngOnInit() {
     this.urteakService.getOne('active_year')
-    .subscribe((res) => this.year = res);
+    .subscribe((res) => {
+      const date = new Date();
+      const month = date.getMonth();
+      if (month < 6){
+        this.this_or_before_year = res - 1;
+      } else {
+        this.this_or_before_year = res;
+      }
+      this.year = res;
+    });
    }
 
   sailkapenaToogle(liga: string) {
