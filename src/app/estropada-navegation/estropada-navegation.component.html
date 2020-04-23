@@ -1,14 +1,14 @@
-<div fxLayout>
-  <div fxFlex="10">
-  <a mat-button [routerLink]="['/estropada', prev]">
-    <mat-icon>
-      arrow_left
-    </mat-icon>
-  </a>
+<div fxLayout fxFill fxLayoutAling="space-between center">
+  <div >
+    <a mat-button matTooltip="Aurreko estropada" [routerLink]="['/estropada', prev]">
+      <mat-icon>
+        arrow_left
+      </mat-icon>
+    </a>
   </div>
-  <div fxFlex="80"></div>
-  <div fxFlex="10">
-    <a mat-button [routerLink]="['/estropada', next]">
+  <div fxFlex></div>
+  <div >
+    <a mat-button matTooltip="Hurrengo estropada" [routerLink]="['/estropada', next]">
       <mat-icon>
         arrow_right
       </mat-icon>
