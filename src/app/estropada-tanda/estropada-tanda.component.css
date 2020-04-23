@@ -5,3 +5,13 @@ mat-card {
   margin: 15px 0
 }
 
+.mat-column-Postua {
+  padding-left: 0;
+}
+
+.mat-column-Denbora {
+  padding-right: 0;
+}
+mat-header-cell, mat-cell {
+  justify-content: center;
+}
