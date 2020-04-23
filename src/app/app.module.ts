@@ -16,7 +16,8 @@ import {
   MatButtonToggleModule,
   MatFormFieldModule,
   MatSelectModule,
-  MatSortModule
+  MatSortModule,
+  MatTooltipModule
 } from '@angular/material';
 
 // provider
@@ -146,6 +147,7 @@ const routes: Routes = [
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
+    MatTooltipModule,
     MatMenuModule,
     MatSidenavModule,
     MatSortModule,
