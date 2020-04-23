@@ -35,14 +35,14 @@ describe('EstropadaTandaComponent', () => {
   });
 
   it('should show tanda number in title', () => {
-    expect(fixture.debugElement.query(By.css('mat-card-title')).nativeElement.innerHTML.startsWith('1. tanda')).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('mat-card-title')).nativeElement.textContent).toContain('1. tanda');
   });
 
   it('should show one row per team', () => {
     expect(fixture.debugElement.queryAll(By.css('mat-row')).length).toEqual(4);
   });
 
-  it('should have 7 columns per row(team)', () => {
-    expect(fixture.debugElement.queryAll(By.css('mat-row mat-cell')).length).toEqual(28);
+  it('should have 8 columns per row(team)', () => {
+    expect(fixture.debugElement.queryAll(By.css('mat-row mat-cell')).length).toEqual(32);
   });
 });

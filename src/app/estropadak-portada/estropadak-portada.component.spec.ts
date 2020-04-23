@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { MatSidenavModule, MatTableModule, MatButtonToggleModule, MatListModule, MatToolbarModule, MatCardModule, MatIconModule } from '@angular/material';
+import { MatSidenavModule, MatTableModule, MatButtonToggleModule, MatListModule, MatToolbarModule, MatCardModule, MatIconModule, MatSelectModule, MatFormFieldModule } from '@angular/material';
 
 import { EstropadakPortadaComponent } from './estropadak-portada.component';
 import { EstropadakSailkapenaComponent } from '../estropadak-sailkapena/estropadak-sailkapena.component';
@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EstropadakAzkenEmaitzakCardComponent } from '../estropadak-azken-emaitzak-card/estropadak-azken-emaitzak-card.component';
 import { EstropadakHurrengoakCardComponent } from '../estropadak-hurrengoak-card/estropadak-hurrengoak-card.component';
 import { EstropadakNavegationService } from '../shared/estropadak-navegation.service';
+import { FormsModule } from '@angular/forms';
 
 describe('EstropadakPortadaComponent', () => {
   let component: EstropadakPortadaComponent;
@@ -20,11 +21,14 @@ describe('EstropadakPortadaComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        FormsModule,
         MatCardModule,
+        MatFormFieldModule,
         MatIconModule,
         MatSidenavModule,
         MatTableModule,
         MatButtonToggleModule,
+        MatSelectModule,
         MatToolbarModule,
         MatListModule,
         RouterTestingModule

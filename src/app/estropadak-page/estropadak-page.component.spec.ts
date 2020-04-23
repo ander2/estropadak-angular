@@ -3,7 +3,18 @@ import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatIconModule, MatTabsModule, MatButtonModule, MatMenuModule, MatListModule, MatTableModule, MatButtonToggleModule, MatToolbarModule } from '@angular/material';
+import {
+  MatIconModule,
+  MatTabsModule,
+  MatButtonModule,
+  MatMenuModule,
+  MatListModule,
+  MatTableModule,
+  MatButtonToggleModule,
+  MatToolbarModule,
+  MatSelectModule,
+  MatFormFieldModule,
+} from '@angular/material';
 import { NvD3Module } from 'ng2-nvd3';
 import { of } from 'rxjs';
 
@@ -16,6 +27,7 @@ import { EstropadaService, UrteakService, SailkapenaService } from '../shared/es
 import { HttpModule } from '@angular/http';
 import { EstropadaServiceStub, SailkapenaServiceStub, UrteakServiceStub } from '../shared/estropada.service.stub';
 import { EstropadakNavegationService } from '../shared/estropadak-navegation.service';
+import { FormsModule } from '@angular/forms';
 
 describe('EstropadakPageComponent', () => {
   let component: EstropadakPageComponent;
@@ -25,12 +37,15 @@ describe('EstropadakPageComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        FormsModule,
         HttpModule,
         MatButtonModule,
         MatButtonToggleModule,
+        MatFormFieldModule,
         MatIconModule,
         MatListModule,
         MatMenuModule,
+        MatSelectModule,
         MatTabsModule,
         MatTableModule,
         MatToolbarModule,

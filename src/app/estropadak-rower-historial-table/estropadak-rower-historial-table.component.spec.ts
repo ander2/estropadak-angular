@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EstropadakRowerHistorialTableComponent } from './estropadak-rower-historial-table.component';
+import { MatTableModule, MatButtonModule, MatIconModule, MatSortModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('EstropadakRowerHistorialTableComponent', () => {
   let component: EstropadakRowerHistorialTableComponent;
@@ -8,6 +10,13 @@ describe('EstropadakRowerHistorialTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatIconModule,
+        MatSortModule,
+        MatTableModule
+      ],
       declarations: [ EstropadakRowerHistorialTableComponent ]
     })
     .compileComponents();
@@ -16,6 +25,9 @@ describe('EstropadakRowerHistorialTableComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadakRowerHistorialTableComponent);
     component = fixture.componentInstance;
+    component.rower = {
+      historial: []
+    }
     fixture.detectChanges();
   });
 

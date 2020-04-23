@@ -212,6 +212,10 @@ export class EstropadaServiceStub {
       }
     ]);
   }
+
+  getCategories() {
+    return of([]);
+  }
 }
 
 
