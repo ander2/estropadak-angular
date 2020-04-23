@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 
@@ -24,6 +24,100 @@ export class EstropadaService {
     getOne(id: string): Observable<Estropada> {
         return this.http.get(`${estropadakUrl}estropada/${id}`)
             .pipe(map(res => res.json()))
+    }
+
+    isMulticategory(league: string): boolean {
+        if (['gbl', 'bbl'].indexOf(league.toLowerCase()) > -1) {
+            return true;
+        }
+        return false;
+    }
+
+    getCategories(liga: string) {
+        // 'AG', 'IG', 'IN', 'KG', 'KN', 'JG', 'JN', 'SN', 'SG'
+        let kategoriak;
+        if (liga.toLowerCase() === 'bbl') {
+            kategoriak = [
+            {
+                name: 'Alebin mutilak',
+                code: 'AG'
+            },
+            {
+                name: 'Alebin neskak',
+                code: 'AN'
+            },
+            {
+                name: 'Infantil mutilak',
+                code: 'IG'
+            },
+            {
+                name: 'Infantil neskak',
+                code: 'IN'
+            },
+            {
+                name: 'Kadete mutilak',
+                code: 'KG'
+            },
+            {
+                name: 'Kadete neskak',
+                code: 'KN'
+            },
+            {
+                name: 'Jubenil mutilak',
+                code: 'JG'
+            },
+            {
+                name: 'Jubenil neskak',
+                code: 'JN'
+            },
+            {
+                name: 'Senior mutilak',
+                code: 'SG'
+            },
+            {
+                name: 'Senior neskak',
+                code: 'SN'
+            }
+        ];
+        } else {
+            // 0: "Promesa NESKAK"
+            kategoriak = [
+            {
+                name: 'Infantil mutilak',
+                code: 'Infantila MUTILAK'
+            },
+            {
+                name: 'Infantil neskak',
+                code: 'Haurra NESKAK'
+            },
+            {
+                name: 'Kadete mutilak',
+                code: 'Kadete MUTILAK'
+            },
+            {
+                name: 'Kadete neskak',
+                code: 'Promesa NESKAK'
+            },
+            {
+                name: 'Jubenil mutilak',
+                code: 'Jubenil MUTILAK'
+            },
+            {
+                name: 'Jubenil neskak',
+                code: 'Jubenil NESKAK'
+            },
+            {
+                name: 'Senior mutilak',
+                code: 'Senior MUTILAK'
+            },
+            {
+                name: 'Senior neskak',
+                code: 'Absolut NESKAK'
+            }
+            ];
+
+        }
+        return of(kategoriak);
     }
 }
 

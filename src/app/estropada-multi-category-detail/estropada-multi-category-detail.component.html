@@ -7,7 +7,7 @@
     <mat-label>Kategoria </mat-label>
     <mat-select [(ngModel)]="category" (selectionChange)="onChangeCategory($event)">
       <mat-option value="guztiak">Guztiak</mat-option>
-      <mat-option *ngFor="let kat of kategoriak" [value]="kat">{{kat}}</mat-option>
+      <mat-option *ngFor="let kat of kategoriak" [value]="kat.code">{{kat.name}}</mat-option>
     </mat-select>
   </mat-form-field>
   <div *ngFor="let tanda of estropada?.tandak">

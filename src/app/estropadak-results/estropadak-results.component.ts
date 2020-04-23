@@ -39,9 +39,13 @@ export class EstropadakResultsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.getEmaitzak(this.league, '' + this.year, this.team)
+  }
+
+  getEmaitzak(league, year, team) {
+    this.emaitzakService.getList(league, year, team)
       .subscribe(res => {
         const emaitzak = res.map(emaitza => {
-          if (emaitza.sailkapena.length > 0) {
+          if (emaitza.sailkapena && emaitza.sailkapena.length > 0) {
             emaitza.position = emaitza.sailkapena[0].posizioa;
             emaitza.points = emaitza.sailkapena[0].puntuazioa;
             emaitza.denbora = emaitza.sailkapena[0].denbora;
@@ -73,10 +77,6 @@ export class EstropadakResultsComponent implements OnInit, AfterViewInit {
             this.dataSource.data.next(sailk);
           });
     });
-  }
-
-  getEmaitzak(league, year, team) {
-    return this.emaitzakService.getList(league, year, team);
   }
 
   paramsChanged(newParams: SeasonTeamSelection) {

@@ -1,7 +1,7 @@
 <mat-toolbar>
     {{year}} {{league?.toUpperCase()}} liga. Estropada emaitzak
 </mat-toolbar>
-<mat-nav-list *ngIf="estropadak">
+<mat-nav-list *ngIf="estropadak && estropadak.length > 0; else noestropadak">
   <mat-list-item *ngFor="let estropada of estropadak"
     (click)="onSelect(estropada)">
     <h3 matLine>
@@ -12,3 +12,11 @@
     </p>
   </mat-list-item>
 </mat-nav-list>
+
+<ng-template #noestropadak>
+  <div class="mat-subheading-1 alert">
+    <div>
+      Ez dago estropadarik denboraldi honetan
+    </div>
+  </div>
+</ng-template>

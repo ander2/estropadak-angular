@@ -1,4 +1,6 @@
-<button mat-raised-button [matMenuTriggerFor]="menu">Aurreko urteak</button>
-<mat-menu #menu="matMenu">
-  <button mat-menu-item *ngFor="let year of years" (click)="goToEstropadak(league, year)">{{year}}</button>
-</mat-menu>
+<div>
+  <button mat-raised-button [matMenuTriggerFor]="menu">Aurreko urteak</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item *ngFor="let year of years" (click)="goToEstropadak(league, year)">{{year}}</button>
+  </mat-menu>
+</div>

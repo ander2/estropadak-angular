@@ -16,16 +16,7 @@ export class EstropadaMultiCategoryDetailComponent implements OnInit {
   estropada: any = {};
   id = '1';
   datasource;
-  kategoriak = [
-    'Promesa NESKAK',
-    'Infantila MUTILAK',
-    'Absolut NESKAK',
-    'Kadete MUTILAK',
-    'Jubenil MUTILAK',
-    'Senior MUTILAK',
-    'Jubenil NESKAK',
-    'Haurra NESKAK'
-  ];
+  kategoriak = [];
   category = 'guztiak';
 
   constructor(
@@ -45,15 +36,25 @@ export class EstropadaMultiCategoryDetailComponent implements OnInit {
   refresh( ) {
     this.estropadaService.getOne(this.id)
     .subscribe((estropada) => {
+      this.estropadaService.getCategories(estropada.liga).subscribe(res => this.kategoriak = res);
       const tandak = [];
       const sailkapena = estropada.sailkapena || [];
+      const catMap = estropada.sailkapena.reduce((memo, sailk) => {
+        if (!memo.find(e => e.name === sailk['kategoria'])) {
+          memo.push({
+            name: sailk['kategoria'],
+            index: memo.length
+          });
+        }
+        return memo;
+      }, [])
       // const tanda1 = sailkapena.filter((el) => el.tanda === 1);
       sailkapena.forEach(sailk => {
-        const index = sailk.tanda - 1;
-        if (tandak[index]) {
-          tandak[index].push(sailk);
+        const cat = catMap.find(e => e.name === sailk['kategoria']);
+        if (tandak[cat['index']]) {
+          tandak[cat['index']].push(sailk);
         } else {
-          tandak[index] = [sailk];
+          tandak[cat['index']] = [sailk];
         }
       });
 

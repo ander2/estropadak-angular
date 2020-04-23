@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UrteakService } from 'app/shared/estropada.service';
+import { UrteakService, EstropadaService } from 'app/shared/estropada.service';
 import { TaldeakService } from 'app/shared/taldeak.service';
 
 @Component({
@@ -38,10 +38,13 @@ export class EstropadakSelectionFormComponent implements OnInit {
     'Haurra NESKAK'
   ];
   category = this.kategoriak[0];
+  isMultiCategory = false;
+
   constructor(
     private fb: FormBuilder,
     private yearService: UrteakService,
     private taldeakService: TaldeakService,
+    private estropadakService: EstropadaService
   ) { }
 
   ngOnInit() {
@@ -78,6 +81,7 @@ export class EstropadakSelectionFormComponent implements OnInit {
 
   updateYearsAndRefresh() {
     this.league = this.form.get('league').value;
+    this.isMultiCategory = this.estropadakService.isMulticategory(this.league);
     this.updateYears();
     this.form.get('year').setValue(this.years[0]);
   }

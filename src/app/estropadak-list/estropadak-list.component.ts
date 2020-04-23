@@ -43,7 +43,7 @@ export class EstropadakListComponent implements OnChanges {
   }
 
   onSelect(estropada) {
-    if (estropada.id.indexOf('GBL') > -1) {
+    if (this.estropadaService.isMulticategory(this.league)) {
       this.router.navigate(['/estropada', 'batel-liga', estropada.id]);
     } else {
       this.router.navigate(['/estropada', estropada.id]);
