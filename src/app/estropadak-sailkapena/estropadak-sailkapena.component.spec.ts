@@ -1,10 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MatIconModule, MatTableModule, MatButtonToggleModule, MatToolbarModule } from '@angular/material';
+import {
+  MatIconModule,
+  MatTableModule,
+  MatButtonToggleModule,
+  MatToolbarModule,
+  MatSelectModule,
+  MatFormFieldModule,
+} from '@angular/material';
 
 import { EstropadakSailkapenaComponent } from './estropadak-sailkapena.component';
 import { SailkapenaService } from '../shared/estropada.service';
 import { SailkapenaServiceStub } from '../shared/estropada.service.stub';
+import { FormsModule } from '@angular/forms';
 
 describe('EstropadakSailkapenaComponent', () => {
   let component: EstropadakSailkapenaComponent;
@@ -13,7 +21,10 @@ describe('EstropadakSailkapenaComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        FormsModule,
+        MatFormFieldModule,
         MatIconModule,
+        MatSelectModule,
         MatTableModule,
         MatToolbarModule,
         MatButtonToggleModule,

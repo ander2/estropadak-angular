@@ -8,9 +8,10 @@ import { of } from 'rxjs';
 
 import { EstropadakPlaygroundComponent } from './estropadak-playground.component';
 import { EstropadakSelectionFormComponent } from '../estropadak-selection-form/estropadak-selection-form.component';
-import { EmaitzakService, UrteakService } from '../shared/estropada.service';
+import { EmaitzakService, UrteakService, EstropadaService } from '../shared/estropada.service';
 import { TaldeakService } from '../shared/taldeak.service';
 import { TaldeakServiceStub } from '../shared/taldeak.service.stub';
+import { EstropadaServiceStub } from 'app/shared/estropada.service.stub';
 
 
 describe('EstropadakPlaygroundComponent', () => {
@@ -38,7 +39,8 @@ describe('EstropadakPlaygroundComponent', () => {
       providers: [
         { provide: EmaitzakService, useValue: {getList: () => of([])}},
         { provide: TaldeakService, useClass: TaldeakServiceStub },
-        { provide: UrteakService, useValue: {getList: () => of({act: [2019]})} }
+        { provide: UrteakService, useValue: {getList: () => of({act: [2019]})} },
+        { provide: EstropadaService, useClass: EstropadaServiceStub}
       ]
     })
     .compileComponents();

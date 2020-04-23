@@ -5,10 +5,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatButtonModule, MatSelectModule, MatToolbarModule } from '@angular/material';
 import { of } from 'rxjs';
 
-import { EmaitzakService, UrteakService } from '../shared/estropada.service';
+import { EmaitzakService, UrteakService, EstropadaService } from '../shared/estropada.service';
 import { EstropadakSelectionFormComponent } from './estropadak-selection-form.component';
 import { TaldeakService } from '../shared/taldeak.service';
 import { TaldeakServiceStub } from '../shared/taldeak.service.stub';
+import { EstropadaServiceStub } from 'app/shared/estropada.service.stub';
 
 describe('EstropadakSelectionFormComponent', () => {
   let component: EstropadakSelectionFormComponent;
@@ -26,6 +27,7 @@ describe('EstropadakSelectionFormComponent', () => {
       ],
       declarations: [ EstropadakSelectionFormComponent ],
       providers: [
+        { provide: EstropadaService, useClass: EstropadaServiceStub },
         { provide: TaldeakService, useClass: TaldeakServiceStub },
         { provide: UrteakService, useValue: {getList: () => of({'act': [2019]})} }
       ]
