@@ -67,8 +67,10 @@ export class EstropadakAzkenEmaitzakCardComponent implements OnInit, OnChanges {
             .filter((_, index) => index < 4);
           return estropada;
         });
-      this.dataSource = new EstropadaDataSource(this.estropadak[0].sailkapena);
-      this.dataSource2 = new EstropadaDataSource(this.estropadak[1].sailkapena);
+        if (this.estropadak.length) {
+          this.dataSource = new EstropadaDataSource(this.estropadak[0].sailkapena);
+          this.dataSource2 = new EstropadaDataSource(this.estropadak[1].sailkapena);
+        }
       })
   }
 }
