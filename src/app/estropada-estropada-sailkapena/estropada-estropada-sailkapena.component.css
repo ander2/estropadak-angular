@@ -1,0 +1,7 @@
+.mat-column-Postua {
+  padding-left: 0;
+}
+
+mat-header-cell, mat-cell {
+  justify-content: center;
+}

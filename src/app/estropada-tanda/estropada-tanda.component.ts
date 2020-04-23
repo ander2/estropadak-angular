@@ -13,7 +13,7 @@ export class EstropadaTandaComponent implements OnInit {
   @Input()
   tanda;
   displayedColumns = ['Postua', 'Taldea', 'Kalea', '1.z',
-  '2.z', '3.z', 'Denbora'];
+  '2.z', '3.z', 'ziab', 'Denbora'];
   dataSource;
   constructor() { }
 

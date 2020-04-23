@@ -1,15 +1,19 @@
 <mat-card>
-  <mat-card-title>{{tanda[0].tanda}}. tanda<span *ngIf="tanda[0].kategoria"> - {{tanda[0].kategoria}}</span></mat-card-title>
+  <mat-card-header>
+    <mat-card-title>
+      {{tanda[0].tanda}}. tanda<span *ngIf="tanda[0].kategoria"> - {{tanda[0].kategoria}}</span>
+    </mat-card-title>
+  </mat-card-header>
   <mat-card-content>
     <mat-table #table [dataSource]="dataSource">
-        <ng-container matColumnDef="Taldea">
-          <mat-header-cell *matHeaderCellDef fxLayoutAlign.xs="center center"> Taldea </mat-header-cell>
-          <mat-cell *matCellDef="let row" fxFlex.xs="1 0 45px"> {{row.talde_izena}} </mat-cell>
+        <ng-container matColumnDef="Postua">
+          <mat-header-cell *matHeaderCellDef fxFlex.xs="12" fxLayoutAlign.xs="start center" > Postua </mat-header-cell>
+          <mat-cell *matCellDef="let row" fxFlex.xs="12" fxLayoutAlign.xs="start center"> {{row.tanda_postua}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="Postua">
-          <mat-header-cell *matHeaderCellDef fxHide.xs> Postua </mat-header-cell>
-          <mat-cell *matCellDef="let row" fxFlex.xs="0 1 15px" [ngStyle.xs]="{'padding':0}"> {{row.tanda_postua}} </mat-cell>
+        <ng-container matColumnDef="Taldea">
+          <mat-header-cell *matHeaderCellDef fxLayoutAlign.xs="center center"> Taldea </mat-header-cell>
+          <mat-cell *matCellDef="let row"  fxLayoutAlign.xs="start center"> {{row.talde_izena}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="Kalea">
@@ -18,18 +22,27 @@
         </ng-container>
 
         <ng-container matColumnDef="1.z">
-          <mat-header-cell *matHeaderCellDef> 1.z </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.ziabogak[0]}} </mat-cell>
+          <mat-header-cell *matHeaderCellDef fxHide.xs> 1.z </mat-header-cell>
+          <mat-cell *matCellDef="let row" fxHide.xs> {{row.ziabogak[0]}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="2.z">
-          <mat-header-cell *matHeaderCellDef> 2.z </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.ziabogak[1]}} </mat-cell>
+          <mat-header-cell *matHeaderCellDef fxHide.xs> 2.z </mat-header-cell>
+          <mat-cell *matCellDef="let row" fxHide.xs> {{row.ziabogak[1]}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="3.z">
-          <mat-header-cell *matHeaderCellDef> 3.z </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.ziabogak[2]}} </mat-cell>
+          <mat-header-cell *matHeaderCellDef fxHide.xs> 3.z </mat-header-cell>
+          <mat-cell *matCellDef="let row" fxHide.xs> {{row.ziabogak[2]}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ziab">
+          <mat-header-cell *matHeaderCellDef fxHide.gt-xs>Ziabogak</mat-header-cell>
+          <mat-cell *matCellDef="let row" fxHide.gt-xs>
+            {{row.ziabogak[0]}} <br>
+            {{row.ziabogak[1]}} <br>
+            {{row.ziabogak[2]}}
+          </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="Denbora">
