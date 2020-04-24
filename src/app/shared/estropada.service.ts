@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpParams } from '@angular/common/http';
-import { Http, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -13,18 +12,16 @@ const estropadakUrl = environment.apiUrl;
 @Injectable()
 export class EstropadaService {
 
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
     getList(league: string, year: string): Observable<Estropada[]> {
         const endpoint = `${estropadakUrl}estropadak`;
         const params = {league, year};
-        return this.http.get(endpoint, {params})
-            .pipe(map(res => res.json()))
+        return this.http.get(endpoint, {params}) as Observable<Estropada[]>;
     }
 
     getOne(id: string): Observable<Estropada> {
-        return this.http.get(`${estropadakUrl}estropada/${id}`)
-            .pipe(map(res => res.json()))
+        return this.http.get(`${estropadakUrl}estropada/${id}`) as Observable<Estropada>;
     }
 
     isMulticategory(league: string): boolean {
@@ -125,31 +122,30 @@ export class EstropadaService {
 @Injectable()
 export class UrteakService {
 
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
-    getList(historial: boolean=false) {
+    getList(historial: boolean = false) {
         const endpoint = `${estropadakUrl}years`;
-        const params = {historial};
-        return this.http.get(endpoint, {params})
-                .pipe(map(res => res.json()))
+        const params = {
+            historial: historial.toString()
+        };
+        return this.http.get(endpoint, {params}) as Observable<{[key: string]: number[]}>
     }
 
-    getOne(id: string) {
-        return this.http.get(`${estropadakUrl}${id}`)
-            .pipe(map(res => res.json()))
+    getOne(id: string): Observable<number> {
+        return this.http.get(`${estropadakUrl}${id}`) as Observable<number>;
     }
 }
 
 @Injectable()
 export class SailkapenaService {
 
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
     getList(league: string, year: string, team?: string) {
         const params = {league, year, team};
         const endpoint = `${estropadakUrl}estropadak`;
-        return this.http.get(endpoint, {params})
-            .pipe(map(res => res.json()));
+        return this.http.get(endpoint, {params});
     }
 
     getOne(league: string, year: string, team?: string, category?: string): any {
@@ -160,15 +156,14 @@ export class SailkapenaService {
         if (category) {
             params['category'] = category;
         }
-        return this.http.get(`${estropadakUrl}sailkapena`, {params})
-            .pipe(map(res => res.json()));
+        return this.http.get(`${estropadakUrl}sailkapena`, {params});
     }
 }
 
 @Injectable()
 export class EmaitzakService {
 
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
     getList(league: string, year: string, team?: string) {
         const endpoint = `${estropadakUrl}emaitzak`;
@@ -176,12 +171,10 @@ export class EmaitzakService {
         if (team) {
             params['team'] = team;
         }
-        return this.http.get(endpoint, {params})
-            .pipe(map(res => res.json()));
+        return this.http.get(endpoint, {params}) as Observable<any[]>;
     }
 
     getOne(id: string): Observable<Estropada> {
-        return this.http.get(`${estropadakUrl}estropada/${id}`)
-            .pipe(map(res => res.json()));
+        return this.http.get(`${estropadakUrl}estropada/${id}`) as Observable<Estropada>;
     }
 }

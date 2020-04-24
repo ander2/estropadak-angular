@@ -24,7 +24,6 @@ import { EstropadakListComponent } from '../estropadak-list/estropadak-list.comp
 import { EstropadakSailkapenaComponent } from '../estropadak-sailkapena/estropadak-sailkapena.component';
 import { EstropadakStatsComponent } from '../estropadak-stats/estropadak-stats.component';
 import { EstropadaService, UrteakService, SailkapenaService } from '../shared/estropada.service';
-import { HttpModule } from '@angular/http';
 import { EstropadaServiceStub, SailkapenaServiceStub, UrteakServiceStub } from '../shared/estropada.service.stub';
 import { EstropadakNavegationService } from '../shared/estropadak-navegation.service';
 import { FormsModule } from '@angular/forms';
@@ -38,7 +37,6 @@ describe('EstropadakPageComponent', () => {
       imports: [
         BrowserAnimationsModule,
         FormsModule,
-        HttpModule,
         MatButtonModule,
         MatButtonToggleModule,
         MatFormFieldModule,

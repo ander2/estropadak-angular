@@ -13,7 +13,7 @@ export class EstropadakPortadaComponent implements OnInit {
   league = 'act';
   year = 2019;
   this_or_before_year = 2019;
-  @ViewChild(MatSidenav) sidenav;
+  @ViewChild(MatSidenav, { static: false }) sidenav;
   constructor(
     private router: Router,
     private urteakService: UrteakService

@@ -21,7 +21,7 @@ import {
 } from '@angular/material';
 
 // provider
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule} from '@angular/router';
 
@@ -135,7 +135,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     FlexLayoutModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     MatButtonModule,
     MatButtonToggleModule,
     MatCardModule,
