@@ -170,9 +170,12 @@ export class StatsService {
   getAges(league: string, year?: number, team?: string) {
     const params = {
       league,
-      year: '' + year,
-      team
+      year: '' + year
     };
+
+    if (team) {
+      params['team'] = team;
+    }
 
     if (league.toLowerCase() === 'gbl') {
       return of([]);
@@ -205,30 +208,43 @@ export class StatsService {
           }))
         }]
       } else {
-        const stats = res[0].stats;
-        return [{
-          key: 'Min',
-          values:
-            Object.keys(stats)
-                  .map((teamName) => ({
-                    label: teamName,
-                    value: stats[teamName].age ? parseInt(stats[teamName].age.min_age, 10) : 0
-                  }))
-        }, {
-          key: 'Media',
-          values: Object.keys(stats)
-                  .map((teamName) => ({
-                    label: teamName,
-                    value: stats[teamName].age ? stats[teamName].age.avg_age : 0
-                  }))
-        }, {
-          key: 'Max',
-          values: Object.keys(stats)
-                  .map((teamName) => ({
-                    label: teamName,
-                    value: stats[teamName].age ? parseInt(stats[teamName].age.max_age, 10) : 0
-                  }))
-        }];
+        if (res.length === 0) {
+          return [{
+            key: 'Min',
+            values: []
+          }, {
+            key: 'Media',
+            values: []
+          }, {
+            key: 'Max',
+            values: []
+          }];
+        } else {
+          const stats = res[0].stats;
+          return [{
+            key: 'Min',
+            values:
+              Object.keys(stats)
+                    .map((teamName) => ({
+                      label: teamName,
+                      value: stats[teamName].age ? parseInt(stats[teamName].age.min_age, 10) : 0
+                    }))
+          }, {
+            key: 'Media',
+            values: Object.keys(stats)
+                    .map((teamName) => ({
+                      label: teamName,
+                      value: stats[teamName].age ? stats[teamName].age.avg_age : 0
+                    }))
+          }, {
+            key: 'Max',
+            values: Object.keys(stats)
+                    .map((teamName) => ({
+                      label: teamName,
+                      value: stats[teamName].age ? parseInt(stats[teamName].age.max_age, 10) : 0
+                    }))
+          }];
+        }
       }
     }));
   }
@@ -237,16 +253,19 @@ export class StatsService {
   getIncorporations(league: string, year?: number, team?: string) {
     const params = {
       league,
-      year: '' + year,
-      team
+      year: '' + year
     };
+
+    if (team) {
+      params['team'] = team;
+    }
 
     if (league.toLowerCase() === 'gbl') {
       return of([]);
     }
 
-    return this.http.get(`${estropadakUrl}sailkapena`, {params})
-    .pipe(map(res => res[0].stats))
+    return (this.http.get(`${estropadakUrl}sailkapena`, {params}) as Observable<any[]>)
+    .pipe(map(res => res.length > 0 ? res[0].stats : []))
     .pipe(map(stats => {
         return [{
           key: 'Bajak',
