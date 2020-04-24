@@ -21,7 +21,7 @@ export class EstropadakRowerHistorialTableComponent implements OnInit, OnChanges
   @Output() public teamClicked: EventEmitter<RowerHistorial> = new EventEmitter();
   displayedColumns = ['Urtea', 'Taldea'];
   public dataSource = new HistorialDataSource([]);
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor() { }
 

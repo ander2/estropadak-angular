@@ -22,7 +22,7 @@ export class EstropadakResultsComponent implements OnInit, AfterViewInit {
   public emaitzak = [];
   displayedColumns = ['data', 'Estropada', 'denbora', 'position', 'points'];
   public dataSource = new EstropadaDataSource([]);
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
     private route: ActivatedRoute,

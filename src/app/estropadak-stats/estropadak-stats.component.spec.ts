@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpModule } from '@angular/http';
 
 import { NvD3Module } from 'ng2-nvd3';
 
@@ -13,7 +12,6 @@ xdescribe('EstropadakStatsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpModule,
         NvD3Module,
       ],
       declarations: [ EstropadakStatsComponent ],

@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import {map, tap } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 
 const estropadakUrl = environment.apiUrl;
 
 @Injectable()
 export class StatsService {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   teamColors(team: string) {
     switch (team) {
@@ -74,8 +74,7 @@ export class StatsService {
       params['category'] = category;
     }
 
-    return this.http.get(`${estropadakUrl}sailkapena`, {params})
-    .pipe(map(res => res.json()))
+    return (this.http.get(`${estropadakUrl}sailkapena`, {params}) as Observable<any[]>)
     .pipe(map(res => {
       const results = res.map( stat => {
         return Object.keys(stat.stats).map(taldea => {
@@ -109,8 +108,7 @@ export class StatsService {
     }
 
     return this.http.get(`${estropadakUrl}sailkapena`, {params})
-    .pipe(map(res => res.json()))
-    .pipe(map(res => {
+    .pipe(map((res: any []) => {
       const results = res.map( stat => {
         return Object.keys(res[0].stats).map(taldea => {
           return {
@@ -132,8 +130,7 @@ export class StatsService {
   getTeamRank(league: string, team: string) {
     const params = {league, team};
     return this.http.get(`${estropadakUrl}sailkapena`, {params})
-    .pipe(map(res => res.json()))
-    .pipe(map(stats => {
+    .pipe(map((stats: any[]) => {
       return [{
         key: team,
         color: this.teamColors(team),
@@ -155,7 +152,6 @@ export class StatsService {
     }
 
     return this.http.get(`${estropadakUrl}sailkapena`, {params})
-    .pipe(map(res => res.json()))
     .pipe(map(res => {
       const stats = res[0].stats;
       return [{
@@ -172,15 +168,18 @@ export class StatsService {
   }
 
   getAges(league: string, year?: number, team?: string) {
-    const params = {league, year, team};
+    const params = {
+      league,
+      year: '' + year,
+      team
+    };
 
     if (league.toLowerCase() === 'gbl') {
       return of([]);
     }
 
     return this.http.get(`${estropadakUrl}sailkapena`, {params})
-    .pipe(map(res => res.json()))
-    .pipe(map(res => {
+    .pipe(map((res: any[]) => {
       if (team) {
         res = res.filter(u => u.stats[team].age);
         return [{
@@ -236,14 +235,17 @@ export class StatsService {
 
 
   getIncorporations(league: string, year?: number, team?: string) {
-    const params = {league, year, team};
+    const params = {
+      league,
+      year: '' + year,
+      team
+    };
 
     if (league.toLowerCase() === 'gbl') {
       return of([]);
     }
 
     return this.http.get(`${estropadakUrl}sailkapena`, {params})
-    .pipe(map(res => res.json()))
     .pipe(map(res => res[0].stats))
     .pipe(map(stats => {
         return [{
