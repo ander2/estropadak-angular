@@ -57,6 +57,8 @@ import { EstropadakPlaygroundComponent } from './estropadak-playground/estropada
 import { NgCytoComponent } from './ng-cyto/ng-cyto.component';
 import { EstropadakRowerGraphComponent } from './estropadak-rower-graph/estropadak-rower-graph.component';
 import { EstropadakRowerHistorialTableComponent } from './estropadak-rower-historial-table/estropadak-rower-historial-table.component';
+import { CacheMapService } from './shared/cache-map.service';
+import { httpInterceptorProviders } from './http-interceptors';
 
 const routes: Routes = [
   {
@@ -160,6 +162,8 @@ const routes: Routes = [
     // InMemoryWebApiModule.forRoot(InMemStoreService, {apiBase: 'api/'})
   ],
   providers: [
+    CacheMapService,
+    httpInterceptorProviders,
     EstropadaService,
     EmaitzakService,
     EstropadakNavegationService,
