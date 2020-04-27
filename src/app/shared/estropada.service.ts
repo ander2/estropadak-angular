@@ -21,7 +21,7 @@ export class EstropadaService {
     }
 
     getOne(id: string): Observable<Estropada> {
-        return this.http.get(`${estropadakUrl}estropada/${id}`) as Observable<Estropada>;
+        return this.http.get(`${estropadakUrl}estropadak/${id}`) as Observable<Estropada>;
     }
 
     isMulticategory(league: string): boolean {
@@ -156,7 +156,7 @@ export class SailkapenaService {
         if (category) {
             params['category'] = category;
         }
-        return this.http.get(`${estropadakUrl}sailkapena`, {params});
+        return this.http.get(`${estropadakUrl}sailkapenak`, {params});
     }
 }
 
@@ -175,6 +175,6 @@ export class EmaitzakService {
     }
 
     getOne(id: string): Observable<Estropada> {
-        return this.http.get(`${estropadakUrl}estropada/${id}`) as Observable<Estropada>;
+        return this.http.get(`${estropadakUrl}estropadak/${id}`) as Observable<Estropada>;
     }
 }

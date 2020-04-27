@@ -74,7 +74,7 @@ export class StatsService {
       params['category'] = category;
     }
 
-    return (this.http.get(`${estropadakUrl}sailkapena`, {params}) as Observable<any[]>)
+    return (this.http.get(`${estropadakUrl}sailkapenak`, {params}) as Observable<any[]>)
     .pipe(map(res => {
       const results = res.map( stat => {
         return Object.keys(stat.stats).map(taldea => {
@@ -107,7 +107,7 @@ export class StatsService {
       params['category'] = category;
     }
 
-    return this.http.get(`${estropadakUrl}sailkapena`, {params})
+    return this.http.get(`${estropadakUrl}sailkapenak`, {params})
     .pipe(map((res: any []) => {
       const results = res.map( stat => {
         return Object.keys(res[0].stats).map(taldea => {
@@ -129,7 +129,7 @@ export class StatsService {
 
   getTeamRank(league: string, team: string) {
     const params = {league, team};
-    return this.http.get(`${estropadakUrl}sailkapena`, {params})
+    return this.http.get(`${estropadakUrl}sailkapenak`, {params})
     .pipe(map((stats: any[]) => {
       return [{
         key: team,
@@ -151,7 +151,7 @@ export class StatsService {
       params['category'] = category;
     }
 
-    return this.http.get(`${estropadakUrl}sailkapena`, {params})
+    return this.http.get(`${estropadakUrl}sailkapenak`, {params})
     .pipe(map(res => {
       const stats = res[0].stats;
       return [{
@@ -181,7 +181,7 @@ export class StatsService {
       return of([]);
     }
 
-    return this.http.get(`${estropadakUrl}sailkapena`, {params})
+    return this.http.get(`${estropadakUrl}sailkapenak`, {params})
     .pipe(map((res: any[]) => {
       if (team) {
         res = res.filter(u => u.stats[team].age);
@@ -264,7 +264,7 @@ export class StatsService {
       return of([]);
     }
 
-    return (this.http.get(`${estropadakUrl}sailkapena`, {params}) as Observable<any[]>)
+    return (this.http.get(`${estropadakUrl}sailkapenak`, {params}) as Observable<any[]>)
     .pipe(map(res => res.length > 0 ? res[0].stats : []))
     .pipe(map(stats => {
         return [{
