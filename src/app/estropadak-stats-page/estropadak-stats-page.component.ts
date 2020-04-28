@@ -331,7 +331,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
   updateYears() {
     const league = this.form.get('league').value || 'act';
     this.taldeakService.getList(league, this.year)
-    .subscribe( res => this.teams = res);
+    .subscribe( res => this.teams = res.map(taldea => taldea.name));
     this.years = this.allYears[league].sort((a, b) => b - a);
   }
 

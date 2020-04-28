@@ -16,7 +16,10 @@ export class EstropadaService {
 
     getList(league: string, year: string): Observable<Estropada[]> {
         const endpoint = `${estropadakUrl}estropadak`;
-        const params = {league, year};
+        const params = {league};
+        if (year) {
+            params['year'] = year;
+        }
         return this.http.get(endpoint, {params}) as Observable<Estropada[]>;
     }
 
