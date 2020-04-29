@@ -94,15 +94,12 @@ export class StatsService {
   }
 
   getTeamRank(league: string, team: string) {
-    const params = {league, team};
-    return this.http.get(`${estropadakUrl}sailkapenak`, {params})
-    .pipe(map((stats: any[]) => {
-      return [{
-        key: team,
-        color: this.teamColors(team),
-        values: stats.map((stat, i) => ({label: stat.urtea, value: stat.stats[team].position}))
-      }]
-    }));
+    const params = {
+      league,
+      team,
+      stat: 'rank'
+    };
+    return this.http.get(`${estropadakUrl}estatistikak`, {params});
   }
 
   getRank(league: string, year?: number, team?: string, category?: string) {
@@ -143,7 +140,8 @@ export class StatsService {
   getIncorporations(league: string, year?: number, team?: string) {
     const params = {
       league,
-      year: '' + year
+      year: '' + year,
+      stat: 'incorporations'
     };
 
     if (team) {
@@ -154,25 +152,7 @@ export class StatsService {
       return of([]);
     }
 
-    return (this.http.get(`${estropadakUrl}sailkapenak`, {params}) as Observable<any[]>)
-    .pipe(map(res => res.length > 0 ? res[0].stats : []))
-    .pipe(map(stats => {
-        return [{
-          key: 'Bajak',
-          values: Object.keys(stats)
-                  .map((teamName) => ({
-                    label: teamName,
-                    value: stats[teamName].rowers ? stats[teamName].rowers.bajak : 0
-                  }))
-        }, {
-          key: 'Altak',
-          values: Object.keys(stats)
-                  .map((teamName) => ({
-                    label: teamName,
-                    value: stats[teamName].rowers ? stats[teamName].rowers.altak : 0
-                  }))
-        }];
-    }));
+    return (this.http.get(`${estropadakUrl}estatistikak`, {params}) as Observable<any[]>);
   }
 
 }

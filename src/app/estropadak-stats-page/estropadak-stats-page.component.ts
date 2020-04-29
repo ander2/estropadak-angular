@@ -37,6 +37,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
   lineChartReversedOptions: any = {};
   discreteBarChartOptions: any = {};
   points_per_race: any = [];
+  points_per_year: any = [];
   positions_per_race: any = [];
   rank: any = [];
   cumulative: any = [];
@@ -111,7 +112,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
         },
         {
           name: 'Puntu bilakaera',
-          value: 'points_total'
+          value: 'cumulative'
         },
         {
           name: 'Sailkapen orokorra',
@@ -128,15 +129,11 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
       ],
       taldea: [
         {
-          name: 'Puntuak estropadako',
-          value: 'tpoints_per_race'
-        },
-        {
-          name: 'Puntu bilakaera',
+          name: 'Sailkapen nagusiko puntuak',
           value: 'tpoints_total'
         },
         {
-          name: 'Sailkapen orokorra',
+          name: 'Sailkapen nagusiko postua',
           value: 'trank'
         },
         {
@@ -301,6 +298,9 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
       this.options.chart.yAxis.axisLabel = 'Urteak';
       this.options.chart.reduceXTicks = false;
       this.options.chart.xAxis.staggerLabels = true;
+    } else if (chartType === 'points_total') {
+      this.options = this.lineChartOptions;
+      this.chartData = this.points_per_year;
     } else {
       this.chartData = this.cumulative;
       this.options = this.lineChartOptions;
@@ -366,7 +366,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
   loadTeamData(league: string, team: string) {
     this.statsService.getGraphPointsPerRace(league, undefined, team)
     .subscribe(res => {
-      this.points_per_race = res;
+      this.points_per_year = res;
       this.changeChart();
     });
     this.statsService.getGraphCumulativePoints(league, undefined, team)
