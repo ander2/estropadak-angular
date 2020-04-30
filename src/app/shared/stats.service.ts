@@ -78,7 +78,7 @@ export class StatsService {
     return this.http.get(`${estropadakUrl}estatistikak`, {params});
   }
 
-  getGraphCumulativePoints(league: string, year?: number, team?: string, category?: string) {
+  getGraphCumulativePoints(league: string, year?: number, team?: string, category?: string): Observable<any[]> {
     const params = {league};
     if (year) {
       params['year'] = year;
@@ -90,7 +90,7 @@ export class StatsService {
       params['category'] = category;
     }
 
-    return this.http.get(`${estropadakUrl}estatistikak`, {params});
+    return this.http.get(`${estropadakUrl}estatistikak`, {params}) as Observable<any []>;
   }
 
   getTeamRank(league: string, team: string) {
@@ -99,7 +99,7 @@ export class StatsService {
       team,
       stat: 'rank'
     };
-    return this.http.get(`${estropadakUrl}estatistikak`, {params});
+    return this.http.get(`${estropadakUrl}estatistikak`, {params}) as Observable<any[]>;
   }
 
   getRank(league: string, year?: number, team?: string, category?: string) {
@@ -115,7 +115,7 @@ export class StatsService {
     }
     params['stat'] = 'rank'
 
-    return this.http.get(`${estropadakUrl}estatistikak`, {params});
+    return this.http.get(`${estropadakUrl}estatistikak`, {params}) as Observable<any[]>;
   }
 
   getAges(league: string, year?: number, team?: string) {
@@ -133,7 +133,7 @@ export class StatsService {
       return of([]);
     }
 
-    return this.http.get(`${estropadakUrl}estatistikak`, {params});
+    return this.http.get(`${estropadakUrl}estatistikak`, {params}) as Observable<any[]>;
   }
 
 
