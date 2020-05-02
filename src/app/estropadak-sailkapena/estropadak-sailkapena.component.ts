@@ -67,17 +67,18 @@ export class EstropadakSailkapenaComponent implements OnChanges {
   getSailkapena(league, year, category?) {
     this.sailkapenaService.getOne(league, year, null, category)
     .subscribe((res) => {
-      this.sailkapena = res[0];
-      const sailk = Object.keys(this.sailkapena.stats).reduce((memo: any[], taldeIzena: string) => {
-        this.sailkapena.stats[taldeIzena].izena = taldeIzena;
-        memo.push(this.sailkapena.stats[taldeIzena]);
-        return memo;
-      }, []);
-      const ordered = sailk.sort((a, b) => parseInt(a.position, 10) - parseInt(b.position, 10));
-      this.dataSource = new EstropadaDataSource(ordered);
+      if (res.length > 0) {
+        this.sailkapena = res[0];
+        const sailk = Object.keys(this.sailkapena.stats).reduce((memo: any[], taldeIzena: string) => {
+          this.sailkapena.stats[taldeIzena].izena = taldeIzena;
+          memo.push(this.sailkapena.stats[taldeIzena]);
+          return memo;
+        }, []);
+        const ordered = sailk.sort((a, b) => parseInt(a.position, 10) - parseInt(b.position, 10));
+        this.dataSource = new EstropadaDataSource(ordered);
+      }
     }, (err) => {
-      this.dataSource = new EstropadaDataSource([]);
-      console.log('Error');
+        this.dataSource = new EstropadaDataSource([]);
     });
   }
 }
