@@ -162,9 +162,6 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
           rotateLabels: 25,
           showMaxMin: false
         },
-        yAxis: {
-          axisLabel: 'Puntuak'
-        },
         yDomain: [12, 0],
         yRange: [360, 10]
       }
@@ -180,11 +177,20 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
           bottom: 70,
           left: 65
         },
-        x: (d) => d.label,
+        x: (d) => d.x,
         y: (d) => parseInt(d.value, 10),
         xAxis: {
           axisLabel: 'Estropadak',
-          tickFormat: (d) => this.estropadak[d],
+          tickFormat: (d) => {
+            const last = this.chartData.length - 1;
+            if (this.chartData[last].values[d]) {
+              return this.chartData[last].values[d]['label'];
+            } else if (d > 2000) {
+              return d;
+            } else {
+              return '';
+            }
+          },
           rotateLabels: 25,
           showMaxMin: false
         },
@@ -208,10 +214,10 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
         y: (d) => parseInt(d.value, 10),
         valueFormat: d3.format('d'),
         showValues: true,
-        xAxis: {
-          axisLabel: 'Taldeak',
-        },
-        staggerLabels: false,
+        // xAxis: {
+        //   axisLabel: 'Taldeak',
+        // },
+        staggerLabels: true,
         yAxis: {
           axisLabel: 'Puntuak',
           tickFormat: d3.format('d'),
@@ -239,37 +245,43 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
   }
 
   updateData(year: string, league: string, team?: string, category?: string) {
-    this.estropadaService.getList(league, year)
-    .subscribe((estropadak) => {
-      this.estropadak = estropadak.filter((estropada) => {
-        if ('puntuagarria' in estropada) {
-          return estropada.puntuagarria;
-        } else {
-          return true;
-        }
-      })
-      .map((estropada) => estropada.izena)
-      .filter((estropada) => estropada.indexOf('Play') === -1)
+    const chartType = this.form.get('chart').value;
+    if (chartType === 'points_per_race' || chartType === 'cumulative') {
+      this.estropadaService.getList(league, year)
+      .subscribe((estropadak) => {
+        this.estropadak = estropadak.filter((estropada) => {
+          if ('puntuagarria' in estropada) {
+            return estropada.puntuagarria;
+          } else {
+            return true;
+          }
+        })
+        .map((estropada) => estropada.izena)
+        .filter((estropada) => estropada.indexOf('Play') === -1)
 
-      const chartType = this.form.get('chart').value;
-      if (chartType.indexOf('t') === 0) {
-        this.loadTeamData(league, team);
-      } else {
-        this.loadYearData(league, year, category);
-      }
-    });
+      });
+    }
+    if (chartType.indexOf('t') === 0) {
+      this.loadTeamData(league, team);
+    } else {
+      this.loadYearData(league, year, category);
+    }
   }
 
   changeChart() {
     let chartType = this.form.get('chart').value;
     this.setEnabledFields(chartType);
-    if (chartType.indexOf('t') === 0) {
-      this.lineChartOptions.chart.xAxis.axisLabel = 'Jardunaldia';
-      chartType = chartType.slice(1);
-    } else if (chartType === 'trank') {
-      this.lineChartOptions.chart.yAxis.axisLabel = 'Sailkapena';
+    if (chartType === 'trank') {
+      this.lineChartReversedOptions.chart.yAxis = {
+        axisLabel: 'Postua'
+      };
     } else {
-      this.lineChartOptions.chart.yAxis.axisLabel = 'Puntuak';
+      this.lineChartReversedOptions.chart.yAxis = {
+        axisLabel: 'Puntuak'
+      };
+    }
+    if (chartType.indexOf('t') === 0) {
+      chartType = chartType.slice(1);
     }
     this.options = this.lineChartOptions;
     this.chartData = this.statsData;
@@ -286,15 +298,13 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
     } else if (chartType === 'ages') {
       this.options = this.discreteBarChartOptions;
       this.options.chart.type = 'multiBarChart';
-      this.options.chart.yAxis.axisLabel = 'Urteak';
+      this.options.chart.yAxis.axisLabel = 'Adina';
       this.options.chart.reduceXTicks = false;
-      this.options.chart.xAxis.staggerLabels = true;
     } else if (chartType === 'incorporations') {
       this.options = this.discreteBarChartOptions;
       this.options.chart.type = 'multiBarChart';
-      this.options.chart.yAxis.axisLabel = 'Urteak';
+      this.options.chart.yAxis.axisLabel = 'Alta/Baja';
       this.options.chart.reduceXTicks = false;
-      this.options.chart.xAxis.staggerLabels = true;
     } else if (chartType === 'points_total') {
       this.options = this.lineChartOptions;
     } else {
@@ -408,17 +418,6 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
     //   this.cumulative = res;
     //   this.changeChart();
     // });
-  }
-
-  teamChange() {
-    const team = this.form.get('team').value;
-    if (team) {
-      this.lineChartOptions.chart.xAxis.tickFormat = (i) => i;
-    } else {
-      this.form.get('year').enable();
-      this.lineChartOptions.chart.xAxis.tickFormat = (i) => this.estropadak[i];
-    }
-    this.updateChart();
   }
 
 }

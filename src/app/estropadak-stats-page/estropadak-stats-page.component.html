@@ -42,7 +42,7 @@
     </ng-container>
     <ng-container *ngIf="showTeams">
     <mat-form-field>
-      <mat-select formControlName="team" placeholder="Taldea" (selectionChange)="teamChange()">
+      <mat-select formControlName="team" placeholder="Taldea" (selectionChange)="updateChart()">
         <mat-option [value]="">Guztiak</mat-option>
         <mat-option *ngFor="let team of teams" [value]="team">
           {{team}}
