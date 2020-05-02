@@ -20,12 +20,13 @@ export class HeaderComponent implements OnInit {
     this.urteakService.getList().subscribe((res) => this.years = res);
   }
 
-  goToEstropada(league?: string, year?: string) {
-    if (league && year) {
-      this.router.navigate(['estropadak', league, year]);
-    } else {
-      this.router.navigate(['/']);
-    }
+  goToEstropadak(league: string) {
+    const year = Math.max(...this.years[league]);
+    this.router.navigate(['estropadak', league, year]);
+  }
+
+  goToPortada() {
+    this.router.navigate(['/']);
   }
 
   goToEstatistikak() {

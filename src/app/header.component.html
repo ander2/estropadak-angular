@@ -4,7 +4,7 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="goToEstropada()">
+      <button mat-menu-item (click)="goToPortada()">
         Portada
       </button>
       <button mat-menu-item [matMenuTriggerFor]="traineruak">
@@ -24,24 +24,24 @@
       </button>
     </mat-menu>
     <mat-menu #traineruak="matMenu">
-      <button mat-menu-item (click)="goToEstropada('act', years?.act[years?.act.length - 1])">
+      <button mat-menu-item (click)="goToEstropadak('act')">
         ACT
       </button>
-      <button mat-menu-item (click)="goToEstropada('arc1', years?.arc1[years?.arc1.length - 1])">
+      <button mat-menu-item (click)="goToEstropadak('arc1')">
         ARC-1
       </button>
-      <button mat-menu-item (click)="goToEstropada('arc2', years?.arc2[years?.arc2.length - 1])">
+      <button mat-menu-item (click)="goToEstropadak('arc2')">
         ARC-2
       </button>
-      <button mat-menu-item (click)="goToEstropada('euskotren', years?.euskotren[years?.euskotren.length - 1])">
+      <button mat-menu-item (click)="goToEstropadak('euskotren')">
         Euskotren
       </button>
-      <button mat-menu-item (click)="goToEstropada('ete', years?.ete[years?.ete.length - 1])">
+      <button mat-menu-item (click)="goToEstropadak('ete')">
         ETE
       </button>
     </mat-menu>
     <mat-menu #batelak="matMenu">
-      <button mat-menu-item (click)="goToEstropada('gbl', years?.gbl[years?.gbl.length - 1])">
+      <button mat-menu-item (click)="goToEstropadak('gbl')">
         Gipuzkoako Liga
       </button>
     </mat-menu>
