@@ -88,7 +88,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
     });
     this.initGraphSettings();
     this.route.queryParams.subscribe((params) => {
-      this.year = sanitizeYear(params.year) || '2019';
+      this.year = sanitizeYear(params.year) || '2020';
       this.league = sanitizeLeague(params.league) || 'act';
       this.chart = sanitizeChart(params.chart) || 'general_rank';
       this.form.patchValue({
