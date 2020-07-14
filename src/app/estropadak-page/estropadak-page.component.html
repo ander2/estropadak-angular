@@ -1,6 +1,6 @@
 <app-estropadak-years [league]="league"></app-estropadak-years>
 
-<div fxLayout fxLayout.xs="column">
+<div fxLayout fxLayout.xs="column" *ngIf="league !== 'txapelketak'; else txapelketa">
   <div fxFlex="60%" fxFlex.xs>
     <div class="content">
       <app-estropadak-list [year]="year" [league]="league"></app-estropadak-list>
@@ -12,3 +12,9 @@
     </div>
   </div>
 </div>
+
+<ng-template #txapelketa>
+  <div class="content">
+    <app-estropadak-list [year]="year" [league]="league"></app-estropadak-list>
+  </div>
+</ng-template>
