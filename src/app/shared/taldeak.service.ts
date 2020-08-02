@@ -16,8 +16,10 @@ export class TaldeakService {
       const endpoint = `${estropadakUrl}taldeak`;
       const params = {
         league,
-        year: '' + year
       };
+      if (year) {
+        params['year'] = year;
+      }
       return this.http.get(endpoint, {params});
   }
 

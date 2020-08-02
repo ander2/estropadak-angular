@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable, of} from 'rxjs';
 
-import { SailkapenaService } from 'app/shared/estropada.service';
+import { SailkapenakService } from 'app/shared/sailkapenak.service';
 import { Stats } from 'app/shared/stats.model';
 import { MatButtonToggleChange, MatSelectChange } from '@angular/material';
 
@@ -38,7 +38,7 @@ export class EstropadakSailkapenaComponent implements OnChanges {
   dataSource;
 
   constructor(
-    private sailkapenaService: SailkapenaService,
+    private sailkapenaService: SailkapenakService,
   ) { }
 
   onChangeLeague(event: MatButtonToggleChange) {

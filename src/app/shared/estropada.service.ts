@@ -140,28 +140,7 @@ export class UrteakService {
     }
 }
 
-@Injectable()
-export class SailkapenaService {
 
-    constructor(private http: HttpClient) { }
-
-    getList(league: string, year: string, team?: string) {
-        const params = {league, year, team};
-        const endpoint = `${estropadakUrl}estropadak`;
-        return this.http.get(endpoint, {params});
-    }
-
-    getOne(league: string, year: string, team?: string, category?: string): any {
-        const params = {league, year};
-        if (team) {
-            params['team'] = team;
-        }
-        if (category) {
-            params['category'] = category;
-        }
-        return this.http.get(`${estropadakUrl}sailkapenak`, {params});
-    }
-}
 
 @Injectable()
 export class EmaitzakService {

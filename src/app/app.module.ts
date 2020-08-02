@@ -17,7 +17,8 @@ import {
   MatFormFieldModule,
   MatSelectModule,
   MatSortModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatChipsModule
 } from '@angular/material';
 
 // provider
@@ -30,7 +31,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppComponent } from './app.component';
 
-import { EstropadaService, UrteakService, SailkapenaService, EmaitzakService } from './shared/estropada.service';
+import { EstropadaService, UrteakService, EmaitzakService } from './shared/estropada.service';
 import { EstropadakListComponent } from './estropadak-list/estropadak-list.component';
 import { EstropadaDetailComponent } from './estropada-detail/estropada-detail.component';
 import { EstropadaMultiCategoryDetailComponent } from './estropada-multi-category-detail/estropada-multi-category-detail.component';
@@ -59,6 +60,8 @@ import { EstropadakRowerGraphComponent } from './estropadak-rower-graph/estropad
 import { EstropadakRowerHistorialTableComponent } from './estropadak-rower-historial-table/estropadak-rower-historial-table.component';
 import { CacheMapService } from './shared/cache-map.service';
 import { httpInterceptorProviders } from './http-interceptors';
+import { EstropadakTeamComparationComponent } from './estropadak-team-comparation/estropadak-team-comparation.component';
+import { SailkapenakService } from './shared/sailkapenak.service';
 
 const routes: Routes = [
   {
@@ -101,6 +104,10 @@ const routes: Routes = [
     path: 'arraunlariak',
     component: EstropadakRowerGraphComponent
   },
+  {
+    path: 'konparaketak',
+    component: EstropadakTeamComparationComponent
+  },
   { path: '**', component: PageNotFoundComponent }
 
 ];
@@ -130,7 +137,8 @@ const routes: Routes = [
     EstropadakSelectionFormComponent,
     EstropadakPlaygroundComponent,
     EstropadakRowerGraphComponent,
-    EstropadakRowerHistorialTableComponent
+    EstropadakRowerHistorialTableComponent,
+    EstropadakTeamComparationComponent
   ],
   imports: [
     BrowserModule,
@@ -141,6 +149,7 @@ const routes: Routes = [
     MatButtonModule,
     MatButtonToggleModule,
     MatCardModule,
+    MatChipsModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -167,7 +176,7 @@ const routes: Routes = [
     EstropadaService,
     EmaitzakService,
     EstropadakNavegationService,
-    SailkapenaService,
+    SailkapenakService,
     TaldeakService,
     UrteakService,
     StatsService

@@ -1,5 +1,6 @@
 import { Component, OnInit, OnChanges, Input, ViewEncapsulation } from '@angular/core';
-import { EstropadaService, SailkapenaService } from 'app/shared/estropada.service';
+import { EstropadaService } from 'app/shared/estropada.service';
+import { SailkapenakService } from 'app/shared/sailkapenak.service';
 import 'nvd3';
 import { Estropada } from 'app/shared/estropadak.model';
 declare let d3: any;
@@ -27,7 +28,7 @@ export class EstropadakStatsComponent implements OnInit, OnChanges {
 
   constructor(
     private estropadaService: EstropadaService,
-    private sailkapenaService: SailkapenaService
+    private sailkapenaService: SailkapenakService
   ) { }
 
   ngOnInit() {

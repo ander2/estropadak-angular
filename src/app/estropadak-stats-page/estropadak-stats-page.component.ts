@@ -5,7 +5,8 @@ import { MatSelect } from '@angular/material';
 import * as d3 from 'd3';
 import 'nvd3';
 
-import { EstropadaService, SailkapenaService, UrteakService } from 'app/shared/estropada.service';
+import { EstropadaService, UrteakService } from 'app/shared/estropada.service';
+import { SailkapenakService } from 'app/shared/sailkapenak.service';
 import { TaldeakService } from 'app/shared/taldeak.service';
 import { StatsService } from 'app/shared/stats.service';
 import { ActivatedRoute } from '@angular/router';
@@ -67,7 +68,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
     private fb: FormBuilder,
     private yearService: UrteakService,
     private estropadaService: EstropadaService,
-    private sailkapenaService: SailkapenaService,
+    private sailkapenaService: SailkapenakService,
     private taldeakService: TaldeakService,
     private statsService: StatsService,
     private route: ActivatedRoute

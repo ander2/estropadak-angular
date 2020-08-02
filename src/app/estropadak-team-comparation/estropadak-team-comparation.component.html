@@ -1,0 +1,49 @@
+<div>
+  <mat-toolbar>Talde konparaketak:  </mat-toolbar>
+</div>
+
+<form [formGroup]="form" novalidate>
+  <mat-form-field>
+    <mat-select formControlName="team" placeholder="Taldea">
+      <mat-option *ngFor="let team of taldeak" [value]="team.name">
+        {{team.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-icon-button (click)="taldeaGehitu()">
+    <mat-icon>add_circle_outline</mat-icon>
+  </button>
+  <button mat-button (click)="compare()" [disabled]="!konparaketaEnabled">Konparatu</button>
+  <br>
+  <mat-form-field>
+    <mat-select formControlName="metric" placeholder="Metrica">
+      <mat-option *ngFor="let metric of metrics" [value]="metric.code">
+        {{metric.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+
+
+<div fxLayout fxLayout.xs="column" fxLayoutAlign="center start">
+  <mat-chip-list aria-label="Taldeak" *ngFor="let taldea of aukeratutakoTaldeak">
+    <mat-chip>{{taldea}}</mat-chip>
+  </mat-chip-list>
+
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="urtea">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Urtea</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.urtea}}</mat-cell>
+    </ng-container>
+
+
+    <ng-container *ngFor="let taldea of aukeratutakoTaldeak" [matColumnDef]="taldea">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs>{{taldea}}</mat-header-cell>
+        <mat-cell *matCellDef="let row" fxHide.xs>{{row.stats[taldea][form.get('metric').value]}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
