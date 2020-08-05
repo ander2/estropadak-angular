@@ -4,6 +4,13 @@
 
 <form [formGroup]="form" novalidate>
   <mat-form-field>
+    <mat-select formControlName="liga" placeholder="Liga" >
+      <mat-option *ngFor="let liga of ligak" [value]="liga">
+        {{liga}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
     <mat-select formControlName="team" placeholder="Taldea">
       <mat-option *ngFor="let team of taldeak" [value]="team.name">
         {{team.name}}
@@ -22,13 +29,20 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <mat-form-field class="example-chip-list">
+    <mat-chip-list #chipList aria-label="Taldeak">
+      <mat-chip [removable]="removable" (removed)="taldeaKendu(taldea)" *ngFor="let taldea of aukeratutakoTaldeak">
+        {{taldea}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input placeholder="Taldeak..."
+             [matChipInputFor]="chipList">
+    </mat-chip-list>
+  </mat-form-field>
 </form>
 
 
-<div fxLayout fxLayout.xs="column" fxLayoutAlign="center start">
-  <mat-chip-list aria-label="Taldeak" *ngFor="let taldea of aukeratutakoTaldeak">
-    <mat-chip>{{taldea}}</mat-chip>
-  </mat-chip-list>
+<div>
 
   <mat-table #table [dataSource]="dataSource" matSort>
 
@@ -46,4 +60,9 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+
+</div>
+
+<div>
+  <nvd3 [options]="options" [data]="chartData"></nvd3>
 </div>
