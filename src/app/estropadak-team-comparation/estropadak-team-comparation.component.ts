@@ -44,21 +44,24 @@ export class EstropadakTeamComparationComponent implements OnInit {
       margin : {
         top: 20,
         right: 20,
-        bottom: 70,
+        bottom: 20,
         left: 65
       },
       x: (d) => d.label,
-      y: (d) => parseInt(d.value, 10),
+      y: (d) => {
+        return parseInt(d.value[this.form.get('metric').value], 10);
+      },
       xAxis: {
         axisLabel: 'Urtea',
-        rotateLabels: 25,
-        showMaxMin: false
+        showMaxMin: true
       },
       yAxis: {
-        axisLabel: 'Puntuak'
+        axisLabel: 'Puntuak',
+        tickFormat: d => d
       },
     }
   };
+  viewMode = 'table';
 
   constructor(
     private saikapenakService: SailkapenakService,
@@ -80,6 +83,16 @@ export class EstropadakTeamComparationComponent implements OnInit {
     this.form.get('liga').valueChanges.subscribe((change) => {
       console.log(change);
       this.taldeakLoad(change);
+    });
+    this.form.get('metric').valueChanges.subscribe((change) => {
+      const options = Object.assign({}, this.options);
+      if (change === 'points') {
+        delete options.chart['yDomain'];
+      } else {
+        options.chart['yDomain'] = [12, 1];
+        options.chart['yRange'] = [360, 10];
+      }
+      this.options = options;
     })
   }
 
@@ -124,7 +137,7 @@ export class EstropadakTeamComparationComponent implements OnInit {
             }
             memo[k].push({
               label: stat.urtea,
-              value: stat.stats[k][this.form.get('metric').value]
+              value: stat.stats[k]
             });
             return {
               key: k,
@@ -144,6 +157,10 @@ export class EstropadakTeamComparationComponent implements OnInit {
       });
       console.table(this.chartData);
     })
+  }
+
+  changeMode(mode: string) {
+    this.viewMode = mode;
   }
 
 }
