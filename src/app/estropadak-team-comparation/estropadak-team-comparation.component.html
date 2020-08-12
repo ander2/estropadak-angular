@@ -48,16 +48,16 @@
 </button>
 
 <div *ngIf="viewMode === 'table'">
-  <mat-table #table [dataSource]="dataSource" matSort>
+  <mat-table #table [dataSource]="dataSource">
 
     <ng-container matColumnDef="urtea">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Urtea</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>Urtea</mat-header-cell>
       <mat-cell *matCellDef="let row">{{row.urtea}}</mat-cell>
     </ng-container>
 
 
     <ng-container *ngFor="let taldea of aukeratutakoTaldeak" [matColumnDef]="taldea">
-        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs>{{taldea}}</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef fxHide.xs>{{taldea}}</mat-header-cell>
         <mat-cell *matCellDef="let row" fxHide.xs>{{row.stats[taldea][form.get('metric').value]}}</mat-cell>
     </ng-container>
 
