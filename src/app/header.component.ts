@@ -40,4 +40,8 @@ export class HeaderComponent implements OnInit {
   goToArraunlariak() {
     this.router.navigate(['arraunlariak']);
   }
+
+  goTo(component: string) {
+    this.router.navigate([component]);
+  }
 }
