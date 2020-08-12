@@ -9,6 +9,7 @@ import { SailkapenakService } from 'app/shared/sailkapenak.service';
 import { Sailkapena } from 'app/shared/sailkapenak.model';
 import { TaldeakService } from 'app/shared/taldeak.service';
 import { FormBuilder } from '@angular/forms';
+import { StatsService } from 'app/shared/stats.service';
 
 @Component({
   selector: 'app-estropadak-team-comparation',
@@ -28,6 +29,7 @@ export class EstropadakTeamComparationComponent implements OnInit {
   aukeratutakoTaldeak: string[] = [];
   form;
   konparaketaEnabled = false;
+  aukeraketaEnabled = true;
   removable = true;
   metrics = [
     {code: 'points', name: 'Puntuak'},
@@ -66,6 +68,7 @@ export class EstropadakTeamComparationComponent implements OnInit {
   constructor(
     private saikapenakService: SailkapenakService,
     private taldeakService: TaldeakService,
+    private statsService: StatsService,
     private fb: FormBuilder
   ) {
     const taldea1 = 'Urdaibai';
@@ -113,6 +116,9 @@ export class EstropadakTeamComparationComponent implements OnInit {
     if (this.aukeratutakoTaldeak.length > 1) {
       this.konparaketaEnabled = true;
     }
+    if (this.aukeratutakoTaldeak.length > 6) {
+      this.aukeraketaEnabled = false;
+    }
   }
 
   taldeaKendu(taldea: string) {
@@ -120,6 +126,9 @@ export class EstropadakTeamComparationComponent implements OnInit {
     this.aukeratutakoTaldeak = this.aukeratutakoTaldeak.filter(t => t !== taldea);
     this.displayedColumns = this.displayedColumns.filter(t => t !== taldea);
     this.taldeak.push(taldea);
+    if (this.aukeratutakoTaldeak.length < 6) {
+      this.aukeraketaEnabled = true;
+    }
   }
 
   compare() {
@@ -152,6 +161,7 @@ export class EstropadakTeamComparationComponent implements OnInit {
       this.chartData = Object.keys(data).map(k => {
         return {
           key: k,
+          color: this.statsService.teamColors(k),
           values: data[k]
         };
       });

@@ -44,7 +44,7 @@
 <button mat-icon-button *ngIf="viewMode === 'table'" (click)="changeMode('chart')">
   <mat-icon>show_chart</mat-icon>
 </button>
-<button mat-icon-button *ngIf="viewMode === 'chart'" (click)="changeMode('table')">
+<button mat-icon-button *ngIf="viewMode === 'chart'" (click)="changeMode('table')" [disabled]="!aukeraketaEnabled">
   <mat-icon *ngIf="viewMode === 'chart'">table_chart</mat-icon>
 </button>
 
