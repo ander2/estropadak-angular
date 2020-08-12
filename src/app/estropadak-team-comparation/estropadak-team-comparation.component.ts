@@ -26,6 +26,7 @@ export class EstropadakTeamComparationComponent implements OnInit {
   displayedColumns = ['urtea'];
   dataSource;
   taldeak;
+  taldeGuztiak;
   aukeratutakoTaldeak: string[] = [];
   form;
   konparaketaEnabled = false;
@@ -106,6 +107,7 @@ export class EstropadakTeamComparationComponent implements OnInit {
       .subscribe(res => {
         this.aukeratutakoTaldeak = [];
         this.displayedColumns = [];
+        this.taldeGuztiak = res;
         this.taldeak = res;
       })
   }
@@ -127,7 +129,10 @@ export class EstropadakTeamComparationComponent implements OnInit {
   taldeaKendu(taldea: string) {
     this.aukeratutakoTaldeak = this.aukeratutakoTaldeak.filter(t => t !== taldea);
     this.displayedColumns = this.displayedColumns.filter(t => t !== taldea);
-    this.taldeak.push(taldea);
+
+    this.taldeak.push(this.taldeGuztiak.filter(t => t.name === taldea).pop());
+    this.taldeak = this.taldeak.sort((a, b) => a.name.localeCompare(b.name));
+
     if (this.aukeratutakoTaldeak.length < 6) {
       this.aukeraketaEnabled = true;
     }
