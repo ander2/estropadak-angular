@@ -1,7 +1,7 @@
 <mat-toolbar>Taldeen konparaketak</mat-toolbar>
 <form [formGroup]="form" novalidate>
   <p>
-    Aukeratu gehienez 6 talde eta konparatu urtee desberdinetan lortutako emaitzak.
+    Aukeratu gehienez 6 talde eta konparatu urtee desberdinetan lortutako emaitzak. Taldeak elkarrekin lehiatu diren urteak bakarrik erakutsiko dira.
   </p>
   <mat-form-field>
     <mat-select formControlName="liga" placeholder="Liga" >
@@ -29,16 +29,15 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field class="example-chip-list">
+  <div *ngIf="aukeratutakoTaldeak.length > 0">
+    <p>Aukeratutako taldeak:</p>
     <mat-chip-list #chipList aria-label="Taldeak">
       <mat-chip [removable]="removable" (removed)="taldeaKendu(taldea)" *ngFor="let taldea of aukeratutakoTaldeak">
         {{taldea}}
         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
       </mat-chip>
-      <input placeholder="Taldeak..."
-             [matChipInputFor]="chipList">
     </mat-chip-list>
-  </mat-form-field>
+  </div>
 </form>
 
 <button mat-icon-button *ngIf="viewMode === 'table'" (click)="changeMode('chart')">
