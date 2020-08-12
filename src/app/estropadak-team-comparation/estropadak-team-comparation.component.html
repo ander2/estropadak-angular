@@ -1,8 +1,8 @@
-<div>
-  <mat-toolbar>Talde konparaketak:  </mat-toolbar>
-</div>
-
+<mat-toolbar>Taldeen konparaketak</mat-toolbar>
 <form [formGroup]="form" novalidate>
+  <p>
+    Aukeratu gehienez 6 talde eta konparatu urtee desberdinetan lortutako emaitzak.
+  </p>
   <mat-form-field>
     <mat-select formControlName="liga" placeholder="Liga" >
       <mat-option *ngFor="let liga of ligak" [value]="liga">
@@ -17,7 +17,7 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <button mat-icon-button (click)="taldeaGehitu()">
+  <button mat-icon-button (click)="taldeaGehitu()" aria-label="Aukeratu">
     <mat-icon>add_circle_outline</mat-icon>
   </button>
   <button mat-button (click)="compare()" [disabled]="!konparaketaEnabled">Konparatu</button>
