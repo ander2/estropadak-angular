@@ -111,13 +111,15 @@ export class EstropadakTeamComparationComponent implements OnInit {
 
   taldeaGehitu() {
     const taldea = this.form.get('team').value;
-    this.aukeratutakoTaldeak.push(taldea);
-    this.taldeak = this.taldeak.filter(t => t.name !== taldea);
-    if (this.aukeratutakoTaldeak.length > 1) {
-      this.konparaketaEnabled = true;
-    }
-    if (this.aukeratutakoTaldeak.length > 6) {
-      this.aukeraketaEnabled = false;
+    if (taldea) {
+      this.aukeratutakoTaldeak.push(taldea);
+      this.taldeak = this.taldeak.filter(t => t.name !== taldea);
+      if (this.aukeratutakoTaldeak.length > 1) {
+        this.konparaketaEnabled = true;
+      }
+      if (this.aukeratutakoTaldeak.length > 6) {
+        this.aukeraketaEnabled = false;
+      }
     }
   }
 
