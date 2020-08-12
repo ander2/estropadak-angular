@@ -84,8 +84,9 @@ export class EstropadakTeamComparationComponent implements OnInit {
       metric: ['points']
     });
     this.form.get('liga').valueChanges.subscribe((change) => {
-      console.log(change);
       this.taldeakLoad(change);
+      this.chartData = [];
+      this.dataSource.data.next([]);
     });
     this.form.get('metric').valueChanges.subscribe((change) => {
       const options = Object.assign({}, this.options);
@@ -124,7 +125,6 @@ export class EstropadakTeamComparationComponent implements OnInit {
   }
 
   taldeaKendu(taldea: string) {
-    console.log('Kendu', taldea);
     this.aukeratutakoTaldeak = this.aukeratutakoTaldeak.filter(t => t !== taldea);
     this.displayedColumns = this.displayedColumns.filter(t => t !== taldea);
     this.taldeak.push(taldea);
@@ -167,7 +167,6 @@ export class EstropadakTeamComparationComponent implements OnInit {
           values: data[k]
         };
       });
-      console.table(this.chartData);
     })
   }
 
