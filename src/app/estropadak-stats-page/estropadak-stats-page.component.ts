@@ -212,16 +212,13 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
           left: 65
         },
         x: (d) => d.label,
-        y: (d) => parseInt(d.value, 10),
-        valueFormat: d3.format('d'),
+        y: (d) => d.value,
+        valueFormat: d3.format('.2'),
         showValues: true,
-        // xAxis: {
-        //   axisLabel: 'Taldeak',
-        // },
         staggerLabels: true,
         yAxis: {
           axisLabel: 'Puntuak',
-          tickFormat: d3.format('d'),
+          tickFormat: d3.format('.2'),
         },
       }
     };
