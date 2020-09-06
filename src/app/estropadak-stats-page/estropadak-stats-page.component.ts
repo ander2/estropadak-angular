@@ -37,7 +37,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
   lineChartOptions: any = {};
   lineChartReversedOptions: any = {};
   discreteBarChartOptions: any = {};
-  statsData: any[];
+  statsData;
   points_per_race: any = [];
   points_per_year: any = [];
   positions_per_race: any = [];
@@ -63,6 +63,9 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
     'Haurra NESKAK'
   ];
   category = this.kategoriak[0];
+  estropadaIzena = '';
+  interval;
+  @ViewChild('nvd3', {static: false}) nvChart;
 
   constructor(
     private fb: FormBuilder,
@@ -119,6 +122,10 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
         {
           name: 'Sailkapen orokorra',
           value: 'general_rank'
+        },
+        {
+          name: 'Sailkapen orokorra(eboluzioa)',
+          value: 'general_rank_animation'
         },
         {
           name: 'Arraunlarien adina',
@@ -203,6 +210,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
 
     this.discreteBarChartOptions = {
       chart: {
+        // type: 'multiBarHorizontalChart',
         type: 'discreteBarChart',
         height: 450,
         margin : {
@@ -216,6 +224,9 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
         valueFormat: d3.format('.2'),
         showValues: true,
         staggerLabels: true,
+        duration: 800,
+        interpolate: 'linear',
+        barColor: d => d.color,
         yAxis: {
           axisLabel: 'Puntuak',
           tickFormat: d3.format('.2'),
@@ -235,6 +246,9 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
   }
 
   updateChart() {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
     const year = this.form.get('year').value;
     const league = this.form.get('league').value;
     this.team = this.form.get('team').value;
@@ -289,7 +303,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
     } else if (chartType === 'positions_per_race') {
       const maxVals = Math.max(...this.chartData.map(g => Math.max(...g.values.map(k => k.value))));
       this.options.chart.yDomain = [0, maxVals]
-    } else if (chartType === 'general_rank') {
+    } else if (chartType.indexOf('general_rank') > -1 ) {
       this.options = this.discreteBarChartOptions;
     } else if (chartType === 'rank') {
       this.options = this.lineChartReversedOptions;
@@ -363,6 +377,36 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
       .subscribe( res => {
         this.rank = res;
         this.statsData = res;
+        this.changeChart();
+      });
+    } else if (chartType === 'general_rank_animation') {
+      this.statsService.getGraphCumulativePoints(league, parseInt(year, 10), null, category)
+      .subscribe(res => {
+        this.rank = res;
+        let i = 0;
+        const _this = this;
+        const changeData = () => {
+          try {
+            this.estropadaIzena = this.rank[0].values[i].label;
+          } catch (err) {
+            clearInterval(this.interval);
+            return;
+          }
+          const values = res.map( r => {
+            return {
+              label: r.key,
+              color: r.color,
+              value: r.values[i].value
+            }
+          }).sort((a, b) => b.value - a.value);
+          i++;
+          this.statsData = [{
+            key: 'Taldea',
+            values
+          }];
+          this.chartData = this.statsData;
+        };
+        this.interval = setInterval(changeData, 1500);
         this.changeChart();
       });
     } else if (chartType === 'ages') {

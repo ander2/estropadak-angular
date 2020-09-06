@@ -52,6 +52,7 @@
     </ng-container>
   </form>
 </div>
+<h3 *ngIf="chart.value === 'general_rank_animation'">{{estropadaIzena}}</h3>
 <div *ngIf="options">
-  <nvd3 [options]="options" [data]="chartData"></nvd3>
+  <nvd3 #nvd3 [options]="options" [data]="chartData"></nvd3>
 </div>
