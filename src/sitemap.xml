@@ -51,6 +51,9 @@
    <url>
       <loc>http://www.estropadak.eus/estropadak/act/2019</loc>
    </url>
+   <url>
+      <loc>http://www.estropadak.eus/estropadak/act/2020</loc>
+   </url>
     <url>
         <loc>http://www.estropadak.eus/estropadak/arc1/2006</loc>
     </url>
@@ -89,6 +92,12 @@
     </url>
     <url>
         <loc>http://www.estropadak.eus/estropadak/arc1/2018</loc>
+    </url>
+    <url>
+        <loc>http://www.estropadak.eus/estropadak/arc1/2019</loc>
+    </url>
+    <url>
+        <loc>http://www.estropadak.eus/estropadak/arc1/2020</loc>
     </url>
     <url>
         <loc>http://www.estropadak.eus/estropadak/arc2/2006</loc>
@@ -130,6 +139,12 @@
         <loc>http://www.estropadak.eus/estropadak/arc2/2018</loc>
     </url>
     <url>
+        <loc>http://www.estropadak.eus/estropadak/arc2/2019</loc>
+    </url>
+    <url>
+        <loc>http://www.estropadak.eus/estropadak/arc2/2020</loc>
+    </url>
+    <url>
         <loc>http://www.estropadak.eus/estropadak/euskotren/2009</loc>
     </url>
     <url>
@@ -163,6 +178,15 @@
         <loc>http://www.estropadak.eus/estropadak/euskotren/2019</loc>
     </url>
     <url>
+        <loc>http://www.estropadak.eus/estropadak/euskotren/2020</loc>
+    </url>
+    <url>
         <loc>http://www.estropadak.eus/estropadak/ete/2018</loc>
+    </url>
+    <url>
+        <loc>http://www.estropadak.eus/estropadak/ete/2019</loc>
+    </url>
+    <url>
+        <loc>http://www.estropadak.eus/estropadak/ete/2020</loc>
     </url>
 </urlset>
