@@ -62,7 +62,7 @@ export class StatsService {
     }
   }
 
-  getGraphPointsPerRace(league: string, year?: number, team?: string, category?: string) {
+  getGraphPointsPerRace(league: string, year?: number, team?: string, category?: string): Observable<any> {
     const params = {league};
     if (year) {
       params['year'] = year;
@@ -73,29 +73,12 @@ export class StatsService {
     if (category) {
       params['category'] = category;
     }
+    params['stat'] = 'points';
 
-    return (this.http.get(`${estropadakUrl}sailkapena`, {params}) as Observable<any[]>)
-    .pipe(map(res => {
-      const results = res.map( stat => {
-        return Object.keys(stat.stats).map(taldea => {
-          return {
-            key: team ? stat.urtea : taldea,
-            color: year ? this.teamColors(taldea) : undefined,
-            values: stat.stats[taldea].cumulative.map((pos, i, arr) => {
-              const points = i === 0 ? arr[i] : arr[i] - arr[i - 1];
-              return {
-                label: i,
-                value: points
-              };
-            }),
-          }
-        });
-      });
-      return results.reduce((memo, val) => memo.concat(val), []);
-    }));
+    return this.http.get(`${estropadakUrl}estatistikak`, {params});
   }
 
-  getGraphCumulativePoints(league: string, year?: number, team?: string, category?: string) {
+  getGraphCumulativePoints(league: string, year?: number, team?: string, category?: string): Observable<any[]> {
     const params = {league};
     if (year) {
       params['year'] = year;
@@ -107,36 +90,16 @@ export class StatsService {
       params['category'] = category;
     }
 
-    return this.http.get(`${estropadakUrl}sailkapena`, {params})
-    .pipe(map((res: any []) => {
-      const results = res.map( stat => {
-        return Object.keys(res[0].stats).map(taldea => {
-          return {
-            key: team ? stat.urtea : taldea,
-            color: year ? this.teamColors(taldea) : undefined,
-            values: stat.stats[taldea].cumulative.map((points, i) => {
-              return {
-                label: i,
-                value: points
-              };
-            }),
-          }
-        });
-      });
-      return results.reduce((memo, val) => memo.concat(val), []);
-    }));
+    return this.http.get(`${estropadakUrl}estatistikak`, {params}) as Observable<any []>;
   }
 
   getTeamRank(league: string, team: string) {
-    const params = {league, team};
-    return this.http.get(`${estropadakUrl}sailkapena`, {params})
-    .pipe(map((stats: any[]) => {
-      return [{
-        key: team,
-        color: this.teamColors(team),
-        values: stats.map((stat, i) => ({label: stat.urtea, value: stat.stats[team].position}))
-      }]
-    }));
+    const params = {
+      league,
+      team,
+      stat: 'rank'
+    };
+    return this.http.get(`${estropadakUrl}estatistikak`, {params}) as Observable<any[]>;
   }
 
   getRank(league: string, year?: number, team?: string, category?: string) {
@@ -150,110 +113,35 @@ export class StatsService {
     if (category) {
       params['category'] = category;
     }
+    params['stat'] = 'rank'
 
-    return this.http.get(`${estropadakUrl}sailkapena`, {params})
-    .pipe(map(res => {
-      const stats = res[0].stats;
-      return [{
-        key: 'Taldea',
-        values: Object.keys(stats)
-                      .map((teamName) => ({
-                        label: teamName,
-                        color: this.teamColors(teamName),
-                        value: stats[teamName].points
-                      }))
-                      .sort((a, b) => b.value - a.value)
-      }]
-    }));
+    return this.http.get(`${estropadakUrl}estatistikak`, {params}) as Observable<any[]>;
   }
 
   getAges(league: string, year?: number, team?: string) {
     const params = {
       league,
-      year: '' + year
+      stat: 'ages'
     };
-
+    if (year) {
+      params['year'] = year;
+    }
     if (team) {
       params['team'] = team;
     }
-
     if (league.toLowerCase() === 'gbl') {
       return of([]);
     }
 
-    return this.http.get(`${estropadakUrl}sailkapena`, {params})
-    .pipe(map((res: any[]) => {
-      if (team) {
-        res = res.filter(u => u.stats[team].age);
-        return [{
-          key: 'Min',
-          // color: this.teamColors(team),
-          values: res.map((stat, i) => ({
-            label: stat.urtea,
-            value: stat.stats[team].age ? stat.stats[team].age.min_age : 0
-          }))
-        }, {
-          key: 'Media',
-          // color: this.teamColors(team),
-          values: res.map((stat, i) => ({
-            label: stat.urtea,
-            value: stat.stats[team].age ? stat.stats[team].age.avg_age : 0
-          }))
-        }, {
-          key: 'Max',
-          // color: this.teamColors(team),
-          values: res.map((stat, i) => ({
-            label: stat.urtea,
-            value: stat.stats[team].age ? stat.stats[team].age.max_age : 0
-          }))
-        }]
-      } else {
-        if (res.length === 0) {
-          return [{
-            key: 'Min',
-            values: []
-          }, {
-            key: 'Media',
-            values: []
-          }, {
-            key: 'Max',
-            values: []
-          }];
-        } else {
-          const stats = res[0].stats;
-          return [{
-            key: 'Min',
-            values:
-              Object.keys(stats)
-                    .map((teamName) => ({
-                      label: teamName,
-                      value: stats[teamName].age ? parseInt(stats[teamName].age.min_age, 10) : 0
-                    }))
-          }, {
-            key: 'Media',
-            values: Object.keys(stats)
-                    .map((teamName) => ({
-                      label: teamName,
-                      value: stats[teamName].age ? stats[teamName].age.avg_age : 0
-                    }))
-          }, {
-            key: 'Max',
-            values: Object.keys(stats)
-                    .map((teamName) => ({
-                      label: teamName,
-                      value: stats[teamName].age ? parseInt(stats[teamName].age.max_age, 10) : 0
-                    }))
-          }];
-        }
-      }
-    }));
+    return this.http.get(`${estropadakUrl}estatistikak`, {params}) as Observable<any[]>;
   }
 
 
   getIncorporations(league: string, year?: number, team?: string) {
     const params = {
       league,
-      year: '' + year
+      year: '' + year,
+      stat: 'incorporations'
     };
 
     if (team) {
@@ -264,25 +152,7 @@ export class StatsService {
       return of([]);
     }
 
-    return (this.http.get(`${estropadakUrl}sailkapena`, {params}) as Observable<any[]>)
-    .pipe(map(res => res.length > 0 ? res[0].stats : []))
-    .pipe(map(stats => {
-        return [{
-          key: 'Bajak',
-          values: Object.keys(stats)
-                  .map((teamName) => ({
-                    label: teamName,
-                    value: stats[teamName].rowers ? stats[teamName].rowers.bajak : 0
-                  }))
-        }, {
-          key: 'Altak',
-          values: Object.keys(stats)
-                  .map((teamName) => ({
-                    label: teamName,
-                    value: stats[teamName].rowers ? stats[teamName].rowers.altak : 0
-                  }))
-        }];
-    }));
+    return (this.http.get(`${estropadakUrl}estatistikak`, {params}) as Observable<any[]>);
   }
 
 }

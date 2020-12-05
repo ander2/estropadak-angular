@@ -16,12 +16,15 @@ export class EstropadaService {
 
     getList(league: string, year: string): Observable<Estropada[]> {
         const endpoint = `${estropadakUrl}estropadak`;
-        const params = {league, year};
+        const params = {league};
+        if (year) {
+            params['year'] = year;
+        }
         return this.http.get(endpoint, {params}) as Observable<Estropada[]>;
     }
 
     getOne(id: string): Observable<Estropada> {
-        return this.http.get(`${estropadakUrl}estropada/${id}`) as Observable<Estropada>;
+        return this.http.get(`${estropadakUrl}estropadak/${id}`) as Observable<Estropada>;
     }
 
     isMulticategory(league: string): boolean {
@@ -137,28 +140,7 @@ export class UrteakService {
     }
 }
 
-@Injectable()
-export class SailkapenaService {
 
-    constructor(private http: HttpClient) { }
-
-    getList(league: string, year: string, team?: string) {
-        const params = {league, year, team};
-        const endpoint = `${estropadakUrl}estropadak`;
-        return this.http.get(endpoint, {params});
-    }
-
-    getOne(league: string, year: string, team?: string, category?: string): any {
-        const params = {league, year};
-        if (team) {
-            params['team'] = team;
-        }
-        if (category) {
-            params['category'] = category;
-        }
-        return this.http.get(`${estropadakUrl}sailkapena`, {params});
-    }
-}
 
 @Injectable()
 export class EmaitzakService {
@@ -175,6 +157,6 @@ export class EmaitzakService {
     }
 
     getOne(id: string): Observable<Estropada> {
-        return this.http.get(`${estropadakUrl}estropada/${id}`) as Observable<Estropada>;
+        return this.http.get(`${estropadakUrl}estropadak/${id}`) as Observable<Estropada>;
     }
 }

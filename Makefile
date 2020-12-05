@@ -1,7 +1,7 @@
 REMOTE_PATH=/home/ander2/Work/estropadak-nginx/dist
 
 build: src/app/*
-	ng build --prod
+	ng build --prod --source-map=false
 
 clean: dist/*
 	rm -rf dist/*

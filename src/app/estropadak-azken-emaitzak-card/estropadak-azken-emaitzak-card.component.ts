@@ -2,7 +2,7 @@ import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { EmaitzakService } from '../shared/estropada.service';
 import { Estropada, TaldeSailkapena } from '../shared/estropadak.model';
 import * as moment from 'moment';
-import { MatButtonToggleChange } from '@angular/material';
+import { MatTabChangeEvent } from '@angular/material';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable, of} from 'rxjs';
 
@@ -34,6 +34,8 @@ export class EstropadakAzkenEmaitzakCardComponent implements OnInit, OnChanges {
   displayedColumns = ['Taldea', 'Denbora'];
   dataSource: any;
   dataSource2: any;
+  tabs = ['ACT', 'ARC1', 'ARC2', 'EUSKOTREN', 'ETE'];
+
   constructor(
     private emaitzakService: EmaitzakService
   ) { }
@@ -46,8 +48,8 @@ export class EstropadakAzkenEmaitzakCardComponent implements OnInit, OnChanges {
     this.showEmaitzak(this.league, this.year);
   }
 
-  onChangeLeague(event: MatButtonToggleChange) {
-    this.league = event.value;
+  onChangeLeague(event: MatTabChangeEvent) {
+    this.league = event.tab.textLabel;
     this.showEmaitzak(this.league, this.year);
 
   }

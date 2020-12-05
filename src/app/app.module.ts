@@ -17,7 +17,8 @@ import {
   MatFormFieldModule,
   MatSelectModule,
   MatSortModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatChipsModule
 } from '@angular/material';
 
 // provider
@@ -25,12 +26,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule} from '@angular/router';
 
-import { NvD3Module } from 'ng2-nvd3';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppComponent } from './app.component';
 
-import { EstropadaService, UrteakService, SailkapenaService, EmaitzakService } from './shared/estropada.service';
+import { EstropadaService, UrteakService, EmaitzakService } from './shared/estropada.service';
 import { EstropadakListComponent } from './estropadak-list/estropadak-list.component';
 import { EstropadaDetailComponent } from './estropada-detail/estropada-detail.component';
 import { EstropadaMultiCategoryDetailComponent } from './estropada-multi-category-detail/estropada-multi-category-detail.component';
@@ -41,13 +41,11 @@ import { EstropadakPortadaComponent } from './estropadak-portada/estropadak-port
 import { EstropadakPageComponent } from './estropadak-page/estropadak-page.component';
 import { EstropadaEstropadaSailkapenaComponent } from './estropada-estropada-sailkapena/estropada-estropada-sailkapena.component';
 import { EstropadakHoniBuruzComponent } from './estropadak-honi-buruz/estropadak-honi-buruz.component';
-import { EstropadakStatsComponent } from './estropadak-stats/estropadak-stats.component';
 import { EstropadakYearsComponent } from './estropadak-years/estropadak-years.component';
 import { EstropadaNavegationComponent } from './estropada-navegation/estropada-navegation.component';
 import { EstropadakNavegationService } from './shared/estropadak-navegation.service';
 import { EstropadakHurrengoakCardComponent } from './estropadak-hurrengoak-card/estropadak-hurrengoak-card.component';
 import { EstropadakAzkenEmaitzakCardComponent } from './estropadak-azken-emaitzak-card/estropadak-azken-emaitzak-card.component';
-import { EstropadakStatsPageComponent } from './estropadak-stats-page/estropadak-stats-page.component';
 import { TaldeakService } from './shared/taldeak.service';
 import { StatsService } from './shared/stats.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -57,6 +55,9 @@ import { EstropadakPlaygroundComponent } from './estropadak-playground/estropada
 import { NgCytoComponent } from './ng-cyto/ng-cyto.component';
 import { EstropadakRowerGraphComponent } from './estropadak-rower-graph/estropadak-rower-graph.component';
 import { EstropadakRowerHistorialTableComponent } from './estropadak-rower-historial-table/estropadak-rower-historial-table.component';
+import { CacheMapService } from './shared/cache-map.service';
+import { httpInterceptorProviders } from './http-interceptors';
+import { SailkapenakService } from './shared/sailkapenak.service';
 
 const routes: Routes = [
   {
@@ -85,7 +86,7 @@ const routes: Routes = [
   },
   {
     path: 'estatistikak',
-    component: EstropadakStatsPageComponent
+    loadChildren: () => import('./estropadak-stats-page/estropadak-stats-page.module').then( m => m.EstropadakStatsPageModule)
   },
   {
     path: 'estropadak/:league/:year/:team',
@@ -98,6 +99,10 @@ const routes: Routes = [
   {
     path: 'arraunlariak',
     component: EstropadakRowerGraphComponent
+  },
+  {
+    path: 'konparaketak',
+    loadChildren: () => import('./estropadak-team-comparation/estropadak-team-comparation.module').then(m => m.EstropadakTeamComparationModule)
   },
   { path: '**', component: PageNotFoundComponent }
 
@@ -117,18 +122,16 @@ const routes: Routes = [
     EstropadakPageComponent,
     EstropadaEstropadaSailkapenaComponent,
     EstropadakHoniBuruzComponent,
-    EstropadakStatsComponent,
     EstropadakYearsComponent,
     EstropadaNavegationComponent,
     EstropadakHurrengoakCardComponent,
     EstropadakAzkenEmaitzakCardComponent,
-    EstropadakStatsPageComponent,
     EstropadakResultsComponent,
     PageNotFoundComponent,
     EstropadakSelectionFormComponent,
     EstropadakPlaygroundComponent,
     EstropadakRowerGraphComponent,
-    EstropadakRowerHistorialTableComponent
+    EstropadakRowerHistorialTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -139,6 +142,7 @@ const routes: Routes = [
     MatButtonModule,
     MatButtonToggleModule,
     MatCardModule,
+    MatChipsModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -151,7 +155,6 @@ const routes: Routes = [
     MatMenuModule,
     MatSidenavModule,
     MatSortModule,
-    NvD3Module,
     ReactiveFormsModule,
     RouterModule.forRoot(
       routes,
@@ -160,10 +163,12 @@ const routes: Routes = [
     // InMemoryWebApiModule.forRoot(InMemStoreService, {apiBase: 'api/'})
   ],
   providers: [
+    CacheMapService,
+    httpInterceptorProviders,
     EstropadaService,
     EmaitzakService,
     EstropadakNavegationService,
-    SailkapenaService,
+    SailkapenakService,
     TaldeakService,
     UrteakService,
     StatsService

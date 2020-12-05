@@ -22,7 +22,6 @@ import { EstropadakPageComponent } from './estropadak-page.component';
 import { EstropadakYearsComponent } from '../estropadak-years/estropadak-years.component';
 import { EstropadakListComponent } from '../estropadak-list/estropadak-list.component';
 import { EstropadakSailkapenaComponent } from '../estropadak-sailkapena/estropadak-sailkapena.component';
-import { EstropadakStatsComponent } from '../estropadak-stats/estropadak-stats.component';
 import { EstropadaService, UrteakService, SailkapenaService } from '../shared/estropada.service';
 import { EstropadaServiceStub, SailkapenaServiceStub, UrteakServiceStub } from '../shared/estropada.service.stub';
 import { EstropadakNavegationService } from '../shared/estropadak-navegation.service';
@@ -55,7 +54,6 @@ describe('EstropadakPageComponent', () => {
         EstropadakYearsComponent,
         EstropadakListComponent,
         EstropadakSailkapenaComponent,
-        EstropadakStatsComponent
       ],
       providers: [
         {provide: EstropadaService, useClass: EstropadaServiceStub},

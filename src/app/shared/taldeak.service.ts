@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 
@@ -17,19 +16,19 @@ export class TaldeakService {
       const endpoint = `${estropadakUrl}taldeak`;
       const params = {
         league,
-        year: '' + year
       };
+      if (year) {
+        params['year'] = year;
+      }
       return this.http.get(endpoint, {params});
-          //.pipe(map(res => res.json()));
   }
 
   getOne(team: string, league: string, year: number): Observable<any> {
-      const endpoint = `${estropadakUrl}taldeak/${team}/plantilla`;
+      const endpoint = `${estropadakUrl}taldeak/${team}`;
       const params = {
         league,
         year: '' + year
       };
       return this.http.get(endpoint, {params});
-          //.pipe(map(res => res.json()));
   }
 }
