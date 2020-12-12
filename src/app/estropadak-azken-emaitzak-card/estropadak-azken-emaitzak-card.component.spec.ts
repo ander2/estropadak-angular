@@ -1,9 +1,11 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { EstropadakAzkenEmaitzakCardComponent } from './estropadak-azken-emaitzak-card.component';
@@ -18,10 +20,12 @@ describe('EstropadakAzkenEmaitzakCardComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
+        NoopAnimationsModule,
         MatCardModule,
         MatButtonToggleModule,
         MatListModule,
         MatTableModule,
+        MatTabsModule,
         MatToolbarModule,
         RouterTestingModule
       ],
