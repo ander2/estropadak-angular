@@ -1,17 +1,19 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MatIconModule} from '@angular/material/icon'; 
+import { MatButtonModule } from '@angular/material/button';
 
 import { EstropadaNavegationComponent } from './estropada-navegation.component';
 import { EstropadakNavegationService } from '../shared/estropadak-navegation.service';
-import { MatIconModule, MatButtonModule } from '@angular/material';
-import { RouterTestingModule } from '@angular/router/testing';
 import { EstropadaService } from '../shared/estropada.service';
 import { EstropadaServiceStub } from '../shared/estropada.service.stub';
+
 
 describe('EstropadaNavegationComponent', () => {
   let component: EstropadaNavegationComponent;
   let fixture: ComponentFixture<EstropadaNavegationComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         MatIconModule,

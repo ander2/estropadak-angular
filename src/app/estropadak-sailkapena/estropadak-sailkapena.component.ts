@@ -4,7 +4,8 @@ import {Observable, of} from 'rxjs';
 
 import { SailkapenakService } from 'app/shared/sailkapenak.service';
 import { Stats } from 'app/shared/stats.model';
-import { MatButtonToggleChange, MatSelectChange } from '@angular/material';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-estropadak-sailkapena',
@@ -41,7 +42,7 @@ export class EstropadakSailkapenaComponent implements OnChanges {
     private sailkapenaService: SailkapenakService,
   ) { }
 
-  onChangeLeague(event: MatButtonToggleChange) {
+  onChangeLeague(event: MatButtonToggleChange ) {
     this.league = event.value;
     this.getSailkapena(this.league, this.year);
   }

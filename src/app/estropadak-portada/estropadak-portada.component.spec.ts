@@ -1,23 +1,32 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-
-import { MatSidenavModule, MatTableModule, MatButtonToggleModule, MatListModule, MatToolbarModule, MatCardModule, MatIconModule, MatSelectModule, MatFormFieldModule } from '@angular/material';
+import { MatListModule } from '@angular/material/list';
+import { MatTableModule} from '@angular/material/table';
+import { MatSidenavModule} from '@angular/material/sidenav';
+import { MatIconModule} from '@angular/material/icon';
+import { MatCardModule} from '@angular/material/card';
+import { MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatSelectModule} from '@angular/material/select';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { EstropadakPortadaComponent } from './estropadak-portada.component';
 import { EstropadakSailkapenaComponent } from '../estropadak-sailkapena/estropadak-sailkapena.component';
-import { UrteakService, SailkapenaService, EmaitzakService, EstropadaService } from '../shared/estropada.service';
+import { UrteakService, EmaitzakService, EstropadaService } from '../shared/estropada.service';
+import { SailkapenakService } from '../shared/sailkapenak.service';
 import { UrteakServiceStub, SailkapenaServiceStub, EmaitzakServiceStub, EstropadaServiceStub } from '../shared/estropada.service.stub';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EstropadakAzkenEmaitzakCardComponent } from '../estropadak-azken-emaitzak-card/estropadak-azken-emaitzak-card.component';
 import { EstropadakHurrengoakCardComponent } from '../estropadak-hurrengoak-card/estropadak-hurrengoak-card.component';
 import { EstropadakNavegationService } from '../shared/estropadak-navegation.service';
-import { FormsModule } from '@angular/forms';
 
 describe('EstropadakPortadaComponent', () => {
   let component: EstropadakPortadaComponent;
   let fixture: ComponentFixture<EstropadakPortadaComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
@@ -27,6 +36,7 @@ describe('EstropadakPortadaComponent', () => {
         MatIconModule,
         MatSidenavModule,
         MatTableModule,
+        MatTabsModule,
         MatButtonToggleModule,
         MatSelectModule,
         MatToolbarModule,
@@ -44,7 +54,7 @@ describe('EstropadakPortadaComponent', () => {
         {provide: EstropadaService, useClass: EstropadaServiceStub},
         EstropadakNavegationService,
         {provide: UrteakService, useClass: UrteakServiceStub},
-        {provide: SailkapenaService, useClass: SailkapenaServiceStub}
+        {provide: SailkapenakService, useClass: SailkapenaServiceStub}
       ]
     })
     .compileComponents();

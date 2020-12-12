@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
+
 import { UrteakService } from 'app/shared/estropada.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class EstropadakPortadaComponent implements OnInit {
   league = 'act';
   year = 2020;
   this_or_before_year = 2020;
-  @ViewChild(MatSidenav, { static: false }) sidenav;
+  @ViewChild(MatSidenav) sidenav;
   constructor(
     private router: Router,
     private urteakService: UrteakService

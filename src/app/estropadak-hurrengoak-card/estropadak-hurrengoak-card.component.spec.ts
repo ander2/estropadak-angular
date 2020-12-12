@@ -1,6 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { MatListModule, MatButtonToggleModule, MatToolbarModule } from '@angular/material';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { EstropadakHurrengoakCardComponent } from './estropadak-hurrengoak-card.component';
 import { EstropadaServiceStub } from '../shared/estropada.service.stub';
@@ -13,7 +15,7 @@ describe('EstropadakHurrengoakCardComponent', () => {
   let component: EstropadakHurrengoakCardComponent;
   let fixture: ComponentFixture<EstropadakHurrengoakCardComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         MatListModule,

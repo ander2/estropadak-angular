@@ -1,11 +1,13 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button'; 
+import { MatSelectModule } from '@angular/material/select';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { MatButtonModule, MatSelectModule, MatToolbarModule } from '@angular/material';
 import { of } from 'rxjs';
 
-import { EmaitzakService, UrteakService, EstropadaService } from '../shared/estropada.service';
+import { UrteakService, EstropadaService } from '../shared/estropada.service';
 import { EstropadakSelectionFormComponent } from './estropadak-selection-form.component';
 import { TaldeakService } from '../shared/taldeak.service';
 import { TaldeakServiceStub } from '../shared/taldeak.service.stub';
@@ -15,7 +17,7 @@ describe('EstropadakSelectionFormComponent', () => {
   let component: EstropadakSelectionFormComponent;
   let fixture: ComponentFixture<EstropadakSelectionFormComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,

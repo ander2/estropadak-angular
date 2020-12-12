@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Renderer, ElementRef, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, ElementRef, Input, Output, EventEmitter, Renderer2 } from '@angular/core';
 
 declare var cytoscape: any;
 
@@ -27,7 +27,7 @@ export class NgCytoComponent implements OnInit, OnChanges {
   private initLayout;
   private initValues;
 
-  public constructor(private renderer: Renderer, private el: ElementRef) {
+  public constructor(private renderer: Renderer2, private el: ElementRef) {
 
     this.initLayout = {
       name: 'concentric',

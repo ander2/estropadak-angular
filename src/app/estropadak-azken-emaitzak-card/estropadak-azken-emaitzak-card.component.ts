@@ -1,10 +1,12 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import {DataSource} from '@angular/cdk/collections';
+import { MatTabChangeEvent } from '@angular/material/tabs';
+
+import * as moment from 'moment';
+import {Observable, of} from 'rxjs';
+
 import { EmaitzakService } from '../shared/estropada.service';
 import { Estropada, TaldeSailkapena } from '../shared/estropadak.model';
-import * as moment from 'moment';
-import { MatTabChangeEvent } from '@angular/material';
-import {DataSource} from '@angular/cdk/collections';
-import {Observable, of} from 'rxjs';
 
 class EstropadaDataSource extends DataSource<any> {
     sailkapena;
