@@ -1,13 +1,12 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
 
 import * as moment from 'moment';
 
 import { Estropada } from '../shared/estropadak.model';
 import { EstropadaService } from '../shared/estropada.service';
 import { EstropadakNavegationService } from '../shared/estropadak-navegation.service';
-import { EstropadakListComponent } from '../estropadak-list/estropadak-list.component';
-import { MatButtonToggleChange } from '@angular/material';
 
 @Component({
   selector: 'app-estropadak-hurrengoak-card',

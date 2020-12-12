@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { MatSelect } from '@angular/material';
 
 import * as d3 from 'd3';
 import 'nvd3';
@@ -65,7 +64,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
   category = this.kategoriak[0];
   estropadaIzena = '';
   interval;
-  @ViewChild('nvd3', {static: false}) nvChart;
+  @ViewChild('nvd3') nvChart;
 
   constructor(
     private fb: FormBuilder,

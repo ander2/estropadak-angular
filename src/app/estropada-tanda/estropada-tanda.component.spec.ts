@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
-import { MatCardModule, MatTableModule } from '@angular/material';
+import { By } from '@angular/platform-browser';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
 
 import { EstropadaTandaComponent } from './estropada-tanda.component';
-import { By } from '@angular/platform-browser';
 import { estropada } from '../shared/estropada.fixture';
 
 describe('EstropadaTandaComponent', () => {

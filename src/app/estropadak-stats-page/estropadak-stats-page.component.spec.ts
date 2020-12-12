@@ -1,17 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatSelectModule, MatToolbarModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
+import { NvD3Module } from 'ng2-nvd3';
+import { of } from 'rxjs';
 
 import { EstropadakStatsPageComponent } from './estropadak-stats-page.component';
-import { NvD3Module } from 'ng2-nvd3';
 import { UrteakServiceStub, EstropadaServiceStub, SailkapenaServiceStub } from 'app/shared/estropada.service.stub';
-import { UrteakService, EstropadaService, SailkapenaService } from 'app/shared/estropada.service';
+import { UrteakService, EstropadaService } from 'app/shared/estropada.service';
 import { TaldeakService } from 'app/shared/taldeak.service';
 import { TaldeakServiceStub } from 'app/shared/taldeak.service.stub';
 import { StatsService } from 'app/shared/stats.service';
-import { RouterTestingModule } from '@angular/router/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { of } from 'rxjs';
+import { SailkapenakService } from 'app/shared/sailkapenak.service';
+
 
 describe('EstropadakStatsPageComponent', () => {
   let component: EstropadakStatsPageComponent;
@@ -32,7 +36,7 @@ describe('EstropadakStatsPageComponent', () => {
       providers: [
         {provide: UrteakService, useClass: UrteakServiceStub},
         {provide: EstropadaService, useClass: EstropadaServiceStub},
-        {provide: SailkapenaService, useClass: SailkapenaServiceStub},
+        {provide: SailkapenakService, useClass: SailkapenaServiceStub},
         {provide: TaldeakService, useClass: TaldeakServiceStub},
         {provide: StatsService, useValue: {
           getGraphPointsPerRace: () => of([]),

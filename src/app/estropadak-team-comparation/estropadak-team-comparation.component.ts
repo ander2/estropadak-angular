@@ -1,15 +1,15 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
-import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import * as d3 from 'd3';
 import 'nvd3';
 
 import { SailkapenakService } from 'app/shared/sailkapenak.service';
-import { Sailkapena } from 'app/shared/sailkapenak.model';
 import { TaldeakService } from 'app/shared/taldeak.service';
 import { FormBuilder } from '@angular/forms';
 import { StatsService } from 'app/shared/stats.service';
+
 
 @Component({
   selector: 'app-estropadak-team-comparation',

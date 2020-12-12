@@ -1,8 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
 
 import { EstropadaEstropadaSailkapenaComponent } from './estropada-estropada-sailkapena.component';
-import { MatCardModule, MatTableModule } from '@angular/material';
 import { estropada } from '../shared/estropada.fixture';
+
 
 describe('EstropadaEstropadaSailkapenaComponent', () => {
   let component: EstropadaEstropadaSailkapenaComponent;

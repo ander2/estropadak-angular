@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { DataSource } from '@angular/cdk/table';
-import { MatSort } from '@angular/material';
+import { MatSort } from '@angular/material/sort';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 
 import { EmaitzakService } from 'app/shared/estropada.service';

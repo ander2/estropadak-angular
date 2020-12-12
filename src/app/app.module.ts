@@ -3,23 +3,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import {
-  MatButtonModule,
-  MatListModule,
-  MatTabsModule,
-  MatTableModule,
-  MatMenuModule,
-  MatSidenavModule,
-  MatIconModule,
-  MatInputModule,
-  MatCardModule,
-  MatButtonToggleModule,
-  MatFormFieldModule,
-  MatSelectModule,
-  MatSortModule,
-  MatTooltipModule,
-  MatChipsModule
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+import { MatTabsModule} from '@angular/material/tabs';
+import { MatTableModule} from '@angular/material/table';
+import { MatMenuModule} from '@angular/material/menu';
+import { MatSidenavModule} from '@angular/material/sidenav';
+import { MatIconModule} from '@angular/material/icon';
+import { MatInputModule} from '@angular/material/input';
+import { MatCardModule} from '@angular/material/card';
+import { MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatSelectModule} from '@angular/material/select';
+import { MatSortModule} from '@angular/material/sort';
+import { MatTooltipModule} from '@angular/material/tooltip';
+import {  MatChipsModule } from '@angular/material/chips';
 
 // provider
 import { HttpClientModule } from '@angular/common/http';

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } 
 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { DataSource } from '@angular/cdk/table';
-import { MatSort } from '@angular/material';
+import { MatSort } from '@angular/material/sort';
 
 export class RowerHistorial {
   year: number;
