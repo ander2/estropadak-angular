@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { By } from '@angular/platform-browser';
 import { MatCardModule } from '@angular/material/card';
@@ -11,7 +11,7 @@ describe('EstropadaTandaComponent', () => {
   let component: EstropadaTandaComponent;
   let fixture: ComponentFixture<EstropadaTandaComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         MatCardModule,

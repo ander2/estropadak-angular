@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MatListModule } from '@angular/material/list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -15,7 +15,7 @@ describe('EstropadakHurrengoakCardComponent', () => {
   let component: EstropadakHurrengoakCardComponent;
   let fixture: ComponentFixture<EstropadakHurrengoakCardComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         MatListModule,

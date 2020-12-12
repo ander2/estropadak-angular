@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { MatMenuModule } from '@angular/material/menu';
@@ -11,7 +11,7 @@ describe('EstropadakYearsComponent', () => {
   let component: EstropadakYearsComponent;
   let fixture: ComponentFixture<EstropadakYearsComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         MatMenuModule,
