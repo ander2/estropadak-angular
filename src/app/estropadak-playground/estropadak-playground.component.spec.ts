@@ -13,7 +13,8 @@ import { of } from 'rxjs';
 
 import { EstropadakPlaygroundComponent } from './estropadak-playground.component';
 import { EstropadakSelectionFormComponent } from '../estropadak-selection-form/estropadak-selection-form.component';
-import { EmaitzakService, UrteakService, EstropadaService } from '../shared/estropada.service';
+import { UrteakService, EstropadaService } from '../shared/estropada.service';
+import { EmaitzakService } from '../shared/emaitzak.service';
 import { TaldeakService } from '../shared/taldeak.service';
 import { TaldeakServiceStub } from '../shared/taldeak.service.stub';
 import { EstropadaServiceStub } from 'app/shared/estropada.service.stub';

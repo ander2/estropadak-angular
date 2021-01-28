@@ -15,7 +15,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { EstropadakPortadaComponent } from './estropadak-portada.component';
 import { EstropadakSailkapenaComponent } from '../estropadak-sailkapena/estropadak-sailkapena.component';
-import { UrteakService, EmaitzakService, EstropadaService } from '../shared/estropada.service';
+import { UrteakService, EstropadaService } from '../shared/estropada.service';
+import { EmaitzakService } from '../shared/emaitzak.service';
 import { SailkapenakService } from '../shared/sailkapenak.service';
 import { UrteakServiceStub, SailkapenaServiceStub, EmaitzakServiceStub, EstropadaServiceStub } from '../shared/estropada.service.stub';
 import { EstropadakAzkenEmaitzakCardComponent } from '../estropadak-azken-emaitzak-card/estropadak-azken-emaitzak-card.component';

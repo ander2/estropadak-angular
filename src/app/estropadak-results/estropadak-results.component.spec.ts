@@ -15,7 +15,8 @@ import { of } from 'rxjs';
 
 import { EstropadakSelectionFormComponent } from '../estropadak-selection-form/estropadak-selection-form.component';
 import { EstropadakResultsComponent } from './estropadak-results.component';
-import { EmaitzakService, UrteakService, EstropadaService } from '../shared/estropada.service';
+import { UrteakService, EstropadaService } from '../shared/estropada.service';
+import { EmaitzakService } from '../shared/emaitzak.service';
 import { TaldeakService } from '../shared/taldeak.service';
 import { TaldeakServiceStub } from '../shared/taldeak.service.stub';
 import { EstropadaServiceStub } from 'app/shared/estropada.service.stub';
