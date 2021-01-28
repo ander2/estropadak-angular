@@ -5,7 +5,7 @@ import { DataSource } from '@angular/cdk/table';
 import { MatSort } from '@angular/material/sort';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 
-import { EmaitzakService } from 'app/shared/estropada.service';
+import { EmaitzakService } from 'app/shared/emaitzak.service';
 import { SeasonTeamSelection } from 'app/shared/stats.model';
 
 @Component({
@@ -20,7 +20,7 @@ export class EstropadakResultsComponent implements OnInit, AfterViewInit {
   public year: number;
   public results: any[] = [];
   public emaitzak = [];
-  displayedColumns = ['data', 'Estropada', 'denbora', 'position', 'points'];
+  displayedColumns = ['estropada_data', 'estropada_izena', 'denbora', 'posizioa', 'puntuazioa'];
   public dataSource = new EstropadaDataSource([]);
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
@@ -44,25 +44,13 @@ export class EstropadakResultsComponent implements OnInit, AfterViewInit {
   getEmaitzak(league, year, team) {
     this.emaitzakService.getList(league, year, team)
       .subscribe(res => {
-        const emaitzak = res.map(emaitza => {
-          if (emaitza.sailkapena && emaitza.sailkapena.length > 0) {
-            emaitza.position = emaitza.sailkapena[0].posizioa;
-            emaitza.points = emaitza.sailkapena[0].puntuazioa;
-            emaitza.denbora = emaitza.sailkapena[0].denbora;
-          } else {
-            emaitza.position = undefined;
-            emaitza.points = undefined;
-            emaitza.denbora = undefined;
-          }
-          return emaitza;
-        })
-        .filter(emaitza => emaitza.position !== undefined);
-        this.emaitzak = emaitzak;
-        this.dataSource.data.next(emaitzak);
+        this.emaitzak = res;
+        this.dataSource.data.next(this.emaitzak);
         this.sort.sortChange
           .subscribe(ev => {
+            console.log(ev);
             const sailk = this.emaitzak.sort((a, b) => {
-              if (['denbora', 'data'].indexOf(ev.active) > -1) {
+              if (['denbora', 'estropada_data'].indexOf(ev.active) > -1) {
                 if (a[ev.active] < b[ev.active]) {
                   return ev.direction === 'asc' ? -1 : 1;
                 } else if (a[ev.active] > b[ev.active]) {

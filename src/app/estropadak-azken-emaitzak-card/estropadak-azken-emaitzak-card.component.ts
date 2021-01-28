@@ -5,7 +5,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import * as moment from 'moment';
 import {Observable, of} from 'rxjs';
 
-import { EmaitzakService } from '../shared/estropada.service';
+import { EstropadaService } from '../shared/estropada.service';
 import { Estropada, TaldeSailkapena } from '../shared/estropadak.model';
 
 class EstropadaDataSource extends DataSource<any> {
@@ -39,7 +39,7 @@ export class EstropadakAzkenEmaitzakCardComponent implements OnInit, OnChanges {
   tabs = ['ACT', 'ARC1', 'ARC2', 'EUSKOTREN', 'ETE'];
 
   constructor(
-    private emaitzakService: EmaitzakService
+    private estropadakService: EstropadaService
   ) { }
 
   ngOnInit() {
@@ -58,7 +58,7 @@ export class EstropadakAzkenEmaitzakCardComponent implements OnInit, OnChanges {
 
   showEmaitzak(league, year) {
     const date = moment(); // new Date().toISOString();
-    this.emaitzakService.getList(league, year)
+    this.estropadakService.getList(league, year)
       .subscribe((estropadak: Estropada[]) => {
         this.estropadak = estropadak
         .filter((estropada: Estropada) => moment(estropada.data) <= date)

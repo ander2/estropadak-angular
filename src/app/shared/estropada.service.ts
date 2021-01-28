@@ -139,24 +139,3 @@ export class UrteakService {
         return this.http.get(`${estropadakUrl}${id}`) as Observable<number>;
     }
 }
-
-
-
-@Injectable()
-export class EmaitzakService {
-
-    constructor(private http: HttpClient) { }
-
-    getList(league: string, year: string, team?: string) {
-        const endpoint = `${estropadakUrl}emaitzak`;
-        const params = {league, year};
-        if (team) {
-            params['team'] = team;
-        }
-        return this.http.get(endpoint, {params}) as Observable<any[]>;
-    }
-
-    getOne(id: string): Observable<Estropada> {
-        return this.http.get(`${estropadakUrl}estropadak/${id}`) as Observable<Estropada>;
-    }
-}

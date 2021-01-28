@@ -9,28 +9,28 @@
 </app-estropadak-selection-form>
 <div fxLayout fxLayout.xs="column" fxLayoutAlign="center start">
 <mat-table #table [dataSource]="dataSource" matSort>
-  <ng-container matColumnDef="data">
+  <ng-container matColumnDef="estropada_data">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.data | date: 'yyyy/MM/dd'}}</mat-cell>
+    <mat-cell *matCellDef="let row">{{row.estropada_data | date: 'yyyy/MM/dd'}}</mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="Estropada">
+  <ng-container matColumnDef="estropada_izena">
     <mat-header-cell *matHeaderCellDef>Estropada</mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <a [routerLink]="['/estropada', row.id]">
-        {{row.izena}}
+      <a [routerLink]="['/estropada', row.estropada_id]">
+        {{row.estropada_izena}}
       </a>
     </mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="position">
+  <ng-container matColumnDef="posizioa">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Posizioa</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.position}}</mat-cell>
+    <mat-cell *matCellDef="let row">{{row.posizioa}}</mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="points">
+  <ng-container matColumnDef="puntuazioa">
     <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs>Puntuak</mat-header-cell>
-    <mat-cell *matCellDef="let row" fxHide.xs>{{row.points}}</mat-cell>
+    <mat-cell *matCellDef="let row" fxHide.xs>{{row.puntuazioa}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="denbora">

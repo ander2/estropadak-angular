@@ -9,8 +9,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { EstropadakAzkenEmaitzakCardComponent } from './estropadak-azken-emaitzak-card.component';
-import { EmaitzakServiceStub } from '../shared/estropada.service.stub';
-import { EmaitzakService } from '../shared/estropada.service';
+import { EstropadaServiceStub } from '../shared/estropada.service.stub';
+import { EstropadaService } from '../shared/estropada.service';
 import { Estropada } from '../shared/estropadak.model';
 
 describe('EstropadakAzkenEmaitzakCardComponent', () => {
@@ -31,7 +31,7 @@ describe('EstropadakAzkenEmaitzakCardComponent', () => {
       ],
       declarations: [ EstropadakAzkenEmaitzakCardComponent ],
       providers: [
-        {provide: EmaitzakService, useClass: EmaitzakServiceStub}
+        {provide: EstropadaService, useClass: EstropadaServiceStub}
       ]
     })
     .compileComponents();

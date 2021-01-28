@@ -28,7 +28,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppComponent } from './app.component';
 
-import { EstropadaService, UrteakService, EmaitzakService } from './shared/estropada.service';
+import { EstropadaService, UrteakService } from './shared/estropada.service';
+import { EmaitzakService } from './shared/emaitzak.service';
 import { EstropadakListComponent } from './estropadak-list/estropadak-list.component';
 import { EstropadaDetailComponent } from './estropada-detail/estropada-detail.component';
 import { EstropadaMultiCategoryDetailComponent } from './estropada-multi-category-detail/estropada-multi-category-detail.component';

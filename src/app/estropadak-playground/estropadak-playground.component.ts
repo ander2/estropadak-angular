@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { EmaitzakService } from 'app/shared/estropada.service';
-import { TaldeakService } from 'app/shared/taldeak.service';
 import { filter } from 'rxjs/operators';
 import { FormBuilder } from '@angular/forms';
+
 import { SeasonTeamSelection } from 'app/shared/stats.model';
+import { TaldeakService } from 'app/shared/taldeak.service';
+import { EstropadaService } from 'app/shared/estropada.service';
 
 @Component({
   selector: 'app-estropadak-playground',
@@ -27,7 +28,7 @@ export class EstropadakPlaygroundComponent implements OnInit {
   form;
 
   constructor(
-    private emaitzakService: EmaitzakService,
+    private estropadakService: EstropadaService,
     private taldeakService: TaldeakService,
     private fb: FormBuilder
   ) { }
@@ -76,7 +77,7 @@ export class EstropadakPlaygroundComponent implements OnInit {
   }
 
   getEmaitzak(league, year) {
-    this.emaitzakService.getList(league, year)
+    this.estropadakService.getList(league, year)
       .subscribe(res => {
         res = res.filter(s => s.sailkapena);
         const emaitzak = res.map((emaitza, i) => {
@@ -84,10 +85,9 @@ export class EstropadakPlaygroundComponent implements OnInit {
             return null;
           }
           if (i === 0) {
-            console.log(this.displayColumnHeaders);
-            if (this.league.toLowerCase() === 'gbl') {
-              emaitza.sailkapena = emaitza.sailkapena.filter(s => s.kategoria === this.category);
-            }
+            // if (this.league.toLowerCase() === 'gbl') {
+            //   emaitza.sailkapena = emaitza.sailkapena.filter(s => s.kategoria === this.category);
+            // }
             emaitza.sailkapena.forEach(taldea => {
               const izena = this.getTeamName(taldea.talde_izena);
               this.displayColumnHeaders.push(izena)
@@ -131,7 +131,6 @@ export class EstropadakPlaygroundComponent implements OnInit {
   }
 
   removeCol(colName: string) {
-    console.log(`removing ${colName} col`);
     this.displayColumnHeaders = this.displayColumnHeaders.filter(h => h !== colName);
   }
 

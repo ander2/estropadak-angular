@@ -1,14 +1,14 @@
-.mat-column-data {
+.mat-column-estropada_data {
   justify-content: center;
   flex: 0 0 90px;
 }
 
-.mat-column-position {
+.mat-column-posizioa {
   justify-content: center;
   flex: 0 0 70px;
 }
 
-.mat-column-points {
+.mat-column-puntuazioa {
   justify-content: center;
   flex: 0 0 70px;
 }
