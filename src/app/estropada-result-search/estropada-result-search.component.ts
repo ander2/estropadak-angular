@@ -34,6 +34,7 @@ export class EstropadaResultSearchComponent implements OnInit {
       posizioa: {name: 'Posizioa', type: 'number'},
       tanda_posizioa: {name: 'Tandako Posizioa', type: 'number'},
       estropada_data: {name: 'Data', type: 'date'},
+      denbora: {name: 'Denbora', type: 'time'},
       tanda: {
         name: 'Tanda',
         type: 'category',
@@ -45,7 +46,7 @@ export class EstropadaResultSearchComponent implements OnInit {
       }
     }
   }
-  public displayedColumns = ['estropada_data', 'liga', 'taldea', 'estropada_izena', 'denbora', 'posizioa', 'puntuazioa'];
+  public displayedColumns = ['estropada_data', 'liga', 'taldea', 'estropada_izena', 'denbora', 'posizioa'];
   public dataSource = new EstropadaDataSource([]);
 
   constructor(
