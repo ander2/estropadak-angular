@@ -45,7 +45,7 @@ export class EstropadaResultSearchComponent implements OnInit {
       }
     }
   }
-  public displayedColumns = ['estropada_data', 'estropada_izena', 'denbora', 'posizioa', 'puntuazioa'];
+  public displayedColumns = ['estropada_data', 'liga', 'taldea', 'estropada_izena', 'denbora', 'posizioa', 'puntuazioa'];
   public dataSource = new EstropadaDataSource([]);
 
   constructor(
@@ -78,9 +78,22 @@ export class EstropadaResultSearchComponent implements OnInit {
   }
 
   queryToMango(query: {[key: string]: any}) {
-    let mangoQuery: {[key: string]: any} = {};
-    if ('rules' in query) {
-      mangoQuery[`\$${query.condition}`] = query.rules.map(rule => {
+    if ('condition' in query) {
+      return {
+          ['$' + query.condition]: query.rules.map(rule => {
+              if (rule.condition) {
+                return this.queryToMango(rule);
+              }
+              let condition = {};
+              const operator = this.operatorToMango(rule.operator);
+              condition[rule.field] = {
+                  [operator]: rule.value
+              }
+            return condition;
+          })
+        };
+    } else {
+      return query.map(rule => {
         let condition = {};
         const operator = this.operatorToMango(rule.operator);
         condition[rule.field] = {
@@ -88,7 +101,6 @@ export class EstropadaResultSearchComponent implements OnInit {
         }
         return condition;
       });
-      return mangoQuery;
     }
   }
 

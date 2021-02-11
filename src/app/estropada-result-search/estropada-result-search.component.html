@@ -1,4 +1,4 @@
-<query-builder [(ngModel)]='query' [config]='config' [allowRuleset]=false>
+<query-builder [(ngModel)]='query' [config]='config' [allowRuleset]=true>
       <ng-container *queryInput="let rule; type: 'textarea'; let getDisabledState=getDisabledState">
         <textarea class="text-input text-area" [(ngModel)]="rule.value" [disabled]=getDisabledState()
           placeholder="Custom Textarea"></textarea>
@@ -12,6 +12,16 @@
   <ng-container matColumnDef="estropada_data">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
     <mat-cell *matCellDef="let row">{{row.estropada_data | date: 'yyyy/MM/dd'}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="liga">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Liga</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.liga}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="taldea">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Taldea</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.talde_izen_normalizatua}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="estropada_izena">
