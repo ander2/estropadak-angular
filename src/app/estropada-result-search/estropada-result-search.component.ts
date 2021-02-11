@@ -111,12 +111,18 @@ export class EstropadaResultSearchComponent implements OnInit {
         return '$gt';
       case('>='):
         return '$gte';
+      case('<'):
+        return '$lt';
       case('<='):
         return '$lte';
       case('='):
         return '$eq';
       case('!='):
         return '$neq';
+      case('in'):
+        return '$in';
+      case('not in'):
+        return '$nin';
     }
   }
 }
