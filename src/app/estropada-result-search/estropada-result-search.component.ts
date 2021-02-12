@@ -1,10 +1,12 @@
 import { DataSource } from '@angular/cdk/table';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+
+import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { QueryBuilderConfig } from 'angular2-query-builder';
 
 import { EmaitzakService } from 'app/shared/emaitzak.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { TaldeakService } from 'app/shared/taldeak.service';
 
 @Component({
   selector: 'app-estropada-result-search',
@@ -20,7 +22,11 @@ export class EstropadaResultSearchComponent implements OnInit {
   
   config: QueryBuilderConfig = {
     fields: {
-      talde_izen_normalizatua: {name: 'Taldea', type: 'string'},
+      talde_izen_normalizatua: {
+        name: 'Taldea', 
+        type: 'category',
+        options: []
+      },
       liga: {name: 'Liga', 
         type: 'category',
         options: [
@@ -51,17 +57,31 @@ export class EstropadaResultSearchComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private emaitzakService: EmaitzakService
+    private emaitzakService: EmaitzakService,
+    private taldeakService: TaldeakService
     ) { 
-    this.query = {
-      condition: 'and',
-      rules: [{
-        field: 'talde_izen_normalizatua', 
-        operator: '=',
-        value: 'Donostiarra' 
-      }]
-  };
     this.queryCtrl = this.fb.control(this.query);
+    forkJoin({
+      act: this.taldeakService.getList('act'),
+      arc1: this.taldeakService.getList('arc1'),
+      arc2: this.taldeakService.getList('arc2'),
+      ete: this.taldeakService.getList('ete'),
+      euskotren: this.taldeakService.getList('euskotren'),
+    }).subscribe(res => {
+      let taldeak = [];
+      // @Todo: HAcK, the backend doesn't allow sending all the teams!!
+      taldeak = res.act.map(t => ({name: t.name, value: t.name}));
+      taldeak = taldeak.concat(res.arc1.map(t => ({name: t.name, value: t.name})));
+      taldeak = taldeak.concat(res.arc2.map(t => ({name: t.name, value: t.name})));
+      taldeak = taldeak.concat(res.ete.map(t => ({name: t.name, value: t.name})));
+      taldeak = taldeak.concat(res.euskotren.map(t => ({name: t.name, value: t.name})));
+      this.config.fields.talde_izen_normalizatua.options = taldeak.reduce((memo, taldea) => {
+        if (!memo.find(t => t.name === taldea.name)){
+          memo.push(taldea);
+        }
+        return memo;
+      }, []).sort((a, b) => a.value.localeCompare(b.name));
+    });
   }
 
   ngOnInit(): void {

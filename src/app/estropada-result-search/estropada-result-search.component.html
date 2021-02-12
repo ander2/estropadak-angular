@@ -1,17 +1,96 @@
+<div>
+    <mat-toolbar>Emaitza bilatzailea</mat-toolbar>
+</div>
+
+<p>Eraiki zure kontsulta, baldintza edota balditza-multzoak gehituz, eta sakatu `Bilatu` botoia</p>
 <query-builder [(ngModel)]='query' [config]='config' [allowRuleset]=true>
-      <ng-container *queryInput="let rule; type: 'textarea'; let getDisabledState=getDisabledState">
-        <textarea class="text-input text-area" [(ngModel)]="rule.value" [disabled]=getDisabledState()
-          placeholder="Custom Textarea"></textarea>
-      </ng-container>
+    <!-- <ng-container *queryInput="let rule; type: 'textarea'; let getDisabledState=getDisabledState">
+    <textarea class="text-input text-area" [(ngModel)]="rule.value" [disabled]=getDisabledState()
+        placeholder="Custom Textarea"></textarea>
+    </ng-container> -->
+  <ng-container *queryButtonGroup="let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet">
+    <button type="button" mat-button color="primary" (click)="addRule()">
+      + Baldintza</button>
+    <button type="button" mat-button color="primary" *ngIf="addRuleSet" (click)="addRuleSet()">
+      + Baldintza multzoa</button>
+    <button type="button" mat-button color="primary" *ngIf="removeRuleSet" (click)="removeRuleSet()">
+      + Baldintza multzoa</button>
+  </ng-container>
+  <ng-container *queryRemoveButton="let rule; let removeRule=removeRule">
+    <button type="button" mat-icon-button color="primary" (click)="removeRule(rule)">
+      <mat-icon>remove</mat-icon>
+    </button>
+  </ng-container>
+  <ng-container *querySwitchGroup="let ruleset; let onChange=onChange">
+    <mat-radio-group *ngIf="ruleset" [(ngModel)]="ruleset.condition" color="primary" (ngModelChange)="onChange($event)">
+      <mat-radio-button [style.padding.px]="10" value="and">And</mat-radio-button>
+      <mat-radio-button [style.padding.px]="10" value="or">Or</mat-radio-button>
+    </mat-radio-group>
+  </ng-container>
+  <ng-container *queryEntity="let rule; let entities=entities; let onChange=onChange">
+    <mat-form-field>
+      <mat-select [(ngModel)]="rule.entity" (ngModelChange)="onChange($event, rule)">
+        <mat-option *ngFor="let entity of entities" [value]="entity.value">
+        {{entity.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </ng-container>
+  <ng-container *queryField="let rule; let fields=fields; let onChange=onChange">
+    <mat-form-field>
+      <mat-select [(ngModel)]="rule.field" (ngModelChange)="onChange($event, rule)">
+        <mat-option *ngFor="let field of fields" [value]="field.value">{{field.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </ng-container>
+  <ng-container *queryOperator="let rule; let operators=operators">
+    <mat-form-field>
+      <mat-select [(ngModel)]="rule.operator">
+        <mat-option *ngFor="let value of operators" [value]="value">{{value}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </ng-container>
+  <!-- Override input component for 'boolean' type -->
+  <ng-container *queryInput="let rule; type: 'boolean'">
+    <mat-checkbox [(ngModel)]="rule.value"></mat-checkbox>
+  </ng-container>
+  <!-- Override input component for 'category' type -->
+  <ng-container *queryInput="let rule; let field=field; let options=options; type: 'category'">
+    <mat-form-field>
+      <mat-select [(ngModel)]="rule.value" [placeholder]="field.name">
+        <mat-option *ngFor="let opt of options" [value]="opt.value">
+          {{ opt.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </ng-container>
+  <ng-container *queryInput="let rule; let field=field; type: 'number'; let onChange=onChange">
+    <mat-form-field [style.width.px]="50">
+      <input matInput [(ngModel)]="rule.value" type="number" (ngModelChange)="onChange()">
+    </mat-form-field>
+  </ng-container>
+  <ng-container *queryInput="let rule; let field=field; type: 'string'; let onChange=onChange">
+    <mat-form-field>
+      <input matInput [(ngModel)]="rule.value" (ngModelChange)="onChange()">
+    </mat-form-field>
+  </ng-container>
+  <ng-container *queryInput="let rule; let field=field; type: 'textarea'; let onChange=onChange">
+    <mat-form-field>
+      <textarea matInput [(ngModel)]="rule.value" (ngModelChange)="onChange()">
+      </textarea>
+    </mat-form-field>
+  </ng-container>
 </query-builder>
-<button mat-button (click)="search()">
+
+<button mat-raised-button (click)="search()">
     Bilatu
 </button>
+<hr>
 <h3>Emaitzak</h3>
 <mat-table #table [dataSource]="dataSource" matSort>
   <ng-container matColumnDef="estropada_data">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.estropada_data | date: 'yyyy/MM/dd'}}</mat-cell>
+    <mat-cell *matCellDef="let row">{{row.estropada_data}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="liga">
