@@ -88,10 +88,8 @@ export class EstropadaResultSearchComponent implements OnInit {
   }
 
   search():void {
-    console.log(this.query);
     this.queryCtrl.value;
     const query = this.queryToMango(this.query);
-    console.log(query);
     this.emaitzakService.get(query).subscribe(
       res => this.dataSource.data.next(res),
       err => console.error(err)
