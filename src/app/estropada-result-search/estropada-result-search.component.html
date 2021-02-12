@@ -64,6 +64,22 @@
       </mat-select>
     </mat-form-field>
   </ng-container>
+  <ng-container *queryInput="let rule; type: 'date'; let onChange=onChange">
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="rule.value" (ngModelChange)="onChange()">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </ng-container>
+  <ng-container *queryInput="let rule; let options=options; type: 'multiselect'; let onChange=onChange">
+    <mat-form-field [style.width.px]="300">
+      <mat-select [(ngModel)]="rule.value" multiple (ngModelChange)="onChange()">
+        <mat-option *ngFor="let opt of options" [value]="opt.value">
+          {{ opt.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </ng-container>
   <ng-container *queryInput="let rule; let field=field; type: 'number'; let onChange=onChange">
     <mat-form-field [style.width.px]="50">
       <input matInput [(ngModel)]="rule.value" type="number" (ngModelChange)="onChange()">

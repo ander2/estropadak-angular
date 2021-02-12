@@ -14,6 +14,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [EstropadaResultSearchComponent],
@@ -24,10 +26,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     EstropadaResultSearchRoutingModule,
     MatButtonModule,
     MatButtonToggleModule,
+    MatCheckboxModule,
     MatDatepickerModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatNativeDateModule,
     MatRadioModule,
     MatSelectModule,
     MatTableModule,
