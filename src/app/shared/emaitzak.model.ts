@@ -15,3 +15,8 @@ export class Emaitza {
   tanda_postua: number;
   ziabogak: string[];
 }
+
+export interface EmaitzaResult {
+  docs: Emaitza[];
+  total: number;
+}

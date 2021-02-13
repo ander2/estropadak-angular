@@ -7,6 +7,8 @@ import { QueryBuilderConfig } from 'angular2-query-builder';
 
 import { EmaitzakService } from 'app/shared/emaitzak.service';
 import { TaldeakService } from 'app/shared/taldeak.service';
+import { EmaitzaResult } from 'app/shared/emaitzak.model';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-estropada-result-search',
@@ -53,7 +55,7 @@ export class EstropadaResultSearchComponent implements OnInit {
     }
   }
   public displayedColumns = ['estropada_data', 'liga', 'taldea', 'estropada_izena', 'denbora', 'posizioa'];
-  public dataSource = new EstropadaDataSource([]);
+  public dataSource = new EstropadaDataSource({docs: [], total: 0});
 
   constructor(
     private fb: FormBuilder,
@@ -87,13 +89,23 @@ export class EstropadaResultSearchComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  search():void {
+  search(page?: PageEvent):void {
     this.queryCtrl.value;
     const query = this.queryToMango(this.query);
-    this.emaitzakService.get(query).subscribe(
-      res => this.dataSource.data.next(res),
+    let start = 0;
+    let size = 25;
+    if (page) {
+      start = page.pageIndex;
+      size = page.pageSize;
+    }
+    this.emaitzakService.get(query, start, size).subscribe(
+      res => this.dataSource.update(res),
       err => console.error(err)
     );
+  }
+
+  paginate(pageEvent: PageEvent) {
+    this.search(pageEvent);
   }
 
   queryToMango(query: {[key: string]: any}) {
@@ -150,14 +162,21 @@ class EstropadaDataSource extends DataSource<any> {
   sailkapena;
   sort;
   data: BehaviorSubject<any[]> = new BehaviorSubject([]);
-  constructor(sailkapena) {
+  total: BehaviorSubject<number> = new BehaviorSubject(0);
+  constructor(emaitzakResult: EmaitzaResult) {
     super();
-    this.sailkapena = sailkapena;
-    this.data.next(sailkapena);
+    this.sailkapena = emaitzakResult;
+    this.data.next(emaitzakResult.docs);
+    this.total.next(emaitzakResult.total);
   }
 
   connect(): Observable<any> {
     return this.data;
+  }
+  
+  update(emaitzaResult: EmaitzaResult) {
+    this.data.next(emaitzaResult.docs);
+    this.total.next(emaitzaResult.total);
   }
 
   disconnect() {}

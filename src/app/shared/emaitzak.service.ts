@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { Estropada } from './estropadak.model';
 
 import { environment } from '../../environments/environment';
-import { Emaitza } from './emaitzak.model';
+import { Emaitza, EmaitzaResult } from './emaitzak.model';
 
 const estropadakUrl = environment.apiUrl;
 
@@ -35,10 +35,14 @@ export class EmaitzakService {
         return this.http.get(`${estropadakUrl}estropadak/${id}`) as Observable<Estropada>;
     }
 
-    get(criteria: any): Observable<Emaitza[]> {
+    get(criteria: any, from: number, count: number): Observable<EmaitzaResult> {
         const endpoint = `${estropadakUrl}emaitzak`;
         criteria['type'] = "emaitza";
-        const params = {criteria: JSON.stringify(criteria)};
-        return this.http.get(endpoint, {params}) as Observable<Emaitza[]>;
+        const params = {
+            criteria: JSON.stringify(criteria),
+            page: '' + from,
+            count: '' + count
+        };
+        return this.http.get(endpoint, {params}) as Observable<EmaitzaResult>;
     }
 }
