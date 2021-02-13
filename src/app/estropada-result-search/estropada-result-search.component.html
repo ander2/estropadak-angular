@@ -98,10 +98,12 @@
   </ng-container>
 </query-builder>
 
-<button mat-raised-button (click)="search()">
-    Bilatu
-</button>
-<hr>
+<div class="bilatu">
+    <button mat-raised-button (click)="search()">
+        Bilatu
+    </button>
+</div>
+<mat-divider></mat-divider>
 <h3>Emaitzak</h3>
 <mat-table #table [dataSource]="dataSource" matSort>
   <ng-container matColumnDef="estropada_data">
