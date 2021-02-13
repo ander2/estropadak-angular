@@ -3,6 +3,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 
 import { UrteakService } from 'app/shared/estropada.service';
+import { parseTwoDigitYear } from 'moment';
 
 @Component({
   selector: 'app-estropadak-portada',
@@ -12,8 +13,9 @@ import { UrteakService } from 'app/shared/estropada.service';
 export class EstropadakPortadaComponent implements OnInit {
 
   league = 'act';
-  year = 2020;
-  this_or_before_year = 2020;
+  year = new Date().getFullYear();
+  this_or_before_year = new Date().getFullYear();
+
   @ViewChild(MatSidenav) sidenav;
   constructor(
     private router: Router,

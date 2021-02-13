@@ -103,6 +103,10 @@ const routes: Routes = [
     path: 'konparaketak',
     loadChildren: () => import('./estropadak-team-comparation/estropadak-team-comparation.module').then(m => m.EstropadakTeamComparationModule)
   },
+  {
+    path: 'bilaketak',
+    loadChildren: () => import('./estropada-result-search/estropada-result-search.module').then(m => m.EstropadaResultSearchModule)
+  },
   { path: '**', component: PageNotFoundComponent }
 
 ];

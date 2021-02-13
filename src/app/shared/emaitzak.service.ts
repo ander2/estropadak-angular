@@ -34,4 +34,11 @@ export class EmaitzakService {
     getOne(id: string): Observable<Estropada> {
         return this.http.get(`${estropadakUrl}estropadak/${id}`) as Observable<Estropada>;
     }
+
+    get(criteria: any): Observable<Emaitza[]> {
+        const endpoint = `${estropadakUrl}emaitzak`;
+        criteria['type'] = "emaitza";
+        const params = {criteria: JSON.stringify(criteria)};
+        return this.http.get(endpoint, {params}) as Observable<Emaitza[]>;
+    }
 }
