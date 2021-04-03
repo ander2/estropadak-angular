@@ -1,6 +1,7 @@
-<mat-toolbar>
+<h1 class="mat-h1">
     {{year}} {{league?.toUpperCase()}}<ng-container *ngIf="league !== 'txapelketak'"> liga</ng-container>. Estropada emaitzak
-</mat-toolbar>
+</h1>
+<mat-divider></mat-divider>
 <mat-nav-list *ngIf="estropadak && estropadak.length > 0; else noestropadak">
   <mat-list-item *ngFor="let estropada of estropadak"
     (click)="onSelect(estropada)">

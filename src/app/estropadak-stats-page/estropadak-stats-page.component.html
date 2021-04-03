@@ -1,7 +1,7 @@
-<mat-toolbar>Estatistikak</mat-toolbar>
+<h1 class="mat-h1">Estatistikak</h1>
 <div>
   <form [formGroup]="form" novalidate>
-    <p>Aukeratu ikusi nahi duzun grafika mota eta liga. Ondoren aukeratu urtea edo taldea (grafikaren arabera).</p>
+    <p class="mat-body">Aukeratu ikusi nahi duzun grafika mota eta liga. Ondoren aukeratu urtea edo taldea (grafikaren arabera).</p>
     <mat-form-field>
       <mat-select #chart formControlName="chart" placeholder="Grafika mota" (selectionChange)="updateChart()">
         <mat-optgroup label="Ligen gaineko grafikak">

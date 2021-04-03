@@ -1,9 +1,78 @@
 <div fxLayout="column">
   <div>
-    <app-header></app-header>
-    <router-outlet></router-outlet>
-  </div>
-  <div class="text-center">
-    <a routerLink="/honi-buruz">Honi buruz</a>
+    <mat-sidenav-container class="example-sidenav-container" fullscreen>
+      <mat-sidenav #snav [autoFocus]="false">
+        <mat-nav-list>
+          <a mat-list-item routerLink=".">
+            <mat-icon>rowing</mat-icon>
+            Portada
+          </a>
+          <a mat-list-item routerLink="/bilaketak">
+            <mat-icon>search</mat-icon>
+            Bilaketak
+          </a>
+          <a mat-list-item routerLink="/estatistikak">
+            <mat-icon>show_chart</mat-icon>
+            Grafikak
+          </a>
+          <a mat-list-item routerLink="/jolastokia">
+            <mat-icon>table_view</mat-icon>
+            Jolastokia
+          </a>
+          <a mat-list-item routerLink="/konparaketak">
+            <mat-icon>compare_arrows</mat-icon>
+            Konparaketak
+          </a>
+        </mat-nav-list>
+        <mat-divider></mat-divider>
+        <div>
+          <h1 class="mat-h1">Estropadak</h1>
+        </div>
+        <mat-nav-list>
+          <a mat-list-item routerLink="/estropadak/act/2020">
+            Euskolabel liga
+          </a>
+          <a mat-list-item routerLink="/estropadak/arc1/2020">
+            KAE1 liga
+          </a>
+          <a mat-list-item routerLink="/estropadak/arc2/2020">
+            KAE2 liga
+          </a>
+          <a mat-list-item routerLink="/estropadak/euskotren/2020">
+            Euskotren liga
+          </a>
+          <a mat-list-item routerLink="/estropadak/ete/2020">
+            ETE liga
+          </a>
+        </mat-nav-list>
+        <mat-menu #traineruak="matMenu">
+          <button mat-menu-item routerLink="/estropadak/act/2020">
+              ACT
+            </button>
+            <button mat-menu-item routerLink="/estropadak/arc1/2020">
+              ARC-1
+            </button>
+            <button mat-menu-item routerLink="/estropadak/arc2/2020">
+              ARC-2
+            </button>
+            <button mat-menu-item routerLink="/estropadak/euskotren/2020">
+              Euskotren
+            </button>
+            <button mat-menu-item routerLink="/estropadak/ete/2020">
+              ETE
+            </button>
+            <button mat-menu-item routerLink="/estropadak/txapelketak/2020">
+              Txapelketak
+            </button>
+          </mat-menu>
+        </mat-sidenav>
+      <mat-sidenav-content class="estropadak-sidenav-content">
+        <app-header (menuClicked)="snav.toggle()"></app-header>
+        <router-outlet></router-outlet>
+        <div class="text-center">
+          <a routerLink="/honi-buruz">Honi buruz</a>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
   </div>
 </div>

@@ -16,4 +16,6 @@
     color: #FFF!important;
 }
 
-h1, h2 {text-align: center}
+h1 {
+  margin: 16px 0 16px !important;
+}

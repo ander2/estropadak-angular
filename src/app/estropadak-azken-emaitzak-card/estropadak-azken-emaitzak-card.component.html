@@ -1,14 +1,18 @@
 <mat-card>
-  <mat-card-title> Azken estropada emaitzak </mat-card-title>
+  <mat-card-title> 
+    <h1 class="mat-h1">
+      Azken estropada emaitzak 
+    </h1>
+  </mat-card-title>
   <mat-card-content>
     <mat-tab-group [selectedIndex]="0" (selectedTabChange)="onChangeLeague($event)">
       <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab">
         <div fxLayout fxLayout.xs="column">
           <div fxFlex fxFlex.xs="50%" *ngFor="let estropada of this.estropadak; let i=index" class="box">
-            <mat-toolbar>
+            <h3 class="mat-h2">
               {{estropada.izena}}
-            </mat-toolbar>
-            <p>{{estropada.data}}<br> {{estropada.lekua}}</p>
+            </h3>
+            <p class="mat-body grey">{{estropada.data}}<br>{{estropada.lekua}}</p>
             <mat-table #table [dataSource]="i==0?dataSource:dataSource2">
               <ng-container matColumnDef="Taldea">
                 <mat-header-cell *matHeaderCellDef> Taldea </mat-header-cell>

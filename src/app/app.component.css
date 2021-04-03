@@ -2,6 +2,34 @@
     background-color: rgba(0, 0, 0, .25);
 }
 
+.main {
+    height: 100vh;
+}
+
 .text-center{
     text-align: center;
+}
+
+mat-sidenav {
+    width: 300px;
+}
+
+mat-sidenav .mat-list-item .mat-icon {
+    padding: 0 15px 0;
+}
+
+mat-sidenav h1 {
+    text-align: center;
+}
+
+.example-sidenav-container {
+    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+        causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+    flex: 1;
+}
+
+.estropadak-sidenav-content {
+    background-color: #ffff;
+    max-width: 900px;
+    margin: 0 auto;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UrteakService } from './shared/estropada.service';
 import { Router } from '@angular/router';
 
@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   years;
+  @Output()
+  menuClicked: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private urteakService: UrteakService,
@@ -43,5 +45,9 @@ export class HeaderComponent implements OnInit {
 
   goTo(component: string) {
     this.router.navigate([component]);
+  }
+
+  emitClick() {
+    this.menuClicked.emit();
   }
 }
