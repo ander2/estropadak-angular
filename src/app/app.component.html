@@ -29,39 +29,39 @@
           <h1 class="mat-h1">Estropadak</h1>
         </div>
         <mat-nav-list>
-          <a mat-list-item routerLink="/estropadak/act/2020">
+          <a mat-list-item routerLink="/estropadak/act/{{ activeYear }}">
             Euskolabel liga
           </a>
-          <a mat-list-item routerLink="/estropadak/arc1/2020">
+          <a mat-list-item routerLink="/estropadak/arc1/{{ activeYear }}">
             KAE1 liga
           </a>
-          <a mat-list-item routerLink="/estropadak/arc2/2020">
+          <a mat-list-item routerLink="/estropadak/arc2/{{ activeYear }}">
             KAE2 liga
           </a>
-          <a mat-list-item routerLink="/estropadak/euskotren/2020">
+          <a mat-list-item routerLink="/estropadak/euskotren/{{ activeYear }}">
             Euskotren liga
           </a>
-          <a mat-list-item routerLink="/estropadak/ete/2020">
+          <a mat-list-item routerLink="/estropadak/ete/{{ activeYear }}">
             ETE liga
           </a>
         </mat-nav-list>
         <mat-menu #traineruak="matMenu">
-          <button mat-menu-item routerLink="/estropadak/act/2020">
+          <button mat-menu-item routerLink="/estropadak/act/{{ activeYear }}">
               ACT
             </button>
-            <button mat-menu-item routerLink="/estropadak/arc1/2020">
+            <button mat-menu-item routerLink="/estropadak/arc1/{{ activeYear }}">
               ARC-1
             </button>
-            <button mat-menu-item routerLink="/estropadak/arc2/2020">
+            <button mat-menu-item routerLink="/estropadak/arc2/{{ activeYear }}">
               ARC-2
             </button>
-            <button mat-menu-item routerLink="/estropadak/euskotren/2020">
+            <button mat-menu-item routerLink="/estropadak/euskotren/{{ activeYear }}">
               Euskotren
             </button>
-            <button mat-menu-item routerLink="/estropadak/ete/2020">
+            <button mat-menu-item routerLink="/estropadak/ete/{{ activeYear }}">
               ETE
             </button>
-            <button mat-menu-item routerLink="/estropadak/txapelketak/2020">
+            <button mat-menu-item routerLink="/estropadak/txapelketak/{{ activeYear }}">
               Txapelketak
             </button>
           </mat-menu>
