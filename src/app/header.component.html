@@ -1,6 +1,4 @@
-<div fxLayout="column" fxLayoutAlign="start start">
-  <div fxLayoutAlign="start center">
-    <button mat-icon-button [matMenuTriggerFor]="menu">
+    <!-- <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
@@ -53,8 +51,8 @@
       <button mat-menu-item (click)="goToEstropadak('gbl')">
         Gipuzkoako Liga
       </button>
-    </mat-menu>
-    <h1>Traineru Estropadak</h1>
-  </div>
-  <h3>KAE, TKE, Euskotren eta ETE ligen egutegia, emaitzak eta estatistikak.</h3>
-</div>
+    </mat-menu> -->
+<mat-toolbar>
+  <button mat-icon-button (click)="emitClick()"><mat-icon>menu</mat-icon></button>
+  <span>Traineru Estropadak</span>
+</mat-toolbar>

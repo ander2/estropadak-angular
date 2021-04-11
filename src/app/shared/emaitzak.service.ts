@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, pipe } from 'rxjs';
+import { map } from 'rxjs/operators'
 import { Estropada } from './estropadak.model';
 
 import { environment } from '../../environments/environment';
@@ -28,7 +29,8 @@ export class EmaitzakService {
             talde_izen_normalizatua: `${team}`
         };
         const params = {criteria: JSON.stringify(criteria)};
-        return this.http.get(endpoint, {params}) as Observable<Emaitza[]>;
+        return this.http.get(endpoint, {params})
+               .pipe(map((res: any) => res.docs)) as Observable<Emaitza[]>;
     }
 
     getOne(id: string): Observable<Estropada> {

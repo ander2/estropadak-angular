@@ -4,15 +4,16 @@
   </div>
   <div fxLayout fxLayout.xs="column">
     <div fxFlex="50%" fxFlex.xs class="box">
-      <mat-toolbar>
-        Sailkapen nagusia
-      </mat-toolbar>
-      <app-estropadak-sailkapena [year]="this_or_before_year" [league]="'ACT'" [showTitle]="'false'"></app-estropadak-sailkapena>
+      <h1 class="mat-h1">
+        Liga Sailkapenak
+      </h1>
+      <app-estropadak-sailkapena [year]="year" [league]="'ACT'" [showTitle]="'false'"></app-estropadak-sailkapena>
     </div>
     <div fxFlex="50%" fxFlex.xs class="box">
-      <mat-toolbar>
-        <h2>Hurrengo estropadak</h2>
-      </mat-toolbar>
+      <h1 class="mat-h1">
+        Hurrengo estropadak
+      </h1>
+      <mat-divider></mat-divider>
       <app-estropadak-hurrengoak-card [year]="year" [league]="'ACT'"></app-estropadak-hurrengoak-card>
     </div>
   </div>

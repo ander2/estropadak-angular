@@ -12,3 +12,7 @@ h2 {text-align: left}
 .box {
   padding: 10px 10px 0 0;
 }
+
+.grey {
+  opacity: 70%;
+}

@@ -1,6 +1,7 @@
-<mat-toolbar *ngIf="showTitle === true">
+<h1 class="mat-h1" *ngIf="showTitle === true">
     Liga sailkapena
-</mat-toolbar>
+</h1>
+<mat-divider></mat-divider>
 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" (change)="onChangeLeague($event)" *ngIf="showTitle !== true" class="box">
   <mat-button-toggle value="ACT" [checked]="league.toUpperCase() === 'ACT'">ACT</mat-button-toggle>
   <mat-button-toggle value="ARC1" [checked]="league.toUpperCase() === 'ARC1'">ARC1</mat-button-toggle>

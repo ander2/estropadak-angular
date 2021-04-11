@@ -132,7 +132,7 @@ export class UrteakService {
         const params = {
             historial: historial.toString()
         };
-        return this.http.get(endpoint, {params}) as Observable<{[key: string]: number[]}>
+        return this.http.get(endpoint, {params}) as Observable<[{name: string, years: [number]}]>
     }
 
     getOne(id: string): Observable<number> {

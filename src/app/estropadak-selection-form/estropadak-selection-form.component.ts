@@ -61,8 +61,11 @@ export class EstropadakSelectionFormComponent implements OnInit {
       this.form.get('team').updateValueAndValidity();
     }
     this.yearService.getList(this.historial).subscribe( years => {
-      this.allYears = years;
-      this.leagues = Object.keys(years).sort();
+      this.allYears = years.reduce((memo, year) => {
+        memo[year.name] = year.years;
+        return memo;
+      }, {});
+      this.leagues = years.map(year => year.name).sort();
       this.updateYears();
     });
     this.taldeakService.getList(this.league, this.year)

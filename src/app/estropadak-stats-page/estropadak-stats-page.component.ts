@@ -85,8 +85,11 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
       category: [this.category]
     });
     this.yearService.getList().subscribe( years => {
-      this.allYears = years;
-      this.leagues = Object.keys(years).sort();
+      this.allYears = years.reduce((memo, year) => {
+        memo[year.name] = year.years;
+        return memo;
+      }, {});
+      this.leagues = years.map(year => year.name).sort();
       this.updateYears();
     });
     this.initGraphSettings();
