@@ -12,7 +12,9 @@
             <h3 class="mat-h2">
               {{estropada.izena}}
             </h3>
-            <p class="mat-body grey">{{estropada.data}}<br>{{estropada.lekua}}</p>
+            <p class="mat-body grey">
+              {{estropada.data | date:'yyyy-MM-dd HH:mm' }}<br>{{estropada.lekua}}
+            </p>
             <mat-table #table [dataSource]="i==0?dataSource:dataSource2">
               <ng-container matColumnDef="Taldea">
                 <mat-header-cell *matHeaderCellDef> Taldea </mat-header-cell>

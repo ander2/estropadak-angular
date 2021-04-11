@@ -107,7 +107,7 @@
   <mat-table #table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="estropada_data">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.estropada_data}}</mat-cell>
+      <mat-cell *matCellDef="let row">{{row.estropada_data | date:'yyyy-MM-dd' }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="liga">

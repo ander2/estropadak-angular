@@ -1,6 +1,8 @@
 <div *ngIf="estropada" class="content">
   <h1 class="mat-h1" >{{estropada.izena}}</h1>
-  <h2 class="mat-subheading-2">{{estropada.data}} <br> {{estropada.lekua}}</h2>
+  <h2 class="mat-subheading-2">
+    {{estropada.data | date:'yyyy-MM-dd HH:mm' }} <br> {{estropada.lekua}}
+  </h2>
   <app-estropada-navegation [estropadaId]="id"></app-estropada-navegation>
   <h4 *ngIf="estropada.oharrak">Oharrak: {{estropada.oharrak}}</h4>
   <div *ngIf="estropada?.sailkapena?.length > 0; else no_sailkapena">
