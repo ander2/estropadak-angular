@@ -1,44 +1,48 @@
-<div>
-  <mat-toolbar>{{team}} estropada emaitzak: {{league | uppercase}} {{year}} urtea</mat-toolbar>
-</div>
-<app-estropadak-selection-form 
-  [year]="year"
-  [league]="league"
-  [team]="team"
-  (selectionChanged)="paramsChanged($event)">
-</app-estropadak-selection-form>
-<div fxLayout fxLayout.xs="column" fxLayoutAlign="center start">
-<mat-table #table [dataSource]="dataSource" matSort>
-  <ng-container matColumnDef="estropada_data">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.estropada_data | date: 'yyyy/MM/dd'}}</mat-cell>
-  </ng-container>
+<div class="content">
+  <h1 class="mat-h1">
+    {{team}} estropada emaitzak: {{league | uppercase}} {{year}} urtea
+  </h1>
 
-  <ng-container matColumnDef="estropada_izena">
-    <mat-header-cell *matHeaderCellDef>Estropada</mat-header-cell>
-    <mat-cell *matCellDef="let row">
-      <a [routerLink]="['/estropada', row.estropada_id]">
-        {{row.estropada_izena}}
-      </a>
-    </mat-cell>
-  </ng-container>
+  <app-estropadak-selection-form 
+    [year]="year"
+    [league]="league"
+    [team]="team"
+    (selectionChanged)="paramsChanged($event)">
+  </app-estropadak-selection-form>
 
-  <ng-container matColumnDef="posizioa">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Posizioa</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.posizioa}}</mat-cell>
-  </ng-container>
+  <div fxLayout fxLayout.xs="column" fxLayoutAlign="center start">
+    <mat-table #table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="estropada_data">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.estropada_data | date: 'yyyy-MM-dd'}}</mat-cell>
+      </ng-container>
 
-  <ng-container matColumnDef="puntuazioa">
-    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs>Puntuak</mat-header-cell>
-    <mat-cell *matCellDef="let row" fxHide.xs>{{row.puntuazioa}}</mat-cell>
-  </ng-container>
+      <ng-container matColumnDef="estropada_izena">
+        <mat-header-cell *matHeaderCellDef>Estropada</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <a [routerLink]="['/estropada', row.estropada_id]">
+            {{row.estropada_izena}}
+          </a>
+        </mat-cell>
+      </ng-container>
 
-  <ng-container matColumnDef="denbora">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Denbora</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.denbora}}</mat-cell>
-  </ng-container>
+      <ng-container matColumnDef="posizioa">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Posizioa</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.posizioa}}</mat-cell>
+      </ng-container>
 
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
+      <ng-container matColumnDef="puntuazioa">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs>Puntuak</mat-header-cell>
+        <mat-cell *matCellDef="let row" fxHide.xs>{{row.puntuazioa}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="denbora">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Denbora</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.denbora}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
 </div>

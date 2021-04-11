@@ -1,58 +1,60 @@
-<h1 class="mat-h1">Estatistikak</h1>
-<div>
-  <form [formGroup]="form" novalidate>
-    <p class="mat-body">Aukeratu ikusi nahi duzun grafika mota eta liga. Ondoren aukeratu urtea edo taldea (grafikaren arabera).</p>
-    <mat-form-field>
-      <mat-select #chart formControlName="chart" placeholder="Grafika mota" (selectionChange)="updateChart()">
-        <mat-optgroup label="Ligen gaineko grafikak">
-          <mat-option [value]="chart.value" *ngFor="let chart of charts['liga']">
-              {{chart.name}}
-          </mat-option>
-        </mat-optgroup>
-        <mat-optgroup label="Taldeen gaineko grafikak">
-          <mat-option [value]="chart.value" *ngFor="let chart of charts['taldea']">
-              {{chart.name}}
-          </mat-option>
-        </mat-optgroup>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-select formControlName="league" placeholder="Liga" (selectionChange)="updateYearsAndRefresh()">
-        <mat-option *ngFor="let league of leagues" [value]="league">
-          {{league | uppercase}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field *ngIf="form.get('league').value === 'gbl'">
-      <mat-select formControlName="category" placeholder="Kategoria" (selectionChange)="updateChart()">
-        <mat-option *ngFor="let kat of kategoriak" [value]="kat">
-          {{kat | uppercase}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <ng-container *ngIf="showYears">
+<div class="content">
+  <h1 class="mat-h1">Estatistikak</h1>
+  <div>
+    <form [formGroup]="form" novalidate>
+      <p class="mat-body">Aukeratu ikusi nahi duzun grafika mota eta liga. Ondoren aukeratu urtea edo taldea (grafikaren arabera).</p>
       <mat-form-field>
-        <mat-select formControlName="year" placeholder="Urtea" (selectionChange)="updateChart()">
-          <mat-option [value]="">Guztiak</mat-option>
-          <mat-option *ngFor="let year of years" [value]="year">
-            {{year}}
+        <mat-select #chart formControlName="chart" placeholder="Grafika mota" (selectionChange)="updateChart()">
+          <mat-optgroup label="Ligen gaineko grafikak">
+            <mat-option [value]="chart.value" *ngFor="let chart of charts['liga']">
+                {{chart.name}}
+            </mat-option>
+          </mat-optgroup>
+          <mat-optgroup label="Taldeen gaineko grafikak">
+            <mat-option [value]="chart.value" *ngFor="let chart of charts['taldea']">
+                {{chart.name}}
+            </mat-option>
+          </mat-optgroup>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select formControlName="league" placeholder="Liga" (selectionChange)="updateYearsAndRefresh()">
+          <mat-option *ngFor="let league of leagues" [value]="league">
+            {{league | uppercase}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </ng-container>
-    <ng-container *ngIf="showTeams">
-    <mat-form-field>
-      <mat-select formControlName="team" placeholder="Taldea" (selectionChange)="updateChart()">
-        <mat-option [value]="">Guztiak</mat-option>
-        <mat-option *ngFor="let team of teams" [value]="team">
-          {{team}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    </ng-container>
-  </form>
-</div>
-<h3 *ngIf="chart.value === 'general_rank_animation'">{{estropadaIzena}}</h3>
-<div *ngIf="options">
-  <nvd3 #nvd3 [options]="options" [data]="chartData"></nvd3>
+      <mat-form-field *ngIf="form.get('league').value === 'gbl'">
+        <mat-select formControlName="category" placeholder="Kategoria" (selectionChange)="updateChart()">
+          <mat-option *ngFor="let kat of kategoriak" [value]="kat">
+            {{kat | uppercase}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <ng-container *ngIf="showYears">
+        <mat-form-field>
+          <mat-select formControlName="year" placeholder="Urtea" (selectionChange)="updateChart()">
+            <mat-option [value]="">Guztiak</mat-option>
+            <mat-option *ngFor="let year of years" [value]="year">
+              {{year}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
+      <ng-container *ngIf="showTeams">
+      <mat-form-field>
+        <mat-select formControlName="team" placeholder="Taldea" (selectionChange)="updateChart()">
+          <mat-option [value]="">Guztiak</mat-option>
+          <mat-option *ngFor="let team of teams" [value]="team">
+            {{team}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </ng-container>
+    </form>
+  </div>
+  <h3 *ngIf="chart.value === 'general_rank_animation'">{{estropadaIzena}}</h3>
+  <div *ngIf="options">
+    <nvd3 #nvd3 [options]="options" [data]="chartData"></nvd3>
+  </div>
 </div>

@@ -19,3 +19,7 @@
 h1 {
   margin: 16px 0 16px !important;
 }
+
+.content {
+  padding: 15px;
+}
