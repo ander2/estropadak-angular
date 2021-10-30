@@ -33,20 +33,20 @@ export class EstropadaDetailComponent implements OnInit {
   refresh( ) {
     this.estropadaService.getOne(this.id)
     .subscribe((estropada) => {
-      const tandak = [];
+      
       const sailkapena = estropada.sailkapena || [];
-      const tanda1 = sailkapena.filter((el) => el.tanda === 1);
-      if (tanda1.length > 0) {
-        tandak.push(tanda1);
+      const tanda_kop = sailkapena.reduce((memo, sailk) => {
+        if (sailk.tanda > memo) { 
+          return sailk.tanda; 
+        } 
+        return memo;
+      }, 0);
+
+      const tandak = [];
+      for (let i=1; i<=tanda_kop; i++){
+        tandak[i - 1] = sailkapena.filter(s => s.tanda === i);
       }
-      const tanda2 = sailkapena.filter((el) => el.tanda === 2);
-      if (tanda2.length > 0) {
-        tandak.push(tanda2);
-      }
-      const tanda3 = sailkapena.filter((el) => el.tanda === 3);
-      if (tanda3.length > 0) {
-        tandak.push(tanda3);
-      }
+
       this.estropada = {
         izena: estropada.izena,
         lekua: estropada.lekua,
