@@ -6,6 +6,8 @@ import { MatTableModule } from '@angular/material/table';
 
 import { EstropadaTandaComponent } from './estropada-tanda.component';
 import { estropada } from '../shared/estropada.fixture';
+import { EstropadaService } from 'app/shared/estropada.service';
+import { EstropadaServiceStub } from 'app/shared/estropada.service.stub';
 
 describe('EstropadaTandaComponent', () => {
   let component: EstropadaTandaComponent;
@@ -18,7 +20,10 @@ describe('EstropadaTandaComponent', () => {
         MatTableModule,
         FlexLayoutModule
       ],
-      declarations: [ EstropadaTandaComponent ]
+      declarations: [ EstropadaTandaComponent ],
+      providers: [
+        {provide: EstropadaService, useClass: EstropadaServiceStub}
+      ]
     })
     .compileComponents();
   }));
