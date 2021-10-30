@@ -51,16 +51,8 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
   showYears = false;
   showTeams = false;
   chart: string;
-  kategoriak = [
-    'Promesa NESKAK',
-    'Infantila MUTILAK',
-    'Absolut NESKAK',
-    'Kadete MUTILAK',
-    'Jubenil MUTILAK',
-    'Senior MUTILAK',
-    'Jubenil NESKAK',
-    'Haurra NESKAK'
-  ];
+  kategoriak = [ ];
+  multikategoria = false;
   category = this.kategoriak[0];
   estropadaIzena = '';
   interval;
@@ -84,6 +76,11 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
       team: [this.team],
       category: [this.category]
     });
+    if (this.league === 'gbl' || this.league === 'btl'|| this.league === 'gtl') {
+      this.multikategoria = true;
+      this.estropadaService.getCategories(this.league)
+        .subscribe(res => this.kategoriak = res);
+    }
     this.yearService.getList().subscribe( years => {
       this.allYears = years.reduce((memo, year) => {
         memo[year.name] = year.years;
@@ -94,7 +91,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
     });
     this.initGraphSettings();
     this.route.queryParams.subscribe((params) => {
-      this.year = sanitizeYear(params.year) || '2020';
+      this.year = sanitizeYear(params.year) || '2021';
       this.league = sanitizeLeague(params.league) || 'act';
       this.chart = sanitizeChart(params.chart) || 'general_rank';
       this.form.patchValue({
@@ -244,6 +241,11 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
     if (changes.league) {
       this.league = changes.league.currentValue;
     }
+    if (this.league === 'gbl' || this.league === 'btl'|| this.league === 'gtl') {
+      this.multikategoria = true;
+      this.estropadaService.getCategories(this.league)
+        .subscribe(res => this.kategoriak = res);
+    }
     this.updateChart();
   }
 
@@ -254,8 +256,17 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
     const year = this.form.get('year').value;
     const league = this.form.get('league').value;
     this.team = this.form.get('team').value;
-    this.category = this.form.get('category').value;
-    this.updateData(year, league, this.team, this.category);
+    if (league === 'gbl' || league === 'btl'|| league === 'gtl') {
+      this.estropadaService.getCategories(league)
+        .subscribe(res => {
+          this.kategoriak = res
+          this.multikategoria = true;
+          this.category = this.form.get('category').value;
+          this.updateData(year, league, this.team, this.category);
+        });
+    } else {
+      this.updateData(year, league, this.team, this.category);
+    }
   }
 
   updateData(year: string, league: string, team?: string, category?: string) {

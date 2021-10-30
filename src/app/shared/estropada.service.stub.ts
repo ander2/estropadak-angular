@@ -987,11 +987,11 @@ export class UrteakServiceStub {
   }
 
   getList() {
-    return of({
-      'act': [2017, 2016, 2015],
-      'arc1': [2017, 2016, 2015],
-      'arc2': [2017, 2016, 2015],
-    })
+    return of([
+      {name: 'act', years: [2017, 2016, 2015]},
+      {name: 'arc1', years: [2017, 2016, 2015]},
+      {name: 'arc2', years: [2017, 2016, 2015]}
+    ]);
   }
 }
 

@@ -24,10 +24,10 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field *ngIf="form.get('league').value === 'gbl'">
+      <mat-form-field *ngIf="multikategoria">
         <mat-select formControlName="category" placeholder="Kategoria" (selectionChange)="updateChart()">
-          <mat-option *ngFor="let kat of kategoriak" [value]="kat">
-            {{kat | uppercase}}
+          <mat-option *ngFor="let kat of kategoriak" [value]="kat.code">
+            {{kat.name | uppercase}}
           </mat-option>
         </mat-select>
       </mat-form-field>
