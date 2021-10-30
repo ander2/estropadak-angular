@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FormsModule } from '@angular/forms';
+
 import { MatTableModule} from '@angular/material/table';
 import { MatIconModule} from '@angular/material/icon';
 import { MatButtonToggleModule} from '@angular/material/button-toggle';
@@ -8,9 +10,10 @@ import { MatSelectModule} from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { EstropadakSailkapenaComponent } from './estropadak-sailkapena.component';
+import { EstropadaServiceStub, SailkapenaServiceStub } from '../shared/estropada.service.stub';
 import { SailkapenakService } from '../shared/sailkapenak.service';
-import { SailkapenaServiceStub } from '../shared/estropada.service.stub';
-import { FormsModule } from '@angular/forms';
+import { EstropadaService } from '../shared/estropada.service';
+import { MatDividerModule } from '@angular/material/divider';
 
 describe('EstropadakSailkapenaComponent', () => {
   let component: EstropadakSailkapenaComponent;
@@ -26,11 +29,13 @@ describe('EstropadakSailkapenaComponent', () => {
         MatTableModule,
         MatToolbarModule,
         MatButtonToggleModule,
+        MatDividerModule,
         RouterTestingModule
       ],
       declarations: [ EstropadakSailkapenaComponent ],
       providers: [
-        {provide: SailkapenakService, useClass: SailkapenaServiceStub}
+        {provide: SailkapenakService, useClass: SailkapenaServiceStub},
+        {provide: EstropadaService, useClass: EstropadaServiceStub}
       ]
 
     })

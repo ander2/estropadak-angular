@@ -6,6 +6,7 @@ import { SailkapenakService } from 'app/shared/sailkapenak.service';
 import { Stats } from 'app/shared/stats.model';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MatSelectChange } from '@angular/material/select';
+import { EstropadaService } from 'app/shared/estropada.service';
 
 @Component({
   selector: 'app-estropadak-sailkapena',
@@ -25,21 +26,15 @@ export class EstropadakSailkapenaComponent implements OnChanges {
   }
   sailkapena: Stats;
 
-  displayedColumns = ['Posizioa', 'Taldea', 'Puntuak', 'Garaipenak'];
-  kategoriak = [
-    'Promesa NESKAK',
-    'Infantila MUTILAK',
-    'Absolut NESKAK',
-    'Kadete MUTILAK',
-    'Jubenil MUTILAK',
-    'Senior MUTILAK',
-    'Jubenil NESKAK',
-    'Haurra NESKAK'
-  ];
+  displayedColumns: string[] = ['Posizioa', 'Taldea', 'Puntuak', 'Garaipenak'];
+  kategoriak: string[] = [];
+  multikategoria = false;
+  category = '';
   dataSource;
 
   constructor(
     private sailkapenaService: SailkapenakService,
+    private estropadaService: EstropadaService,
   ) { }
 
   onChangeLeague(event: MatButtonToggleChange ) {
@@ -54,15 +49,22 @@ export class EstropadakSailkapenaComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    let category;
     if (changes.year) {
       this.year = changes.year.currentValue;
     }
+    if (this.league === 'gbl' || this.league === 'btl' || this.league === 'gtl') {
+      this.multikategoria = true;
+    }
     if (this.league === 'gbl') {
-      category = 'Haurra NESKAK';
+      this.category = 'Haurra NESKAK';
+    }
+    if (this.league === 'btl' || this.league === 'gtl') {
+      this.category = 'JG';
     }
 
-    this.getSailkapena(this.league, this.year, category);
+    this.getSailkapena(this.league, this.year, this.category);
+    this.estropadaService.getCategories(this.league)
+      .subscribe(res => this.kategoriak = res);
   }
 
   getSailkapena(league, year, category?) {
