@@ -72,6 +72,14 @@ const routes: Routes = [
     component: EstropadaMultiCategoryDetailComponent
   },
   {
+    path: 'estropada/:liga/:id',
+    component: EstropadaMultiCategoryDetailComponent
+  },
+  {
+    path: 'estropada/txapelketak/:id',
+    component: EstropadaMultiCategoryDetailComponent
+  },
+  {
     path: 'estropada/:id',
     component: EstropadaDetailComponent
   },
