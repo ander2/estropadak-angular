@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header.component';
 import { UrteakService } from './shared/estropada.service';
 import { UrteakServiceStub } from './shared/estropada.service.stub';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
@@ -27,6 +28,7 @@ describe('AppComponent', () => {
         MatSidenavModule,
         MatListModule,
         MatDividerModule,
+        MatToolbarModule,
         RouterTestingModule.withRoutes(
           [{path: '', component: AppComponent}]
         )
