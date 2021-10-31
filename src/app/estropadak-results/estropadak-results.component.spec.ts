@@ -19,7 +19,7 @@ import { UrteakService, EstropadaService } from '../shared/estropada.service';
 import { EmaitzakService } from '../shared/emaitzak.service';
 import { TaldeakService } from '../shared/taldeak.service';
 import { TaldeakServiceStub } from '../shared/taldeak.service.stub';
-import { EstropadaServiceStub } from 'app/shared/estropada.service.stub';
+import { EstropadaServiceStub, UrteakServiceStub } from '../shared/estropada.service.stub';
 
 
 describe('EstropadakResultsComponent', () => {
@@ -49,7 +49,7 @@ describe('EstropadakResultsComponent', () => {
         { provide: EstropadaService, useClass: EstropadaServiceStub},
         { provide: EmaitzakService, useValue: {getList: () => of([])}},
         { provide: TaldeakService, useClass: TaldeakServiceStub },
-        { provide: UrteakService, useValue: {getList: () => of({'act': [2019]})} },
+        { provide: UrteakService, useClass: UrteakServiceStub },
         { provide: ActivatedRoute, useValue: {paramMap: of({get: (key) => {
             if (key === 'year') {
               return 2019;

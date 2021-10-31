@@ -28,7 +28,7 @@ export class EstropadaService {
     }
 
     isMulticategory(league: string): boolean {
-        if (['gbl', 'bbl'].indexOf(league.toLowerCase()) > -1) {
+        if (['gbl', 'bbl', 'btl', 'gtl'].indexOf(league.toLowerCase()) > -1) {
             return true;
         }
         return false;
@@ -80,6 +80,51 @@ export class EstropadaService {
                 code: 'SN'
             }
         ];
+        } else if(['btl'].indexOf(liga.toLowerCase()) > -1) {
+            kategoriak = [
+                {
+                    name: 'Jubenil mutilak',
+                    code: 'JG'
+                },
+                {
+                    name: 'Jubenil neskak',
+                    code: 'JN'
+                },
+                {
+                    name: 'Senior mutilak',
+                    code: 'SG'
+                },
+                {
+                    name: 'Senior neskak',
+                    code: 'SN'
+                }
+            ];
+        } else if(['gtl'].indexOf(liga.toLowerCase()) > -1) {
+            kategoriak = [
+                {
+                    name: 'Jubenil mutilak',
+                    code: 'JG'
+                },
+                {
+                    name: 'Senior mutilak',
+                    code: 'SG'
+                },
+                {
+                    name: 'Senior neskak',
+                    code: 'SN'
+                }
+            ];
+        } else if(['txapelketak'].indexOf(liga.toLowerCase()) > -1){
+            kategoriak = [
+                {
+                    name: 'Senior mutilak',
+                    code: 'SG'
+                },
+                {
+                    name: 'Senior neskak',
+                    code: 'SN'
+                }
+            ];
         } else {
             // 0: "Promesa NESKAK"
             kategoriak = [
@@ -89,7 +134,7 @@ export class EstropadaService {
             },
             {
                 name: 'Infantil neskak',
-                code: 'Haurra NESKAK'
+                code: 'Infantila NESKAK'
             },
             {
                 name: 'Kadete mutilak',
@@ -97,7 +142,7 @@ export class EstropadaService {
             },
             {
                 name: 'Kadete neskak',
-                code: 'Promesa NESKAK'
+                code: 'Kadete NESKAK'
             },
             {
                 name: 'Jubenil mutilak',
@@ -113,7 +158,7 @@ export class EstropadaService {
             },
             {
                 name: 'Senior neskak',
-                code: 'Absolut NESKAK'
+                code: 'Senior NESKAK'
             }
             ];
 
