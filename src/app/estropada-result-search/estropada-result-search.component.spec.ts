@@ -1,11 +1,28 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
 import { QueryBuilderModule } from 'angular2-query-builder';
+
 import { EmaitzakService } from 'app/shared/emaitzak.service';
-import { EmaitzakServiceStub } from 'app/shared/estropada.service.stub';
+import { UrteakService } from 'app/shared/estropada.service';
+import { EmaitzakServiceStub, UrteakServiceStub } from 'app/shared/estropada.service.stub';
+import { TaldeakService } from 'app/shared/taldeak.service';
+import { TaldeakServiceStub } from 'app/shared/taldeak.service.stub';
 
 import { EstropadaResultSearchComponent } from './estropada-result-search.component';
 
@@ -21,11 +38,25 @@ describe('EstropadaResultSearchComponent', () => {
         ReactiveFormsModule,
         QueryBuilderModule,
         MatButtonModule,
-        MatTableModule
+        MatButtonToggleModule,
+        MatCheckboxModule,
+        MatDatepickerModule,
+        MatDividerModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatNativeDateModule,
+        MatPaginatorModule,
+        MatRadioModule,
+        MatSelectModule,
+        MatTableModule,
+        MatToolbarModule,
       ],
       declarations: [ EstropadaResultSearchComponent ],
       providers: [
-        { provide: EmaitzakService, useClass: EmaitzakServiceStub }
+        { provide: EmaitzakService, useClass: EmaitzakServiceStub },
+        { provide: UrteakService, useClass: UrteakServiceStub },
+        { provide: TaldeakService, useClass: TaldeakServiceStub }
       ]
     })
     .compileComponents();
