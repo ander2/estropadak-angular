@@ -7,6 +7,8 @@ import { FormBuilder } from '@angular/forms';
 import { SeasonTeamSelection } from 'app/shared/stats.model';
 import { TaldeakService } from 'app/shared/taldeak.service';
 import { EstropadaService } from 'app/shared/estropada.service';
+import { ActivatedRoute } from '@angular/router';
+import { sanitizeLeague, sanitizeYear } from 'app/shared/utils';
 
 @Component({
   selector: 'app-estropadak-playground',
@@ -30,22 +32,28 @@ export class EstropadakPlaygroundComponent implements OnInit {
   constructor(
     private estropadakService: EstropadaService,
     private taldeakService: TaldeakService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.form = this.fb.group({
-      property: [this.displayProp],
-      minVal: [1],
-      maxVal: [12],
-      minTime: ['19:00'],
-      maxTime: ['23:00'],
-    });
-    this.taldeakService.getList(this.league, this.year)
-    .subscribe(res => {
-      this.taldeak = res;
-      this.getEmaitzak('ACT', 2019);
-      this.dataSource = new PlaygroundDataSource([]);
+    this.route.queryParams.subscribe((params) => {
+      this.year = parseInt(sanitizeYear(params.year)) || 2021;
+      this.league = sanitizeLeague(params.league) || 'act';
+
+      this.form = this.fb.group({
+        property: [this.displayProp],
+        minVal: [1],
+        maxVal: [12],
+        minTime: ['19:00'],
+        maxTime: ['23:00'],
+      });
+      this.taldeakService.getList(this.league, this.year)
+      .subscribe(res => {
+        this.taldeak = res;
+        this.getEmaitzak(this.league, this.year);
+        this.dataSource = new PlaygroundDataSource([]);
+      });
     });
   }
 

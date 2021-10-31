@@ -2,6 +2,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
@@ -17,7 +18,7 @@ import { UrteakService, EstropadaService } from '../shared/estropada.service';
 import { EmaitzakService } from '../shared/emaitzak.service';
 import { TaldeakService } from '../shared/taldeak.service';
 import { TaldeakServiceStub } from '../shared/taldeak.service.stub';
-import { EstropadaServiceStub } from 'app/shared/estropada.service.stub';
+import { EstropadaServiceStub, UrteakServiceStub } from '../shared/estropada.service.stub';
 
 
 describe('EstropadakPlaygroundComponent', () => {
@@ -31,6 +32,7 @@ describe('EstropadakPlaygroundComponent', () => {
         FormsModule,
         HttpClientTestingModule,
         ReactiveFormsModule,
+        RouterTestingModule,
         MatIconModule,
         MatButtonModule,
         MatListModule,
@@ -45,7 +47,7 @@ describe('EstropadakPlaygroundComponent', () => {
       providers: [
         { provide: EmaitzakService, useValue: {getList: () => of([])}},
         { provide: TaldeakService, useClass: TaldeakServiceStub },
-        { provide: UrteakService, useValue: {getList: () => of({act: [2019]})} },
+        { provide: UrteakService, useClass: UrteakServiceStub},
         { provide: EstropadaService, useClass: EstropadaServiceStub}
       ]
     })
