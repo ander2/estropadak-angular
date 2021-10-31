@@ -16,7 +16,7 @@ import { EstropadaMultiCategoryDetailComponent } from './estropada-multi-categor
 import { EstropadaEstropadaSailkapenaComponent } from '../estropada-estropada-sailkapena/estropada-estropada-sailkapena.component';
 import { EstropadaTandaComponent } from '../estropada-tanda/estropada-tanda.component';
 import { EstropadaService } from '../shared/estropada.service';
-import { EstropadaServiceStub } from '../shared/estropada.service.stub';
+import { EstropadaMulticategoryServiceStub } from '../shared/estropada.service.stub';
 import { EstropadaNavegationComponent } from '../estropada-navegation/estropada-navegation.component';
 import { EstropadakNavegationService } from '../shared/estropadak-navegation.service';
 
@@ -48,7 +48,7 @@ describe('EstropadaMultiDetailComponent', () => {
         EstropadaNavegationComponent
       ],
       providers: [
-        { provide: EstropadaService, useClass: EstropadaServiceStub },
+        { provide: EstropadaService, useClass: EstropadaMulticategoryServiceStub },
         EstropadakNavegationService
       ]
     })

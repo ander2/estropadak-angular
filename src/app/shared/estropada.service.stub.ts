@@ -1,5 +1,6 @@
 import { of } from 'rxjs';
 import { estropada } from './estropada.fixture';
+import { estropada as multicategoryEstropada} from './multicategory_estropada.fixture';
 
 export class EstropadaServiceStub {
 
@@ -1606,5 +1607,33 @@ export class EmaitzakServiceStub {
         "urla": "http://www.euskolabelliga.com/resultados/ver.php?id=eu&r=1489953292"
       }
   ]);
+  }
+}
+
+export class EstropadaMulticategoryServiceStub {
+
+  getOne(id: number) {
+    return of(multicategoryEstropada)
+  }
+
+  getCategories() {
+    return of([
+      {
+          name: 'Jubenil mutilak',
+          code: 'JG'
+      },
+      {
+          name: 'Senior mutilak',
+          code: 'SG'
+      },
+      {
+          name: 'Senior neskak',
+          code: 'SN'
+      }
+    ]);
+  }
+
+  getList() {
+    return of([]);
   }
 }

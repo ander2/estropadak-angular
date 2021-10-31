@@ -18,6 +18,7 @@ export class EstropadaMultiCategoryDetailComponent implements OnInit {
   datasource;
   kategoriak = [];
   category = 'guztiak';
+  sailkapena = [];
 
   constructor(
     private estropadaService: EstropadaService,
@@ -37,31 +38,23 @@ export class EstropadaMultiCategoryDetailComponent implements OnInit {
     this.estropadaService.getOne(this.id)
     .subscribe((estropada) => {
       this.estropadaService.getCategories(estropada.liga).subscribe(res => this.kategoriak = res);
-      const tandak = [];
+      let tandak = [];
       const sailkapena = estropada.sailkapena || [];
-      const catMap = estropada.sailkapena.reduce((memo, sailk) => {
-        if (!memo.find(e => e.name === sailk['kategoria'])) {
-          memo.push({
-            name: sailk['kategoria'],
-            index: memo.length
-          });
-        }
-        return memo;
-      }, [])
-      // const tanda1 = sailkapena.filter((el) => el.tanda === 1);
-      sailkapena.forEach(sailk => {
-        const cat = catMap.find(e => e.name === sailk['kategoria']);
-        if (tandak[cat['index']]) {
-          tandak[cat['index']].push(sailk);
-        } else {
-          tandak[cat['index']] = [sailk];
-        }
+      this.kategoriak.forEach(kategoria => {
+        const kategoria_emaitzak = sailkapena.filter(_sailkapena => kategoria.code.toLowerCase() === _sailkapena['kategoria'].toLowerCase());
+        const filtered_by_tanda_number = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(tanda_zenb => kategoria_emaitzak.filter(ke => ke.tanda === tanda_zenb));
+        tandak = tandak.concat(filtered_by_tanda_number);
       });
+
+      this.sailkapena = sailkapena.filter(sailk => sailk['kategoria'].toLowerCase() === this.kategoriak[0].code.toLowerCase());
+      
+      tandak = tandak.filter(t => t.length > 0);
 
       this.estropada = {
         izena: estropada.izena,
         lekua: estropada.lekua,
         data: estropada.data,
+        liga: estropada.liga,
         tandak: tandak,
         sailkapena: sailkapena,
         oharrak: estropada.oharrak
@@ -82,7 +75,14 @@ export class EstropadaMultiCategoryDetailComponent implements OnInit {
         }
       });
     } else {
-      tandak.push(sailkapena.filter(t => t.kategoria === event.value));
+      const kategoria_sailkapenak = sailkapena.filter(t => t.kategoria.toLowerCase() === event.value.toLowerCase());
+      this.sailkapena = kategoria_sailkapenak;
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].forEach( tandaInd => {
+        const tanda = kategoria_sailkapenak.filter((el) => el.tanda === tandaInd);
+        if (tanda.length > 0) {
+          tandak.push(tanda);
+        }
+      });
     }
 
     this.estropada.tandak = tandak;
