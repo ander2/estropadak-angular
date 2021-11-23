@@ -14,7 +14,6 @@ import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatSelectModule} from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { NvD3Module } from 'ng2-nvd3';
 import { of } from 'rxjs';
 
 import { EstropadakPageComponent } from './estropadak-page.component';
@@ -45,7 +44,6 @@ describe('EstropadakPageComponent', () => {
         MatTabsModule,
         MatTableModule,
         MatToolbarModule,
-        NvD3Module,
         RouterTestingModule
       ],
       declarations: [

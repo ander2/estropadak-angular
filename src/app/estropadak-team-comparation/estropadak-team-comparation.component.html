@@ -69,6 +69,7 @@
   </div>
 
   <div *ngIf="viewMode === 'chart'">
-    <nvd3 [options]="options" [data]="chartData"></nvd3>
+    <!-- <nvd3 [options]="options" [data]="chartData"></nvd3> -->
+    <canvas id="chart" #canvas width="400" height="200">{{myChart}}</canvas>
   </div>
 </div>

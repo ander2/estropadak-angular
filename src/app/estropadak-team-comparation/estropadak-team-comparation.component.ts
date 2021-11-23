@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
-import { BehaviorSubject, Observable } from 'rxjs';
 
-import * as d3 from 'd3';
-import 'nvd3';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Chart, ChartType, registerables } from 'chart.js';
+Chart.register(...registerables);
 
 import { SailkapenakService } from 'app/shared/sailkapenak.service';
 import { TaldeakService } from 'app/shared/taldeak.service';
@@ -16,7 +16,6 @@ import { StatsService } from 'app/shared/stats.service';
   templateUrl: './estropadak-team-comparation.component.html',
   styleUrls: [
     './estropadak-team-comparation.component.css',
-    '../../../node_modules/nvd3/build/nv.d3.css'
   ],
   encapsulation: ViewEncapsulation.None
 })
@@ -39,32 +38,48 @@ export class EstropadakTeamComparationComponent implements OnInit {
     {code: 'worst', name: 'Estropada sailkapen okerrena'},
   ];
   ligak = ['ACT', 'ARC1', 'ARC2', 'ETE', 'euskotren'];
-  chartData = [];
+  chartData = {
+    labels: [],
+    datasets: []
+  };
+  myChart;
   options = {
-    chart: {
-      type: 'lineChart',
-      height: 450,
-      margin : {
-        top: 20,
-        right: 20,
-        bottom: 20,
-        left: 65
-      },
-      x: (d) => d.label,
-      y: (d) => {
-        return parseInt(d.value[this.form.get('metric').value], 10);
-      },
-      xAxis: {
-        axisLabel: 'Urtea',
-        showMaxMin: true
-      },
-      yAxis: {
-        axisLabel: 'Puntuak',
-        tickFormat: d => d
-      },
-    }
+    // chart: {
+    //   type: 'lineChart',
+    //   height: 450,
+    //   margin : {
+    //     top: 20,
+    //     right: 20,
+    //     bottom: 20,
+    //     left: 65
+    //   },
+    //   x: (d) => d.label,
+    //   y: (d) => {
+    //     return parseInt(d.value[this.form.get('metric').value], 10);
+    //   },
+    //   xAxis: {
+    //     axisLabel: 'Urtea',
+    //     showMaxMin: true
+    //   },
+    //   yAxis: {
+    //     axisLabel: 'Puntuak',
+    //     tickFormat: d => d
+    //   },
+    // }
   };
   viewMode = 'table';
+  private canvas: ElementRef;
+  @ViewChild('canvas', {static: false}) set content(content: ElementRef) {
+    console.log(content);
+    if (content) {
+      this.canvas = content;
+      if (this.viewMode === 'chart' && this.myChart) {
+        this.reCreateChart();
+      } else if (this.viewMode === 'chart') {
+        this.createChart();
+      }
+    }
+  }
 
   constructor(
     private saikapenakService: SailkapenakService,
@@ -86,18 +101,21 @@ export class EstropadakTeamComparationComponent implements OnInit {
     });
     this.form.get('liga').valueChanges.subscribe((change) => {
       this.taldeakLoad(change);
-      this.chartData = [];
+      this.chartData = {
+        labels: [],
+        datasets: []
+      };
       this.dataSource.data.next([]);
     });
     this.form.get('metric').valueChanges.subscribe((change) => {
       const options = Object.assign({}, this.options);
-      if (change === 'points') {
-        delete options.chart['yDomain'];
-      } else {
-        options.chart['yDomain'] = [12, 1];
-        options.chart['yRange'] = [360, 10];
-      }
-      this.options = options;
+      // if (change === 'points') {
+      //   delete options.chart['yDomain'];
+      // } else {
+      //   options.chart['yDomain'] = [12, 1];
+      //   options.chart['yRange'] = [360, 10];
+      // }
+      // this.options = options;
     })
   }
 
@@ -165,18 +183,45 @@ export class EstropadakTeamComparationComponent implements OnInit {
           });
         return memo;
       }, {});
-      this.chartData = Object.keys(data).map(k => {
-        return {
-          key: k,
-          color: this.statsService.teamColors(k),
-          values: data[k]
-        };
-      });
+      this.chartData = {
+        labels: res.map(val => val.urtea),
+        datasets: Object.keys(data).map(val => {
+          return {
+            label: val,
+            borderColor: this.statsService.teamColors(val),
+            data: data[val].map(v => v.value[this.form.get('metric').value])
+          }
+        })
+      };
+      // Object.keys(data).map(k => {
+      //   return {
+      //     key: k,
+      //     color: this.statsService.teamColors(k),
+      //     values: data[k]
+      //   };
+      // });
     })
   }
 
   changeMode(mode: string) {
     this.viewMode = mode;
+  }
+
+  createChart() {
+    const data = {
+      labels: [],
+      datasets: []
+    };
+    this.myChart = new Chart(this.canvas.nativeElement, {
+        type: 'line',
+        data: this.chartData,
+        options: this.options
+    });
+  }
+
+  reCreateChart() {
+    this.myChart.destroy();
+    this.createChart();
   }
 
 }
