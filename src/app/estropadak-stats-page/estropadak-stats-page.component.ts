@@ -8,6 +8,7 @@ import { StatsService } from 'app/shared/stats.service';
 import { ActivatedRoute } from '@angular/router';
 import { sanitizeYear, sanitizeLeague, sanitizeChart } from 'app/shared/utils';
 import { Chart, ChartType, registerables } from 'chart.js';
+import { map } from 'rxjs/operators';
 Chart.register(...registerables);
 
 
@@ -21,9 +22,9 @@ Chart.register(...registerables);
 export class EstropadakStatsPageComponent implements OnInit, OnChanges {
 
   @Input()
-  league;
+  league = 'act';
   @Input()
-  year;
+  year:number = 2021;
   form: FormGroup;
   leagues: string[];
   years: number[];
@@ -32,17 +33,9 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
   team = undefined;
   options: any;
   lineChartOptions: any = {};
-  lineChartReversedOptions: any = {};
-  discreteBarChartOptions: any = {};
   statsData;
-  points_per_race: any = [];
-  points_per_year: any = [];
-  positions_per_race: any = [];
   rank: any = [];
-  cumulative: any = [];
   estropadak: string[] = [];
-  ages: any = [];
-  incorporations: any = [];
   allEstropadak: {[key: string]: any[]}
   chartType: ChartType = 'bar';
   chartData: any;
@@ -81,40 +74,42 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
       this.estropadaService.getCategories(this.league)
         .subscribe(res => this.kategoriak = res);
     }
-    this.yearService.getList().subscribe( years => {
-      this.allYears = years.reduce((memo, year) => {
-        memo[year.name] = year.years;
-        return memo;
-      }, {});
-      this.leagues = years.map(year => year.name).sort();
-      // this.updateYears();
-    });
     this.initGraphSettings();
     this.route.queryParams.subscribe((params) => {
-      console.log('Query param handling', params);
-      if (Object.keys(params).length > 0) {
-        console.log('Query param handling 2');
-        this.year = sanitizeYear(params.year) || '2021';
-        this.league = sanitizeLeague(params.league) || 'act';
-        this.chart = sanitizeChart(params.chart) || 'general_rank';
-        this.form.patchValue({
-          league: this.league,
-          year: this.year,
-          chart: this.chart,
-        });
-        this.taldeakService.getList(this.league, this.year)
-        .subscribe(teams => {
-          this.teams = teams.map(t => t.name);
-        });
-      }
+      this.loadYears().subscribe(() => {
+        if (Object.keys(params).length > 0) {
+          this.year = parseInt(sanitizeYear(params.year), 10) || 2021;
+          this.league = sanitizeLeague(params.league) || 'act';
+          this.chart = sanitizeChart(params.chart) || 'general_rank';
+          this.years = this.allYears[this.league];
+          this.form.patchValue({
+            league: this.league,
+            year: this.year,
+            chart: this.chart,
+          });
+          this.taldeakService.getList(this.league, this.year)
+          .subscribe(teams => {
+            this.teams = teams.map(t => t.name);
+          });
+          this.updateChart();
+        } else {
+          this.years = this.allYears[this.league];
+        }
+      });
     });
     this.createChart();
     this.updateChart();
   }
 
-  ngAfterViewInit() {
-    // this.createChart();
-    // this.updateChart();
+  loadYears() {
+    return this.yearService.getList()
+    .pipe(map( years => {
+      this.allYears = years.reduce((memo, year) => {
+        memo[year.name] = year.years;
+        return memo;
+      }, {});
+      this.leagues = years.map(year => year.name).sort();
+    }));
   }
 
   createChart() {
@@ -149,10 +144,10 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
           name: 'Sailkapen orokorra',
           value: 'general_rank'
         },
-        {
-          name: 'Sailkapen orokorra(eboluzioa)',
-          value: 'general_rank_animation'
-        },
+        // {
+        //   name: 'Sailkapen orokorra(eboluzioa)',
+        //   value: 'general_rank_animation'
+        // },
         {
           name: 'Arraunlarien adina',
           value: 'ages'
@@ -178,29 +173,6 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
       ]
     };
 
-    this.lineChartReversedOptions = {
-      chart: {
-        type: 'lineChart',
-        height: 450,
-        margin : {
-          top: 20,
-          right: 20,
-          bottom: 70,
-          left: 65
-        },
-        x: (d) => d.label,
-        y: (d) => d.value,
-        xAxis: {
-          axisLabel: 'Estropadak',
-          tickFormat: (d) => d,
-          rotateLabels: 25,
-          showMaxMin: false
-        },
-        yDomain: [12, 0],
-        yRange: [360, 10]
-      }
-    }
-
     this.lineChartOptions = {
       scales: {
         x: {
@@ -218,29 +190,6 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
       }
     };
 
-    this.discreteBarChartOptions = {
-      chart: {
-        // type: 'multiBarHorizontalChart',
-        type: 'discreteBarChart',
-        height: 450,
-        margin : {
-          top: 20,
-          right: 20,
-          bottom: 50,
-          left: 65
-        },
-        x: (d) => d.label,
-        y: (d) => d.value,
-        showValues: true,
-        staggerLabels: true,
-        duration: 800,
-        interpolate: 'linear',
-        barColor: d => d.color,
-        yAxis: {
-          axisLabel: 'Puntuak',
-        },
-      }
-    };
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -259,7 +208,6 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
   }
 
   updateChart() {
-    console.log('Update chart called');
     if (this.interval) {
       clearInterval(this.interval);
     }
@@ -311,46 +259,14 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
         reverse: true,
         min: 1
       };
-    } 
-    return ;
-    // else {
-    //   this.lineChartReversedOptions.chart.yAxis = {
-    //     axisLabel: 'Puntuak'
-    //   };
-    // }
-    if (chartType.indexOf('t') === 0) {
-      chartType = chartType.slice(1);
-    }
-    this.options = this.lineChartOptions;
-    this.chartData = this.statsData;
-    if (chartType === 'points_per_race') {
-      const maxVals = Math.max(...this.chartData.map(g => Math.max(...g.values.map(k => k.value))));
-      this.options.chart.yDomain = [0, maxVals]
-    } else if (chartType === 'positions_per_race') {
-      const maxVals = Math.max(...this.chartData.map(g => Math.max(...g.values.map(k => k.value))));
-      this.options.chart.yDomain = [0, maxVals]
-    } else if (chartType.indexOf('general_rank') > -1 ) {
-      this.options = this.discreteBarChartOptions;
-    } else if (chartType === 'rank') {
-      this.options = this.lineChartReversedOptions;
-    } else if (chartType === 'ages') {
-      this.options = this.discreteBarChartOptions;
-      this.options.chart.type = 'multiBarChart';
-      this.options.chart.yAxis.axisLabel = 'Adina';
-      this.options.chart.reduceXTicks = false;
-    } else if (chartType === 'incorporations') {
-      this.options = this.discreteBarChartOptions;
-      this.options.chart.type = 'multiBarChart';
-      this.options.chart.yAxis.axisLabel = 'Alta/Baja';
-      this.options.chart.reduceXTicks = false;
-    } else if (chartType === 'points_total') {
-      this.options = this.lineChartOptions;
     } else {
-      const maxVals = Math.max(...this.chartData.map(g => Math.max(...g.values.map(k => k.value))));
-      this.options.chart.yDomain = [0, maxVals]
+      this.lineChartOptions.scales.y =  {
+        reverse: false,
+        min: 0
+      };
     }
+    return ;
   }
-
 
   setEnabledFields(chartType) {
     if (chartType[0] === 't') {
@@ -365,7 +281,6 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
   }
 
   updateYearsAndRefresh() {
-    console.log('Update years and refresh');
     this.updateYears();
     this.form.get('year').setValue(this.years[0]);
     this.updateChart();
@@ -444,8 +359,6 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
     } else if (chartType === 'ages') {
       this.statsService.getAges(league, parseInt(year, 10))
       .subscribe( res => {
-        // this.ages = res;
-        // this.statsData = res;
         this.statsData = this.statsService.getDatasets(res);
         this.chartType = 'bar' ;
         this.options = {};
@@ -454,8 +367,6 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
     } else if (chartType === 'incorporations') {
       this.statsService.getIncorporations(league, parseInt(year, 10))
       .subscribe( res => {
-        // this.incorporations = res;
-        // this.statsData = res;
         this.statsData = this.statsService.getDatasets(res);
         this.chartType = 'bar' ;
         this.options = {};
@@ -466,9 +377,9 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
 
   loadTeamData(league: string, team: string) {
     const chartType = this.form.get('chart').value;
+    this.changeChart();
     if (team === null) {
       this.statsData = [];
-      this.changeChart();
       return;
     }
     if (chartType === 'tpoints_total') {
@@ -495,11 +406,6 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
         this.reCreateChart();
       });
     }
-    // this.statsService.getGraphCumulativePoints(league, undefined, team)
-    // .subscribe(res => {
-    //   this.cumulative = res;
-    //   this.changeChart();
-    // });
   }
 
 }
