@@ -155,4 +155,31 @@ export class StatsService {
     return (this.http.get(`${estropadakUrl}estatistikak`, {params}) as Observable<any[]>);
   }
 
+  getDatasets(res: any[]) {
+    return {
+      labels: res[0]?.values.map(val => val.label),
+      datasets: res.map((val, i) => {
+        let backgroundColor = ''
+        if (val.key === 'Min') {
+          backgroundColor = 'yellow';
+        }
+        if (val.key === 'Max') {
+          backgroundColor = 'blue';
+        }
+        if (val.key === 'Media' || val.key == 'Altak') {
+          backgroundColor = 'green';
+        }
+        if (val.key == 'Bajak') {
+          backgroundColor = 'red';
+        }
+        return {
+            label: val.key,
+            data:  val.values.map(v => v.value),
+            borderColor: val.key === 'Taldea' ? val.values.map(v => v.color) : res[i].color || res[i].values[0].color || backgroundColor,
+            backgroundColor: val.key === 'Taldea' ? val.values.map(v => v.color) : res[i].color || res[i].values[0].color || backgroundColor
+          }
+      })
+    }
+  }
+
 }

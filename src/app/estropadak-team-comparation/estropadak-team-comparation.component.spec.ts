@@ -9,7 +9,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { NvD3Module } from 'ng2-nvd3';
 import { of } from 'rxjs';
 
 import { EstropadakTeamComparationComponent } from './estropadak-team-comparation.component';
@@ -36,7 +35,6 @@ describe('EstropadakTeamComparationComponent', () => {
         MatTableModule,
         MatToolbarModule,
         MatSelectModule,
-        NvD3Module,
         ReactiveFormsModule,
       ],
       providers: [
