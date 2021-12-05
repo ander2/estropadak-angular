@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation, ViewChild, Input, OnChanges, Simp
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 import { EstropadaService, UrteakService } from 'app/shared/estropada.service';
-import { SailkapenakService } from 'app/shared/sailkapenak.service';
 import { TaldeakService } from 'app/shared/taldeak.service';
 import { StatsService } from 'app/shared/stats.service';
 import { ActivatedRoute } from '@angular/router';
@@ -34,9 +33,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
   options: any;
   lineChartOptions: any = {};
   statsData;
-  rank: any = [];
   estropadak: string[] = [];
-  allEstropadak: {[key: string]: any[]}
   chartType: ChartType = 'bar';
   chartData: any;
   charts: {[key: string]: any[]};
@@ -49,13 +46,13 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
   estropadaIzena = '';
   interval;
   myChart;
+  noData: string = '';
   @ViewChild('canvas', {static: true}) private canvas: ElementRef;
 
   constructor(
     private fb: FormBuilder,
     private yearService: UrteakService,
     private estropadaService: EstropadaService,
-    private sailkapenaService: SailkapenakService,
     private taldeakService: TaldeakService,
     private statsService: StatsService,
     private route: ActivatedRoute
@@ -288,14 +285,16 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
 
   updateYears() {
     const league = this.form.get('league').value || 'act';
-    this.taldeakService.getList(league, this.year)
-    .subscribe( res => this.teams = res.map(taldea => taldea.name));
+    const year = this.form.get('chart').value.startsWith('t') ? null : this.form.get('year').value;
+    this.taldeakService.getList(league, year)
+      .subscribe( res => this.teams = res.map(taldea => taldea.name));
     this.years = this.allYears[league].sort((a, b) => b - a);
   }
 
   loadYearData(league: string, year: string, category: string) {
     const chartType = this.form.get('chart').value;
     this.changeChart();
+    this.noData = '';
     if (year === null) {
       this.statsData = [];
       this.changeChart();
@@ -320,21 +319,25 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
     } else if (chartType === 'general_rank') {
       this.statsService.getRank(league, parseInt(year, 10), null, category)
       .subscribe( res => {
-        this.rank = res;
         this.statsData = this.statsService.getDatasets(res);
         this.chartType = 'bar' ;
-        this.options = {};
+        this.options = {
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        };
         this.reCreateChart();
       });
     } else if (chartType === 'general_rank_animation') {
       this.statsService.getGraphCumulativePoints(league, parseInt(year, 10), null, category)
       .subscribe(res => {
-        this.rank = res;
         let i = 0;
         const _this = this;
         const changeData = () => {
           try {
-            this.estropadaIzena = this.rank[0].values[i].label;
+            this.estropadaIzena = '';
           } catch (err) {
             clearInterval(this.interval);
             return;
@@ -351,7 +354,6 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
             key: 'Taldea',
             values
           }];
-          this.chartData = this.statsData;
         };
         this.interval = setInterval(changeData, 1500);
         this.changeChart();
@@ -362,6 +364,12 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
         this.statsData = this.statsService.getDatasets(res);
         this.chartType = 'bar' ;
         this.options = {};
+        this.reCreateChart();
+      }, err => {
+        this.statsData = [];
+        this.chartType = 'bar' ;
+        this.options = {};
+        this.noData = 'Ez dago daturik';
         this.reCreateChart();
       });
     } else if (chartType === 'incorporations') {

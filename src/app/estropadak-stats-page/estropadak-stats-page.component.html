@@ -55,4 +55,9 @@
   </div>
   <h3 *ngIf="chart.value === 'general_rank_animation'">{{estropadaIzena}}</h3>
 </div>
+
+<div *ngIf="noData">
+  {{noData}}
+</div>
+
 <canvas id="chart" #canvas width="400" height="200">{{myChart}}</canvas>

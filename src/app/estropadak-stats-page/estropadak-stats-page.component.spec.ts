@@ -34,7 +34,6 @@ describe('EstropadakStatsPageComponent', () => {
       providers: [
         {provide: UrteakService, useClass: UrteakServiceStub},
         {provide: EstropadaService, useClass: EstropadaServiceStub},
-        {provide: SailkapenakService, useClass: SailkapenaServiceStub},
         {provide: TaldeakService, useClass: TaldeakServiceStub},
         {provide: StatsService, useValue: {
           getGraphPointsPerRace: () => of([]),
