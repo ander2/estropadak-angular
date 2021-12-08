@@ -39,7 +39,6 @@ export class EstropadakPlaygroundComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(navigator.userAgent);
     if (navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('iPhone') > -1) {
       this.isMobile = true;
     }
@@ -109,33 +108,20 @@ export class EstropadakPlaygroundComponent implements OnInit {
           if (emaitza.izena.indexOf('Play') > -1) {
             return null;
           }
-          // if (i === 0) {
-          //   // if (this.league.toLowerCase() === 'gbl') {
-          //   //   emaitza.sailkapena = emaitza.sailkapena.filter(s => s.kategoria === this.category);
-          //   // }
-          //   emaitza.sailkapena.forEach((taldea, idx) => {
-          //     const izena = this.getTeamName(taldea.talde_izena);
-          //     this.displayColumnHeaders.push(izena)
-          //   });
-          // }
           const estropData = new Date(emaitza.data);
           const options = { month: '2-digit', day: '2-digit' };
           const sailkapena = {
             izena: emaitza.izena,
             data: new Intl.DateTimeFormat('eu-ES', options).format(estropData)
           };
-          //{izena: `${estropData.getMonth() + 1}/${estropData.getDate()}`};
-          emaitza.sailkapena.forEach((taldea) => {
-            const izena = this.getTeamName(taldea.talde_izena);
-            sailkapena[izena] = taldea;
+          emaitza.sailkapena.forEach((taldeSailkapenDatuak) => {
+            const izena = this.getTeamName(taldeSailkapenDatuak.talde_izena);
+            sailkapena[izena] = taldeSailkapenDatuak;
           });
           return sailkapena;
         })
         .filter(emaitza => emaitza !== null);
 
-        // if (navigator.userAgent.indexOf('Android') > -1) {
-        //   this.displayColumnHeaders = this.displayColumnHeaders.slice(0, 5);
-        // }
         this.dataSource = new PlaygroundDataSource(emaitzak)
         this.changeTeams();
     });
