@@ -39,7 +39,8 @@ export class EstropadakPlaygroundComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('iphone')) {
+    console.log(navigator.userAgent);
+    if (navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('iPhone') > -1) {
       this.isMobile = true;
     }
     this.route.queryParams.subscribe((params) => {
@@ -57,7 +58,11 @@ export class EstropadakPlaygroundComponent implements OnInit {
       this.taldeakService.getList(this.league, this.year)
       .subscribe(res => {
         this.teams = res;
-        this.form.get('teams').setValue(this.teams.map(t => t.short));
+        if (this.isMobile) {
+          this.form.get('teams').setValue(this.teams.map(t => t.short).slice(0, 4));
+        } else {
+          this.form.get('teams').setValue(this.teams.map(t => t.short));
+        }
         this.getEmaitzak(this.league, this.year);
         this.dataSource = new PlaygroundDataSource([]);
       });
@@ -82,7 +87,11 @@ export class EstropadakPlaygroundComponent implements OnInit {
     this.taldeakService.getList(this.league, this.year)
     .subscribe(res => {
       this.teams = res;
-      this.form.get('teams').setValue(this.teams.map(t => t.short));
+      if (this.isMobile) {
+        this.form.get('teams').setValue(this.teams.map(t => t.short).slice(0, 4));
+      } else {
+        this.form.get('teams').setValue(this.teams.map(t => t.short));
+      }
       this.getEmaitzak(newParams.league, newParams.year);
     });
   }
