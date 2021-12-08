@@ -115,7 +115,7 @@ export class EstropadakPlaygroundComponent implements OnInit {
 
   getTeamName(team: string) {
     if (this.taldeak.find(t => t.alt_names.indexOf(team) > -1)) {
-      return this.taldeak.find(t => t.alt_names.indexOf(team) > -1).name;
+      return this.taldeak.find(t => t.alt_names.indexOf(team) > -1).short;
     } else {
       return team;
     }
