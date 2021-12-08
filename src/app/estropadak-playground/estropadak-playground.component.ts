@@ -22,12 +22,14 @@ export class EstropadakPlaygroundComponent implements OnInit {
   league = 'act';
   category = '';
   displayedColumns = ['estropada'];
-  displayColumnHeaders = ['izena'];
+  firstColumnProperty = 'data';
+  displayColumnHeaders = [this.firstColumnProperty];
   displayProp = 'posizioa';
   properties = ['posizioa', 'puntuazioa', 'tanda', 'tanda_postua', 'kalea', 'denbora'];
   values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  taldeak = [];
+  teams = [];
   form;
+  isMobile = false;
 
   constructor(
     private estropadakService: EstropadaService,
@@ -37,11 +39,15 @@ export class EstropadakPlaygroundComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('iPhone') > -1) {
+      this.isMobile = true;
+    }
     this.route.queryParams.subscribe((params) => {
       this.year = parseInt(sanitizeYear(params.year)) || 2021;
       this.league = sanitizeLeague(params.league) || 'act';
 
       this.form = this.fb.group({
+        teams: [],
         property: [this.displayProp],
         minVal: [1],
         maxVal: [12],
@@ -50,7 +56,12 @@ export class EstropadakPlaygroundComponent implements OnInit {
       });
       this.taldeakService.getList(this.league, this.year)
       .subscribe(res => {
-        this.taldeak = res;
+        this.teams = res;
+        if (this.isMobile) {
+          this.form.get('teams').setValue(this.teams.map(t => t.short).slice(0, 4));
+        } else {
+          this.form.get('teams').setValue(this.teams.map(t => t.short));
+        }
         this.getEmaitzak(this.league, this.year);
         this.dataSource = new PlaygroundDataSource([]);
       });
@@ -74,13 +85,18 @@ export class EstropadakPlaygroundComponent implements OnInit {
 
     this.taldeakService.getList(this.league, this.year)
     .subscribe(res => {
-      this.taldeak = res;
+      this.teams = res;
+      if (this.isMobile) {
+        this.form.get('teams').setValue(this.teams.map(t => t.short).slice(0, 4));
+      } else {
+        this.form.get('teams').setValue(this.teams.map(t => t.short));
+      }
       this.getEmaitzak(newParams.league, newParams.year);
     });
   }
 
   resetTable() {
-    this.displayColumnHeaders = ['izena'];
+    this.displayColumnHeaders = [this.firstColumnProperty];
     this.displayedColumns = ['estropada'];
   }
 
@@ -92,30 +108,28 @@ export class EstropadakPlaygroundComponent implements OnInit {
           if (emaitza.izena.indexOf('Play') > -1) {
             return null;
           }
-          if (i === 0) {
-            // if (this.league.toLowerCase() === 'gbl') {
-            //   emaitza.sailkapena = emaitza.sailkapena.filter(s => s.kategoria === this.category);
-            // }
-            emaitza.sailkapena.forEach(taldea => {
-              const izena = this.getTeamName(taldea.talde_izena);
-              this.displayColumnHeaders.push(izena)
-            });
-          }
-          const sailkapena = {izena: emaitza.izena};
-          emaitza.sailkapena.forEach((taldea) => {
-            const izena = this.getTeamName(taldea.talde_izena);
-            sailkapena[izena] = taldea;
+          const estropData = new Date(emaitza.data);
+          const options = { month: '2-digit', day: '2-digit' };
+          const sailkapena = {
+            izena: emaitza.izena,
+            data: new Intl.DateTimeFormat('eu-ES', options).format(estropData)
+          };
+          emaitza.sailkapena.forEach((taldeSailkapenDatuak) => {
+            const izena = this.getTeamName(taldeSailkapenDatuak.talde_izena);
+            sailkapena[izena] = taldeSailkapenDatuak;
           });
           return sailkapena;
         })
         .filter(emaitza => emaitza !== null);
+
         this.dataSource = new PlaygroundDataSource(emaitzak)
+        this.changeTeams();
     });
   }
 
   getTeamName(team: string) {
-    if (this.taldeak.find(t => t.alt_names.indexOf(team) > -1)) {
-      return this.taldeak.find(t => t.alt_names.indexOf(team) > -1).name;
+    if (this.teams.find(t => t.alt_names.indexOf(team) > -1)) {
+      return this.teams.find(t => t.alt_names.indexOf(team) > -1).short;
     } else {
       return team;
     }
@@ -140,6 +154,12 @@ export class EstropadakPlaygroundComponent implements OnInit {
 
   removeCol(colName: string) {
     this.displayColumnHeaders = this.displayColumnHeaders.filter(h => h !== colName);
+  }
+
+  changeTeams() {
+    const teams = this.form.get('teams').value;
+    this.displayColumnHeaders = [this.firstColumnProperty];
+    this.displayColumnHeaders.push(...teams);
   }
 
 }
