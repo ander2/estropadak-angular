@@ -22,12 +22,14 @@ export class EstropadakPlaygroundComponent implements OnInit {
   league = 'act';
   category = '';
   displayedColumns = ['estropada'];
-  displayColumnHeaders = ['izena'];
+  firstColumnProperty = 'data';
+  displayColumnHeaders = [this.firstColumnProperty];
   displayProp = 'posizioa';
   properties = ['posizioa', 'puntuazioa', 'tanda', 'tanda_postua', 'kalea', 'denbora'];
   values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   taldeak = [];
   form;
+  isMobile = false;
 
   constructor(
     private estropadakService: EstropadaService,
@@ -37,6 +39,9 @@ export class EstropadakPlaygroundComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('iphone')) {
+      this.isMobile = true;
+    }
     this.route.queryParams.subscribe((params) => {
       this.year = parseInt(sanitizeYear(params.year)) || 2021;
       this.league = sanitizeLeague(params.league) || 'act';
@@ -80,7 +85,7 @@ export class EstropadakPlaygroundComponent implements OnInit {
   }
 
   resetTable() {
-    this.displayColumnHeaders = ['izena'];
+    this.displayColumnHeaders = [this.firstColumnProperty];
     this.displayedColumns = ['estropada'];
   }
 
@@ -96,12 +101,18 @@ export class EstropadakPlaygroundComponent implements OnInit {
             // if (this.league.toLowerCase() === 'gbl') {
             //   emaitza.sailkapena = emaitza.sailkapena.filter(s => s.kategoria === this.category);
             // }
-            emaitza.sailkapena.forEach(taldea => {
+            emaitza.sailkapena.forEach((taldea, idx) => {
               const izena = this.getTeamName(taldea.talde_izena);
               this.displayColumnHeaders.push(izena)
             });
           }
-          const sailkapena = {izena: emaitza.izena};
+          const estropData = new Date(emaitza.data);
+          const options = { month: '2-digit', day: '2-digit' };
+          const sailkapena = {
+            izena: emaitza.izena,
+            data: new Intl.DateTimeFormat('eu-ES', options).format(estropData)
+          };
+          //{izena: `${estropData.getMonth() + 1}/${estropData.getDate()}`};
           emaitza.sailkapena.forEach((taldea) => {
             const izena = this.getTeamName(taldea.talde_izena);
             sailkapena[izena] = taldea;
@@ -109,6 +120,10 @@ export class EstropadakPlaygroundComponent implements OnInit {
           return sailkapena;
         })
         .filter(emaitza => emaitza !== null);
+
+        if (navigator.userAgent.indexOf('Android') > -1) {
+          this.displayColumnHeaders = this.displayColumnHeaders.slice(0, 5);
+        }
         this.dataSource = new PlaygroundDataSource(emaitzak)
     });
   }

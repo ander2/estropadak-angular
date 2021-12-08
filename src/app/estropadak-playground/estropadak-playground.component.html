@@ -45,14 +45,16 @@
   <mat-table #table [dataSource]="dataSource" matSort>
     <ng-container *ngFor="let header of displayColumnHeaders;let i=index; " [matColumnDef]="header">
       <mat-header-cell *matHeaderCellDef="let row">{{header}} 
-        <button mat-icon-button (click)="removeCol(header)" *ngIf="header !== 'izena'">
+        <button mat-icon-button (click)="removeCol(header)" *ngIf="header !== firstColumnProperty">
           <mat-icon inline=true>cancel</mat-icon>
         </button>
       </mat-header-cell>
-      <mat-cell *matCellDef="let row">
-        <span *ngIf="header === 'izena'">{{row.izena}}</span>
-        <span *ngIf="header !== 'izena' && row[header]">{{row[header][displayProp]}}</span>
-        <span *ngIf="header !== 'izena' && !row[header]"> - </span>
+      <mat-cell *matCellDef="let row" matTooltip="{{row.izena}}">
+        <span *ngIf="header === firstColumnProperty" >
+          {{row[firstColumnProperty]}}
+        </span>
+        <span *ngIf="header !== firstColumnProperty && row[header]">{{row[header][displayProp]}}</span>
+        <span *ngIf="header !== firstColumnProperty && !row[header]"> - </span>
       </mat-cell>
     </ng-container>
 
