@@ -27,7 +27,7 @@ export class EstropadakPlaygroundComponent implements OnInit {
   displayProp = 'posizioa';
   properties = ['posizioa', 'puntuazioa', 'tanda', 'tanda_postua', 'kalea', 'denbora'];
   values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  taldeak = [];
+  teams = [];
   form;
   isMobile = false;
 
@@ -47,6 +47,7 @@ export class EstropadakPlaygroundComponent implements OnInit {
       this.league = sanitizeLeague(params.league) || 'act';
 
       this.form = this.fb.group({
+        teams: [],
         property: [this.displayProp],
         minVal: [1],
         maxVal: [12],
@@ -55,7 +56,8 @@ export class EstropadakPlaygroundComponent implements OnInit {
       });
       this.taldeakService.getList(this.league, this.year)
       .subscribe(res => {
-        this.taldeak = res;
+        this.teams = res;
+        this.form.get('teams').setValue(this.teams.map(t => t.short));
         this.getEmaitzak(this.league, this.year);
         this.dataSource = new PlaygroundDataSource([]);
       });
@@ -79,7 +81,8 @@ export class EstropadakPlaygroundComponent implements OnInit {
 
     this.taldeakService.getList(this.league, this.year)
     .subscribe(res => {
-      this.taldeak = res;
+      this.teams = res;
+      this.form.get('teams').setValue(this.teams.map(t => t.short));
       this.getEmaitzak(newParams.league, newParams.year);
     });
   }
@@ -97,15 +100,15 @@ export class EstropadakPlaygroundComponent implements OnInit {
           if (emaitza.izena.indexOf('Play') > -1) {
             return null;
           }
-          if (i === 0) {
-            // if (this.league.toLowerCase() === 'gbl') {
-            //   emaitza.sailkapena = emaitza.sailkapena.filter(s => s.kategoria === this.category);
-            // }
-            emaitza.sailkapena.forEach((taldea, idx) => {
-              const izena = this.getTeamName(taldea.talde_izena);
-              this.displayColumnHeaders.push(izena)
-            });
-          }
+          // if (i === 0) {
+          //   // if (this.league.toLowerCase() === 'gbl') {
+          //   //   emaitza.sailkapena = emaitza.sailkapena.filter(s => s.kategoria === this.category);
+          //   // }
+          //   emaitza.sailkapena.forEach((taldea, idx) => {
+          //     const izena = this.getTeamName(taldea.talde_izena);
+          //     this.displayColumnHeaders.push(izena)
+          //   });
+          // }
           const estropData = new Date(emaitza.data);
           const options = { month: '2-digit', day: '2-digit' };
           const sailkapena = {
@@ -121,16 +124,17 @@ export class EstropadakPlaygroundComponent implements OnInit {
         })
         .filter(emaitza => emaitza !== null);
 
-        if (navigator.userAgent.indexOf('Android') > -1) {
-          this.displayColumnHeaders = this.displayColumnHeaders.slice(0, 5);
-        }
+        // if (navigator.userAgent.indexOf('Android') > -1) {
+        //   this.displayColumnHeaders = this.displayColumnHeaders.slice(0, 5);
+        // }
         this.dataSource = new PlaygroundDataSource(emaitzak)
+        this.changeTeams();
     });
   }
 
   getTeamName(team: string) {
-    if (this.taldeak.find(t => t.alt_names.indexOf(team) > -1)) {
-      return this.taldeak.find(t => t.alt_names.indexOf(team) > -1).short;
+    if (this.teams.find(t => t.alt_names.indexOf(team) > -1)) {
+      return this.teams.find(t => t.alt_names.indexOf(team) > -1).short;
     } else {
       return team;
     }
@@ -155,6 +159,12 @@ export class EstropadakPlaygroundComponent implements OnInit {
 
   removeCol(colName: string) {
     this.displayColumnHeaders = this.displayColumnHeaders.filter(h => h !== colName);
+  }
+
+  changeTeams() {
+    const teams = this.form.get('teams').value;
+    this.displayColumnHeaders = [this.firstColumnProperty];
+    this.displayColumnHeaders.push(...teams);
   }
 
 }

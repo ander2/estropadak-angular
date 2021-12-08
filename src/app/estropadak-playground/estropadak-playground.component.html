@@ -8,7 +8,14 @@
     (selectionChanged)="paramsChanged($event)">
   </app-estropadak-selection-form>
   <form [formGroup]="form" novalidate>
-    <p>Aukeratu bistaratu nahi dituzun balio eta filtroak:</p>
+    <p>Aukeratu filtroak:</p>
+    <mat-form-field>
+      <mat-select formControlName="teams" placeholder="Aukeratu taldeak" multiple (selectionChange)="changeTeams()">
+        <mat-option *ngFor="let team of teams" [value]="team.short">
+          {{team.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
     <mat-form-field>
       <mat-select formControlName="property" placeholder="Aukeratu bistaratzeko balioa" (selectionChange)="changeDisplayProp()">
         <mat-option *ngFor="let prop of properties" [value]="prop">
@@ -44,10 +51,8 @@
   </form>
   <mat-table #table [dataSource]="dataSource" matSort>
     <ng-container *ngFor="let header of displayColumnHeaders;let i=index; " [matColumnDef]="header">
-      <mat-header-cell *matHeaderCellDef="let row">{{header}} 
-        <button mat-icon-button (click)="removeCol(header)" *ngIf="header !== firstColumnProperty">
-          <mat-icon inline=true>cancel</mat-icon>
-        </button>
+      <mat-header-cell *matHeaderCellDef="let row">
+        {{header}} 
       </mat-header-cell>
       <mat-cell *matCellDef="let row" matTooltip="{{row.izena}}">
         <span *ngIf="header === firstColumnProperty" >
