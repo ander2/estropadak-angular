@@ -4,6 +4,7 @@ import { DataSource } from '@angular/cdk/collections';
 import { EstropadaService } from '../shared/estropada.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { EstropadaTandaComponent } from '../estropada-tanda/estropada-tanda.component';
+import { Estropada } from 'app/shared/estropadak.model';
 
 @Component({
   selector: 'app-estropada-detail',
@@ -13,7 +14,7 @@ import { EstropadaTandaComponent } from '../estropada-tanda/estropada-tanda.comp
 
 export class EstropadaDetailComponent implements OnInit {
 
-  estropada: any = {};
+  estropada: Estropada;
   id = '1';
   datasource;
   constructor(
@@ -47,14 +48,8 @@ export class EstropadaDetailComponent implements OnInit {
         tandak[i - 1] = sailkapena.filter(s => s.tanda === i);
       }
 
-      this.estropada = {
-        izena: estropada.izena,
-        lekua: estropada.lekua,
-        data: estropada.data,
-        tandak: tandak,
-        sailkapena: sailkapena,
-        oharrak: estropada.oharrak
-      };
+      this.estropada = estropada;
+      this.estropada.tandak = tandak;
     });
   }
 }

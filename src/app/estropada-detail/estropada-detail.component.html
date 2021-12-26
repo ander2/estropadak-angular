@@ -15,5 +15,10 @@
     <app-estropada-tanda [tanda]="tanda"></app-estropada-tanda>
     <mat-divider></mat-divider>
   </div>
+  <div *ngIf="estropada.bi_jardunaldiko_bandera">
+    <h2 class="title">Bi egunetako Sailkapena</h2>
+    <app-estropadak-bi-jardunaldiko-sailkapena [sailkapena]="estropada.bi_eguneko_sailkapena">
+    </app-estropadak-bi-jardunaldiko-sailkapena>
+  </div>
 </div>
 
