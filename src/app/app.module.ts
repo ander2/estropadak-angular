@@ -57,6 +57,7 @@ import { EstropadakRowerHistorialTableComponent } from './estropadak-rower-histo
 import { CacheMapService } from './shared/cache-map.service';
 import { httpInterceptorProviders } from './http-interceptors';
 import { SailkapenakService } from './shared/sailkapenak.service';
+import { EstropadakBiJardunaldikoSailkapenaComponent } from './estropadak-bi-jardunaldiko-sailkapena/estropadak-bi-jardunaldiko-sailkapena.component';
 
 const routes: Routes = [
   {
@@ -143,6 +144,7 @@ const routes: Routes = [
     EstropadakPlaygroundComponent,
     EstropadakRowerGraphComponent,
     EstropadakRowerHistorialTableComponent,
+    EstropadakBiJardunaldikoSailkapenaComponent,
   ],
   imports: [
     BrowserModule,

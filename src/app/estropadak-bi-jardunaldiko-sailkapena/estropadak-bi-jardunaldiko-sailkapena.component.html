@@ -1,0 +1,33 @@
+<mat-table [dataSource]="sailkapena"  matSort (matSortChange)="announceSortChange($event)">
+    <ng-container matColumnDef="posizioa">
+        <mat-header-cell *matHeaderCellDef fxFlex="7" fxFlex.xs="7" fxLayoutAlign.xs="start center"></mat-header-cell>
+        <mat-cell *matCellDef="let row" fxFlex="7" fxFlex.xs="7" fxLayoutAlign="start center"> {{row.posizioa}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="talde_izena">
+        <mat-header-cell *matHeaderCellDef fxLayoutAlign.xs="center center">Izena </mat-header-cell>
+        <mat-cell *matCellDef="let row" fxLayoutAlign="start center"> {{row.talde_izena}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="lehen_jardunaldiko_denbora">
+        <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header fxFlex="15" fxHide.xs="15">1. Jardunaldia </mat-header-cell>
+        <mat-cell *matCellDef="let row" fxFlex="15" fxHide.xs="15"> {{row.lehen_jardunaldiko_denbora}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="bigarren_jardunaldiko_denbora">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="15" fxHide.xs="15">2. Jardunaldia </mat-header-cell>
+        <mat-cell *matCellDef="let row" fxFlex="15" fxHide.xs="15"> {{row.bigarren_jardunaldiko_denbora}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="denbora_batura">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="15" fxFlex.xs="20">Denbora totala </mat-header-cell>
+        <mat-cell *matCellDef="let row" fxFlex="15" fxFlex.xs="20"> {{row.denbora_batura}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="denborak">
+        <mat-header-cell *matHeaderCellDef fxHide.gt-xs fxFlex.xs="25">Denborak</mat-header-cell>
+        <mat-cell *matCellDef="let row" fxHide.gt-xs fxFlex.xs="25">
+        {{row.lehen_jardunaldiko_denbora}} <br>
+        {{row.bigarren_jardunaldiko_denbora}} <br>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
