@@ -1,0 +1,12 @@
+.mat-column-posizioa {
+    padding-left: 0;
+}
+  
+.mat-column-denbora_batura  {
+    justify-content: center;
+    padding-right: 0;
+}
+
+mat-header-cell, mat-cell {
+    justify-content: center;
+}
