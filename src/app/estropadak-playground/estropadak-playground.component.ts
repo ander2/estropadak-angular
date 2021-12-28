@@ -109,7 +109,7 @@ export class EstropadakPlaygroundComponent implements OnInit {
             return null;
           }
           const estropData = new Date(emaitza.data);
-          const options = { month: '2-digit', day: '2-digit' };
+          const options = { month: '2-digit', day: '2-digit' } as const;
           const sailkapena = {
             izena: emaitza.izena,
             data: new Intl.DateTimeFormat('eu-ES', options).format(estropData)
