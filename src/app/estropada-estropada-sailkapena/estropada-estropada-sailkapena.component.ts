@@ -11,6 +11,8 @@ import {Observable, of} from 'rxjs';
 export class EstropadaEstropadaSailkapenaComponent implements OnChanges {
 
   @Input() sailkapena;
+  @Input() txapelketa;
+  @Input() federazioSaria;
   displayedColumns = ['Postua', 'Taldea', 'Kalea', '1.z',
   '2.z', '3.z', 'Denbora', 'Puntuak'];
   dataSource;
@@ -19,7 +21,11 @@ export class EstropadaEstropadaSailkapenaComponent implements OnChanges {
   ngOnChanges(simpleChanges: SimpleChanges) {
     if ('sailkapena' in simpleChanges) {
       this.sailkapena = simpleChanges.sailkapena.currentValue;
-      const orderedSailkapena = this.sailkapena.sort((a, b) => (parseInt(a.posizioa, 10) - parseInt(b.posizioa, 10)));
+      let orderedSailkapena = this.sailkapena.sort((a, b) => (parseInt(a.posizioa, 10) - parseInt(b.posizioa, 10)));
+      if (this.txapelketa && this.federazioSaria) {
+        const tandaKop = orderedSailkapena.reduce((memo, sailkapena) => sailkapena.tanda > memo ? sailkapena.tanda : memo, 0);
+        orderedSailkapena = orderedSailkapena.filter(s => s.tanda === tandaKop);
+      }
       this.dataSource = new EstropadaDataSource(orderedSailkapena);
     }
   }

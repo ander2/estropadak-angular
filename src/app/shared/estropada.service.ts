@@ -9,6 +9,53 @@ import { environment } from '../../environments/environment';
 
 const estropadakUrl = environment.apiUrl;
 
+const categories = [
+    {
+        name: 'Senior neskak',
+        code: 'SN'
+    },
+    {
+        name: 'Senior gizonak',
+        code: 'SG'
+    },
+    {
+        name: 'Alebin gizonak',
+        code: 'AG'
+    },
+    {
+        name: 'Alebin neskak',
+        code: 'AN'
+    },
+    {
+        name: 'Infantil mutilak',
+        code: 'IG'
+    },
+    {
+        name: 'Infantil neskak',
+        code: 'IN'
+    },
+    {
+        name: 'Kadete mutilak',
+        code: 'KG'
+    },
+    {
+        name: 'Kadete neskak',
+        code: 'KN'
+    },
+    {
+        name: 'Jubenil mutilak',
+        code: 'JG'
+    },
+    {
+        name: 'Jubenil neskak',
+        code: 'JN'
+    },
+    {
+        name: 'Promesa neskak',
+        code: 'PN'
+    },
+];
+
 @Injectable()
 export class EstropadaService {
 
@@ -28,10 +75,18 @@ export class EstropadaService {
     }
 
     isMulticategory(league: string): boolean {
-        if (['gbl', 'bbl', 'btl', 'gtl'].indexOf(league.toLowerCase()) > -1) {
+        if (['gbl', 'bbl', 'btl', 'gtl', 'txapelketak'].indexOf(league.toLowerCase()) > -1) {
             return true;
         }
         return false;
+    }
+
+    getCategoryFromCode(code: string) {
+        return categories.find(c => c.code === code);
+    }
+
+    getCategoriesFromEstropada(estropada: Estropada) {
+        return estropada.kategoriak.map(kategoria => categories.find(c => c.code === kategoria));
     }
 
     getCategories(liga: string) {

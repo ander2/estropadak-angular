@@ -44,7 +44,6 @@ export class EstropadakSailkapenaComponent implements OnChanges {
 
   onChangeCategory(event: MatSelectChange) {
     const category = event.value;
-    console.log(category);
     this.getSailkapena(this.league, this.year, category);
   }
 

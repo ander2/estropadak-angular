@@ -1,9 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { DataSource } from '@angular/cdk/collections';
 import { EstropadaService } from '../shared/estropada.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { EstropadaTandaComponent } from '../estropada-tanda/estropada-tanda.component';
+
 
 @Component({
   selector: 'app-estropada-multi-category-detail',
@@ -19,6 +18,7 @@ export class EstropadaMultiCategoryDetailComponent implements OnInit {
   kategoriak = [];
   category = 'guztiak';
   sailkapena = [];
+  federazioSaria = true;
 
   constructor(
     private estropadaService: EstropadaService,
@@ -37,7 +37,10 @@ export class EstropadaMultiCategoryDetailComponent implements OnInit {
   refresh( ) {
     this.estropadaService.getOne(this.id)
     .subscribe((estropada) => {
-      this.estropadaService.getCategories(estropada.liga).subscribe(res => this.kategoriak = res);
+      if (estropada.izena.toLowerCase().indexOf('traineru') > -1) {
+        this.federazioSaria = false;
+      }
+      this.kategoriak = this.estropadaService.getCategoriesFromEstropada(estropada);
       let tandak = [];
       const sailkapena = estropada.sailkapena || [];
       this.kategoriak.forEach(kategoria => {

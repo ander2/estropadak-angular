@@ -24,9 +24,10 @@ export class Estropada {
   data: string;
   id: string;
   lekua: string;
-  liga: 'ACT' | 'ARC1' | 'ARC2' | 'euskotren';
+  liga: string;
   urla: string;
   tandak?: TaldeSailkapena[];
+  kategoriak?: string[];
   sailkapena: TaldeSailkapena[];
   puntuagarria?: boolean;
   oharrak?: string;
