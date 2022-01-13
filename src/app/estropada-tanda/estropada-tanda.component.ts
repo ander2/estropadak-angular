@@ -24,11 +24,7 @@ export class EstropadaTandaComponent implements OnInit {
 
   ngOnInit() {
     if (this.tanda[0].kategoria && this.league){
-      this.estropadaService.getCategories(this.league)
-        .subscribe(res => {
-          this.categories = res;
-          this.categoryName = this.categories.find(c => c.code === this.tanda[0].kategoria)['name'];
-        });
+      this.categoryName = this.estropadaService.getCategoryFromCode(this.tanda[0].kategoria).name;
     }
     const orderedTanda = this.tanda.sort((a, b) => a.tanda_postua > b.tanda_postua);
     this.dataSource = new EstropadaDataSource(orderedTanda);

@@ -14,7 +14,7 @@
   </mat-form-field>
   <div *ngIf="estropada?.sailkapena?.length > 0; else no_sailkapena">
 
-    <app-estropada-estropada-sailkapena [sailkapena]="sailkapena"></app-estropada-estropada-sailkapena>
+    <app-estropada-estropada-sailkapena [sailkapena]="sailkapena" [txapelketa]="true" [federazioSaria]="federazioSaria"></app-estropada-estropada-sailkapena>
 
     <div *ngFor="let tanda of estropada?.tandak">
       <app-estropada-tanda [tanda]="tanda" [league]="estropada.liga"></app-estropada-tanda>
