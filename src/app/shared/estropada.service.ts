@@ -9,6 +9,7 @@ import { environment } from '../../environments/environment';
 
 const estropadakUrl = environment.apiUrl;
 
+// @TODO: Improve categories handling
 const categories = [
     {
         name: 'Senior neskak',
@@ -54,6 +55,10 @@ const categories = [
         name: 'Promesa neskak',
         code: 'PN'
     },
+    {
+        name: 'Promesa mutilak',
+        code: 'PG'
+    }
 ];
 
 @Injectable()
@@ -185,35 +190,35 @@ export class EstropadaService {
             kategoriak = [
             {
                 name: 'Infantil mutilak',
-                code: 'Infantila MUTILAK'
+                code: 'IG'
             },
             {
                 name: 'Infantil neskak',
-                code: 'Infantila NESKAK'
+                code: 'IN'
             },
             {
-                name: 'Kadete mutilak',
-                code: 'Kadete MUTILAK'
+                name: 'Promesa mutilak',
+                code: 'PG'
             },
             {
-                name: 'Kadete neskak',
-                code: 'Kadete NESKAK'
+                name: 'Promesa neskak',
+                code: 'PN'
             },
             {
                 name: 'Jubenil mutilak',
-                code: 'Jubenil MUTILAK'
+                code: 'JG'
             },
             {
                 name: 'Jubenil neskak',
-                code: 'Jubenil NESKAK'
+                code: 'JN'
             },
             {
                 name: 'Senior mutilak',
-                code: 'Senior MUTILAK'
+                code: 'SG'
             },
             {
                 name: 'Senior neskak',
-                code: 'Senior NESKAK'
+                code: 'SN'
             }
             ];
 
