@@ -83,7 +83,7 @@ export class EstropadakPlaygroundComponent implements OnInit {
       this.properties = ['posizioa', 'puntuazioa', 'tanda', 'tanda_postua', 'kalea', 'denbora'];
     }
 
-    this.taldeakService.getList(this.league, this.year)
+    this.taldeakService.getList(this.league, this.year, this.category)
     .subscribe(res => {
       this.teams = res;
       if (this.isMobile) {
@@ -114,7 +114,18 @@ export class EstropadakPlaygroundComponent implements OnInit {
             izena: emaitza.izena,
             data: new Intl.DateTimeFormat('eu-ES', options).format(estropData)
           };
-          emaitza.sailkapena.forEach((taldeSailkapenDatuak) => {
+          if (this.category) {
+            emaitza.sailkapena = emaitza.sailkapena
+          }
+          emaitza.sailkapena
+          .filter( s => {
+            if (this.category) {
+              return s.kategoria === this.category;
+            } else {
+              return true;
+            }
+          })
+          .forEach((taldeSailkapenDatuak) => {
             const izena = this.getTeamName(taldeSailkapenDatuak.talde_izena);
             sailkapena[izena] = taldeSailkapenDatuak;
           });

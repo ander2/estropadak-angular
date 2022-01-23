@@ -8,8 +8,8 @@
   </mat-form-field>
   <mat-form-field *ngIf="isMultiCategory">
     <mat-select formControlName="category" placeholder="Kategoria" (selectionChange)="updateYearsAndRefresh()">
-      <mat-option *ngFor="let kat of kategoriak" [value]="kat">
-        {{kat | uppercase}}
+      <mat-option *ngFor="let kat of kategoriak" [value]="kat.code">
+        {{ kat.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>

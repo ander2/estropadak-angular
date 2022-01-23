@@ -9,6 +9,7 @@ export class TaldeSailkapena {
   tanda: number;
   tanda_postua: number;
   ziabogak: string[];
+  kategoria: string;
 }
 
 export class BiEgunekoSailkapena {

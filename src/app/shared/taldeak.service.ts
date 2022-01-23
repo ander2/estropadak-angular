@@ -20,13 +20,16 @@ export class TaldeakService {
 
   constructor(private http: HttpClient) { }
 
-  getList(league?: string, year?: number): Observable<Team[]> {
+  getList(league?: string, year?: number, category?: string): Observable<Team[]> {
       const endpoint = `${estropadakUrl}taldeak`;
       const params = {
         league,
       };
       if (year) {
         params['year'] = year;
+      }
+      if (category) {
+        params['category'] = category;
       }
       return this.http.get(endpoint, {params}) as Observable<Team[]>;
   }

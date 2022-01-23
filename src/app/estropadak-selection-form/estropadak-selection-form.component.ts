@@ -50,6 +50,8 @@ export class EstropadakSelectionFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.estropadakService.getCategories(this.league)
+      .subscribe(res => this.kategoriak = res);
     this.form = this.fb.group({
       league: [this.league.toLowerCase(), Validators.required],
       year: [this.year, Validators.required],
