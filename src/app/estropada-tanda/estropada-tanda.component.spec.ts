@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 
 import { EstropadaTandaComponent } from './estropada-tanda.component';
-import { estropada } from '../shared/estropada.fixture';
+import { estropada, euskotrenEstropada } from '../shared/estropada.fixture';
 import { EstropadaService } from 'app/shared/estropada.service';
 import { EstropadaServiceStub } from 'app/shared/estropada.service.stub';
 
@@ -47,7 +47,14 @@ describe('EstropadaTandaComponent', () => {
     expect(fixture.debugElement.queryAll(By.css('mat-row')).length).toEqual(4);
   });
 
-  it('should have 8 columns per row(team)', () => {
-    expect(fixture.debugElement.queryAll(By.css('mat-row mat-cell')).length).toEqual(32);
+  it('should have 7 columns per row(team) in ACT league', () => {
+    expect(fixture.debugElement.queryAll(By.css('mat-row mat-cell')).length).toEqual(28);
+  });
+
+  it('should have 5 columns per row(team) in Euskotren league', () => {
+    component.tanda = euskotrenEstropada.sailkapena.filter(s => s.tanda === 1);
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(fixture.debugElement.queryAll(By.css('mat-row mat-cell')).length).toEqual(20);
   });
 });

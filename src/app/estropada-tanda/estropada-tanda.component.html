@@ -21,20 +21,13 @@
           <mat-cell *matCellDef="let row" fxHide.xs> {{row.kalea}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="1.z">
-          <mat-header-cell *matHeaderCellDef fxHide.xs> 1.z </mat-header-cell>
-          <mat-cell *matCellDef="let row" fxHide.xs> {{row.ziabogak[0]}} </mat-cell>
+        <ng-container *ngFor="let ziaboga of [].constructor(ziabogak); let i=index">
+          <ng-container matColumnDef="{{i}}.z">
+            <mat-header-cell *matHeaderCellDef fxHide.xs> {{i + 1}}.z </mat-header-cell>
+            <mat-cell *matCellDef="let row" fxHide.xs> {{row.ziabogak[i]}} </mat-cell>
+          </ng-container>
         </ng-container>
 
-        <ng-container matColumnDef="2.z">
-          <mat-header-cell *matHeaderCellDef fxHide.xs> 2.z </mat-header-cell>
-          <mat-cell *matCellDef="let row" fxHide.xs> {{row.ziabogak[1]}} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="3.z">
-          <mat-header-cell *matHeaderCellDef fxHide.xs> 3.z </mat-header-cell>
-          <mat-cell *matCellDef="let row" fxHide.xs> {{row.ziabogak[2]}} </mat-cell>
-        </ng-container>
 
         <ng-container matColumnDef="ziab">
           <mat-header-cell *matHeaderCellDef fxHide.gt-xs>Ziabogak</mat-header-cell>
