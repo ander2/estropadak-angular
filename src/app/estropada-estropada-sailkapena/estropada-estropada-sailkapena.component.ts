@@ -13,35 +13,28 @@ export class EstropadaEstropadaSailkapenaComponent implements OnChanges {
   @Input() sailkapena;
   @Input() txapelketa;
   @Input() federazioSaria;
-  displayedColumns = ['Postua', 'Taldea', 'Kalea', '1.z',
-  '2.z', '3.z', 'Denbora', 'Puntuak'];
+  _baseColumns = ['Postua', 'Taldea', 'Kalea', 'Denbora', 'Puntuak'];
+  displayedColumns = ['Postua', 'Taldea', 'Kalea', 'Denbora', 'Puntuak'];
   dataSource;
+  ziabogak;
   constructor() { }
 
   ngOnChanges(simpleChanges: SimpleChanges) {
     if ('sailkapena' in simpleChanges) {
       this.sailkapena = simpleChanges.sailkapena.currentValue;
+      this.ziabogak = this.sailkapena[0]['ziabogak'].length;
+      this.displayedColumns = this._baseColumns.slice();
+      this.sailkapena[0]['ziabogak'].forEach((z, i) => {
+        if (z) {
+          this.displayedColumns.splice(3 + i, 0, i+'.z');
+        }
+      });
       let orderedSailkapena = this.sailkapena.sort((a, b) => (parseInt(a.posizioa, 10) - parseInt(b.posizioa, 10)));
       if (this.txapelketa && this.federazioSaria) {
         const tandaKop = orderedSailkapena.reduce((memo, sailkapena) => sailkapena.tanda > memo ? sailkapena.tanda : memo, 0);
         orderedSailkapena = orderedSailkapena.filter(s => s.tanda === tandaKop);
       }
-      this.dataSource = new EstropadaDataSource(orderedSailkapena);
+      this.dataSource = orderedSailkapena;
     }
   }
 }
-
-class EstropadaDataSource extends DataSource<any> {
-    sailkapena;
-    constructor(sailkapena) {
-      super();
-      this.sailkapena = sailkapena;
-    }
-
-    connect(): Observable<any> {
-      return of(this.sailkapena);
-    }
-
-    disconnect() {}
-}
-
