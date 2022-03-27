@@ -28,6 +28,10 @@ const categories = [
         code: 'AN'
     },
     {
+        name: 'Alebin mixto',
+        code: 'AX'
+    },
+    {
         name: 'Infantil mutilak',
         code: 'IG'
     },
