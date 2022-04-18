@@ -40,6 +40,9 @@ export class EstropadaMultiCategoryDetailComponent implements OnInit {
       if (estropada.izena.toLowerCase().indexOf('traineru') > -1) {
         this.federazioSaria = false;
       }
+      if (['btl', 'gtl', 'bbl', 'gbl'].indexOf(estropada.liga.toLowerCase()) > -1) {
+        this.federazioSaria = false;
+      }
       this.kategoriak = this.estropadaService.getCategoriesFromEstropada(estropada);
       let tandak = [];
       const sailkapena = estropada.sailkapena || [];
