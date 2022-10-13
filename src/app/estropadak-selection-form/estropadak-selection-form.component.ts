@@ -39,7 +39,7 @@ export class EstropadakSelectionFormComponent implements OnInit {
     'Jubenil NESKAK',
     'Haurra NESKAK'
   ];
-  category = this.kategoriak[0];
+  category; //  = this.kategoriak[0];
   isMultiCategory = false;
 
   constructor(
