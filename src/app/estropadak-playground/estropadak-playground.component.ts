@@ -43,7 +43,7 @@ export class EstropadakPlaygroundComponent implements OnInit {
       this.isMobile = true;
     }
     this.route.queryParams.subscribe((params) => {
-      this.year = parseInt(sanitizeYear(params.year)) || 2021;
+      this.year = parseInt(sanitizeYear(params.year)) || 2022;
       this.league = sanitizeLeague(params.league) || 'act';
 
       this.form = this.fb.group({
@@ -77,7 +77,7 @@ export class EstropadakPlaygroundComponent implements OnInit {
       this.form.get('minTime').setValue('11:00');
       this.form.get('maxTime').setValue('13:00');
     }
-    if (this.category.toLowerCase() === 'gbl') {
+    if (this.category?.toLowerCase() === 'gbl') {
       this.properties = ['posizioa', 'puntuazioa', 'denbora'];
     } else {
       this.properties = ['posizioa', 'puntuazioa', 'tanda', 'tanda_postua', 'kalea', 'denbora'];
