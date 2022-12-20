@@ -8,7 +8,7 @@
     <mat-tab-group [selectedIndex]="0" (selectedTabChange)="onChangeLeague($event)">
       <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab">
         <div fxLayout fxLayout.xs="column">
-          <div fxFlex fxFlex.xs="50%" *ngFor="let estropada of this.estropadak; let i=index" class="box">
+          <div fxFlex fxFlex.xs="50%" *ngFor="let estropada of estropadak; let i=index" class="box">
             <h3 class="mat-h2">
               {{estropada.izena}}
             </h3>
@@ -29,15 +29,15 @@
               <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
               <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
             </mat-table>
-            <mat-list *ngIf="estropadak.length === 0">
-              <mat-list-item>
-                Ez dago estropadarik
-              </mat-list-item>
-            </mat-list>
             <p *ngIf="estropadak.length !== 0">
               <a [routerLink]="['/estropada', estropada.id]">Ikusi gehiago</a>
             </p>
           </div>
+          <mat-list *ngIf="estropadak.length === 0">
+            <mat-list-item>
+              Ez dago estropada emaitzarik
+            </mat-list-item>
+          </mat-list>
         </div>
       </mat-tab>
     </mat-tab-group>

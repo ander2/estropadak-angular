@@ -23,7 +23,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
   @Input()
   league = 'act';
   @Input()
-  year:number = 2021;
+  year:number = 2022;
   form: FormGroup;
   leagues: string[];
   years: number[];

@@ -27,7 +27,7 @@ export class EstropadakPortadaComponent implements OnInit {
     .subscribe((res) => {
       const date = new Date();
       const month = date.getMonth();
-      if (month < 6){
+      if (month < 5){
         this.this_or_before_year = res - 1;
       } else {
         this.this_or_before_year = res;

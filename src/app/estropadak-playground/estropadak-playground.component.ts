@@ -193,7 +193,7 @@ class PlaygroundDataSource extends DataSource<any> {
     const emaitzaBerria = this.sailkapena.map(estropada => {
       const d = {};
       for (const teamName of Object.keys(estropada)) {
-        if (teamName !== 'izena') {
+        if (teamName !== 'izena' && teamName !== 'data') {
           const result = Object.assign({}, estropada[teamName]);
           if (result[displayProp]) {
             if (result[displayProp] < minVal ||
