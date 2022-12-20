@@ -28,7 +28,7 @@
     "core-js": "^2.6.11",
     "cytoscape": "^3.14.1",
     "cytoscape-dagre": "^2.2.2",
-    "moment": "^2.29.2",
+    "moment": "^2.29.4",
     "rxjs": "^6.5.5",
     "rxjs-compat": "^6.5.5",
     "tslib": "^2.0.0",
