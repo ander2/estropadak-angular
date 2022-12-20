@@ -129,7 +129,6 @@
       }
     }
   },
-  "defaultProject": "estropadak",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

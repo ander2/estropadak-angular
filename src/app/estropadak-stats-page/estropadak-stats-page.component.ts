@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, Input, OnChanges, SimpleChanges, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder } from '@angular/forms';
 
 import { EstropadaService, UrteakService } from 'app/shared/estropada.service';
 import { TaldeakService } from 'app/shared/taldeak.service';
@@ -24,7 +24,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
   league = 'act';
   @Input()
   year:number = 2022;
-  form: FormGroup;
+  form: UntypedFormGroup;
   leagues: string[];
   years: number[];
   teams: string[] = [];
@@ -50,7 +50,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
   @ViewChild('canvas', {static: true}) private canvas: ElementRef;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private yearService: UrteakService,
     private estropadaService: EstropadaService,
     private taldeakService: TaldeakService,

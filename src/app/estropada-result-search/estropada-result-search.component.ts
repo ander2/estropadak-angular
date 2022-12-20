@@ -1,6 +1,6 @@
 import { DataSource } from '@angular/cdk/table';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, FormGroup } from '@angular/forms';
 
 import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { QueryBuilderConfig } from 'angular2-query-builder';
@@ -16,7 +16,7 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrls: ['./estropada-result-search.component.css']
 })
 export class EstropadaResultSearchComponent implements OnInit {
-  public queryCtrl: FormControl;
+  public queryCtrl: UntypedFormControl;
   query = {
     condition: 'and',
     rules: [ ]
@@ -58,7 +58,7 @@ export class EstropadaResultSearchComponent implements OnInit {
   public dataSource = new EstropadaDataSource({docs: [], total: 0});
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private emaitzakService: EmaitzakService,
     private taldeakService: TaldeakService
     ) { 

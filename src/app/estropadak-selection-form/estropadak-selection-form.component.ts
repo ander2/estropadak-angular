@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { UrteakService, EstropadaService } from 'app/shared/estropada.service';
 import { TaldeakService } from 'app/shared/taldeak.service';
 
@@ -24,7 +24,7 @@ export class EstropadakSelectionFormComponent implements OnInit {
   historial = false;
   @Output()
   selectionChanged: EventEmitter<any> = new EventEmitter();
-  form: FormGroup;
+  form: UntypedFormGroup;
   leagues: string[];
   years: number[];
   teams: string[] = [];
@@ -43,7 +43,7 @@ export class EstropadakSelectionFormComponent implements OnInit {
   isMultiCategory = false;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private yearService: UrteakService,
     private taldeakService: TaldeakService,
     private estropadakService: EstropadaService

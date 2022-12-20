@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 
 import { SeasonTeamSelection } from 'app/shared/stats.model';
 import { TaldeakService } from 'app/shared/taldeak.service';
@@ -34,7 +34,7 @@ export class EstropadakPlaygroundComponent implements OnInit {
   constructor(
     private estropadakService: EstropadaService,
     private taldeakService: TaldeakService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private route: ActivatedRoute
   ) { }
 

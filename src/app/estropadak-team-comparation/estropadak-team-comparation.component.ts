@@ -7,7 +7,7 @@ Chart.register(...registerables);
 
 import { SailkapenakService } from 'app/shared/sailkapenak.service';
 import { TaldeakService } from 'app/shared/taldeak.service';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { StatsService } from 'app/shared/stats.service';
 
 
@@ -85,7 +85,7 @@ export class EstropadakTeamComparationComponent implements OnInit {
     private saikapenakService: SailkapenakService,
     private taldeakService: TaldeakService,
     private statsService: StatsService,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {
     const taldea1 = 'Urdaibai';
     const taldea2 = 'Hondarribia';
