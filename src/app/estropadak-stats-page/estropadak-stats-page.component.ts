@@ -23,7 +23,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
   @Input()
   league = 'act';
   @Input()
-  year:number = 2022;
+  year:number = 2023;
   form: UntypedFormGroup;
   leagues: string[];
   years: number[];
@@ -229,7 +229,7 @@ export class EstropadakStatsPageComponent implements OnInit, OnChanges {
     if (chartType === 'points_per_race' || chartType === 'cumulative') {
       this.estropadaService.getList(league, year)
       .subscribe((estropadak) => {
-        this.estropadak = estropadak.filter((estropada) => {
+        this.estropadak = estropadak.docs.filter((estropada) => {
           if ('puntuagarria' in estropada) {
             return estropada.puntuagarria;
           } else {

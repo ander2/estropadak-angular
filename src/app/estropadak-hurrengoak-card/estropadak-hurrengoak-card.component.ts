@@ -4,7 +4,7 @@ import { MatButtonToggleChange } from '@angular/material/button-toggle';
 
 import * as moment from 'moment';
 
-import { Estropada } from '../shared/estropadak.model';
+import { Estropada, EstropadakList } from '../shared/estropadak.model';
 import { EstropadaService } from '../shared/estropada.service';
 import { EstropadakNavegationService } from '../shared/estropadak-navegation.service';
 
@@ -38,9 +38,10 @@ export class EstropadakHurrengoakCardComponent implements OnChanges {
 
   updateEstropadak(league: string, year: string) {
     if (this.league && this.year) {
-      this.estropadaService.getList(this.league, this.year).subscribe((estropadak: Estropada[]) => {
+      this.estropadaService.getList(this.league, this.year)
+      .subscribe((estropadak: EstropadakList) => {
         const date = moment();
-        this.estropadak = estropadak
+        this.estropadak = estropadak.docs
           .filter((estropada: Estropada) => moment(estropada.data) >= date)
           .filter((estropada, index) => index < 4);
       });

@@ -9,7 +9,9 @@ export class EstropadaServiceStub {
   }
 
   getList() {
-    return of([{
+    return of({
+      total: 2,
+      docs: [{
       'data': '2017-07-01 19:00',
       'id': '415a90c7b50aea0ef54ee194e60016ac',
       'izena': 'VIII Bandera de Bilbao',
@@ -412,7 +414,7 @@ export class EstropadaServiceStub {
         ],
         "urla": "http://www.euskolabelliga.com/resultados/ver.php?id=eu&r=1489952608"
       }
-    ]);
+    ]});
   }
 
   getCategories() {

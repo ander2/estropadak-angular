@@ -37,3 +37,8 @@ export class Estropada {
   bi_eguneko_sailkapena?: BiEgunekoSailkapena[];
   related_estropada?: string;
 }
+
+export class EstropadakList {
+  total: number;
+  docs: Estropada[];
+}

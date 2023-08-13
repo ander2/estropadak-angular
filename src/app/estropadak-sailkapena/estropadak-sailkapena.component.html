@@ -19,13 +19,13 @@
   <mat-table #table [dataSource]="dataSource">
       <ng-container matColumnDef="Posizioa">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.position}}</mat-cell>
+        <mat-cell *matCellDef="let row">{{row.value.position}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="Taldea">
         <mat-header-cell *matHeaderCellDef>Taldea</mat-header-cell>
         <mat-cell *matCellDef="let row">
-          {{row.izena}}
+          {{row.name}}
           <a [routerLink]="['/estropadak', league, year, row.izena]" *ngIf="!multikategoria">
             <mat-icon>arrow_right</mat-icon>
           </a>
@@ -34,12 +34,12 @@
 
       <ng-container matColumnDef="Puntuak">
         <mat-header-cell *matHeaderCellDef>Puntuak</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.points}}</mat-cell>
+        <mat-cell *matCellDef="let row">{{row.value.points}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="Garaipenak">
         <mat-header-cell *matHeaderCellDef>Garaipenak</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.wins}}</mat-cell>
+        <mat-cell *matCellDef="let row">{{row.value.wins}}</mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

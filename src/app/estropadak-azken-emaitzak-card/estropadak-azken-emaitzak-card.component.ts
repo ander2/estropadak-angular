@@ -6,7 +6,7 @@ import * as moment from 'moment';
 import {Observable, of} from 'rxjs';
 
 import { EstropadaService } from '../shared/estropada.service';
-import { Estropada, TaldeSailkapena } from '../shared/estropadak.model';
+import { Estropada, EstropadakList } from '../shared/estropadak.model';
 
 class EstropadaDataSource extends DataSource<any> {
     sailkapena;
@@ -59,8 +59,8 @@ export class EstropadakAzkenEmaitzakCardComponent implements OnInit, OnChanges {
   showEmaitzak(league, year) {
     const date = moment(); // new Date().toISOString();
     this.estropadakService.getList(league, year)
-      .subscribe((estropadak: Estropada[]) => {
-        this.estropadak = estropadak
+      .subscribe((estropadak: EstropadakList) => {
+        this.estropadak = estropadak.docs
         .filter((estropada: Estropada) => moment(estropada.data) <= date)
         .filter((estropada: Estropada) => estropada.sailkapena && estropada.sailkapena.length)
         .reverse()

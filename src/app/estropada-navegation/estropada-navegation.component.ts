@@ -27,7 +27,7 @@ export class EstropadaNavegationComponent implements OnInit, OnChanges {
       .subscribe( res => {
         const year = res.data.slice(0, 4);
         this.estropadaService.getList(res.liga, year).subscribe( r => {
-          this.estropadakNavigationService.estropadak = r.map(e => e.id);
+          this.estropadakNavigationService.estropadak = r.docs.map(e => e.id);
           this.calculateNavigation();
         });
       })

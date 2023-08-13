@@ -22,7 +22,8 @@ export class TaldeakServiceStub {
                     "ISUNTZA-ELECNOR-CIKAUTXO",
                     "LEKITTARRA ELECNOR",
                     "LEKITTARRA-ELECNOR"
-                ]
+                ],
+                "short": "ISU"
             },
             {
                 "name": "Zierbena",
@@ -40,7 +41,8 @@ export class TaldeakServiceStub {
                     "Zierbena - BBGE",
                     "Zierbena Bah\u00edas De Bizkaia",
                     "Zierbena Bah\u00edas de Bizkaia"
-                ]
+                ],
+                "short": "ZIE"
             },
             {
                 "name": "Hondarribia",
@@ -64,7 +66,8 @@ export class TaldeakServiceStub {
                     "GO FIT HONDARRIBIA",
                     "GO FIT-HONDARRIBIA",
                     "HONDARRIBIA BERTAKO IGOGAILUAK"
-                ]
+                ],
+                "short": "HON"
             },
             {
                 "name": "Donostiarra",
@@ -79,7 +82,8 @@ export class TaldeakServiceStub {
                     "DONOSTIARRA AMENABAR",
                     "DONOSTIARRA - AMENABAR",
                     "DONOSTIARRA LACTURALE"
-                ]
+                ],
+                "short": "DON"
             },
             {
                 "name": "Kaiku",
@@ -93,7 +97,8 @@ export class TaldeakServiceStub {
                     "Kaiku Producha",
                     "Kaiku",
                     "KAIKU VUSA"
-                ]
+                ],
+                "short": "KAI"
             },
             {
                 "name": "Ondarroa",
@@ -107,7 +112,8 @@ export class TaldeakServiceStub {
                     "Ondarroa AE",
                     "Ondarroa Cikautxo",
                     "ONDARROA CIKAUTXO"
-                ]
+                ],
+                "short": "OND"
             },
             {
                 "name": "Itsasoko ama",
@@ -124,7 +130,8 @@ export class TaldeakServiceStub {
                     "Itsasoko ama",
                     "SANTURTZI IBERDROLA",
                     "SANTURTZI TRANSPORTES Y GRUAS AGUADO"
-                ]
+                ],
+                "short": "SANm"
             },
             {
                 "name": "Zarautz",
@@ -139,7 +146,8 @@ export class TaldeakServiceStub {
                     "ZARAUTZ-BABYAUTO",
                     "ZARAUTZ  - BABYAUTO",
                     "ZARAUTZ BABYAUTO"
-                ]
+                ],
+                "short": "ZAR"
             },
             {
                 "name": "Cabo",
@@ -147,7 +155,8 @@ export class TaldeakServiceStub {
                     "Cabo",
                     "Cabo da Cruz",
                     "CABO"
-                ]
+                ],
+                "short": "CAB"
             },
             {
                 "name": "Orio",
@@ -165,7 +174,8 @@ export class TaldeakServiceStub {
                     "ORIO BABYAUTO",
                     "ORIO",
                     "ORIO ARRAUNKETA ELKARTEA"
-                ]
+                ],
+                "short": "ORI"
             },
             {
                 "name": "Urdaibai",
@@ -176,7 +186,8 @@ export class TaldeakServiceStub {
                     "Urdaibai",
                     "URDAIBAI AVIA",
                     "BERMEO URDAIBAI AVIA"
-                ]
+                ],
+                "short": "URD"
             },
             {
                 "name": "Ares",
@@ -184,7 +195,8 @@ export class TaldeakServiceStub {
                     "Ares",
                     "ARES",
                     "CR ARES"
-                ]
+                ],
+                "short": "ARE"
             }
         ];
          

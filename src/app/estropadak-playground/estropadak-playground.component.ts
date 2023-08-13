@@ -26,7 +26,7 @@ export class EstropadakPlaygroundComponent implements OnInit {
   displayColumnHeaders = [this.firstColumnProperty];
   displayProp = 'posizioa';
   properties = ['posizioa', 'puntuazioa', 'tanda', 'tanda_postua', 'kalea', 'denbora'];
-  values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   teams = [];
   form;
   isMobile = false;
@@ -63,7 +63,6 @@ export class EstropadakPlaygroundComponent implements OnInit {
           this.form.get('teams').setValue(this.teams.map(t => t.short));
         }
         this.getEmaitzak(this.league, this.year);
-        this.dataSource = new PlaygroundDataSource([]);
       });
     });
   }
@@ -103,8 +102,8 @@ export class EstropadakPlaygroundComponent implements OnInit {
   getEmaitzak(league, year) {
     this.estropadakService.getList(league, year)
       .subscribe(res => {
-        res = res.filter(s => s.sailkapena);
-        const emaitzak = res.map((emaitza, i) => {
+        const result = res.docs.filter(s => s.sailkapena);
+        const emaitzak = result.map((emaitza, i) => {
           if (emaitza.izena.indexOf('Play') > -1) {
             return null;
           }

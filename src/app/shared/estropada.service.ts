@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 
-import { Estropada } from './estropadak.model';
+import { Estropada, EstropadakList } from './estropadak.model';
 import { environment } from '../../environments/environment';
 
 const estropadakUrl = environment.apiUrl;
@@ -70,13 +69,13 @@ export class EstropadaService {
 
     constructor(private http: HttpClient) { }
 
-    getList(league: string, year: string): Observable<Estropada[]> {
+    getList(league: string, year: string): Observable<EstropadakList> {
         const endpoint = `${estropadakUrl}estropadak`;
         const params = {league};
         if (year) {
             params['year'] = year;
         }
-        return this.http.get(endpoint, {params}) as Observable<Estropada[]>;
+        return this.http.get(endpoint, {params}) as Observable<EstropadakList>;
     }
 
     getOne(id: string): Observable<Estropada> {

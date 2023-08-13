@@ -3,7 +3,7 @@ import {DataSource} from '@angular/cdk/collections';
 import {Observable, of} from 'rxjs';
 
 import { SailkapenakService } from 'app/shared/sailkapenak.service';
-import { Stats } from 'app/shared/stats.model';
+import { SailkapenaStat } from 'app/shared/sailkapenak.model';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MatSelectChange } from '@angular/material/select';
 import { EstropadaService } from 'app/shared/estropada.service';
@@ -24,7 +24,7 @@ export class EstropadakSailkapenaComponent implements OnChanges {
   get showTitle() {
     return this._showTitle;
   }
-  sailkapena: Stats;
+  sailkapena: SailkapenaStat[] = [];
 
   displayedColumns: string[] = ['Posizioa', 'Taldea', 'Puntuak', 'Garaipenak'];
   kategoriak: string[] = [];
@@ -69,14 +69,9 @@ export class EstropadakSailkapenaComponent implements OnChanges {
   getSailkapena(league, year, category?) {
     this.sailkapenaService.getOne(league, year, null, category)
     .subscribe((res) => {
-      if (res.length > 0) {
-        this.sailkapena = res[0];
-        const sailk = Object.keys(this.sailkapena.stats).reduce((memo: any[], taldeIzena: string) => {
-          this.sailkapena.stats[taldeIzena].izena = taldeIzena;
-          memo.push(this.sailkapena.stats[taldeIzena]);
-          return memo;
-        }, []);
-        const ordered = sailk.sort((a, b) => parseInt(a.position, 10) - parseInt(b.position, 10));
+      if (res.total > 0) {
+        this.sailkapena = res.docs[0].stats;
+        const ordered = this.sailkapena.sort((a, b) => a.value.position - b.value.position);
         this.dataSource = new EstropadaDataSource(ordered);
       }
     }, (err) => {

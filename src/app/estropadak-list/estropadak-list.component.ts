@@ -37,8 +37,8 @@ export class EstropadakListComponent implements OnChanges {
       year = '2017';
     }
     this.estropadaService.getList(league, year).subscribe((estropadak) => {
-      this.estropadak = estropadak
-      this.navigationService.estropadak = estropadak.map(estropada => estropada.id);
+      this.estropadak = estropadak.docs;
+      this.navigationService.estropadak = this.estropadak.map(estropada => estropada.id);
     });
   }
 
