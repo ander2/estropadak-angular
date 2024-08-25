@@ -155,10 +155,10 @@ export class StatsService {
     return (this.http.get(`${estropadakUrl}estatistikak`, {params}) as Observable<any[]>);
   }
 
-  getDatasets(res: any[]) {
+  getDatasets(res: any) {
     return {
-      labels: res[0]?.values.map(val => val.label),
-      datasets: res.map((val, i) => {
+      labels: res.docs[0]?.values.map(val => val.label),
+      datasets: res.docs.map((val, i) => {
         let backgroundColor = ''
         if (val.key === 'Min') {
           backgroundColor = 'yellow';
@@ -175,8 +175,8 @@ export class StatsService {
         return {
             label: val.key,
             data:  val.values.map(v => v.value),
-            borderColor: val.key === 'Taldea' ? val.values.map(v => v.color) : res[i].color || res[i].values[0].color || backgroundColor,
-            backgroundColor: val.key === 'Taldea' ? val.values.map(v => v.color) : res[i].color || res[i].values[0].color || backgroundColor
+            borderColor: val.key === 'Taldea' ? val.values.map(v => v.color) : res.docs[i].color || res.docs[i].values[0].color || backgroundColor,
+            backgroundColor: val.key === 'Taldea' ? val.values.map(v => v.color) : res.docs[i].color || res.docs[i].values[0].color || backgroundColor
           }
       })
     }
