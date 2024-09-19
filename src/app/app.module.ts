@@ -171,7 +171,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(
       routes,
-      { enableTracing: false, relativeLinkResolution: 'legacy' }
+      { enableTracing: false }
     ),
     // InMemoryWebApiModule.forRoot(InMemStoreService, {apiBase: 'api/'})
   ],
