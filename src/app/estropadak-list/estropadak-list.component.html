@@ -5,10 +5,10 @@
 <mat-nav-list *ngIf="estropadak && estropadak.length > 0; else noestropadak">
   <mat-list-item *ngFor="let estropada of estropadak"
     (click)="onSelect(estropada)">
-    <h3 matLine>
+    <h3 matListItemTitle>
       {{ estropada.izena}}
     </h3>
-    <p matLine>
+    <p matListItemLine>
       {{estropada.data | date:'yyyy-MM-dd HH:mm'}}
     </p>
   </mat-list-item>

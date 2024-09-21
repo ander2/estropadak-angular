@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EstropadaResultSearchComponent } from './estropada-result-search.component';
-import { QueryBuilderModule } from 'angular2-query-builder';
+import { NgxAngularQueryBuilderModule } from "ngx-angular-query-builder";
 import { EstropadaResultSearchRoutingModule } from './estropada-result-search.routing.module';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
@@ -40,7 +40,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatSelectModule,
     MatTableModule,
     MatToolbarModule,
-    QueryBuilderModule
+    NgxAngularQueryBuilderModule 
   ]
 })
 export class EstropadaResultSearchModule { }

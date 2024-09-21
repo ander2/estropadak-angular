@@ -17,7 +17,7 @@ import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatSelectModule} from '@angular/material/select';
 import { MatSortModule} from '@angular/material/sort';
 import { MatTooltipModule} from '@angular/material/tooltip';
-import {  MatChipsModule } from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
 
 // provider
 import { HttpClientModule } from '@angular/common/http';
