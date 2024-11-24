@@ -16,7 +16,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
-import { QueryBuilderModule } from 'angular2-query-builder';
+import { NgxAngularQueryBuilderModule } from 'ngx-angular-query-builder';
 
 import { EmaitzakService } from 'app/shared/emaitzak.service';
 import { UrteakService } from 'app/shared/estropada.service';
@@ -36,7 +36,7 @@ describe('EstropadaResultSearchComponent', () => {
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        QueryBuilderModule,
+        NgxAngularQueryBuilderModule,
         MatButtonModule,
         MatButtonToggleModule,
         MatCheckboxModule,

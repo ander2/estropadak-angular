@@ -51,9 +51,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { EstropadakResultsComponent } from './estropadak-results/estropadak-results.component';
 import { EstropadakSelectionFormComponent } from './estropadak-selection-form/estropadak-selection-form.component';
 import { EstropadakPlaygroundComponent } from './estropadak-playground/estropadak-playground.component';
-import { NgCytoComponent } from './ng-cyto/ng-cyto.component';
-import { EstropadakRowerGraphComponent } from './estropadak-rower-graph/estropadak-rower-graph.component';
-import { EstropadakRowerHistorialTableComponent } from './estropadak-rower-historial-table/estropadak-rower-historial-table.component';
+// import { NgCytoComponent } from './ng-cyto/ng-cyto.component';
+// import { EstropadakRowerGraphComponent } from './estropadak-rower-graph/estropadak-rower-graph.component';
+// import { EstropadakRowerHistorialTableComponent } from './estropadak-rower-historial-table/estropadak-rower-historial-table.component';
 import { CacheMapService } from './shared/cache-map.service';
 import { httpInterceptorProviders } from './http-interceptors';
 import { SailkapenakService } from './shared/sailkapenak.service';
@@ -104,10 +104,10 @@ const routes: Routes = [
     path: 'jolastokia',
     component: EstropadakPlaygroundComponent
   },
-  {
-    path: 'arraunlariak',
-    component: EstropadakRowerGraphComponent
-  },
+  // {
+  //   path: 'arraunlariak',
+  //   component: EstropadakRowerGraphComponent
+  // },
   {
     path: 'konparaketak',
     loadChildren: () => import('./estropadak-team-comparation/estropadak-team-comparation.module').then(m => m.EstropadakTeamComparationModule)
@@ -124,7 +124,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HeaderComponent,
-    NgCytoComponent,
+    // NgCytoComponent,
     EstropadakListComponent,
     EstropadaDetailComponent,
     EstropadaMultiCategoryDetailComponent,
@@ -142,8 +142,8 @@ const routes: Routes = [
     PageNotFoundComponent,
     EstropadakSelectionFormComponent,
     EstropadakPlaygroundComponent,
-    EstropadakRowerGraphComponent,
-    EstropadakRowerHistorialTableComponent,
+    // EstropadakRowerGraphComponent,
+    // EstropadakRowerHistorialTableComponent,
     EstropadakBiJardunaldikoSailkapenaComponent,
   ],
   imports: [

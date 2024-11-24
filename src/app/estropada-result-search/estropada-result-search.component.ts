@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl, FormGroup } from '@angular/forms';
 
 import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
-import { QueryBuilderConfig } from 'angular2-query-builder';
+// import { QueryBuilderConfig } from 'angular2-query-builder';
+import {QueryBuilderConfig} from 'ngx-angular-query-builder';
 
 import { EmaitzakService } from 'app/shared/emaitzak.service';
 import { TaldeakService } from 'app/shared/taldeak.service';
