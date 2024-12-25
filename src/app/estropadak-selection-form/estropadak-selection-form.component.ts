@@ -53,7 +53,7 @@ export class EstropadakSelectionFormComponent implements OnInit {
     this.estropadakService.getCategories(this.league)
       .subscribe(res => this.kategoriak = res);
     this.form = this.fb.group({
-      league: [this.league.toLowerCase(), Validators.required],
+      league: [this.league.toUpperCase(), Validators.required],
       year: [this.year, Validators.required],
       team: [this.team],
       category: [this.category]
@@ -79,7 +79,7 @@ export class EstropadakSelectionFormComponent implements OnInit {
   updateYears() {
     let league = this.form.get('league').value;
     if (league) {
-      league = league.toLowerCase();
+      league = league.toUpperCase();
     }
     const year = this.form.get('year').value;
     this.years = this.allYears[league].sort((a, b) => b - a);

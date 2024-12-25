@@ -21,7 +21,7 @@ Chart.register(...registerables);
 export class EstropadakStatsPageComponent implements OnInit, OnChanges {
 
   @Input()
-  league = 'act';
+  league = 'ACT';
   @Input()
   year:number = 2024;
   form: UntypedFormGroup;

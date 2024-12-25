@@ -18,8 +18,8 @@ export class EstropadakPageComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
-      this.league = params.get('league');
-      this.year = params.get('year');
+      this.league = params.get('league').toUpperCase();
+      this.year = parseInt(params.get('year'), 10);
     });
   }
 

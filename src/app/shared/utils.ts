@@ -14,8 +14,8 @@ export function sanitizeLeague(league: string) {
     if (!league) {
         return undefined;
     }
-    league = league.toLowerCase();
-    const _leagues = ['act', 'arc1', 'arc2', 'euskotren', 'ete'];
+    league = league.toUpperCase();
+    const _leagues = ['ACT', 'ARC1', 'ARC2', 'EUSKOTREN', 'ETE'];
     if (_leagues.indexOf(league) > -1) {
         return league;
     } else {

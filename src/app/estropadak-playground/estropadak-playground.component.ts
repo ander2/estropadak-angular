@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, mergeMap, tap } from 'rxjs/operators';
 import { UntypedFormBuilder } from '@angular/forms';
 
 import { SeasonTeamSelection } from 'app/shared/stats.model';
 import { TaldeakService } from 'app/shared/taldeak.service';
-import { EstropadaService } from 'app/shared/estropada.service';
+import { EstropadaService, UrteakService } from 'app/shared/estropada.service';
 import { ActivatedRoute } from '@angular/router';
 import { sanitizeLeague, sanitizeYear } from 'app/shared/utils';
 
@@ -18,8 +18,8 @@ import { sanitizeLeague, sanitizeYear } from 'app/shared/utils';
 export class EstropadakPlaygroundComponent implements OnInit {
 
   public dataSource: any;
-  year = 2019;
-  league = 'act';
+  year:number;
+  league = 'ACT';
   category = '';
   displayedColumns = ['estropada'];
   firstColumnProperty = 'data';
@@ -30,10 +30,12 @@ export class EstropadakPlaygroundComponent implements OnInit {
   teams = [];
   form;
   isMobile = false;
+  loaded$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(
     private estropadakService: EstropadaService,
     private taldeakService: TaldeakService,
+    private urteakService: UrteakService,
     private fb: UntypedFormBuilder,
     private route: ActivatedRoute
   ) { }
@@ -42,10 +44,16 @@ export class EstropadakPlaygroundComponent implements OnInit {
     if (navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('iPhone') > -1) {
       this.isMobile = true;
     }
-    this.route.queryParams.subscribe((params) => {
-      this.year = parseInt(sanitizeYear(params.year)) || 2022;
-      this.league = sanitizeLeague(params.league) || 'act';
-
+    this.urteakService.getOne('active_year')
+    .pipe(tap(urtea => this.year = urtea))
+    .pipe(mergeMap(urtea => {
+      return this.route.queryParams
+    }))
+    .subscribe((params) => {
+      if (parseInt(sanitizeYear(params.year))) {
+        this.year = parseInt(sanitizeYear(params.year));
+      }
+      this.league = sanitizeLeague(params.league) || 'ACT';
       this.form = this.fb.group({
         teams: [],
         property: [this.displayProp],
@@ -63,6 +71,7 @@ export class EstropadakPlaygroundComponent implements OnInit {
           this.form.get('teams').setValue(this.teams.map(t => t.short));
         }
         this.getEmaitzak(this.league, this.year);
+        this.loaded$.next(true);
       });
     });
   }

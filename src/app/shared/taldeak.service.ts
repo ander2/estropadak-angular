@@ -23,7 +23,7 @@ export class TaldeakService {
   getList(league?: string, year?: number, category?: string): Observable<Team[]> {
       const endpoint = `${estropadakUrl}taldeak`;
       const params = {
-        league,
+        league: league.toUpperCase()
       };
       if (year) {
         params['year'] = year;
@@ -37,7 +37,7 @@ export class TaldeakService {
   getOne(team: string, league: string, year: number): Observable<Team> {
       const endpoint = `${estropadakUrl}taldeak/${team}`;
       const params = {
-        league,
+        league: league.toUpperCase(),
         year: '' + year
       };
       return this.http.get(endpoint, {params}) as Observable<Team>;

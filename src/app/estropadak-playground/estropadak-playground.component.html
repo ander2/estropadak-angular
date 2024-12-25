@@ -1,9 +1,10 @@
 <div class="content">
-  <h1 class="mat-h1">Playground (beta)</h1>
+  <h1 class="mat-h1">Playground</h1>
   <p>Aukeratu liga eta urtea:</p>
-  <app-estropadak-selection-form 
-    [year]="year" 
-    [league]="league" 
+  <app-estropadak-selection-form
+    *ngIf="loaded$ | async"
+    [year]="year"
+    [league]="league"
     [showTeams]="false"
     (selectionChanged)="paramsChanged($event)">
   </app-estropadak-selection-form>
@@ -52,7 +53,7 @@
   <mat-table #table [dataSource]="dataSource" matSort>
     <ng-container *ngFor="let header of displayColumnHeaders;let i=index; " [matColumnDef]="header">
       <mat-header-cell *matHeaderCellDef="let row">
-        {{header}} 
+        {{header}}
       </mat-header-cell>
       <mat-cell *matCellDef="let row" matTooltip="{{row.izena}}">
         <span *ngIf="header === firstColumnProperty" >
