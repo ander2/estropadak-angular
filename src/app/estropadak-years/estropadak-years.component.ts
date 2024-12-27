@@ -19,7 +19,7 @@ export class EstropadakYearsComponent implements OnInit {
 
   ngOnInit() {
     this.urteakService.getList().subscribe((res) => {
-      const liga = this.league.toLowerCase();
+      const liga = this.league.toUpperCase();
       const urteak = res.find(ligaUrteak => ligaUrteak.name === liga)
       this.years = urteak.years.sort((a,b) => b - a);
     });
