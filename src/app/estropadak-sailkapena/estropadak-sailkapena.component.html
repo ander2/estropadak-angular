@@ -26,7 +26,7 @@
         <mat-header-cell *matHeaderCellDef>Taldea</mat-header-cell>
         <mat-cell *matCellDef="let row">
           {{row.name}}
-          <a [routerLink]="['/estropadak', league, year, row.izena]" *ngIf="!multikategoria">
+          <a [routerLink]="['/estropadak', league, year, row.name]" *ngIf="!multikategoria">
             <mat-icon>arrow_right</mat-icon>
           </a>
         </mat-cell>
