@@ -162,29 +162,29 @@ export class EstropadakTeamComparationComponent implements OnInit {
     .subscribe(res => {
       this.displayedColumns = ['urtea'];
       this.displayedColumns.push(...this.aukeratutakoTaldeak);
-      this.dataSource.data.next(res);
-      const data = res.reduce((memo, stat) => {
-        Object.keys(stat.stats)
-          .map(k => {
-            if (!memo[k]) {
-              memo[k] = [];
-            }
-            memo[k].push({
-              label: stat.urtea,
-              value: stat.stats[k]
-            });
-            return {
-              key: k,
-              values: [{
-                label: stat.urtea,
-                value: stat.stats[k][this.form.get('metric').value]
-              }]
-            }
+      const preparedData = this._prepareDataForTable(res.docs);
+      this.dataSource.data.next(preparedData);
+      const data = preparedData.reduce((memo, stat) => {
+        this.aukeratutakoTaldeak.forEach(k => {
+          if (!memo[k]) {
+            memo[k] = [];
+          }
+          memo[k].push({
+            label: stat.year,
+            value: stat.stats[k] ? stat.stats[k] : []
           });
+          return {
+            key: k,
+            values: [{
+              label: stat.year,
+              value: stat.stats[k] && stat.stats[k][this.form.get('metric').value] ? stat.stats[k][this.form.get('metric').value]:[]
+            }]
+          }
+        });
         return memo;
       }, {});
       this.chartData = {
-        labels: res.map(val => val.urtea),
+        labels: preparedData.map(val => val.year),
         datasets: Object.keys(data).map(val => {
           return {
             label: val,
@@ -193,13 +193,6 @@ export class EstropadakTeamComparationComponent implements OnInit {
           }
         })
       };
-      // Object.keys(data).map(k => {
-      //   return {
-      //     key: k,
-      //     color: this.statsService.teamColors(k),
-      //     values: data[k]
-      //   };
-      // });
     })
   }
 
@@ -222,6 +215,25 @@ export class EstropadakTeamComparationComponent implements OnInit {
   reCreateChart() {
     this.myChart.destroy();
     this.createChart();
+  }
+
+  _prepareDataForTable(data: any[]): any[] {
+    const result = []
+    const byYear = {}
+    data.forEach(startResult => {
+      if (!byYear[startResult.year]) {
+        byYear[startResult.year] = { }
+      }
+      const name = startResult.stats[0]['name'];
+      byYear[startResult.year][name] = startResult.stats[0]['value'];
+    });
+    Object.entries(byYear).forEach(([key, value]) => {
+      result.push({
+        year: key,
+        stats: value
+      });
+    });
+    return result;
   }
 
 }

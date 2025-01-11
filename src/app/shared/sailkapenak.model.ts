@@ -1,7 +1,11 @@
 export class Sailkapena {
   id: string;
-  urtea: number;
+  year: number;
   stats: SailkapenaStat[]
+}
+export class SailkapenaList {
+  total: number;
+  docs: Sailkapena[];
 }
 
 export class SailkapenaStat {

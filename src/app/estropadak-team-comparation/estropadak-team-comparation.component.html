@@ -53,13 +53,13 @@
 
       <ng-container matColumnDef="urtea">
         <mat-header-cell *matHeaderCellDef>Urtea</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.urtea}}</mat-cell>
+        <mat-cell *matCellDef="let row">{{row.year}}</mat-cell>
       </ng-container>
 
 
       <ng-container *ngFor="let taldea of aukeratutakoTaldeak" [matColumnDef]="taldea">
           <mat-header-cell *matHeaderCellDef fxHide.xs>{{taldea}}</mat-header-cell>
-          <mat-cell *matCellDef="let row" fxHide.xs>{{row.stats[taldea][form.get('metric').value]}}</mat-cell>
+          <mat-cell *matCellDef="let row" fxHide.xs>{{row.stats[taldea]?row.stats[taldea][form.get('metric').value]: '-'}}</mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
