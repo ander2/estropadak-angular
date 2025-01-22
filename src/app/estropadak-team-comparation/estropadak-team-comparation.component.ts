@@ -224,8 +224,9 @@ export class EstropadakTeamComparationComponent implements OnInit {
       if (!byYear[startResult.year]) {
         byYear[startResult.year] = { }
       }
-      const name = startResult.stats[0]['name'];
-      byYear[startResult.year][name] = startResult.stats[0]['value'];
+      startResult.stats.forEach(stat => {
+        byYear[startResult.year][stat.name] = stat.value;
+      });
     });
     Object.entries(byYear).forEach(([key, value]) => {
       result.push({

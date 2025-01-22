@@ -5,6 +5,7 @@
         {{league | uppercase}}
       </mat-option>
     </mat-select>
+    <mat-label>Liga</mat-label>
   </mat-form-field>
   <mat-form-field *ngIf="isMultiCategory">
     <mat-select formControlName="category" placeholder="Kategoria" (selectionChange)="updateYearsAndRefresh()">
@@ -12,6 +13,7 @@
         {{ kat.name }}
       </mat-option>
     </mat-select>
+    <mat-label>Kategoria</mat-label>
   </mat-form-field>
   <ng-container *ngIf="showYears">
     <mat-form-field>
@@ -21,6 +23,7 @@
           {{year}}
         </mat-option>
       </mat-select>
+      <mat-label>Urtea</mat-label>
     </mat-form-field>
   </ng-container>
   <ng-container *ngIf="showTeams">
@@ -31,6 +34,7 @@
           {{team}}
         </mat-option>
       </mat-select>
+      <mat-label>Taldeak</mat-label>
     </mat-form-field>
   </ng-container>
   <button mat-button (click)="selectedData()">Aukeratu</button>

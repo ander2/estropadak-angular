@@ -41,6 +41,14 @@ export class EstropadakPlaygroundComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      teams: [],
+      property: [this.displayProp],
+      minVal: [1],
+      maxVal: [12],
+      minTime: ['19:00'],
+      maxTime: ['23:00'],
+    });
     if (navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('iPhone') > -1) {
       this.isMobile = true;
     }

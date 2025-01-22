@@ -1,6 +1,6 @@
 <div class="content">
-  <h1 class="mat-h1">Playground</h1>
-  <p>Aukeratu liga eta urtea:</p>
+  <h1 class="mat-h1">Datu taulak</h1>
+  <p>Aukeratu liga eta urte bat, talde desberdinen datuak ikusteko:</p>
   <app-estropadak-selection-form
     *ngIf="loaded$ | async"
     [year]="year"
@@ -16,13 +16,15 @@
           {{team.name}}
         </mat-option>
       </mat-select>
+      <mat-label>Taldea</mat-label>
     </mat-form-field>
     <mat-form-field>
-      <mat-select formControlName="property" placeholder="Aukeratu bistaratzeko balioa" (selectionChange)="changeDisplayProp()">
+      <mat-select formControlName="property" placeholder="Aukeratu bistaratzeko datua" (selectionChange)="changeDisplayProp()">
         <mat-option *ngFor="let prop of properties" [value]="prop">
           {{prop}}
         </mat-option>
       </mat-select>
+      <mat-label>Datua</mat-label>
     </mat-form-field>
     <ng-container *ngIf="displayProp !=='denbora'">
     <mat-form-field>
