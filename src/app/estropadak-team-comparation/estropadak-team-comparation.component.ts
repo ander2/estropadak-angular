@@ -2,8 +2,10 @@ import { Component, OnInit, Input, ViewEncapsulation, ViewChild, ElementRef } fr
 import { DataSource } from '@angular/cdk/table';
 
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Chart, ChartType, registerables } from 'chart.js';
-Chart.register(...registerables);
+// import { Chart, ChartType, registerables } from 'chart.js';
+// Chart.register(...registerables);
+import Chart from 'chart.js/auto';
+// Chart.register(...registerables);
 
 import { SailkapenakService } from 'app/shared/sailkapenak.service';
 import { TaldeakService } from 'app/shared/taldeak.service';

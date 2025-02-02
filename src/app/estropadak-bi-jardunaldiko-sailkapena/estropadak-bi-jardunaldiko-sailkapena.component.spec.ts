@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { EstropadakBiJardunaldikoSailkapenaComponent } from './estropadak-bi-jardunaldiko-sailkapena.component';
 
@@ -12,7 +12,7 @@ describe('EstropadakBiJardunaldikoSailkapenaComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports:[
-        BrowserAnimationsModule,
+        NoopAnimationsModule,
         MatTableModule,
         MatSortModule
       ],

@@ -6,9 +6,9 @@ import { TaldeakService } from 'app/shared/taldeak.service';
 import { StatsService } from 'app/shared/stats.service';
 import { ActivatedRoute } from '@angular/router';
 import { sanitizeYear, sanitizeLeague, sanitizeChart } from 'app/shared/utils';
-import { Chart, ChartType, registerables } from 'chart.js';
+import { ChartType } from 'chart.js';
+import Chart from 'chart.js/auto';
 import { map } from 'rxjs/operators';
-Chart.register(...registerables);
 
 
 @Component({

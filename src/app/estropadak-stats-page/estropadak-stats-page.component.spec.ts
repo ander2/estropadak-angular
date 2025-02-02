@@ -15,6 +15,33 @@ import { TaldeakServiceStub } from 'app/shared/taldeak.service.stub';
 import { StatsService } from 'app/shared/stats.service';
 import { SailkapenakService } from 'app/shared/sailkapenak.service';
 
+class ChartMock {
+  public canvas;
+  public options;
+  public data;
+  // this is not a complete mock. You may need to mock other properties as well.
+
+
+  public constructor(canvas: any, options: any) {
+    this.canvas = canvas;
+    this.options = options;
+    this.data = options.data;
+  }
+
+	public default() {
+		return true;
+	}
+}
+
+jest.mock('chart.js/auto', () => {
+  return {
+    default: jest.fn().mockImplementation(() => {
+      return {
+        Chart: ChartMock,
+      }
+    }),
+  }
+})
 
 describe('EstropadakStatsPageComponent', () => {
   let component: EstropadakStatsPageComponent;

@@ -1,4 +1,4 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MatTableModule } from '@angular/material/table';
@@ -15,7 +15,7 @@ describe('EstropadakRowerHistorialTableComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
-        BrowserAnimationsModule,
+        NoopAnimationsModule,
         MatButtonModule,
         MatIconModule,
         MatSortModule,
