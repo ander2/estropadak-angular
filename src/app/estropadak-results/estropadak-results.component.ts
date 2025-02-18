@@ -20,6 +20,7 @@ export class EstropadakResultsComponent implements OnInit, AfterViewInit {
   public year: number;
   public results: any[] = [];
   public emaitzak = [];
+  public loading: boolean = false;
   displayedColumns = ['estropada_data', 'estropada_izena', 'denbora', 'posizioa', 'puntuazioa'];
   public dataSource = new EstropadaDataSource([]);
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -42,8 +43,10 @@ export class EstropadakResultsComponent implements OnInit, AfterViewInit {
   }
 
   getEmaitzak(league, year, team) {
+    this.loading = true;
     this.emaitzakService.getList(league, year, team)
       .subscribe(res => {
+        this.loading = false;
         this.emaitzak = res;
         this.dataSource.data.next(this.emaitzak);
         this.sort.sortChange

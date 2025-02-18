@@ -17,20 +17,21 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrls: ['./estropada-result-search.component.css']
 })
 export class EstropadaResultSearchComponent implements OnInit {
+  public loading: boolean = false;
   public queryCtrl: UntypedFormControl;
   query = {
     condition: 'and',
     rules: [ ]
   };
-  
+
   config: QueryBuilderConfig = {
     fields: {
       talde_izen_normalizatua: {
-        name: 'Taldea', 
+        name: 'Taldea',
         type: 'category',
         options: []
       },
-      liga: {name: 'Liga', 
+      liga: {name: 'Liga',
         type: 'category',
         options: [
           {name: 'ACT', value: 'ACT'},
@@ -62,7 +63,7 @@ export class EstropadaResultSearchComponent implements OnInit {
     private fb: UntypedFormBuilder,
     private emaitzakService: EmaitzakService,
     private taldeakService: TaldeakService
-    ) { 
+    ) {
     this.queryCtrl = this.fb.control(this.query);
     forkJoin({
       act: this.taldeakService.getList('act'),
@@ -91,6 +92,7 @@ export class EstropadaResultSearchComponent implements OnInit {
   }
 
   search(page?: PageEvent):void {
+    this.loading = true;
     this.queryCtrl.value;
     const query = this.queryToMango(this.query);
     let start = 0;
@@ -101,7 +103,8 @@ export class EstropadaResultSearchComponent implements OnInit {
     }
     this.emaitzakService.get(query, start, size).subscribe(
       res => this.dataSource.update(res),
-      err => console.error(err)
+      err => console.error(err),
+      () => this.loading = false
     );
   }
 
@@ -174,7 +177,7 @@ class EstropadaDataSource extends DataSource<any> {
   connect(): Observable<any> {
     return this.data;
   }
-  
+
   update(emaitzaResult: EmaitzaResult) {
     this.data.next(emaitzaResult.docs);
     this.total.next(emaitzaResult.total);

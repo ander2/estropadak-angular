@@ -102,7 +102,11 @@
           Bilatu
       </button>
   </div>
+
   <mat-divider></mat-divider>
+
+  <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+
   <h3>Emaitzak</h3>
   <mat-table #table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="estropada_data">

@@ -3,12 +3,14 @@
     {{team}} estropada emaitzak: {{league | uppercase}} {{year}} urtea
   </h1>
 
-  <app-estropadak-selection-form 
+  <app-estropadak-selection-form
     [year]="year"
     [league]="league"
     [team]="team"
     (selectionChanged)="paramsChanged($event)">
   </app-estropadak-selection-form>
+
+  <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
 
   <div fxLayout fxLayout.xs="column" fxLayoutAlign="center start">
     <mat-table #table [dataSource]="dataSource" matSort>
