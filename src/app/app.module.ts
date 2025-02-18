@@ -18,6 +18,7 @@ import { MatSelectModule} from '@angular/material/select';
 import { MatSortModule} from '@angular/material/sort';
 import { MatTooltipModule} from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 // provider
 import { HttpClientModule } from '@angular/common/http';
@@ -160,6 +161,7 @@ const routes: Routes = [
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatProgressBarModule,
     MatSelectModule,
     MatTableModule,
     MatTabsModule,
