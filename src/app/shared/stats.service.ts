@@ -89,6 +89,7 @@ export class StatsService {
     if (category) {
       params['category'] = category;
     }
+    params['stat'] = 'cumulative';
 
     return this.http.get(`${estropadakUrl}estatistikak`, {params}) as Observable<any []>;
   }
