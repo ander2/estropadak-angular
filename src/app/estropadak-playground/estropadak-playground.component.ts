@@ -155,8 +155,17 @@ export class EstropadakPlaygroundComponent implements OnInit {
   }
 
   getTeamName(team: string) {
-    if (this.teams.find(t => t.alt_names.indexOf(team) > -1)) {
-      return this.teams.find(t => t.alt_names.indexOf(team) > -1).short;
+    let team_;
+    let found = false;
+    this.teams.forEach(t => {
+      const team_names = t.alt_names.map( t_ => t_.toLowerCase());
+      if (team_names.includes(team.toLowerCase())) {
+        team_ = t;
+        found = true;
+      }
+    });
+    if (found) {
+      return team_.short;
     } else {
       return team;
     }
