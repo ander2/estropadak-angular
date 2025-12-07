@@ -21,7 +21,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 // provider
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule} from '@angular/router';
 
@@ -121,73 +121,63 @@ const routes: Routes = [
 
 ];
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    // NgCytoComponent,
-    EstropadakListComponent,
-    EstropadaDetailComponent,
-    EstropadaMultiCategoryDetailComponent,
-    EstropadaTandaComponent,
-    EstropadakSailkapenaComponent,
-    EstropadakPortadaComponent,
-    EstropadakPageComponent,
-    EstropadaEstropadaSailkapenaComponent,
-    EstropadakHoniBuruzComponent,
-    EstropadakYearsComponent,
-    EstropadaNavegationComponent,
-    EstropadakHurrengoakCardComponent,
-    EstropadakAzkenEmaitzakCardComponent,
-    EstropadakResultsComponent,
-    PageNotFoundComponent,
-    EstropadakSelectionFormComponent,
-    EstropadakPlaygroundComponent,
-    // EstropadakRowerGraphComponent,
-    // EstropadakRowerHistorialTableComponent,
-    EstropadakBiJardunaldikoSailkapenaComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    FormsModule,
-    HttpClientModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatChipsModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatProgressBarModule,
-    MatSelectModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    MatMenuModule,
-    MatSidenavModule,
-    MatSortModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot(
-      routes,
-      { enableTracing: false }
-    ),
-    // InMemoryWebApiModule.forRoot(InMemStoreService, {apiBase: 'api/'})
-  ],
-  providers: [
-    CacheMapService,
-    httpInterceptorProviders,
-    EstropadaService,
-    EmaitzakService,
-    EstropadakNavegationService,
-    SailkapenakService,
-    TaldeakService,
-    UrteakService,
-    StatsService
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        HeaderComponent,
+        // NgCytoComponent,
+        EstropadakListComponent,
+        EstropadaDetailComponent,
+        EstropadaMultiCategoryDetailComponent,
+        EstropadaTandaComponent,
+        EstropadakSailkapenaComponent,
+        EstropadakPortadaComponent,
+        EstropadakPageComponent,
+        EstropadaEstropadaSailkapenaComponent,
+        EstropadakHoniBuruzComponent,
+        EstropadakYearsComponent,
+        EstropadaNavegationComponent,
+        EstropadakHurrengoakCardComponent,
+        EstropadakAzkenEmaitzakCardComponent,
+        EstropadakResultsComponent,
+        PageNotFoundComponent,
+        EstropadakSelectionFormComponent,
+        EstropadakPlaygroundComponent,
+        // EstropadakRowerGraphComponent,
+        // EstropadakRowerHistorialTableComponent,
+        EstropadakBiJardunaldikoSailkapenaComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FlexLayoutModule,
+        FormsModule,
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatCardModule,
+        MatChipsModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatListModule,
+        MatProgressBarModule,
+        MatSelectModule,
+        MatTableModule,
+        MatTabsModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        MatMenuModule,
+        MatSidenavModule,
+        MatSortModule,
+        ReactiveFormsModule,
+        RouterModule.forRoot(routes, { enableTracing: false })], providers: [
+        CacheMapService,
+        httpInterceptorProviders,
+        EstropadaService,
+        EmaitzakService,
+        EstropadakNavegationService,
+        SailkapenakService,
+        TaldeakService,
+        UrteakService,
+        StatsService,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }

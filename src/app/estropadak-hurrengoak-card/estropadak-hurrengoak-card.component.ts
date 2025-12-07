@@ -2,7 +2,7 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/cor
 import { Router } from '@angular/router';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 
-import * as moment from 'moment';
+import moment from 'moment';
 
 import { Estropada, EstropadakList } from '../shared/estropadak.model';
 import { EstropadaService } from '../shared/estropada.service';

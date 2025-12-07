@@ -1,6 +1,6 @@
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,6 +20,7 @@ import { EmaitzakService } from '../shared/emaitzak.service';
 import { TaldeakService } from '../shared/taldeak.service';
 import { TaldeakServiceStub } from '../shared/taldeak.service.stub';
 import { EstropadaServiceStub, UrteakServiceStub } from '../shared/estropada.service.stub';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 
 describe('EstropadakPlaygroundComponent', () => {
@@ -28,10 +29,12 @@ describe('EstropadakPlaygroundComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
+    declarations: [
+        EstropadakSelectionFormComponent,
+        EstropadakPlaygroundComponent
+    ],
+    imports: [BrowserAnimationsModule,
         FormsModule,
-        HttpClientTestingModule,
         ReactiveFormsModule,
         RouterTestingModule,
         MatIconModule,
@@ -40,19 +43,16 @@ describe('EstropadakPlaygroundComponent', () => {
         MatSelectModule,
         MatTableModule,
         MatToolbarModule,
-        MatTooltipModule
-      ],
-      declarations: [
-        EstropadakSelectionFormComponent,
-        EstropadakPlaygroundComponent
-      ],
-      providers: [
-        { provide: EmaitzakService, useValue: {getList: () => of([])}},
+        MatTooltipModule],
+    providers: [
+        { provide: EmaitzakService, useValue: { getList: () => of([]) } },
         { provide: TaldeakService, useClass: TaldeakServiceStub },
-        { provide: UrteakService, useClass: UrteakServiceStub},
-        { provide: EstropadaService, useClass: EstropadaServiceStub}
-      ]
-    })
+        { provide: UrteakService, useClass: UrteakServiceStub },
+        { provide: EstropadaService, useClass: EstropadaServiceStub },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+})
     .compileComponents();
   }));
 

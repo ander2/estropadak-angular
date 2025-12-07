@@ -1,9 +1,9 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "downlevelIteration": true,
     "importHelpers": true,
     "outDir": "./dist/out-tsc",
+    "esModuleInterop": true,
     "baseUrl": "src",
     "sourceMap": true,
     "declaration": false,

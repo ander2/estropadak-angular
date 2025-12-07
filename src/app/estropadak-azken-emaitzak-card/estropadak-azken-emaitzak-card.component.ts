@@ -2,7 +2,7 @@ import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import {DataSource} from '@angular/cdk/collections';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 
-import * as moment from 'moment';
+import moment from 'moment';
 import {Observable, of} from 'rxjs';
 
 import { EstropadaService } from '../shared/estropada.service';
