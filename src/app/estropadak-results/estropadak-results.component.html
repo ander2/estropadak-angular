@@ -10,7 +10,7 @@
     (selectionChanged)="paramsChanged($event)">
   </app-estropadak-selection-form>
 
-  <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+  <mat-progress-bar mode="indeterminate" *ngIf="loading | async"></mat-progress-bar>
 
   <div fxLayout fxLayout.xs="column" fxLayoutAlign="center start">
     <mat-table #table [dataSource]="dataSource" matSort>
