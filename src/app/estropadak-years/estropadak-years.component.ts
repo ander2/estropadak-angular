@@ -3,9 +3,10 @@ import { UrteakService } from '../shared/estropada.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-estropadak-years',
-  templateUrl: './estropadak-years.component.html',
-  styleUrls: ['./estropadak-years.component.css']
+    selector: 'app-estropadak-years',
+    templateUrl: './estropadak-years.component.html',
+    styleUrls: ['./estropadak-years.component.css'],
+    standalone: false
 })
 export class EstropadakYearsComponent implements OnInit {
 

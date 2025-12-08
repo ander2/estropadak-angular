@@ -9,9 +9,10 @@ import { EmaitzakService } from 'app/shared/emaitzak.service';
 import { SeasonTeamSelection } from 'app/shared/stats.model';
 
 @Component({
-  selector: 'app-estropadak-results',
-  templateUrl: './estropadak-results.component.html',
-  styleUrls: ['./estropadak-results.component.css']
+    selector: 'app-estropadak-results',
+    templateUrl: './estropadak-results.component.html',
+    styleUrls: ['./estropadak-results.component.css'],
+    standalone: false
 })
 export class EstropadakResultsComponent implements OnInit, AfterViewInit {
 

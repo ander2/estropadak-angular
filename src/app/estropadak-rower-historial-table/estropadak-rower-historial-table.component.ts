@@ -11,9 +11,10 @@ export class RowerHistorial {
 
 
 @Component({
-  selector: 'app-estropadak-rower-historial-table',
-  templateUrl: './estropadak-rower-historial-table.component.html',
-  styleUrls: ['./estropadak-rower-historial-table.component.css']
+    selector: 'app-estropadak-rower-historial-table',
+    templateUrl: './estropadak-rower-historial-table.component.html',
+    styleUrls: ['./estropadak-rower-historial-table.component.css'],
+    standalone: false
 })
 export class EstropadakRowerHistorialTableComponent implements OnInit, OnChanges {
 

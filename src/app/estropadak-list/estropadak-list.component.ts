@@ -4,9 +4,10 @@ import { EstropadaService } from '../shared/estropada.service';
 import { EstropadakNavegationService } from '../shared/estropadak-navegation.service';
 
 @Component({
-  selector: 'app-estropadak-list',
-  templateUrl: './estropadak-list.component.html',
-  styleUrls: ['./estropadak-list.component.css']
+    selector: 'app-estropadak-list',
+    templateUrl: './estropadak-list.component.html',
+    styleUrls: ['./estropadak-list.component.css'],
+    standalone: false
 })
 export class EstropadakListComponent implements OnChanges {
 

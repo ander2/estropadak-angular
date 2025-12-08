@@ -4,9 +4,10 @@ import { MatTable } from '@angular/material/table';
 import { BiEgunekoSailkapena } from 'app/shared/estropadak.model';
 
 @Component({
-  selector: 'app-estropadak-bi-jardunaldiko-sailkapena',
-  templateUrl: './estropadak-bi-jardunaldiko-sailkapena.component.html',
-  styleUrls: ['./estropadak-bi-jardunaldiko-sailkapena.component.css']
+    selector: 'app-estropadak-bi-jardunaldiko-sailkapena',
+    templateUrl: './estropadak-bi-jardunaldiko-sailkapena.component.html',
+    styleUrls: ['./estropadak-bi-jardunaldiko-sailkapena.component.css'],
+    standalone: false
 })
 export class EstropadakBiJardunaldikoSailkapenaComponent implements OnInit {
 

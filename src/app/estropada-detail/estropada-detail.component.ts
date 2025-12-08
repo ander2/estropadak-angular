@@ -7,9 +7,10 @@ import { EstropadaTandaComponent } from '../estropada-tanda/estropada-tanda.comp
 import { Estropada } from 'app/shared/estropadak.model';
 
 @Component({
-  selector: 'app-estropada-detail',
-  templateUrl: './estropada-detail.component.html',
-  styleUrls: ['./estropada-detail.component.css']
+    selector: 'app-estropada-detail',
+    templateUrl: './estropada-detail.component.html',
+    styleUrls: ['./estropada-detail.component.css'],
+    standalone: false
 })
 
 export class EstropadaDetailComponent implements OnInit {

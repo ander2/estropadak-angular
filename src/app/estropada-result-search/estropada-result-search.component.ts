@@ -12,9 +12,10 @@ import { EmaitzaResult } from 'app/shared/emaitzak.model';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-estropada-result-search',
-  templateUrl: './estropada-result-search.component.html',
-  styleUrls: ['./estropada-result-search.component.css']
+    selector: 'app-estropada-result-search',
+    templateUrl: './estropada-result-search.component.html',
+    styleUrls: ['./estropada-result-search.component.css'],
+    standalone: false
 })
 export class EstropadaResultSearchComponent implements OnInit {
   public loading: boolean = false;

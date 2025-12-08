@@ -4,9 +4,10 @@ import { UrteakService, EstropadaService } from 'app/shared/estropada.service';
 import { TaldeakService } from 'app/shared/taldeak.service';
 
 @Component({
-  selector: 'app-estropadak-selection-form',
-  templateUrl: './estropadak-selection-form.component.html',
-  styleUrls: ['./estropadak-selection-form.component.css']
+    selector: 'app-estropadak-selection-form',
+    templateUrl: './estropadak-selection-form.component.html',
+    styleUrls: ['./estropadak-selection-form.component.css'],
+    standalone: false
 })
 export class EstropadakSelectionFormComponent implements OnInit {
 

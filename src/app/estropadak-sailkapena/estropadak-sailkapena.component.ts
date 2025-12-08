@@ -9,9 +9,10 @@ import { MatSelectChange } from '@angular/material/select';
 import { EstropadaService } from 'app/shared/estropada.service';
 
 @Component({
-  selector: 'app-estropadak-sailkapena',
-  templateUrl: './estropadak-sailkapena.component.html',
-  styleUrls: ['./estropadak-sailkapena.component.css']
+    selector: 'app-estropadak-sailkapena',
+    templateUrl: './estropadak-sailkapena.component.html',
+    styleUrls: ['./estropadak-sailkapena.component.css'],
+    standalone: false
 })
 export class EstropadakSailkapenaComponent implements OnChanges {
   @Input() league;

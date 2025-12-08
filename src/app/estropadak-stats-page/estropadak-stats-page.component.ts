@@ -12,11 +12,12 @@ import { map } from 'rxjs/operators';
 
 
 @Component({
-  selector: 'app-estropadak-stats-page',
-  templateUrl: './estropadak-stats-page.component.html',
-  styleUrls: ['./estropadak-stats-page.component.css',
-  ],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-estropadak-stats-page',
+    templateUrl: './estropadak-stats-page.component.html',
+    styleUrls: ['./estropadak-stats-page.component.css',
+    ],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class EstropadakStatsPageComponent implements OnInit, OnChanges {
 

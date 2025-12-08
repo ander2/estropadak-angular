@@ -3,9 +3,10 @@ import { ActivatedRoute, NavigationEnd } from '@angular/router';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
-  selector: 'app-estropadak-page',
-  templateUrl: './estropadak-page.component.html',
-  styleUrls: ['./estropadak-page.component.css']
+    selector: 'app-estropadak-page',
+    templateUrl: './estropadak-page.component.html',
+    styleUrls: ['./estropadak-page.component.css'],
+    standalone: false
 })
 export class EstropadakPageComponent implements OnInit {
 

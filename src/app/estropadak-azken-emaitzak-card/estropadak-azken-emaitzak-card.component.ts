@@ -24,9 +24,10 @@ class EstropadaDataSource extends DataSource<any> {
 
 
 @Component({
-  selector: 'app-estropadak-azken-emaitzak-card',
-  templateUrl: './estropadak-azken-emaitzak-card.component.html',
-  styleUrls: ['./estropadak-azken-emaitzak-card.component.css']
+    selector: 'app-estropadak-azken-emaitzak-card',
+    templateUrl: './estropadak-azken-emaitzak-card.component.html',
+    styleUrls: ['./estropadak-azken-emaitzak-card.component.css'],
+    standalone: false
 })
 export class EstropadakAzkenEmaitzakCardComponent implements OnInit, OnChanges {
 

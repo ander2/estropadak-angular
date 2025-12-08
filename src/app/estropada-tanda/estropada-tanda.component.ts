@@ -5,9 +5,10 @@ import { EstropadaService } from 'app/shared/estropada.service';
 
 
 @Component({
-  selector: 'app-estropada-tanda',
-  templateUrl: './estropada-tanda.component.html',
-  styleUrls: ['./estropada-tanda.component.css']
+    selector: 'app-estropada-tanda',
+    templateUrl: './estropada-tanda.component.html',
+    styleUrls: ['./estropada-tanda.component.css'],
+    standalone: false
 })
 export class EstropadaTandaComponent implements OnInit {
 

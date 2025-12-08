@@ -5,9 +5,10 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 
 
 @Component({
-  selector: 'app-estropada-multi-category-detail',
-  templateUrl: './estropada-multi-category-detail.component.html',
-  styleUrls: ['./estropada-multi-category-detail.component.css']
+    selector: 'app-estropada-multi-category-detail',
+    templateUrl: './estropada-multi-category-detail.component.html',
+    styleUrls: ['./estropada-multi-category-detail.component.css'],
+    standalone: false
 })
 
 export class EstropadaMultiCategoryDetailComponent implements OnInit {

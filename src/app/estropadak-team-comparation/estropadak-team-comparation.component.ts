@@ -14,12 +14,13 @@ import { StatsService } from 'app/shared/stats.service';
 
 
 @Component({
-  selector: 'app-estropadak-team-comparation',
-  templateUrl: './estropadak-team-comparation.component.html',
-  styleUrls: [
-    './estropadak-team-comparation.component.css',
-  ],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-estropadak-team-comparation',
+    templateUrl: './estropadak-team-comparation.component.html',
+    styleUrls: [
+        './estropadak-team-comparation.component.css',
+    ],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class EstropadakTeamComparationComponent implements OnInit {
 

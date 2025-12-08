@@ -11,9 +11,10 @@ import { ActivatedRoute } from '@angular/router';
 import { sanitizeLeague, sanitizeYear } from 'app/shared/utils';
 
 @Component({
-  selector: 'app-estropadak-playground',
-  templateUrl: './estropadak-playground.component.html',
-  styleUrls: ['./estropadak-playground.component.css']
+    selector: 'app-estropadak-playground',
+    templateUrl: './estropadak-playground.component.html',
+    styleUrls: ['./estropadak-playground.component.css'],
+    standalone: false
 })
 export class EstropadakPlaygroundComponent implements OnInit {
 

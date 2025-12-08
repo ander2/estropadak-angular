@@ -3,9 +3,11 @@ import { UrteakService } from './shared/estropada.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: [] // ['./app.component.css']
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: [] // ['./app.component.css']
+    ,
+    standalone: false
 })
 export class HeaderComponent implements OnInit {
 

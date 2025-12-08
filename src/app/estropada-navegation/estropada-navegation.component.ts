@@ -3,9 +3,10 @@ import { EstropadakNavegationService } from '../shared/estropadak-navegation.ser
 import { EstropadaService } from '../shared/estropada.service';
 
 @Component({
-  selector: 'app-estropada-navegation',
-  templateUrl: './estropada-navegation.component.html',
-  styleUrls: ['./estropada-navegation.component.css']
+    selector: 'app-estropada-navegation',
+    templateUrl: './estropada-navegation.component.html',
+    styleUrls: ['./estropada-navegation.component.css'],
+    standalone: false
 })
 export class EstropadaNavegationComponent implements OnInit, OnChanges {
 

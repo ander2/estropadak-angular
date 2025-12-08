@@ -9,9 +9,10 @@ import { EstropadaService } from '../shared/estropada.service';
 import { EstropadakNavegationService } from '../shared/estropadak-navegation.service';
 
 @Component({
-  selector: 'app-estropadak-hurrengoak-card',
-  templateUrl: './estropadak-hurrengoak-card.component.html',
-  styleUrls: ['./estropadak-hurrengoak-card.component.css']
+    selector: 'app-estropadak-hurrengoak-card',
+    templateUrl: './estropadak-hurrengoak-card.component.html',
+    styleUrls: ['./estropadak-hurrengoak-card.component.css'],
+    standalone: false
 })
 export class EstropadakHurrengoakCardComponent implements OnChanges {
 

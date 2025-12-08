@@ -4,9 +4,10 @@ import {Observable, of} from 'rxjs';
 
 
 @Component({
-  selector: 'app-estropada-estropada-sailkapena',
-  templateUrl: './estropada-estropada-sailkapena.component.html',
-  styleUrls: ['./estropada-estropada-sailkapena.component.css']
+    selector: 'app-estropada-estropada-sailkapena',
+    templateUrl: './estropada-estropada-sailkapena.component.html',
+    styleUrls: ['./estropada-estropada-sailkapena.component.css'],
+    standalone: false
 })
 export class EstropadaEstropadaSailkapenaComponent implements OnChanges {
 

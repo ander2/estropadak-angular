@@ -6,9 +6,10 @@ import { UrteakService } from 'app/shared/estropada.service';
 import { parseTwoDigitYear } from 'moment';
 
 @Component({
-  selector: 'app-estropadak-portada',
-  templateUrl: './estropadak-portada.component.html',
-  styleUrls: ['./estropadak-portada.component.css']
+    selector: 'app-estropadak-portada',
+    templateUrl: './estropadak-portada.component.html',
+    styleUrls: ['./estropadak-portada.component.css'],
+    standalone: false
 })
 export class EstropadakPortadaComponent implements OnInit {
 
