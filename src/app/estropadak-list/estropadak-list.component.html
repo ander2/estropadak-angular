@@ -1,23 +1,28 @@
 <h1 class="mat-h1">
-    {{year}} {{league?.toUpperCase()}}<ng-container *ngIf="league !== 'txapelketak'"> liga</ng-container>. Estropada emaitzak
+  {{year}} {{league?.toUpperCase()}}@if (league !== 'txapelketak') {
+  liga
+  }. Estropada emaitzak
 </h1>
 <mat-divider></mat-divider>
-<mat-nav-list *ngIf="estropadak && estropadak.length > 0; else noestropadak">
-  <mat-list-item *ngFor="let estropada of estropadak"
-    (click)="onSelect(estropada)">
-    <h3 matListItemTitle>
-      {{ estropada.izena}}
-    </h3>
-    <p matListItemLine>
-      {{estropada.data | date:'yyyy-MM-dd HH:mm'}}
-    </p>
-  </mat-list-item>
-</mat-nav-list>
-
-<ng-template #noestropadak>
+@if (estropadak && estropadak.length > 0) {
+  <mat-nav-list>
+    @for (estropada of estropadak; track estropada) {
+      <mat-list-item
+        (click)="onSelect(estropada)">
+        <h3 matListItemTitle>
+          {{ estropada.izena}}
+        </h3>
+        <p matListItemLine>
+          {{estropada.data | date:'yyyy-MM-dd HH:mm'}}
+        </p>
+      </mat-list-item>
+    }
+  </mat-nav-list>
+} @else {
   <div class="mat-subheading-1 alert">
     <div>
       Ez dago estropadarik denboraldi honetan
     </div>
   </div>
-</ng-template>
+}
+

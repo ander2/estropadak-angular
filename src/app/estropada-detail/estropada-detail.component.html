@@ -1,24 +1,33 @@
-<div *ngIf="estropada" class="content">
-  <h1 class="mat-h1">{{estropada.izena}}</h1>
-  <h2 class="mat-subheading-2">
-    {{estropada.data | date:'yyyy-MM-dd HH:mm' }} <br> {{estropada.lekua}}
-  </h2>
-  <app-estropada-navegation [estropadaId]="id"></app-estropada-navegation>
-  <h4 *ngIf="estropada.oharrak">Oharrak: {{estropada.oharrak}}</h4>
-  <div *ngIf="estropada?.sailkapena?.length > 0; else no_sailkapena">
-    <app-estropada-estropada-sailkapena [sailkapena]="estropada.sailkapena"></app-estropada-estropada-sailkapena>
+@if (estropada) {
+  <div class="content">
+    <h1 class="mat-h1">{{estropada.izena}}</h1>
+    <h2 class="mat-subheading-2">
+      {{estropada.data | date:'yyyy-MM-dd HH:mm' }} <br> {{estropada.lekua}}
+    </h2>
+    <app-estropada-navegation [estropadaId]="id"></app-estropada-navegation>
+    @if (estropada.oharrak) {
+      <h4>Oharrak: {{estropada.oharrak}}</h4>
+    }
+    @if (estropada?.sailkapena?.length > 0) {
+      <div>
+        <app-estropada-estropada-sailkapena [sailkapena]="estropada.sailkapena"></app-estropada-estropada-sailkapena>
+      </div>
+    } @else {
+      <h3 style='text-align: center'>Sailkapena ez dago eskuragarri</h3>
+    }
+    @for (tanda of estropada?.tandak; track tanda) {
+      <div>
+        <app-estropada-tanda [tanda]="tanda"></app-estropada-tanda>
+        <mat-divider></mat-divider>
+      </div>
+    }
+    @if (estropada.bi_jardunaldiko_bandera) {
+      <div>
+        <h2 class="title">Bi egunetako Sailkapena</h2>
+        <app-estropadak-bi-jardunaldiko-sailkapena [sailkapena]="estropada.bi_eguneko_sailkapena">
+        </app-estropadak-bi-jardunaldiko-sailkapena>
+      </div>
+    }
   </div>
-  <ng-template #no_sailkapena>
-    <h3 style='text-align: center'>Sailkapena ez dago eskuragarri</h3>
-  </ng-template>
-  <div *ngFor="let tanda of estropada?.tandak">
-    <app-estropada-tanda [tanda]="tanda"></app-estropada-tanda>
-    <mat-divider></mat-divider>
-  </div>
-  <div *ngIf="estropada.bi_jardunaldiko_bandera">
-    <h2 class="title">Bi egunetako Sailkapena</h2>
-    <app-estropadak-bi-jardunaldiko-sailkapena [sailkapena]="estropada.bi_eguneko_sailkapena">
-    </app-estropadak-bi-jardunaldiko-sailkapena>
-  </div>
-</div>
+}
 

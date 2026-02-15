@@ -6,16 +6,20 @@
     </p>
     <mat-form-field>
       <mat-select formControlName="liga" placeholder="Liga" >
-        <mat-option *ngFor="let liga of ligak" [value]="liga">
-          {{liga}}
-        </mat-option>
+        @for (liga of ligak; track liga) {
+          <mat-option [value]="liga">
+            {{liga}}
+          </mat-option>
+        }
       </mat-select>
     </mat-form-field>
     <mat-form-field>
       <mat-select formControlName="team" placeholder="Taldea">
-        <mat-option *ngFor="let team of taldeak" [value]="team.name">
-          {{team.name}}
-        </mat-option>
+        @for (team of taldeak; track team) {
+          <mat-option [value]="team.name">
+            {{team.name}}
+          </mat-option>
+        }
       </mat-select>
     </mat-form-field>
     <button mat-icon-button (click)="taldeaGehitu()" aria-label="Aukeratu">
@@ -23,53 +27,68 @@
     </button>
     <button mat-button (click)="compare()" [disabled]="!konparaketaEnabled">Konparatu</button>
     <br>
-    <mat-form-field>
-      <mat-select formControlName="metric" placeholder="Metrica">
-        <mat-option *ngFor="let metric of metrics" [value]="metric.code">
-          {{metric.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <div *ngIf="aukeratutakoTaldeak.length > 0">
-      <p>Aukeratutako taldeak:</p>
-      <mat-chip-list #chipList aria-label="Taldeak">
-        <mat-chip [removable]="removable" (removed)="taldeaKendu(taldea)" *ngFor="let taldea of aukeratutakoTaldeak">
-          {{taldea}}
-          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-        </mat-chip>
-      </mat-chip-list>
-    </div>
-  </form>
+      <mat-form-field>
+        <mat-select formControlName="metric" placeholder="Metrica">
+          @for (metric of metrics; track metric) {
+            <mat-option [value]="metric.code">
+              {{metric.name}}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      @if (aukeratutakoTaldeak.length > 0) {
+        <div>
+          <p>Aukeratutako taldeak:</p>
+          <mat-chip-list #chipList aria-label="Taldeak">
+            @for (taldea of aukeratutakoTaldeak; track taldea) {
+              <mat-chip [removable]="removable" (removed)="taldeaKendu(taldea)">
+                {{taldea}}
+                @if (removable) {
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                }
+              </mat-chip>
+            }
+          </mat-chip-list>
+        </div>
+      }
+    </form>
 
-  <button mat-icon-button *ngIf="viewMode === 'table'" (click)="changeMode('chart')">
-    <mat-icon>show_chart</mat-icon>
-  </button>
-  <button mat-icon-button *ngIf="viewMode === 'chart'" (click)="changeMode('table')" [disabled]="!aukeraketaEnabled">
-    <mat-icon *ngIf="viewMode === 'chart'">table_chart</mat-icon>
-  </button>
+    @if (viewMode === 'table') {
+      <button mat-icon-button (click)="changeMode('chart')">
+        <mat-icon>show_chart</mat-icon>
+      </button>
+    }
+    @if (viewMode === 'chart') {
+      <button mat-icon-button (click)="changeMode('table')" [disabled]="!aukeraketaEnabled">
+        @if (viewMode === 'chart') {
+          <mat-icon>table_chart</mat-icon>
+        }
+      </button>
+    }
 
-  <div *ngIf="viewMode === 'table'">
-    <mat-table #table [dataSource]="dataSource">
+    @if (viewMode === 'table') {
+      <div>
+        <mat-table #table [dataSource]="dataSource">
+          <ng-container matColumnDef="urtea">
+            <mat-header-cell *matHeaderCellDef>Urtea</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.year}}</mat-cell>
+          </ng-container>
+          @for (taldea of aukeratutakoTaldeak; track taldea) {
+            <ng-container [matColumnDef]="taldea">
+              <mat-header-cell *matHeaderCellDef fxHide.xs>{{taldea}}</mat-header-cell>
+              <mat-cell *matCellDef="let row" fxHide.xs>{{row.stats[taldea]?row.stats[taldea][form.get('metric').value]: '-'}}</mat-cell>
+            </ng-container>
+          }
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+    }
 
-      <ng-container matColumnDef="urtea">
-        <mat-header-cell *matHeaderCellDef>Urtea</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.year}}</mat-cell>
-      </ng-container>
-
-
-      <ng-container *ngFor="let taldea of aukeratutakoTaldeak" [matColumnDef]="taldea">
-          <mat-header-cell *matHeaderCellDef fxHide.xs>{{taldea}}</mat-header-cell>
-          <mat-cell *matCellDef="let row" fxHide.xs>{{row.stats[taldea]?row.stats[taldea][form.get('metric').value]: '-'}}</mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-
+    @if (viewMode === 'chart') {
+      <div>
+        <!-- <nvd3 [options]="options" [data]="chartData"></nvd3> -->
+        <canvas id="chart" #canvas width="400" height="200">{{myChart}}</canvas>
+      </div>
+    }
   </div>
-
-  <div *ngIf="viewMode === 'chart'">
-    <!-- <nvd3 [options]="options" [data]="chartData"></nvd3> -->
-    <canvas id="chart" #canvas width="400" height="200">{{myChart}}</canvas>
-  </div>
-</div>

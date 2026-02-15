@@ -1,50 +1,52 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      {{tanda[0].tanda}}. tanda<span *ngIf="categoryName"> - {{categoryName}}</span>
-    </mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-table #table [dataSource]="dataSource">
-        <ng-container matColumnDef="Postua">
-          <mat-header-cell *matHeaderCellDef fxFlex.xs="12" fxLayoutAlign.xs="start center" > Postua </mat-header-cell>
-          <mat-cell *matCellDef="let row" fxFlex.xs="12" fxLayoutAlign.xs="start center"> {{row.tanda_postua}} </mat-cell>
-        </ng-container>
+      {{tanda[0].tanda}}. tanda@if (categoryName) {
+      <span> - {{categoryName}}</span>
+    }
+  </mat-card-title>
+</mat-card-header>
+<mat-card-content>
+  <mat-table #table [dataSource]="dataSource">
+    <ng-container matColumnDef="Postua">
+      <mat-header-cell *matHeaderCellDef fxFlex.xs="12" fxLayoutAlign.xs="start center" > Postua </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxFlex.xs="12" fxLayoutAlign.xs="start center"> {{row.tanda_postua}} </mat-cell>
+    </ng-container>
 
-        <ng-container matColumnDef="Taldea">
-          <mat-header-cell *matHeaderCellDef fxLayoutAlign.xs="center center"> Taldea </mat-header-cell>
-          <mat-cell *matCellDef="let row"  fxLayoutAlign="start center"> {{row.talde_izena}} </mat-cell>
-        </ng-container>
+    <ng-container matColumnDef="Taldea">
+      <mat-header-cell *matHeaderCellDef fxLayoutAlign.xs="center center"> Taldea </mat-header-cell>
+      <mat-cell *matCellDef="let row"  fxLayoutAlign="start center"> {{row.talde_izena}} </mat-cell>
+    </ng-container>
 
-        <ng-container matColumnDef="Kalea">
-          <mat-header-cell *matHeaderCellDef fxHide.xs> Kalea </mat-header-cell>
-          <mat-cell *matCellDef="let row" fxHide.xs> {{row.kalea}} </mat-cell>
-        </ng-container>
+    <ng-container matColumnDef="Kalea">
+      <mat-header-cell *matHeaderCellDef fxHide.xs> Kalea </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxHide.xs> {{row.kalea}} </mat-cell>
+    </ng-container>
 
-        <ng-container *ngFor="let ziaboga of [].constructor(ziabogak); let i=index">
-          <ng-container matColumnDef="{{i}}.z">
-            <mat-header-cell *matHeaderCellDef fxHide.xs> {{i + 1}}.z </mat-header-cell>
-            <mat-cell *matCellDef="let row" fxHide.xs> {{row.ziabogak[i]}} </mat-cell>
-          </ng-container>
-        </ng-container>
+    @for (ziaboga of [].constructor(ziabogak); track ziaboga; let i = $index) {
+      <ng-container matColumnDef="{{i}}.z">
+        <mat-header-cell *matHeaderCellDef fxHide.xs> {{i + 1}}.z </mat-header-cell>
+        <mat-cell *matCellDef="let row" fxHide.xs> {{row.ziabogak[i]}} </mat-cell>
+      </ng-container>
+    }
 
 
-        <ng-container matColumnDef="ziab">
-          <mat-header-cell *matHeaderCellDef fxHide.gt-xs>Ziabogak</mat-header-cell>
-          <mat-cell *matCellDef="let row" fxHide.gt-xs>
-            {{row.ziabogak[0]}} <br>
-            {{row.ziabogak[1]}} <br>
-            {{row.ziabogak[2]}}
-          </mat-cell>
-        </ng-container>
+    <ng-container matColumnDef="ziab">
+      <mat-header-cell *matHeaderCellDef fxHide.gt-xs>Ziabogak</mat-header-cell>
+      <mat-cell *matCellDef="let row" fxHide.gt-xs>
+        {{row.ziabogak[0]}} <br>
+        {{row.ziabogak[1]}} <br>
+        {{row.ziabogak[2]}}
+      </mat-cell>
+    </ng-container>
 
-        <ng-container matColumnDef="Denbora">
-          <mat-header-cell *matHeaderCellDef> Denbora </mat-header-cell>
-          <mat-cell *matCellDef="let row" fxFlexAlign.xs="end"> {{row.denbora}} </mat-cell>
-        </ng-container>
+    <ng-container matColumnDef="Denbora">
+      <mat-header-cell *matHeaderCellDef> Denbora </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxFlexAlign.xs="end"> {{row.denbora}} </mat-cell>
+    </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-  </mat-card-content>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</mat-card-content>
 </mat-card>

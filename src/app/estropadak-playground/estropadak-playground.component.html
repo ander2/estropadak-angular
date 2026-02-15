@@ -1,70 +1,87 @@
 <div class="content">
   <h1 class="mat-h1">Datu taulak</h1>
   <p>Aukeratu liga eta urte bat, talde desberdinen datuak ikusteko:</p>
-  <app-estropadak-selection-form
-    *ngIf="loaded$ | async"
-    [year]="year"
-    [league]="league"
-    [showTeams]="false"
-    (selectionChanged)="paramsChanged($event)">
-  </app-estropadak-selection-form>
+  @if (loaded$ | async) {
+    <app-estropadak-selection-form
+      [year]="year"
+      [league]="league"
+      [showTeams]="false"
+      (selectionChanged)="paramsChanged($event)">
+    </app-estropadak-selection-form>
+  }
   <form [formGroup]="form" novalidate>
     <p>Aukeratu filtroak:</p>
     <mat-form-field>
       <mat-select formControlName="teams" placeholder="Aukeratu taldeak" multiple (selectionChange)="changeTeams()">
-        <mat-option *ngFor="let team of teams" [value]="team.short">
-          {{team.name}}
-        </mat-option>
+        @for (team of teams; track team) {
+          <mat-option [value]="team.short">
+            {{team.name}}
+          </mat-option>
+        }
       </mat-select>
       <mat-label>Taldea</mat-label>
     </mat-form-field>
     <mat-form-field>
       <mat-select formControlName="property" placeholder="Aukeratu bistaratzeko datua" (selectionChange)="changeDisplayProp()">
-        <mat-option *ngFor="let prop of properties" [value]="prop">
-          {{prop}}
-        </mat-option>
+        @for (prop of properties; track prop) {
+          <mat-option [value]="prop">
+            {{prop}}
+          </mat-option>
+        }
       </mat-select>
       <mat-label>Datua</mat-label>
     </mat-form-field>
-    <ng-container *ngIf="displayProp !=='denbora'">
-    <mat-form-field>
-      <mat-select formControlName="minVal" placeholder="Min" (selectionChange)="changeFilter()">
-        <mat-option *ngFor="let prop of values" [value]="prop">
-          {{prop}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-select formControlName="maxVal" placeholder="Max" (selectionChange)="changeFilter()">
-        <mat-option *ngFor="let prop of values" [value]="prop">
-          {{prop}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    </ng-container>
-    <ng-container *ngIf="displayProp ==='denbora'">
-    <mat-form-field>
-      <input matInput formControlName="minTime" placeholder="Denbora min">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput formControlName="maxTime" placeholder="Denbora max">
-    </mat-form-field>
-    <button mat-button (click)="changeFilter()">Bilatu</button>
-    </ng-container>
+    @if (displayProp !=='denbora') {
+      <mat-form-field>
+        <mat-select formControlName="minVal" placeholder="Min" (selectionChange)="changeFilter()">
+          @for (prop of values; track prop) {
+            <mat-option [value]="prop">
+              {{prop}}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select formControlName="maxVal" placeholder="Max" (selectionChange)="changeFilter()">
+          @for (prop of values; track prop) {
+            <mat-option [value]="prop">
+              {{prop}}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    }
+    @if (displayProp ==='denbora') {
+      <mat-form-field>
+        <input matInput formControlName="minTime" placeholder="Denbora min">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="maxTime" placeholder="Denbora max">
+      </mat-form-field>
+      <button mat-button (click)="changeFilter()">Bilatu</button>
+    }
   </form>
   <mat-table #table [dataSource]="dataSource" matSort>
-    <ng-container *ngFor="let header of displayColumnHeaders;let i=index; " [matColumnDef]="header">
-      <mat-header-cell *matHeaderCellDef="let row">
-        {{header}}
-      </mat-header-cell>
-      <mat-cell *matCellDef="let row" matTooltip="{{row.izena}}">
-        <span *ngIf="header === firstColumnProperty" >
-          {{row[firstColumnProperty]}}
-        </span>
-        <span *ngIf="header !== firstColumnProperty && row[header]">{{row[header][displayProp]}}</span>
-        <span *ngIf="header !== firstColumnProperty && !row[header]"> - </span>
-      </mat-cell>
-    </ng-container>
+    @for (header of displayColumnHeaders; track header; let i = $index) {
+      <ng-container [matColumnDef]="header">
+        <mat-header-cell *matHeaderCellDef="let row">
+          {{header}}
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row" matTooltip="{{row.izena}}">
+          @if (header === firstColumnProperty) {
+            <span >
+              {{row[firstColumnProperty]}}
+            </span>
+          }
+          @if (header !== firstColumnProperty && row[header]) {
+            <span>{{row[header][displayProp]}}</span>
+          }
+          @if (header !== firstColumnProperty && !row[header]) {
+            <span> - </span>
+          }
+        </mat-cell>
+      </ng-container>
+    }
 
     <mat-header-row *matHeaderRowDef="displayColumnHeaders"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayColumnHeaders;"></mat-row>

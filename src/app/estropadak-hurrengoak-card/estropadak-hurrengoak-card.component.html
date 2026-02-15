@@ -6,17 +6,21 @@
   <mat-button-toggle value="ETE" [checked]="league.toUpperCase() === 'ETE'">ETE</mat-button-toggle>
 </mat-button-toggle-group>
 <mat-list>
-  <mat-list-item *ngFor="let estropada of this.estropadak" >
-    <h3 matLine>
-      <a [routerLink]="['/estropada', estropada.id]">
-         {{estropada.izena}}
-      </a>
-    </h3>
-    <p matLine>{{estropada.data | date:'yyyy-MM-dd HH:mm'}} {{estropada.lekua}}</p>
-  </mat-list-item>
+  @for (estropada of this.estropadak; track estropada) {
+    <mat-list-item >
+      <h3 matLine>
+        <a [routerLink]="['/estropada', estropada.id]">
+          {{estropada.izena}}
+        </a>
+      </h3>
+      <p matLine>{{estropada.data | date:'yyyy-MM-dd HH:mm'}} {{estropada.lekua}}</p>
+    </mat-list-item>
+  }
 </mat-list>
-<mat-list *ngIf="estropadak.length === 0">
-  <mat-list-item>
-    Ez dago estropadarik
-  </mat-list-item>
-</mat-list>
+@if (estropadak.length === 0) {
+  <mat-list>
+    <mat-list-item>
+      Ez dago estropadarik
+    </mat-list-item>
+  </mat-list>
+}
