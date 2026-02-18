@@ -21,7 +21,7 @@
         <mat-cell *matCellDef="let row" fxHide.xs fxFlex="5"> {{row.kalea}} </mat-cell>
       </ng-container>
 
-      @for (ziaboga of [].constructor(ziabogak); track ziaboga; let i = $index) {
+      @for (ziaboga of [].constructor(ziabogak); track $index; let i = $index) {
         <ng-container matColumnDef="{{i}}.z">
           <mat-header-cell *matHeaderCellDef fxHide.xs> {{i + 1}}.z </mat-header-cell>
           <mat-cell *matCellDef="let row" fxHide.xs> {{row.ziabogak[i]}} </mat-cell>

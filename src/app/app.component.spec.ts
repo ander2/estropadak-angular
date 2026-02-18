@@ -1,6 +1,5 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -20,7 +19,6 @@ describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
-        NoopAnimationsModule,
         MatButtonModule,
         MatButtonToggleModule,
         MatIconModule,
@@ -29,9 +27,7 @@ describe('AppComponent', () => {
         MatListModule,
         MatDividerModule,
         MatToolbarModule,
-        RouterTestingModule.withRoutes(
-          [{path: '', component: AppComponent}]
-        )
+        RouterModule.forRoot([])
       ],
       declarations: [
         AppComponent,

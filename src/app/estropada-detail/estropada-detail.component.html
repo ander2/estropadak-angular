@@ -15,7 +15,7 @@
     } @else {
       <h3 style='text-align: center'>Sailkapena ez dago eskuragarri</h3>
     }
-    @for (tanda of estropada?.tandak; track tanda) {
+    @for (tanda of estropada?.tandak; track $index) {
       <div>
         <app-estropada-tanda [tanda]="tanda"></app-estropada-tanda>
         <mat-divider></mat-divider>
