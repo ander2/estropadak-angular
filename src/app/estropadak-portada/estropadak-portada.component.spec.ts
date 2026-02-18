@@ -27,7 +27,7 @@ describe('EstropadakPortadaComponent', () => {
   let component: EstropadakPortadaComponent;
   let fixture: ComponentFixture<EstropadakPortadaComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
@@ -59,7 +59,7 @@ describe('EstropadakPortadaComponent', () => {
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadakPortadaComponent);

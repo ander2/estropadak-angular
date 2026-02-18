@@ -19,7 +19,7 @@ describe('EstropadakSailkapenaComponent', () => {
   let component: EstropadakSailkapenaComponent;
   let fixture: ComponentFixture<EstropadakSailkapenaComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
@@ -40,7 +40,7 @@ describe('EstropadakSailkapenaComponent', () => {
 
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadakSailkapenaComponent);

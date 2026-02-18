@@ -26,7 +26,7 @@ describe('EstropadakResultsComponent', () => {
   let component: EstropadakResultsComponent;
   let fixture: ComponentFixture<EstropadakResultsComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
@@ -62,7 +62,7 @@ describe('EstropadakResultsComponent', () => {
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadakResultsComponent);

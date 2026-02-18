@@ -12,7 +12,7 @@ describe('EstropadakListComponent', () => {
   let component: EstropadakListComponent;
   let fixture: ComponentFixture<EstropadakListComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
@@ -26,7 +26,7 @@ describe('EstropadakListComponent', () => {
       declarations: [ EstropadakListComponent ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadakListComponent);

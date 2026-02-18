@@ -41,7 +41,7 @@ describe('EstropadakStatsPageComponent', () => {
   let component: EstropadakStatsPageComponent;
   let fixture: ComponentFixture<EstropadakStatsPageComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         MatSelectModule,
@@ -67,7 +67,7 @@ describe('EstropadakStatsPageComponent', () => {
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadakStatsPageComponent);
@@ -75,9 +75,9 @@ describe('EstropadakStatsPageComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', fakeAsync(() => {
+  it('should create', () => {
     component.league = 'act';
     fixture.detectChanges();
     expect(component).toBeTruthy();
-  }));
+  });
 });

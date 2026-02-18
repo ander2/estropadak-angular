@@ -17,7 +17,7 @@ describe('EstropadakAzkenEmaitzakCardComponent', () => {
   let component: EstropadakAzkenEmaitzakCardComponent;
   let fixture: ComponentFixture<EstropadakAzkenEmaitzakCardComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         NoopAnimationsModule,
@@ -35,7 +35,7 @@ describe('EstropadakAzkenEmaitzakCardComponent', () => {
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadakAzkenEmaitzakCardComponent);

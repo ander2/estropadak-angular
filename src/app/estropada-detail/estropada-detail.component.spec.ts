@@ -20,7 +20,7 @@ describe('EstropadaDetailComponent', () => {
   let component: EstropadaDetailComponent;
   let fixture: ComponentFixture<EstropadaDetailComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         FlexLayoutModule,
@@ -44,7 +44,7 @@ describe('EstropadaDetailComponent', () => {
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadaDetailComponent);

@@ -15,7 +15,7 @@ describe('EstropadakHurrengoakCardComponent', () => {
   let component: EstropadakHurrengoakCardComponent;
   let fixture: ComponentFixture<EstropadakHurrengoakCardComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         MatListModule,
@@ -33,7 +33,7 @@ describe('EstropadakHurrengoakCardComponent', () => {
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadakHurrengoakCardComponent);

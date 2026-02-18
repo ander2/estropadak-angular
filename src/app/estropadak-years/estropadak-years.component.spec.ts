@@ -11,7 +11,7 @@ describe('EstropadakYearsComponent', () => {
   let component: EstropadakYearsComponent;
   let fixture: ComponentFixture<EstropadakYearsComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         MatMenuModule,
@@ -23,7 +23,7 @@ describe('EstropadakYearsComponent', () => {
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadakYearsComponent);

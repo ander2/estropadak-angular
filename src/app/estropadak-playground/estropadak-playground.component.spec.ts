@@ -27,7 +27,7 @@ describe('EstropadakPlaygroundComponent', () => {
   let component: EstropadakPlaygroundComponent;
   let fixture: ComponentFixture<EstropadakPlaygroundComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
     declarations: [
         EstropadakSelectionFormComponent,
@@ -54,7 +54,7 @@ describe('EstropadakPlaygroundComponent', () => {
     ]
 })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadakPlaygroundComponent);

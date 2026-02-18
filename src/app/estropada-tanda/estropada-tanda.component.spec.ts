@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { By } from '@angular/platform-browser';
 import { MatCardModule } from '@angular/material/card';
@@ -13,7 +13,7 @@ describe('EstropadaTandaComponent', () => {
   let component: EstropadaTandaComponent;
   let fixture: ComponentFixture<EstropadaTandaComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         MatCardModule,
@@ -26,34 +26,39 @@ describe('EstropadaTandaComponent', () => {
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadaTandaComponent);
     component = fixture.componentInstance;
-    component.tanda = estropada.sailkapena.filter(estrop => estrop.tanda === 1);
-    fixture.detectChanges();
   });
 
   it('should be created', () => {
+    component.tanda = estropada.sailkapena.filter(estrop => estrop.tanda === 1);
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 
   it('should show tanda number in title', () => {
+    component.tanda = estropada.sailkapena.filter(estrop => estrop.tanda === 1);
+    fixture.detectChanges();
     expect(fixture.debugElement.query(By.css('mat-card-title')).nativeElement.textContent).toContain('1. tanda');
   });
 
   it('should show one row per team', () => {
+    component.tanda = estropada.sailkapena.filter(estrop => estrop.tanda === 1);
+    fixture.detectChanges();
     expect(fixture.debugElement.queryAll(By.css('mat-row')).length).toEqual(4);
   });
 
   it('should have 7 columns per row(team) in ACT league', () => {
+    component.tanda = estropada.sailkapena.filter(estrop => estrop.tanda === 1);
+    fixture.detectChanges();
     expect(fixture.debugElement.queryAll(By.css('mat-row mat-cell')).length).toEqual(28);
   });
 
   it('should have 5 columns per row(team) in Euskotren league', () => {
     component.tanda = euskotrenEstropada.sailkapena.filter(s => s.tanda === 1);
-    component.ngOnInit();
     fixture.detectChanges();
     expect(fixture.debugElement.queryAll(By.css('mat-row mat-cell')).length).toEqual(20);
   });

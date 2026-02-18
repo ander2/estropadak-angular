@@ -6,12 +6,12 @@ describe('EstropadakHoniBuruzComponent', () => {
   let component: EstropadakHoniBuruzComponent;
   let fixture: ComponentFixture<EstropadakHoniBuruzComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ EstropadakHoniBuruzComponent ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadakHoniBuruzComponent);

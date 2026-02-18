@@ -25,7 +25,7 @@ describe('EstropadaMultiDetailComponent', () => {
   let component: EstropadaMultiCategoryDetailComponent;
   let fixture: ComponentFixture<EstropadaMultiCategoryDetailComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
@@ -53,7 +53,7 @@ describe('EstropadaMultiDetailComponent', () => {
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadaMultiCategoryDetailComponent);

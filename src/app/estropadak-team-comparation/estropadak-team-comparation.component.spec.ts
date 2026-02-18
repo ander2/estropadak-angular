@@ -23,7 +23,7 @@ describe('EstropadakTeamComparationComponent', () => {
   let component: EstropadakTeamComparationComponent;
   let fixture: ComponentFixture<EstropadakTeamComparationComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         CommonModule,
@@ -51,7 +51,7 @@ describe('EstropadakTeamComparationComponent', () => {
       declarations: [ EstropadakTeamComparationComponent ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadakTeamComparationComponent);

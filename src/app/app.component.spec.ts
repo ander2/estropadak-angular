@@ -16,7 +16,7 @@ import { UrteakServiceStub } from './shared/estropada.service.stub';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 describe('AppComponent', () => {
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         MatButtonModule,
@@ -37,18 +37,18 @@ describe('AppComponent', () => {
         {provide: UrteakService, useClass: UrteakServiceStub}
       ]
     }).compileComponents();
-  }));
+  });
 
-  it('should create the app', waitForAsync(() => {
+  it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  }));
+  });
 
-  it(`should have as title 'app'`, waitForAsync(() => {
+  it(`should have as title 'app'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('Estropadak.net');
-  }));
+  });
 
 });

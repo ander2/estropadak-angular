@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MatIconModule} from '@angular/material/icon'; 
+import { MatIconModule} from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 import { EstropadaNavegationComponent } from './estropada-navegation.component';
@@ -13,7 +13,7 @@ describe('EstropadaNavegationComponent', () => {
   let component: EstropadaNavegationComponent;
   let fixture: ComponentFixture<EstropadaNavegationComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         MatIconModule,
@@ -27,7 +27,7 @@ describe('EstropadaNavegationComponent', () => {
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadaNavegationComponent);

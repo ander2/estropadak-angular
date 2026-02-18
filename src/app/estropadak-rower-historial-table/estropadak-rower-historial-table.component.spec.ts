@@ -12,7 +12,7 @@ describe('EstropadakRowerHistorialTableComponent', () => {
   let component: EstropadakRowerHistorialTableComponent;
   let fixture: ComponentFixture<EstropadakRowerHistorialTableComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         NoopAnimationsModule,
@@ -24,7 +24,7 @@ describe('EstropadakRowerHistorialTableComponent', () => {
       declarations: [ EstropadakRowerHistorialTableComponent ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadakRowerHistorialTableComponent);
