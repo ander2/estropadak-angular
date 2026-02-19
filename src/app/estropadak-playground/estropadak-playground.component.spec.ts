@@ -1,7 +1,7 @@
 import { provideRouter, RouterModule } from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+// import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -51,8 +51,8 @@ describe('EstropadakPlaygroundComponent', () => {
         { provide: TaldeakService, useClass: TaldeakServiceStub },
         { provide: UrteakService, useClass: UrteakServiceStub },
         { provide: EstropadaService, useClass: EstropadaServiceStub },
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting(),
+        // provideHttpClient(withInterceptorsFromDi()),
+        // provideHttpClientTesting(),
         provideRouter([])
       ]
     })
