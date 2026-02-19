@@ -5,11 +5,13 @@
   </ng-container>
   <ng-container matColumnDef="Taldea">
     <mat-header-cell *matHeaderCellDef> Taldea </mat-header-cell>
-    <mat-cell *matCellDef="let row"> 
-      {{row.name}} 
-      <button mat-icon-button (click)="clubYearClicked(row)" *ngIf="row.year > 2009">
-        <mat-icon>arrow_right</mat-icon>
-      </button>
+    <mat-cell *matCellDef="let row">
+      {{row.name}}
+      @if (row.year > 2009) {
+        <button mat-icon-button (click)="clubYearClicked(row)">
+          <mat-icon>arrow_right</mat-icon>
+        </button>
+      }
 
     </mat-cell>
   </ng-container>

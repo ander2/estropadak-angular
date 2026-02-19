@@ -1,6 +1,5 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -17,10 +16,9 @@ import { UrteakServiceStub } from './shared/estropada.service.stub';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 describe('AppComponent', () => {
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        NoopAnimationsModule,
         MatButtonModule,
         MatButtonToggleModule,
         MatIconModule,
@@ -29,9 +27,7 @@ describe('AppComponent', () => {
         MatListModule,
         MatDividerModule,
         MatToolbarModule,
-        RouterTestingModule.withRoutes(
-          [{path: '', component: AppComponent}]
-        )
+        RouterModule.forRoot([])
       ],
       declarations: [
         AppComponent,
@@ -41,18 +37,18 @@ describe('AppComponent', () => {
         {provide: UrteakService, useClass: UrteakServiceStub}
       ]
     }).compileComponents();
-  }));
+  });
 
-  it('should create the app', waitForAsync(() => {
+  it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  }));
+  });
 
-  it(`should have as title 'app'`, waitForAsync(() => {
+  it(`should have as title 'app'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('Estropadak.net');
-  }));
+  });
 
 });

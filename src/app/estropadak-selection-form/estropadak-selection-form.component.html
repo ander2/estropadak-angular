@@ -1,41 +1,51 @@
 <form [formGroup]="form" novalidate>
   <mat-form-field>
     <mat-select formControlName="league" placeholder="Liga" (selectionChange)="updateYearsAndRefresh()">
-      <mat-option *ngFor="let league of leagues" [value]="league">
-        {{league | uppercase}}
-      </mat-option>
+      @for (league of leagues; track league) {
+        <mat-option [value]="league">
+          {{league | uppercase}}
+        </mat-option>
+      }
     </mat-select>
     <mat-label>Liga</mat-label>
   </mat-form-field>
-  <mat-form-field *ngIf="isMultiCategory">
-    <mat-select formControlName="category" placeholder="Kategoria" (selectionChange)="updateYearsAndRefresh()">
-      <mat-option *ngFor="let kat of kategoriak" [value]="kat.code">
-        {{ kat.name }}
-      </mat-option>
-    </mat-select>
-    <mat-label>Kategoria</mat-label>
-  </mat-form-field>
-  <ng-container *ngIf="showYears">
+  @if (isMultiCategory) {
+    <mat-form-field>
+      <mat-select formControlName="category" placeholder="Kategoria" (selectionChange)="updateYearsAndRefresh()">
+        @for (kat of kategoriak; track kat) {
+          <mat-option [value]="kat.code">
+            {{ kat.name }}
+          </mat-option>
+        }
+      </mat-select>
+      <mat-label>Kategoria</mat-label>
+    </mat-form-field>
+  }
+  @if (showYears) {
     <mat-form-field>
       <mat-select formControlName="year" placeholder="Urtea" (selectionChange)="yearChange()">
         <mat-option [value]="">Guztiak</mat-option>
-        <mat-option *ngFor="let year of years" [value]="year">
-          {{year}}
-        </mat-option>
+        @for (year of years; track year) {
+          <mat-option [value]="year">
+            {{year}}
+          </mat-option>
+        }
       </mat-select>
       <mat-label>Urtea</mat-label>
     </mat-form-field>
-  </ng-container>
-  <ng-container *ngIf="showTeams">
+  }
+  @if (showTeams) {
     <mat-form-field>
       <mat-select formControlName="team" placeholder="Taldea" (selectionChange)="teamChange()">
         <mat-option [value]="">Guztiak</mat-option>
-        <mat-option *ngFor="let team of teams" [value]="team">
-          {{team}}
-        </mat-option>
+        @for (team of teams; track team) {
+          <mat-option [value]="team">
+            {{team}}
+          </mat-option>
+        }
       </mat-select>
       <mat-label>Taldeak</mat-label>
     </mat-form-field>
-  </ng-container>
+  }
   <button mat-button (click)="selectedData()">Aukeratu</button>
 </form>

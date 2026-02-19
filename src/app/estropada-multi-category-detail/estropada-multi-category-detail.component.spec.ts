@@ -1,7 +1,7 @@
+import { provideRouter, RouterModule } from '@angular/router';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
@@ -25,7 +25,7 @@ describe('EstropadaMultiDetailComponent', () => {
   let component: EstropadaMultiCategoryDetailComponent;
   let fixture: ComponentFixture<EstropadaMultiCategoryDetailComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
@@ -39,7 +39,7 @@ describe('EstropadaMultiDetailComponent', () => {
         MatSelectModule,
         MatTableModule,
         MatToolbarModule,
-        RouterTestingModule
+        RouterModule
       ],
       declarations: [
         EstropadaMultiCategoryDetailComponent,
@@ -49,11 +49,12 @@ describe('EstropadaMultiDetailComponent', () => {
       ],
       providers: [
         { provide: EstropadaService, useClass: EstropadaMulticategoryServiceStub },
-        EstropadakNavegationService
+        EstropadakNavegationService,
+        provideRouter([])
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadaMultiCategoryDetailComponent);

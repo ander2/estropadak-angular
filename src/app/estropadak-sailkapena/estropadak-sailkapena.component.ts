@@ -28,7 +28,7 @@ export class EstropadakSailkapenaComponent implements OnChanges {
   sailkapena: SailkapenaStat[] = [];
 
   displayedColumns: string[] = ['Posizioa', 'Taldea', 'Puntuak', 'Garaipenak'];
-  kategoriak: string[] = [];
+  kategoriak: {"code": string, "name": string}[] = [];
   multikategoria = false;
   category = '';
   dataSource;

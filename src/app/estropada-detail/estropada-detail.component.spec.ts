@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter, RouterModule } from '@angular/router';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
@@ -20,7 +20,7 @@ describe('EstropadaDetailComponent', () => {
   let component: EstropadaDetailComponent;
   let fixture: ComponentFixture<EstropadaDetailComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         FlexLayoutModule,
@@ -30,7 +30,7 @@ describe('EstropadaDetailComponent', () => {
         MatDividerModule,
         MatTableModule,
         MatToolbarModule,
-        RouterTestingModule
+        RouterModule
       ],
       declarations: [
         EstropadaDetailComponent,
@@ -40,11 +40,12 @@ describe('EstropadaDetailComponent', () => {
       ],
       providers: [
         { provide: EstropadaService, useClass: EstropadaServiceStub },
-        EstropadakNavegationService
+        EstropadakNavegationService,
+        provideRouter([])
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadaDetailComponent);

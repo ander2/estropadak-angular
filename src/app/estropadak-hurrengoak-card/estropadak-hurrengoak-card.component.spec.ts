@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MatListModule } from '@angular/material/list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -8,20 +9,19 @@ import { EstropadakHurrengoakCardComponent } from './estropadak-hurrengoak-card.
 import { EstropadaServiceStub } from '../shared/estropada.service.stub';
 import { EstropadaService } from '../shared/estropada.service';
 import { EstropadakNavegationService } from '../shared/estropadak-navegation.service';
-import { RouterTestingModule } from '@angular/router/testing';
 import { EstropadakListComponent } from '../estropadak-list/estropadak-list.component';
 
 describe('EstropadakHurrengoakCardComponent', () => {
   let component: EstropadakHurrengoakCardComponent;
   let fixture: ComponentFixture<EstropadakHurrengoakCardComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         MatListModule,
         MatButtonToggleModule,
         MatToolbarModule,
-        RouterTestingModule
+        RouterModule
       ],
       declarations: [
         EstropadakListComponent,
@@ -33,7 +33,7 @@ describe('EstropadakHurrengoakCardComponent', () => {
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadakHurrengoakCardComponent);

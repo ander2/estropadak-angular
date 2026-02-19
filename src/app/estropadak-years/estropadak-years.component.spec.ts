@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { RouterModule } from '@angular/router';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MatMenuModule } from '@angular/material/menu';
 
@@ -11,11 +11,11 @@ describe('EstropadakYearsComponent', () => {
   let component: EstropadakYearsComponent;
   let fixture: ComponentFixture<EstropadakYearsComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         MatMenuModule,
-        RouterTestingModule
+        RouterModule
       ],
       declarations: [ EstropadakYearsComponent ],
       providers: [
@@ -23,7 +23,7 @@ describe('EstropadakYearsComponent', () => {
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadakYearsComponent);

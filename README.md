@@ -23,12 +23,12 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Tests / Testak
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `ng test` to execute the unit tests via JEST.
 
-`ng test` exekutatu testak [Karmarekin](https://karma-runner.github.io) exekutatzeko.
+`ng test` exekutatu testak JEST-ekin exekutatzeko.
 
 ## Contact / Harremana
 
-Contact me via Twitter on @estropadak
+Check the website [www.estropadak.eus](www.estropadak.eus)
 
-Twitter-en @estropada kontuan nirekin harremanetan jar zaitezkete.
+[www.estropadak.eus](www.estropadak.eus) web gunearen bitartez.

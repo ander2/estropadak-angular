@@ -1,8 +1,8 @@
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { provideRouter, RouterModule } from '@angular/router';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { of } from 'rxjs';
@@ -41,7 +41,7 @@ describe('EstropadakStatsPageComponent', () => {
   let component: EstropadakStatsPageComponent;
   let fixture: ComponentFixture<EstropadakStatsPageComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         MatSelectModule,
@@ -49,7 +49,7 @@ describe('EstropadakStatsPageComponent', () => {
         FormsModule,
         NoopAnimationsModule,
         ReactiveFormsModule,
-        RouterTestingModule
+        RouterModule
       ],
       declarations: [ EstropadakStatsPageComponent ],
       providers: [
@@ -63,11 +63,12 @@ describe('EstropadakStatsPageComponent', () => {
           getAges: () => of([]),
           getIncorporations: () => of([]),
           getDatasets: () => { return { labels: [], datasets: []}}
-        }}
+        }},
+        provideRouter([])
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadakStatsPageComponent);
@@ -75,9 +76,9 @@ describe('EstropadakStatsPageComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', fakeAsync(() => {
+  it('should create', () => {
     component.league = 'act';
     fixture.detectChanges();
     expect(component).toBeTruthy();
-  }));
+  });
 });

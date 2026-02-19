@@ -10,7 +10,7 @@ describe('EstropadaEstropadaSailkapenaComponent', () => {
   let component: EstropadaEstropadaSailkapenaComponent;
   let fixture: ComponentFixture<EstropadaEstropadaSailkapenaComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         MatCardModule,
@@ -19,7 +19,7 @@ describe('EstropadaEstropadaSailkapenaComponent', () => {
       declarations: [ EstropadaEstropadaSailkapenaComponent ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EstropadaEstropadaSailkapenaComponent);

@@ -1,6 +1,6 @@
 {
   "name": "estropadak",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -13,49 +13,46 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "19.2.17",
-    "@angular/cdk": "^19.2.19",
-    "@angular/common": "19.2.17",
-    "@angular/compiler": "19.2.17",
-    "@angular/core": "19.2.17",
+    "@angular/animations": "21.1.4",
+    "@angular/cdk": "^21.1.5",
+    "@angular/common": "21.1.4",
+    "@angular/compiler": "21.1.4",
+    "@angular/core": "21.1.4",
     "@angular/flex-layout": "^15.0.0-beta.42",
-    "@angular/forms": "19.2.17",
-    "@angular/material": "^19.2.19",
-    "@angular/platform-browser": "19.2.17",
-    "@angular/platform-browser-dynamic": "19.2.17",
-    "@angular/router": "19.2.17",
+    "@angular/forms": "21.1.4",
+    "@angular/material": "^21.1.5",
+    "@angular/platform-browser": "21.1.4",
+    "@angular/platform-browser-dynamic": "21.1.4",
+    "@angular/router": "21.1.4",
     "chart.js": "^4.3.0",
-    "core-js": "^2.6.11",
+    "core-js": "^2.6.12",
     "moment": "^2.29.4",
     "ngx-angular-query-builder": "^18.0.0",
     "rxjs": "^6.6.7",
     "rxjs-compat": "^6.6.7",
-    "tslib": "^2.0.0",
-    "zone.js": "~0.15.1"
+    "tslib": "^2.8.1"
   },
   "devDependencies": {
-    "@angular-builders/jest": "^19.0.1",
-    "@angular-devkit/build-angular": "^19.2.19",
-    "@angular/cli": "19.2.19",
-    "@angular/compiler-cli": "19.2.17",
-    "@angular/language-service": "19.2.17",
-    "@types/jasminewd2": "^2.0.8",
+    "@angular-builders/jest": "^21.0.3",
+    "@angular-devkit/build-angular": "^21.1.4",
+    "@angular/cli": "21.1.4",
+    "@angular/compiler-cli": "21.1.4",
+    "@angular/language-service": "21.1.4",
     "@types/jest": "^29.5.14",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
-    "jasmine-core": "~3.6.0",
-    "jasmine-spec-reporter": "~5.0.0",
-    "jest": "^29.7.0",
+    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^30.2.0",
     "ts-node": "~3.0.4",
     "tslint": "~6.1.0",
-    "typescript": "^5.2.2",
+    "typescript": "^5.9.3",
     "webpack-bundle-analyzer": "^4.5.0"
   },
   "overrides": {
     "ngx-angular-query-builder": {
-      "@angular/common": "^19.2.17",
-      "@angular/core": "^19.2.17",
-      "@angular/forms": "^19.2.17"
+      "@angular/common": ">=19.2.17",
+      "@angular/core": ">=19.2.17",
+      "@angular/forms": ">=19.2.17"
     }
   }
 }
