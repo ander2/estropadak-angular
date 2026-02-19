@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { RouterModule } from '@angular/router';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
 import { MatTableModule} from '@angular/material/table';
@@ -30,7 +30,7 @@ describe('EstropadakSailkapenaComponent', () => {
         MatToolbarModule,
         MatButtonToggleModule,
         MatDividerModule,
-        RouterTestingModule
+        RouterModule
       ],
       declarations: [ EstropadakSailkapenaComponent ],
       providers: [

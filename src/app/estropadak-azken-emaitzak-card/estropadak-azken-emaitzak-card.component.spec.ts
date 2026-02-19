@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { provideRouter, RouterModule } from '@angular/router';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -27,11 +27,12 @@ describe('EstropadakAzkenEmaitzakCardComponent', () => {
         MatTableModule,
         MatTabsModule,
         MatToolbarModule,
-        RouterTestingModule
+        RouterModule
       ],
       declarations: [ EstropadakAzkenEmaitzakCardComponent ],
       providers: [
-        {provide: EstropadaService, useClass: EstropadaServiceStub}
+        {provide: EstropadaService, useClass: EstropadaServiceStub},
+        provideRouter([])
       ]
     })
     .compileComponents();

@@ -1,8 +1,8 @@
+import { provideRouter, RouterModule } from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
@@ -29,31 +29,34 @@ describe('EstropadakPlaygroundComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [
+      declarations: [
         EstropadakSelectionFormComponent,
         EstropadakPlaygroundComponent
-    ],
-    imports: [BrowserAnimationsModule,
+      ],
+      imports: [
+        BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
-        RouterTestingModule,
         MatIconModule,
         MatButtonModule,
         MatListModule,
         MatSelectModule,
         MatTableModule,
         MatToolbarModule,
-        MatTooltipModule],
-    providers: [
+        MatTooltipModule,
+        RouterModule
+      ],
+      providers: [
         { provide: EmaitzakService, useValue: { getList: () => of([]) } },
         { provide: TaldeakService, useClass: TaldeakServiceStub },
         { provide: UrteakService, useClass: UrteakServiceStub },
         { provide: EstropadaService, useClass: EstropadaServiceStub },
         provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-    ]
-})
-    .compileComponents();
+        provideHttpClientTesting(),
+        provideRouter([])
+      ]
+    })
+      .compileComponents();
   });
 
   beforeEach(() => {

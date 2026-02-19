@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,7 +9,6 @@ import { MatIconModule} from '@angular/material/icon';
 import { MatSelectModule} from '@angular/material/select';
 import { MatSortModule} from '@angular/material/sort';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterTestingModule } from '@angular/router/testing';
 
 import { of } from 'rxjs';
 
@@ -32,14 +31,14 @@ describe('EstropadakResultsComponent', () => {
         FormsModule,
         NoopAnimationsModule,
         ReactiveFormsModule,
-        RouterTestingModule,
         MatButtonModule,
         MatIconModule,
         MatListModule,
         MatSelectModule,
         MatSortModule,
         MatTableModule,
-        MatToolbarModule
+        MatToolbarModule,
+        RouterModule
       ],
       declarations: [
         EstropadakSelectionFormComponent,

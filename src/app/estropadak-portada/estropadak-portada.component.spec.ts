@@ -1,7 +1,7 @@
+import { provideRouter, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule} from '@angular/material/table';
 import { MatSidenavModule} from '@angular/material/sidenav';
@@ -42,7 +42,7 @@ describe('EstropadakPortadaComponent', () => {
         MatSelectModule,
         MatToolbarModule,
         MatListModule,
-        RouterTestingModule
+        RouterModule
       ],
       declarations: [
         EstropadakPortadaComponent,
@@ -55,7 +55,8 @@ describe('EstropadakPortadaComponent', () => {
         {provide: EstropadaService, useClass: EstropadaServiceStub},
         EstropadakNavegationService,
         {provide: UrteakService, useClass: UrteakServiceStub},
-        {provide: SailkapenakService, useClass: SailkapenaServiceStub}
+        {provide: SailkapenakService, useClass: SailkapenaServiceStub},
+        provideRouter([])
       ]
     })
     .compileComponents();
