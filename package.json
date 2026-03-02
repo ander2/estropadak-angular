@@ -28,6 +28,7 @@
     "core-js": "^2.6.12",
     "moment": "^2.29.4",
     "ngx-angular-query-builder": "^18.0.0",
+    "rollup": "^4.59.0",
     "rxjs": "^6.6.7",
     "rxjs-compat": "^6.6.7",
     "tslib": "^2.8.1"
