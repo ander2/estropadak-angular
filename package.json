@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@angular-builders/jest": "^21.0.3",
-    "@angular-devkit/build-angular": "^21.1.4",
+    "@angular-devkit/build-angular": "^21.2.5",
     "@angular/cli": "21.1.4",
     "@angular/compiler-cli": "21.1.4",
     "@angular/language-service": "21.1.4",
